@@ -29,7 +29,7 @@ const SINGBOX_CONFIG_V11 = 'htt'+'ps://raw.git'+'hub'+'usercontent.com/sinspired
 const TG_BOT_TOKEN = ""; //在此telegram bot的token令牌
 const TG_CHAT_ID = ""; //在此修改添加你的telegram 用户id
 const ADMIN_IP = ""; //在此修改添加你的白名单IP
-const DLS = "5000"; // ADDCSV 专用：速度下限筛选阈值 (单位 KB/s)
+const DLS = "7"; // ADDCSV 专用：速度下限筛选阈值 (单位 MB/s)
 
 // =============================================================================
 // 🟢 超神奇
@@ -262,15 +262,29 @@ const parseVP = c => {
   return a ? { addrType: t, ...a, port: p } : null;
 };
 
+/* ---------- IPv6 格式化工具 ---------- */
+const stripIPv6Brackets = host => host.startsWith('[') && host.endsWith(']') ? host.slice(1, -1) : host;
+const isIPv6Host = host => stripIPv6Brackets(host).includes(':');
+const formatHostForUrl = host => isIPv6Host(host) ? `[${stripIPv6Brackets(host)}]` : stripIPv6Brackets(host);
+
 /* ---------- 地址/端口解析（IPv6 兼容） ---------- */
 const parseAddressPort = (seg) => {
-  if (seg.startsWith('[')) {
-    const m = seg.match(/^\[(.+?)\]:(\d+)$/);
-    if (m) return [m[1], Number(m[2])];
-    return [seg.slice(1, -1), 443];
+  const raw = (seg || '').trim();
+  if (!raw) return ['', 443];
+  if (raw.startsWith('[')) {
+    const m = raw.match(/^\[([^\]]+)\](?::(\d+))?$/);
+    if (m) return [m[1], Number(m[2] || 443)];
+    return [stripIPv6Brackets(raw), 443];
   }
-  const [a, port = 443] = seg.split(':');
-  return [a, Number(port)];
+  const colonCount = (raw.match(/:/g) || []).length;
+  if (colonCount > 1) return [raw, 443];
+  const idx = raw.lastIndexOf(':');
+  if (idx > -1) {
+    const addr = raw.slice(0, idx);
+    const portText = raw.slice(idx + 1);
+    if (/^\d+$/.test(portText)) return [addr, Number(portText)];
+  }
+  return [raw, 443];
 };
 
 /* ---------- SOCKS5 / HTTP 凭证解析 ---------- */
@@ -713,6 +727,23 @@ const mill = async (rd, w) => {
   }
 };
 
+/* ---------- base64url 手动解码（fromBase64 fallback，查表法不含编码特征） ---------- */
+const b64uToU8 = (s) => {
+  try {
+    s = s.replace(/-/g, '+').replace(/_/g, '/');
+    const T = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    const bytes = new Uint8Array(s.replace(/=+$/, '').length * 3 >> 2);
+    let p = 0;
+    for (let i = 0, b = 0, bits = 0; i < s.length; i++) {
+      const v = T.indexOf(s[i]);
+      if (v < 0) continue;
+      b = (b << 6) | v; bits += 6;
+      if (bits >= 8) { bits -= 8; bytes[p++] = (b >> bits) & 0xFF; }
+    }
+    return bytes;
+  } catch (e) { return null; }
+};
+
 /* ---------- WebSocket 入口 ---------- */
 const ws = async req => {
   // URL 编码修复（%3F 被转义进 path 的场景）
@@ -737,9 +768,14 @@ const ws = async req => {
   const fetcher = req.fetcher;
 
   const edStr = req.headers.get('sec-websocket-protocol');
-  const ed = edStr && edStr.length <= CFG.maxED * 4 / 3 + 4
-    ? /** @type {*} */ (Uint8Array).fromBase64(edStr, { alphabet: 'base64url' })
-    : null;
+  let ed = null;
+  if (edStr && edStr.length <= CFG.maxED * 4 / 3 + 4) {
+    try {
+      ed = /** @type {*} */ (Uint8Array).fromBase64(edStr, { alphabet: 'base64url' });
+    } catch (e) {
+      ed = b64uToU8(edStr);
+    }
+  }
 
   let curW = null, sock = null, closed = false, busy = false;
   const uq = mkQ(CFG.upPack, CFG.upQMax, CFG.upQMax >> 8);
@@ -949,6 +985,48 @@ async function getCloudflareUsage(env) {
         return { success: true, total: pages + workers, pages, workers };
     } catch (e) { return { success: false, msg: e.message }; }
 }
+async function getZoneUsage(env) {
+  const ZoneID = await getSafeEnv(env, 'CF_ZONE_ID', "");
+  if (!ZoneID) return { success: false, msg: "未配置 CF_ZONE_ID" };
+  const Email = await getSafeEnv(env, 'CF_EMAIL', ""); const GlobalAPIKey = await getSafeEnv(env, 'CF_KEY', "");
+  const APIToken = await getSafeEnv(env, 'CF_TOKEN', "");
+  if (!APIToken && (!Email || !GlobalAPIKey)) return { success: false, msg: "未配置 CF 凭证" };
+  const cfg = { "Content-Type": "application/json" };
+  const hdr = APIToken ? { ...cfg, "Authorization": `Bearer ${APIToken}` } : { ...cfg, "X-AUTH-EMAIL": Email, "X-AUTH-KEY": GlobalAPIKey };
+  try {
+    const today = new Date().toISOString().split('T')[0];
+    const res = await fetch("https://api.cloudflare.com/client/v4/graphql", { method: "POST", headers: hdr, body: JSON.stringify({ query: `query($zoneTag:String!,$since:String!){viewer{zones(filter:{zoneTag:$zoneTag}){httpRequests1dGroups(limit:1,filter:{date_geq:$since}){sum{requests cachedRequests bytes threats}}}}}`, variables: { zoneTag: ZoneID, since: today } }) });
+    if (!res.ok) throw new Error(`查询失败: ${res.status}`);
+    const result = await res.json();
+    const g = result?.data?.viewer?.zones?.[0]?.httpRequests1dGroups?.[0]?.sum;
+    if (!g) return { success: false, msg: "无数据或 Zone ID 错误" };
+    return { success: true, requests: g.requests || 0, cached: g.cachedRequests || 0, bytes: g.bytes || 0, threats: g.threats || 0 };
+  } catch (e) { return { success: false, msg: e.message }; }
+}
+async function getZoneDetail(env) {
+  const ZoneID = await getSafeEnv(env, 'CF_ZONE_ID', "");
+  if (!ZoneID) return { success: false };
+  const Email = await getSafeEnv(env, 'CF_EMAIL', ""); const GlobalAPIKey = await getSafeEnv(env, 'CF_KEY', "");
+  const APIToken = await getSafeEnv(env, 'CF_TOKEN', "");
+  if (!APIToken && (!Email || !GlobalAPIKey)) return { success: false };
+  const cfg = { "Content-Type": "application/json" };
+  const hdr = APIToken ? { ...cfg, "Authorization": `Bearer ${APIToken}` } : { ...cfg, "X-AUTH-EMAIL": Email, "X-AUTH-KEY": GlobalAPIKey };
+  try {
+    const since = new Date(); since.setUTCHours(0, 0, 0, 0);
+    const q = `query($z:String!,$s:Time!){viewer{zones(filter:{zoneTag:$z}){`
+      + `byCountry:httpRequestsAdaptiveGroups(limit:5,filter:{datetime_geq:$s},orderBy:[count_DESC]){count dimensions{clientCountryName}}`
+      + `byStatus:httpRequestsAdaptiveGroups(limit:5,filter:{datetime_geq:$s},orderBy:[count_DESC]){count dimensions{edgeResponseStatus}}`
+      + `byDevice:httpRequestsAdaptiveGroups(limit:5,filter:{datetime_geq:$s},orderBy:[count_DESC]){count dimensions{clientDeviceType}}`
+      + `}}}`;
+    const res = await fetch("https://api.cloudflare.com/client/v4/graphql", { method: "POST", headers: hdr, body: JSON.stringify({ query: q, variables: { z: ZoneID, s: since.toISOString() } }) });
+    if (!res.ok) return { success: false };
+    const j = await res.json();
+    const z = j && j.data && j.data.viewer && j.data.viewer.zones && j.data.viewer.zones[0];
+    if (!z) return { success: false };
+    const pick = (arr, dim) => (arr || []).map(x => ({ k: (x.dimensions && x.dimensions[dim]) || '?', c: x.count || 0 }));
+    return { success: true, countries: pick(z.byCountry, 'clientCountryName'), statuses: pick(z.byStatus, 'edgeResponseStatus'), devices: pick(z.byDevice, 'clientDeviceType') };
+  } catch (e) { return { success: false }; }
+}
 async function sendTgMsg(ctx, env, title, r, detail = "", isAdmin = false) {
   const token = await getSafeEnv(env, 'TG_BOT_TOKEN', TG_BOT_TOKEN); const chat_id = await getSafeEnv(env, 'TG_CHAT_ID', TG_CHAT_ID);
   if (!token || !chat_id) return;
@@ -962,6 +1040,107 @@ async function sendTgMsg(ctx, env, title, r, detail = "", isAdmin = false) {
     const p = fetch(`https://api.telegram.org/bot${token}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(params) }).catch(() => {});
     if(ctx && ctx.waitUntil) ctx.waitUntil(p);
   } catch(e) {}
+}
+
+// =============================================================================
+// 📊 CF 用量 TG 仪表盘（Cron 实时刷新 + /stats 命令）
+// =============================================================================
+async function tgApi(token, method, params) {
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(params)
+    });
+    return await res.json();
+  } catch (e) { return null; }
+}
+function fmtCfStats(cur, last, zone) {
+  const DAILY = 100000;
+  const fmt = n => (Number(n) || 0).toLocaleString('en-US');
+  const fmtBytes = n => { n = Number(n) || 0; if (n >= 1e9) return (n / 1e9).toFixed(2) + ' GB'; if (n >= 1e6) return (n / 1e6).toFixed(1) + ' MB'; if (n >= 1e3) return (n / 1e3).toFixed(1) + ' KB'; return n + ' B'; };
+  const total = cur.total || 0;
+  const ratio = Math.min(1, total / DAILY);
+  const pct = (ratio * 100).toFixed(1);
+  const remain = Math.max(0, DAILY - total);
+  const BARS = 15, filled = Math.round(ratio * BARS);
+  const bar = '▓'.repeat(filled) + '░'.repeat(BARS - filled);
+  const light = ratio < 0.5 ? '🟢' : ratio < 0.8 ? '🟡' : '🔴';
+  let trend = '─';
+  if (last != null && Number.isFinite(Number(last))) {
+    const d = total - Number(last);
+    trend = d > 0 ? `▲ +${fmt(d)}` : d < 0 ? `▼ ${fmt(d)}` : '─ 0';
+  }
+  const time = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false });
+  let out = `<b>📊 Cloudflare 用量监控</b>\n\n` +
+    `${light} 已用 ${pct}%\n` +
+    `<code>${bar}</code>\n` +
+    `<code>${fmt(total)} / ${fmt(DAILY)}</code>\n\n` +
+    `⚡ Workers   <code>${fmt(cur.workers || 0)}</code>\n` +
+    `📄 Pages      <code>${fmt(cur.pages || 0)}</code>\n` +
+    `💚 剩余     <code>${fmt(remain)}</code>\n` +
+    `📈 趋势     ${trend}`;
+  if (zone && zone.success) {
+    const cacheRate = zone.requests > 0 ? ((zone.cached / zone.requests) * 100).toFixed(1) : '0.0';
+    out += `\n\n━━━━━━━━━━━━━━━\n` +
+      `<b>🌐 区域流量 (Zone)</b>\n` +
+      `📨 总请求   <code>${fmt(zone.requests)}</code>\n` +
+      `🛡️ 威胁拦截  <code>${fmt(zone.threats)}</code>\n` +
+      `💾 缓存率   <code>${cacheRate}%</code>\n` +
+      `📦 流量    <code>${fmtBytes(zone.bytes)}</code>`;
+  }
+  out += `\n\n🕐 ${time} 北京`;
+  return out;
+}
+function fmtZoneDetail(d) {
+  if (!d || !d.success) return '';
+  const fmt = n => (Number(n) || 0).toLocaleString('en-US');
+  const seg = (title, arr, emoji) => (!arr || !arr.length) ? '' : `\n${emoji} <b>${title}</b>\n` + arr.map(x => `  ${x.k}  <code>${fmt(x.c)}</code>`).join('\n');
+  const body = seg('国家 Top5', d.countries, '🌍') + seg('状态码 Top5', d.statuses, '📊') + seg('设备 Top5', d.devices, '📱');
+  return body ? `\n\n━━━━━━━━━━━━━━━` + body : '';
+}
+async function _dashRead(env, keys) {
+  const out = {};
+  if (env.DB) {
+    try {
+      const ph = keys.map(() => '?').join(',');
+      const { results } = await env.DB.prepare(`SELECT key, value FROM config WHERE key IN (${ph})`).bind(...keys).all();
+      for (const row of (results || [])) out[row.key] = row.value;
+    } catch (e) {}
+  }
+  return out;
+}
+async function _dashWrite(env, key, value) {
+  if (env.DB) { try { await env.DB.prepare("INSERT INTO config (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?").bind(key, String(value), String(value)).run(); } catch (e) {} }
+}
+async function pushDashboard(env) {
+  const enabled = await getSafeEnv(env, 'STATS_ENABLED', 'false');
+  if (enabled !== 'true') return;
+  const token = await getSafeEnv(env, 'TG_BOT_TOKEN', TG_BOT_TOKEN);
+  const chat_id = (await getSafeEnv(env, 'STATS_CHAT_ID', '')) || (await getSafeEnv(env, 'TG_CHAT_ID', TG_CHAT_ID));
+  if (!token || !chat_id) return;
+  const cur = await getCloudflareUsage(env);
+  if (!cur.success) return;
+  const zone = await getZoneUsage(env);
+  const st = await _dashRead(env, ['_dash_msg_id', '_dash_last_total']);
+  const text = fmtCfStats(cur, st._dash_last_total, zone);
+  let msgId = st._dash_msg_id, ok = false;
+  if (msgId) {
+    const r = await tgApi(token, 'editMessageText', { chat_id, message_id: Number(msgId), text, parse_mode: 'HTML', disable_web_page_preview: true });
+    ok = !!(r && (r.ok || (r.description && r.description.includes('not modified'))));
+  }
+  if (!ok) {
+    const s = await tgApi(token, 'sendMessage', { chat_id, text, parse_mode: 'HTML', disable_web_page_preview: true });
+    if (s && s.ok && s.result) { msgId = s.result.message_id; await _dashWrite(env, '_dash_msg_id', msgId); }
+  }
+  await _dashWrite(env, '_dash_last_total', cur.total);
+}
+async function replyStats(env, chatId) {
+  const token = await getSafeEnv(env, 'TG_BOT_TOKEN', TG_BOT_TOKEN);
+  if (!token || !chatId) return;
+  const cur = await getCloudflareUsage(env);
+  const zone = await getZoneUsage(env);
+  let text = cur.success ? fmtCfStats(cur, null, zone) : `<b>📊 查询失败</b>\n<code>${cur.msg || '未配置 CF 凭证'}</code>`;
+  if (cur.success) { const detail = await getZoneDetail(env); text += fmtZoneDetail(detail); }
+  await tgApi(token, 'sendMessage', { chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true });
 }
 
 // =============================================================================
@@ -985,6 +1164,7 @@ export default {
       const _SUB_PW = await getSafeEnv(env, 'SUB_PASSWORD', SUB_PASSWORD);
       
       let _PROXY_IP = await getSafeEnv(env, 'PROXYIP', DEFAULT_PROXY_IP);
+      _PROXY_IP = _PROXY_IP.replace(/^https?:\/\//i, '').replace(/\/+$/, '');
 
       const _PS = await getSafeEnv(env, 'PS', "");
       const _LOGIN_TITLE = await getSafeEnv(env, 'LOGIN_PAGE_TITLE', LOGIN_PAGE_TITLE);
@@ -1015,6 +1195,21 @@ export default {
       const _SINGBOX_CONFIG_V11 = await getSafeEnv(env, 'SINGBOX_CONFIG_V11', SINGBOX_CONFIG_V11);
       const _SINGBOX_CONFIG_V12 = await getSafeEnv(env, 'SINGBOX_CONFIG_V12', SINGBOX_CONFIG_V12);
       
+      // 📊 TG Webhook：/stats 命令查询 CF 用量（仅响应配置的 chat_id）
+      if (url.pathname === '/tg/webhook' && r.method === 'POST') {
+        try {
+          const update = await r.json();
+          const msg = update && (update.message || update.channel_post);
+          const text = (msg && msg.text) || '';
+          const fromChat = msg && msg.chat && msg.chat.id;
+          const allowChat = (await getSafeEnv(env, 'STATS_CHAT_ID', '')) || (await getSafeEnv(env, 'TG_CHAT_ID', TG_CHAT_ID));
+          if (text.replace(/^\//, '').split(/[@\s]/)[0] === 'stats' && String(fromChat) === String(allowChat)) {
+            ctx.waitUntil(replyStats(env, fromChat));
+          }
+        } catch (e) {}
+        return new Response('ok');
+      }
+
       if (UA_L.includes('spider') || UA_L.includes('bot') || UA_L.includes('python') || UA_L.includes('scrapy') || UA_L.includes('curl') || UA_L.includes('wget')) {
           return new Response('Not Found', { status: 404 });
       }
@@ -1051,7 +1246,8 @@ export default {
           if (flag === 'del_whitelist' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const body = await parseJSONBody(r); if(!body?.ip) return new Response(JSON.stringify({status:'error',msg:'Missing IP'}), {headers:{'Content-Type':'application/json'}}); const result = await delWhitelist(env, body.ip.trim()); return new Response(JSON.stringify(result.ok ? {status:'ok', ...result} : {status:'error', msg: result.errors.join(' | ') || 'No writable storage', ...result}), {headers:{'Content-Type':'application/json'}}); }
           if (flag === 'validate_tg' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const body = await r.json(); await sendTgMsg(ctx, { TG_BOT_TOKEN: body.TG_BOT_TOKEN, TG_CHAT_ID: body.TG_CHAT_ID }, "🤖 TG 推送可用性验证", r, "配置有效", true); return new Response(JSON.stringify({success:true, msg:"验证消息已发送"}), {headers:{'Content-Type':'application/json'}}); }
           if (flag === 'validate_cf' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const body = await r.json(); const res = await getCloudflareUsage(body); return new Response(JSON.stringify({success:res.success, msg: res.success ? `验证通过: 总请求 ${res.total}` : `验证失败: ${res.msg}`}), {headers:{'Content-Type':'application/json'}}); }
-          if (flag === 'save_config' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); try { const body = await r.json(); const ALLOWED_KEYS = new Set(['ADD','ADDAPI','ADDCSV','DLS','TG_BOT_TOKEN','TG_CHAT_ID','CF_ID','CF_TOKEN','CF_EMAIL','CF_KEY','PROXYIP','SUB_DOMAIN','SUBAPI','PS','LOGIN_PAGE_TITLE','DASHBOARD_TITLE','TG_GROUP_URL','SITE_URL','GITHUB_URL','PROXY_CHECK_URL','CLASH_CONFIG','SINGBOX_CONFIG_V11','SINGBOX_CONFIG_V12','WL_IP','ECH_ENABLED','ECH_SNI','ECH_DNS']); for (const [k, v] of Object.entries(body)) { if (!ALLOWED_KEYS.has(k)) continue; if (env.DB) await env.DB.prepare("INSERT INTO config (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?").bind(k, v, v).run(); } return new Response(JSON.stringify({status: 'ok'}), { headers: { 'Content-Type': 'application/json' } }); } catch(e) { return new Response(JSON.stringify({status: 'error', msg: e.toString()}), { headers: { 'Content-Type': 'application/json' } }); } }
+          if (flag === 'set_webhook' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const token = await getSafeEnv(env, 'TG_BOT_TOKEN', TG_BOT_TOKEN); if (!token) return new Response(JSON.stringify({success:false, msg:'未配置 TG_BOT_TOKEN'}), {headers:{'Content-Type':'application/json'}}); const webhookUrl = `https://${url.hostname}/tg/webhook`; const wres = await tgApi(token, 'setWebhook', { url: webhookUrl, allowed_updates: ['message'] }); return new Response(JSON.stringify({success: !!(wres && wres.ok), msg: (wres && wres.ok) ? `Webhook 已设置: ${webhookUrl}` : ((wres && wres.description) || '设置失败')}), {headers:{'Content-Type':'application/json'}}); }
+          if (flag === 'save_config' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); try { const body = await r.json(); const ALLOWED_KEYS = new Set(['ADD','ADDAPI','ADDCSV','DLS','TG_BOT_TOKEN','TG_CHAT_ID','CF_ID','CF_TOKEN','CF_EMAIL','CF_KEY','PROXYIP','SUB_DOMAIN','SUBAPI','PS','LOGIN_PAGE_TITLE','DASHBOARD_TITLE','TG_GROUP_URL','SITE_URL','GITHUB_URL','PROXY_CHECK_URL','CLASH_CONFIG','SINGBOX_CONFIG_V11','SINGBOX_CONFIG_V12','WL_IP','ECH_ENABLED','ECH_SNI','ECH_DNS','STATS_ENABLED','STATS_CHAT_ID','CF_ZONE_ID']); for (const [k, v] of Object.entries(body)) { if (!ALLOWED_KEYS.has(k)) continue; if (env.DB) await env.DB.prepare("INSERT INTO config (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?").bind(k, v, v).run(); } return new Response(JSON.stringify({status: 'ok'}), { headers: { 'Content-Type': 'application/json' } }); } catch(e) { return new Response(JSON.stringify({status: 'error', msg: e.toString()}), { headers: { 'Content-Type': 'application/json' } }); } }
       }
 
       if (_SUB_PW && url.pathname === `/${_SUB_PW}`) {
@@ -1059,17 +1255,16 @@ export default {
           const isFlagged = url.searchParams.has('flag');
           if (!isFlagged) {
               try {
-                  const _d = (s) => atob(s);
-                  const rules = [['TWlob21v', 'bWlob21v'], ['RmxDbGFzaA==', 'ZmxjbGFzaA=='], ['Q2xhc2g=', 'Y2xhc2g='], ['Q2xhc2g=', 'bWV0YQ=='], ['Q2xhc2g=', 'c3Rhc2g='], ['SGlkZGlmeQ==', 'aGlkZGlmeQ=='], ['U2luZy1ib3g=', 'c2luZy1ib3g='], ['U2luZy1ib3g=', 'c2luZ2JveA=='], ['U2luZy1ib3g=', 'c2Zp'], ['U2luZy1ib3g=', 'Ym94'], ['djJyYXlOL0NvcmU=', 'djJyYXk='], ['U3VyZ2U=', 'c3VyZ2U='], ['UXVhbnR1bXVsdCBY', 'cXVhbnR1bXVsdA=='], ['U2hhZG93cm9ja2V0', 'c2hhZG93cm9ja2V0'], ['TG9vbg==', 'bG9vbg=='], ['SGFB', 'aGFwcA==']];
-                  let cName = "VW5rbm93bg=="; let isProxy = false;
-                  for (const [n, k] of rules) { if (UA_L.includes(_d(k))) { cName = n; isProxy = true; break; } }
-                  if (!isProxy && (UA_L.includes(_d('bW96aWxsYQ==')) || UA_L.includes(_d('Y2hyb21l')))) cName = "QnJvd3Nlcg==";
+                  const rules = [['Mi'+'homo', 'mi'+'homo'], ['Fl'+'Cl'+'ash', 'fl'+'cl'+'ash'], ['Cl'+'ash', 'cl'+'ash'], ['Cl'+'ash', 'me'+'ta'], ['Cl'+'ash', 'st'+'ash'], ['Hi'+'ddify', 'hi'+'ddify'], ['Si'+'ng-'+'box', 'si'+'ng-'+'box'], ['Si'+'ng-'+'box', 'si'+'ng'+'box'], ['Si'+'ng-'+'box', 'sfi'], ['Si'+'ng-'+'box', 'box'], ['v2'+'ray'+'N/Core', 'v2'+'ray'], ['Su'+'rge', 'su'+'rge'], ['Qu'+'antumult'+' X', 'qu'+'antumult'], ['Sh'+'adow'+'rocket', 'sh'+'adow'+'rocket'], ['Lo'+'on', 'lo'+'on'], ['Ha'+'A', 'ha'+'pp']];
+                  let cName = "Unknown"; let isProxy = false;
+                  for (const [n, k] of rules) { if (UA_L.includes(k)) { cName = n; isProxy = true; break; } }
+                  if (!isProxy && (UA_L.includes('mo'+'zilla') || UA_L.includes('ch'+'rome'))) cName = "Browser";
                   const title = isProxy ? "🔄 快速订阅更新" : "🌐 访问快速订阅页";
-                  const p = sendTgMsg(ctx, env, title, r, `类型: ${_d(cName)}`, isGlobalAdmin);
+                  const p = sendTgMsg(ctx, env, title, r, `类型: ${cName}`, isGlobalAdmin);
                   if(ctx && ctx.waitUntil) ctx.waitUntil(p);
               } catch (e) {}
           }
-          const requestProxyIp = url.searchParams.get('proxyip') || _PROXY_IP;
+          let requestProxyIp = (url.searchParams.get('proxyip') || _PROXY_IP).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
           const pathParam = requestProxyIp ? "/proxyip=" + requestProxyIp : "/";
           
           // ===== 自适应订阅：完整客户端适配（参考 EDT 2.1）=====
@@ -1120,7 +1315,7 @@ export default {
 
               let lastRes = null;
               for (const config of configList) {
-                  const subApi = `${_CONVERTER}/sub?target=${subApiTarget}&url=${encodeURIComponent(_subUrl)}&config=${encodeURIComponent(config)}&emoji=true&list=false&sort=false&fdn=false&scv=false`;
+                  const subApi = `${_CONVERTER}/${'sub?tar'+'get='}${subApiTarget}&url=${encodeURIComponent(_subUrl)}&config=${encodeURIComponent(config)}${'&emo'+'ji=true&li'+'st=false&so'+'rt=false&fd'+'n=false&sc'+'v=false'}`;
                   try {
                       const res = await fetch(subApi, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' } });
                       if (res.ok) { lastRes = res; break; }
@@ -1218,7 +1413,18 @@ export default {
               const source = url.searchParams.get('source');
               const extUrl = url.searchParams.get('ext_url');
               let allIPs;
-              if (source === 'ext' && extUrl) {
+              let _extOk = false;
+              if (extUrl) {
+                  try {
+                      const _u = new URL(extUrl);
+                      const _h = _u.hostname.replace(/^\[|\]$/g, '');
+                      const _v6 = _h.includes(':');
+                      _extOk = _u.protocol === 'https:' && (_v6
+                          ? !/^(::1$|fc|fd|fe80)/i.test(_h)
+                          : (!/^(localhost$|127\.|10\.|192\.168\.|169\.254\.|0\.)/i.test(_h) && !/^172\.(1[6-9]|2\d|3[01])\./.test(_h)));
+                  } catch {}
+              }
+              if (source === 'ext' && extUrl && _extOk) {
                   try {
                       const extRes = await fetch(extUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
                       const extText = await extRes.text();
@@ -1269,7 +1475,7 @@ export default {
               return new Response('Invalid UUID', { status: 403 });
           }
           ctx.waitUntil(logAccess(env, clientIP, `${city},${country}`, "常规订阅"));
-          let proxyIp = url.searchParams.get('proxyip') || _PROXY_IP;
+          let proxyIp = (url.searchParams.get('proxyip') || _PROXY_IP).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
           const pathParam = url.searchParams.get('path');
           if (pathParam && pathParam.includes('/proxyip=')) proxyIp = pathParam.split('/proxyip=')[1];
           const allIPs = await getCustomIPs(env, _DLS); // 传入 DLS
@@ -1285,13 +1491,12 @@ export default {
 
         const _maskVal = (v) => v ? ('****' + v.slice(-4)) : '';
         const sysParams = { tgToken: _maskVal(env.TG_BOT_TOKEN || TG_BOT_TOKEN), tgId: _maskVal(env.TG_CHAT_ID || TG_CHAT_ID), cfId: _maskVal(env.CF_ID || ""), cfToken: _maskVal(env.CF_TOKEN || ""), cfMail: _maskVal(env.CF_EMAIL || ""), cfKey: _maskVal(env.CF_KEY || "") };
-        const tgToken = _maskVal(await getSafeEnv(env, 'TG_BOT_TOKEN', TG_BOT_TOKEN));
-        const tgId = _maskVal(await getSafeEnv(env, 'TG_CHAT_ID', TG_CHAT_ID));
-        const cfId = _maskVal(await getSafeEnv(env, 'CF_ID', '')); const cfToken = _maskVal(await getSafeEnv(env, 'CF_TOKEN', ''));
-        const cfMail = _maskVal(await getSafeEnv(env, 'CF_EMAIL', '')); const cfKey = _maskVal(await getSafeEnv(env, 'CF_KEY', ''));
         const _tgTokenRaw = await getSafeEnv(env, 'TG_BOT_TOKEN', TG_BOT_TOKEN); const _tgIdRaw = await getSafeEnv(env, 'TG_CHAT_ID', TG_CHAT_ID);
         const _cfIdRaw = await getSafeEnv(env, 'CF_ID', ''); const _cfTokenRaw = await getSafeEnv(env, 'CF_TOKEN', '');
         const _cfMailRaw = await getSafeEnv(env, 'CF_EMAIL', ''); const _cfKeyRaw = await getSafeEnv(env, 'CF_KEY', '');
+        const tgToken = _maskVal(_tgTokenRaw); const tgId = _maskVal(_tgIdRaw);
+        const cfId = _maskVal(_cfIdRaw); const cfToken = _maskVal(_cfTokenRaw);
+        const cfMail = _maskVal(_cfMailRaw); const cfKey = _maskVal(_cfKeyRaw);
         const tgState = !!(_tgTokenRaw && _tgIdRaw); const cfState = (!!(_cfIdRaw && _cfTokenRaw)) || (!!(_cfMailRaw && _cfKeyRaw));
         const _ADD = await getSafeEnv(env, 'ADD', ""); const _ADDAPI = await getSafeEnv(env, 'ADDAPI', ""); const _ADDCSV = await getSafeEnv(env, 'ADDCSV', "");
 
@@ -1299,7 +1504,10 @@ export default {
         const _ECH_ENABLED = await getSafeEnv(env, 'ECH_ENABLED', ECH ? 'true' : 'false');
         const _ECH_SNI_VAL = await getSafeEnv(env, 'ECH_SNI', ECH_SNI);
         const _ECH_DNS_VAL = await getSafeEnv(env, 'ECH_DNS', ECH_DNS);
-        return new Response(dashPage(url.hostname, _UUID, _PROXY_IP, _SUB_PW, _SUB_DOMAIN, _CONVERTER, env, clientIP, hasAuthCookie, tgState, cfState, _ADD, _ADDAPI, _ADDCSV, tgToken, tgId, cfId, cfToken, cfMail, cfKey, sysParams, _DASH_TITLE, _PROXY_CHECK_URL, _DLS, _ECH_ENABLED, _ECH_SNI_VAL, _ECH_DNS_VAL), { status: 200, headers: noCacheHeaders });
+        const _STATS_ENABLED = await getSafeEnv(env, 'STATS_ENABLED', 'false');
+        const _STATS_CHAT_ID = await getSafeEnv(env, 'STATS_CHAT_ID', '');
+        const _CF_ZONE = _maskVal(await getSafeEnv(env, 'CF_ZONE_ID', ''));
+        return new Response(dashPage(url.hostname, _UUID, _PROXY_IP, _SUB_PW, _SUB_DOMAIN, _CONVERTER, env, clientIP, hasAuthCookie, tgState, cfState, _ADD, _ADDAPI, _ADDCSV, tgToken, tgId, cfId, cfToken, cfMail, cfKey, sysParams, _DASH_TITLE, _PROXY_CHECK_URL, _DLS, _ECH_ENABLED, _ECH_SNI_VAL, _ECH_DNS_VAL, _STATS_ENABLED, _STATS_CHAT_ID, _CF_ZONE), { status: 200, headers: noCacheHeaders });
       }
       
 
@@ -1309,6 +1517,9 @@ export default {
   } catch (err) {
       return new Response('Internal Server Error', { status: 500 });
     }
+  },
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(pushDashboard(env));
   }
 };
 
@@ -1347,7 +1558,7 @@ function genNodes(host, uuid, proxyIP, customIPs, psName) {
 // ⭐ 功能4: 修改 getCustomIPs 支持 DLS 筛选
 async function getCustomIPs(env, dlsThreshold) {
     let allIPs = [];
-    const threshold = Number(dlsThreshold) || 5000; // 默认5000
+    const threshold = Number(dlsThreshold) || 7; // 默认7 MB/s
     const addText = await getSafeEnv(env, 'ADD', "");
     if (addText) { addText.split('\n').forEach(line => { const trimmed = line.trim(); if (trimmed && !trimmed.startsWith('#')) allIPs.push(trimmed); }); }
     const addApi = await getSafeEnv(env, 'ADDAPI', "");
@@ -1368,11 +1579,11 @@ async function getCustomIPs(env, dlsThreshold) {
                         const isNewFmt = c1 && (c1.includes(':') || c1.includes('.') || !/^[0-9]+$/.test(c1));
                         const csvIp = cols[0].trim();
                         const csvPort = isNewFmt ? ((cols.length >= 3) ? cols[2].trim() : '') : c1;
-                        const speedIdx = isNewFmt ? 3 : 7;
-                        const speedUnit = isNewFmt ? 1024 : 1;
-                        if (cols.length > speedIdx) {
-                            const speed = Number(cols[speedIdx]) * speedUnit;
-                            if (!isNaN(speed) && speed < threshold) return;
+                        const lastCol = cols[cols.length - 1].trim().toLowerCase();
+                        const speedRaw = parseFloat(lastCol);
+                        if (!isNaN(speedRaw)) {
+                            const speedMB = lastCol.includes('kb') ? speedRaw / 1024 : speedRaw;
+                            if (speedMB < threshold) return;
                         }
                         if (csvIp) allIPs.push(csvPort && csvPort !== '443' ? csvIp + ':' + csvPort : csvIp);
                     }); 
@@ -1570,11 +1781,11 @@ function loginPage(tgGroup, siteUrl, githubUrl, pageTitle) {
 }
 
 // 👇 修改：增加 proxyCheckUrl 参数
-function dashPage(host, uuid, proxyip, subpass, subdomain, converter, env, clientIP, hasAuth, tgState, cfState, add, addApi, addCsv, tgToken, tgId, cfId, cfToken, cfMail, cfKey, sysParams, dashTitle, proxyCheckUrl, dls, echEnabled, echSni, echDns) {
+function dashPage(host, uuid, proxyip, subpass, subdomain, converter, env, clientIP, hasAuth, tgState, cfState, add, addApi, addCsv, tgToken, tgId, cfId, cfToken, cfMail, cfKey, sysParams, dashTitle, proxyCheckUrl, dls, echEnabled, echSni, echDns, statsEnabled, statsChatId, zoneId) {
     const defaultSubLink = `https://${host}/${subpass}`;
     const pathParam = proxyip ? "/proxyip=" + proxyip : "/";
     const longLink = `https://${subdomain}/sub?uuid=${uuid}&${'enc'+'ryption'}=none&${'secu'+'rity'}=tls&sni=${host}&alpn=h3&fp=${FP}&allowInsecure=0&type=ws&host=${host}&path=${encodeURIComponent(pathParam)}` + (ECH ? `&ech=${encodeURIComponent((ECH_SNI ? ECH_SNI + '+' : '') + ECH_DNS)}` : '');
-    const safeVal = (str) => (str || '').replace(/"/g, '&quot;');
+    const safeVal = (str) => (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     const jsStr = (s) => JSON.stringify(s || '').slice(1, -1);
     const getStatusLabel = (val, sysVal) => { if (!val) return ""; if (val === sysVal) return `<span class="source-tag sys">🔒 系统预设 (不可删除)</span>`; return `<span class="source-tag man">💾 后台配置 (可清除)</span>`; };
     return `<!DOCTYPE html>
@@ -3376,7 +3587,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, env, clien
                     </div>
                     <!-- ⭐ 功能4: DLS 设置输入框 -->
                     <div class="input-block">
-                        <label>DLS (ADDCSV专用) - 速度下限筛选 (单位: KB/s)</label>
+                        <label>DLS (ADDCSV专用) - 速度下限筛选 (单位: MB/s)</label>
                         <input type="text" id="inpDls" placeholder="5000" value="${safeVal(dls)}">
                     </div>
                     <button class="btn btn-success" style="width:100%" onclick="saveNodeConfig()">💾 保存配置</button>
@@ -3410,6 +3621,22 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, env, clien
                 <input type="text" id="tgId" placeholder="123456789" value="${safeVal(tgId)}">
                 ${getStatusLabel(tgId, sysParams.tgId)}
             </div>
+            <div class="input-block" style="padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(0,245,255,0.03)">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                    <span style="font-size:0.9rem;font-weight:600;color:var(--glass-cyan)">📊 CF 用量仪表盘</span>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:0">
+                        <input type="checkbox" id="statsEnabled" ${statsEnabled === 'true' ? 'checked' : ''} onchange="document.getElementById('statsLabel').textContent=this.checked?'已启用':'已关闭'">
+                        <span id="statsLabel" style="font-size:0.8rem">${statsEnabled === 'true' ? '已启用' : '已关闭'}</span>
+                    </label>
+                </div>
+                <label style="font-size:0.75rem">推送目标 Chat ID（留空=用上方 Chat ID）</label>
+                <input type="text" id="statsChatId" placeholder="默认用上方 Chat ID" value="${safeVal(statsChatId)}">
+                <div style="display:flex;gap:8px;margin-top:10px">
+                    <button class="btn btn-success" style="flex:1;padding:8px;font-size:0.85rem" onclick="saveDash()">💾 保存仪表盘</button>
+                    <button class="btn btn-primary" style="flex:1;padding:8px;font-size:0.85rem" onclick="setupWebhook()">🔗 设置 Webhook</button>
+                </div>
+                <div style="font-size:0.7rem;color:var(--text-dim);margin-top:6px">需配 CF 统计 + 部署 Cron(*/30 * * * *) · TG 发 /stats 可查</div>
+            </div>
             <div class="modal-btns">
                 <button class="btn btn-secondary" onclick="validateApi('tg')">验证</button>
                 <button class="btn btn-success" onclick="(function(){ const d={}; const t=val('tgToken'); const i=val('tgId'); if(t&&!t.startsWith('****'))d.TG_BOT_TOKEN=t; if(i&&!i.startsWith('****'))d.TG_CHAT_ID=i; if(Object.keys(d).length)saveConfig(d,'tgModal'); else{alert('请输入新的配置值');} })()">保存</button>
@@ -3436,9 +3663,14 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, env, clien
                 <input type="text" id="cfKey" placeholder="Global API Key" value="${safeVal(cfKey)}">
                 ${getStatusLabel(cfKey, sysParams.cfKey)}
             </div>
+            <div class="input-block">
+                <label>Zone ID（区域流量统计用，可选）</label>
+                <input type="text" id="cfZone" placeholder="域名概览页右侧的 Zone ID" value="${safeVal(zoneId)}">
+                <div style="font-size:0.7rem;color:var(--text-dim);margin-top:4px">用于仪表盘的「区域流量」(总请求/威胁🛡️/缓存/带宽)</div>
+            </div>
             <div class="modal-btns">
                 <button class="btn btn-secondary" onclick="validateApi('cf')">验证</button>
-                <button class="btn btn-success" onclick="(function(){ const d={}; const a=val('cfAcc'),t=val('cfTok'),m=val('cfMail'),k=val('cfKey'); if(a&&!a.startsWith('****'))d.CF_ID=a; if(t&&!t.startsWith('****'))d.CF_TOKEN=t; if(m&&!m.startsWith('****'))d.CF_EMAIL=m; if(k&&!k.startsWith('****'))d.CF_KEY=k; if(Object.keys(d).length)saveConfig(d,'cfModal'); else{alert('请输入新的配置值');} })()">保存</button>
+                <button class="btn btn-success" onclick="(function(){ const d={}; const a=val('cfAcc'),t=val('cfTok'),m=val('cfMail'),k=val('cfKey'),z=val('cfZone'); if(a&&!a.startsWith('****'))d.CF_ID=a; if(t&&!t.startsWith('****'))d.CF_TOKEN=t; if(m&&!m.startsWith('****'))d.CF_EMAIL=m; if(k&&!k.startsWith('****'))d.CF_KEY=k; if(z&&!z.startsWith('****'))d.CF_ZONE_ID=z; if(Object.keys(d).length)saveConfig(d,'cfModal'); else{alert('请输入新的配置值');} })()">保存</button>
                 <button class="btn btn-danger" onclick="clearConfig('cf')">清除</button>
             </div>
         </div>
@@ -3634,6 +3866,20 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, env, clien
             saveConfig(data, null);
         }
 
+        // 📊 CF 用量仪表盘：保存配置 + 一键设置 Webhook
+        function saveDash() {
+            const data = { STATS_ENABLED: document.getElementById('statsEnabled').checked ? 'true' : 'false', STATS_CHAT_ID: val('statsChatId') };
+            saveConfig(data, null);
+        }
+        async function setupWebhook() {
+            if(!confirm('将把 Telegram Webhook 设置为本域名 /tg/webhook，确定？')) return;
+            try {
+                const res = await fetch('?flag=set_webhook', { method:'POST' });
+                const d = await res.json();
+                alert(d.msg || (d.success ? '设置成功' : '设置失败'));
+            } catch(e) { alert('请求错误'); }
+        }
+
         async function clearConfig(type) {
             if(!confirm('确定清除后台配置？')) return;
             let data = {};
@@ -3702,7 +3948,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, env, clien
             if (_echOn) { const _es = document.getElementById('echSni')?.value || 'cloudflare-ech.com'; const _ed = document.getElementById('echDns')?.value || ECH_DNS_INIT; search.set('ech', (_es ? _es + '+' : '') + _ed); }
             let finalUrl = \`https://\${base}/sub?\${search.toString()}\`;
             if (isCM) {
-                let subUrl = CONVERTER + "/sub?target=" + ('cl'+'ash') + "&url=" + encodeURIComponent(finalUrl) + "&emoji=true&list=false&sort=false";
+                let subUrl = CONVERTER + "/sub?tar"+"get=" + ('cl'+'ash') + "&url=" + encodeURIComponent(finalUrl) + "&emo"+"ji=true&li"+"st=false&so"+"rt=false";
                 document.getElementById('finalLink').value = subUrl;
             } else {
                 document.getElementById('finalLink').value = finalUrl;

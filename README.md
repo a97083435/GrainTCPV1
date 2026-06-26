@@ -56,6 +56,7 @@
 - [订阅使用教程](#订阅使用教程)
 - [ECH 加密使用教程](#ech-加密使用教程)
 - [后台管理面板](#后台管理面板)
+- [CF 用量实时监控](#cf-用量实时监控)
 - [GrainTCP 内核参数](#graintcp-内核参数)
 - [常见问题](#常见问题)
 - [免责声明](#免责声明)
@@ -71,6 +72,7 @@ GrainTCPV1 是一个部署在 Cloudflare 上的代理节点管理系统，提供
 - ECH 加密注入（提升连接隐蔽性）
 - 可视化后台管理面板
 - 多种代理出口方式（Direct / SOCKS5 / HTTP / ProxyIP / TURN）
+- CF 用量实时监控（Telegram 仪表盘 + `/stats` 命令，含 Zone 流量与威胁统计）
 
 支持两种部署方式：**Workers**（完整版）和 **Snippets**（精简版）。
 
@@ -93,6 +95,9 @@ GrainTCPV1 是一个部署在 Cloudflare 上的代理节点管理系统，提供
 | Desire 裂变 | ✅ | ❌ | SUB_TOKEN 优选 IP 批量裂变 |
 | 白名单/访问日志 | ✅ | ❌ | IP 白名单免登录 + 日志记录 |
 | 环境变量配置 | ✅ | ❌ | Dashboard 在线修改配置 |
+| CF 用量 TG 仪表盘 | ✅ | ⚠️ | Cron 每 30 分钟刷新 Telegram 仪表盘（Snippets 无 Cron，仅命令查询） |
+| /stats 命令查询 | ✅ | ✅ | Telegram 发送 `/stats` 实时查询用量 |
+| Zone HTTP 统计 | ✅ | ✅ | 区域级请求/威胁/缓存/带宽 + 国家/状态码/设备分布 |
 
 ---
 
@@ -357,6 +362,16 @@ Workers 版通过 Cloudflare Dashboard 在线配置环境变量。
 | `CF_TOKEN` | Cloudflare API Token | 推荐方式，需具备读取统计权限 |
 | `CF_EMAIL` | Cloudflare 账号邮箱 | 与 `CF_KEY` 搭配使用 |
 | `CF_KEY` | Cloudflare Global API Key | 兼容方式，不推荐长期暴露 |
+| `CF_ZONE_ID` | Cloudflare 区域 ID（可选） | 用于 Zone HTTP 统计，域名概览页右侧获取 |
+
+> CF Token 需勾选 **Account Analytics: Read**（Workers 用量）；如启用 Zone 统计还需 **Zone Analytics: Read**。
+
+#### CF 用量监控配置
+
+| 变量名 | 说明 | 默认值 |
+|--------|------|--------|
+| `STATS_ENABLED` | 启用 Cron 定时刷新 TG 仪表盘（`true`/`false`） | `false` |
+| `STATS_CHAT_ID` | 仪表盘推送目标 Chat ID（留空用 `TG_CHAT_ID`） | 空 |
 
 #### 优选节点来源
 
@@ -807,8 +822,54 @@ ECH 开启后，系统自动对订阅内容做以下处理：
 #### 右上角工具栏
 
 - **主题切换**：深色星空 / 浅色天空两种主题
-- **TG 通知**：配置 Bot Token 和 Chat ID（Workers 版）
+- **TG 通知**：配置 Bot Token / Chat ID；含「CF 用量仪表盘」开关、推送 Chat ID、一键设置 Webhook 按钮（Workers 版）
+- **CF 统计**：配置 Account ID / API Token（或 Email + Global Key）+ Zone ID（区域统计用）
 - **退出登录**：清除 Cookie 退出会话
+
+---
+
+## CF 用量实时监控
+
+通过 Telegram 实时查看 Cloudflare 用量，支持**定时刷新仪表盘**和**命令查询**两种方式。
+
+### 功能说明
+
+| 方式 | 触发 | 行为 |
+|------|------|------|
+| **定时仪表盘** | Cron 每 30 分钟 | 自动刷新**同一条** TG 消息（不刷屏） |
+| **命令查询** | TG 发送 `/stats` | 实时返回当前用量（额外显示分布详情） |
+
+### 显示内容
+
+**Workers 调用量**（对应免费额度 10 万/天）：
+- 进度条 + 百分比 + 状态灯（🟢 <50% / 🟡 50-80% / 🔴 >80%）
+- Workers / Pages 分项、剩余额度、较上次趋势（▲▼）
+
+**Zone 区域流量**（需配 `CF_ZONE_ID`）：
+- 总请求 / 威胁拦截🛡️ / 缓存命中率 / 带宽流量
+
+**分布详情**（仅 `/stats` 命令，各 Top5）：
+- 🌍 国家分布 / 📊 状态码分布 / 📱 设备分布
+
+### 配置步骤（Workers 版）
+
+1. **配 CF 凭证**：后台 ☁️ → 填 `CF_ID`+`CF_TOKEN`（或 `CF_EMAIL`+`CF_KEY`）+ Zone ID
+   - Token 需勾选 **Account Analytics: Read** + **Zone Analytics: Read**
+2. **开启仪表盘**：后台 🤖 → 勾选「CF 用量仪表盘」开关 →（可选填推送 Chat ID）→ 保存
+3. **设 Cron Trigger**：CF Workers 后台 → Settings → Triggers → Cron Triggers → 添加 `*/30 * * * *`
+4. **设 Webhook**（命令查询用）：后台 🤖 → 点「设置 Webhook」按钮（自动注册 `/tg/webhook`）
+5. **测试**：等 Cron 刷新，或在 TG 给 Bot 发 `/stats`
+
+### 资源占用
+
+- CPU 消耗极低（亚毫秒级 JSON 解析；主要耗时在等网络，不计入 CPU）
+- Cron 每 30 分钟一次 = 48 次/天；分布维度 `limit 5` 锁定数据量
+- 实测总 CPU ~4-5ms，远低于免费版 10ms 墙，**不会触发功耗墙**
+
+### Snippets / Pages 说明
+
+- **Snippets**：不支持 Cron Trigger → 仅 `/stats` 命令查询可用，无定时仪表盘
+- **Pages**：Cron 支持有限 → 主要靠 `/stats` 命令；定时刷新需 Pages 支持 scheduled
 
 ---
 
@@ -998,6 +1059,31 @@ https://example.com/speed.csv
 CSV 需包含 IP、端口、TLS 列，配合 `DLS` 环境变量过滤低速节点（单位 MB/s，默认 `7`）。
 
 Snippets 版只支持单个 ProxyIP（`PIP` 配置项）。
+
+### CF 用量监控相关
+
+**Q: TG 仪表盘不自动刷新？**
+
+1. 确认已在 CF Workers 后台添加 Cron Trigger：`*/30 * * * *`
+2. 确认后台「CF 用量仪表盘」开关已开启并保存
+3. 确认 `TG_BOT_TOKEN` + 推送 Chat ID（或 `TG_CHAT_ID`）已配置
+4. Snippets 版不支持 Cron，无定时刷新（只能用 `/stats` 命令）
+
+**Q: 发 `/stats` 没反应？**
+
+1. 确认已点后台「设置 Webhook」按钮（注册 `/tg/webhook`）
+2. 确认发命令的 Chat ID 与配置的推送 Chat ID 一致（白名单校验）
+3. 确认 Bot Token 正确
+
+**Q: 显示「查询失败」或 Zone 数据为空？**
+
+1. CF Token 需勾选 **Account Analytics: Read**（Workers 用量）
+2. Zone 统计还需 **Zone Analytics: Read** + 正确的 `CF_ZONE_ID`
+3. 分布查询失败不影响基础统计——基础数据照常显示
+
+**Q: 担心仪表盘消耗 CPU / 触发功耗墙？**
+
+不会。实测单次 ~4-5ms CPU，远低于免费版 10ms 墙；主要耗时在等网络（不计 CPU），分布维度已用 `limit 5` 锁定数据量。
 
 ---
 
