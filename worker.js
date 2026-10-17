@@ -1773,7 +1773,9 @@ const tryCon = async (fetcher, addrType, host, port, routeCfg) => {
   for (const method of order) {
     try {
       if (method === 'direct') {
-        return await raceSprout(fetcher, host, port);
+        // 直连前把域名解成 IPv4：CF 解析域名时若有 AAAA 会优选 IPv6，出口被 Google 判香港（送中）
+        const targets = (await _turnResolveTarget(host, 'ipv4')).filter(t => t.family === 'ipv4');
+        return await raceSprout(fetcher, targets.length ? targets[0].address : host, port);
       }
       if (method === 'turn' && turn) {
         return await connectViaTurnProxy(openSocket, turn, host, port, family);
