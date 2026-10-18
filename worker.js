@@ -1650,7 +1650,7 @@ function pCfg(url, path, fbPIP = null) {
     const seg = path.match(pxRe)[1];
     const [a, p = 443] = parseAddressPort(seg);
     pIP = { address: a.includes('[') ? a.slice(1, -1) : a, port: +p };
-    order = ['direct', 'proxy'];
+    order = ['proxy'];
     return { pIP, s5, enS, turn, sstp, gP, order };
   }
 
@@ -1723,7 +1723,7 @@ function pCfg(url, path, fbPIP = null) {
   if (!order) {
     const mode = url.searchParams.get('mode') || 'auto';
     if (mode === 'proxy') {
-      order = ['direct', 'proxy'];
+      order = ['proxy'];
     } else if (mode !== 'auto') {
       order = [mode];
     } else {
@@ -1740,7 +1740,7 @@ function pCfg(url, path, fbPIP = null) {
       if (order.includes('s5') && !order.includes('direct')) order.unshift('direct');
       if (order.includes('turn') && !order.includes('direct')) order.unshift('direct');
       if (order.includes('sstp') && !order.includes('direct')) order.unshift('direct');
-      if (order.includes('proxy') && !order.includes('direct')) order.unshift('direct');
+      // proxy 不再强插 direct（指定 proxy 即只走 proxy，避免 CF 直连出口被判错国家）
       if (!order.length) {
         order = ['direct'];
         if (turn) order.push('turn');
