@@ -1650,7 +1650,7 @@ function pCfg(url, path, fbPIP = null) {
     const seg = path.match(pxRe)[1];
     const [a, p = 443] = parseAddressPort(seg);
     pIP = { address: a.includes('[') ? a.slice(1, -1) : a, port: +p };
-    order = ['proxy'];
+    order = ['direct', 'proxy'];
     return { pIP, s5, enS, turn, sstp, gP, order };
   }
 
@@ -1723,7 +1723,7 @@ function pCfg(url, path, fbPIP = null) {
   if (!order) {
     const mode = url.searchParams.get('mode') || 'auto';
     if (mode === 'proxy') {
-      order = ['proxy'];
+      order = ['direct', 'proxy'];
     } else if (mode !== 'auto') {
       order = [mode];
     } else {
@@ -1740,7 +1740,7 @@ function pCfg(url, path, fbPIP = null) {
       if (order.includes('s5') && !order.includes('direct')) order.unshift('direct');
       if (order.includes('turn') && !order.includes('direct')) order.unshift('direct');
       if (order.includes('sstp') && !order.includes('direct')) order.unshift('direct');
-      // proxy 不再强插 direct（指定 proxy 即只走 proxy，避免 CF 直连出口被判错国家）
+      if (order.includes('proxy') && !order.includes('direct')) order.unshift('direct');
       if (!order.length) {
         order = ['direct'];
         if (turn) order.push('turn');
@@ -1797,7 +1797,12 @@ const tryCon = async (fetcher, addrType, host, port, routeCfg) => {
       if (method === 'direct') {
         // 直连前把域名解成 IPv4：CF 解析域名时若有 AAAA 会优选 IPv6，出口被 Google 判香港（送中）
         // 但目标是 CF 托管站点时必须回落域名：解析出来就是 CF 自己的 anycast IP，CF 连自家 IP 会失败
-        const targets = (await _turnResolveTarget(host, 'ipv4')).filter(t => t.family === 'ipv4' && !isCfIp(t.address));
+        const resolved = (await _turnResolveTarget(host, 'ipv4')).filter(t => t.family === 'ipv4');
+        const targets = resolved.filter(t => !isCfIp(t.address));
+        // 目标 A 记录全在 CF 段（= CF 托管站点）：直连必然失败，认出就直接交给 proxy，省掉那次白撞
+        if (resolved.length && !targets.length && pIP) {
+          return await sprout(fetcher, pIP.address, pIP.port);
+        }
         return await raceSprout(fetcher, targets.length ? targets[0].address : host, port);
       }
       if (method === 'turn' && turn) {
