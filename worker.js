@@ -661,6 +661,28 @@ const _turnQueryDns = async (hostname, type) => {
   }
 };
 
+/* Cloudflare 官方 IPv4 段（https://www.cloudflare.com/ips-v4）。
+   104 段放宽为 104.16.0.0/12，以覆盖 104.28.x.x 等 CF 实际使用的范围。
+   用途：直连时跳过「CF 连自家 anycast IP」的自连 —— 那种连接 CF 边缘不接受，
+   旧版直接用域名连才是正常路径。 */
+const _cfV4 = [
+  [173, 245, 48, 0, 20], [103, 21, 244, 0, 22], [103, 22, 200, 0, 22],
+  [103, 31, 4, 0, 22], [141, 101, 64, 0, 18], [108, 162, 192, 0, 18],
+  [190, 93, 240, 0, 20], [188, 114, 96, 0, 20], [197, 234, 240, 0, 22],
+  [198, 41, 128, 0, 17], [162, 158, 0, 0, 15], [104, 16, 0, 0, 12],
+  [172, 64, 0, 0, 13], [131, 0, 72, 0, 22]
+];
+const isCfIp = (addr) => {
+  const p = String(addr).split('.').map(Number);
+  if (p.length !== 4 || p.some(n => !Number.isInteger(n) || n < 0 || n > 255)) return false;
+  const v = ((p[0] << 24) | (p[1] << 16) | (p[2] << 8) | p[3]) >>> 0;
+  return _cfV4.some(([a, b, c, d, bits]) => {
+    const base = (((a << 24) | (b << 16) | (c << 8) | d) >>> 0);
+    const mask = (0xFFFFFFFF << (32 - bits)) >>> 0;
+    return (v & mask) === (base & mask);
+  });
+};
+
 const _turnResolveTarget = async (hostname, familyHint) => {
   const host = _turnStripBrackets(hostname);
   if (_turnIsIPv4(host)) return [{ address: host, family: 'ipv4' }];
@@ -1774,7 +1796,8 @@ const tryCon = async (fetcher, addrType, host, port, routeCfg) => {
     try {
       if (method === 'direct') {
         // 直连前把域名解成 IPv4：CF 解析域名时若有 AAAA 会优选 IPv6，出口被 Google 判香港（送中）
-        const targets = (await _turnResolveTarget(host, 'ipv4')).filter(t => t.family === 'ipv4');
+        // 但目标是 CF 托管站点时必须回落域名：解析出来就是 CF 自己的 anycast IP，CF 连自家 IP 会失败
+        const targets = (await _turnResolveTarget(host, 'ipv4')).filter(t => t.family === 'ipv4' && !isCfIp(t.address));
         return await raceSprout(fetcher, targets.length ? targets[0].address : host, port);
       }
       if (method === 'turn' && turn) {
