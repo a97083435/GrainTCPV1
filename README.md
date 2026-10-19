@@ -74,6 +74,8 @@
 
 同名变量只要设置了环境变量，后台面板里保存的值就不再生效；想改回用面板配置，把对应环境变量删掉即可。
 
+> 代码顶部配置区是内置默认值，已做混淆处理，**不建议直接修改**。要自定义请使用环境变量，环境变量优先级最高。
+
 > 后台面板只能修改部分配置。`UUID`、`WEB_PASSWORD`、`SUB_PASSWORD`、`SUB_TOKEN`、`CONCUR`、`KEY`、`UUID_REFRESH` 这 7 项**只能通过环境变量修改**，后台面板没有对应输入框。
 
 #### 怎么添加
@@ -259,7 +261,7 @@ sub://sub.example.net#CM优选订阅
 | `DASHBOARD_TITLE` | 后台管理页标题 | `管理控制台 · Glass LH` |
 | `TG_GROUP_URL` | 交流群链接（登录页按钮） | `https://t.me/zyssadmin` |
 | `SITE_URL` | 网站链接（登录页按钮） | `https://blog.2026565.xyz/` |
-| `GITHUB_URL` | 项目地址（登录页按钮） | `https://github.com/xtgm/GrainTCPV1` |
+| `GITHUB_URL` | 项目地址（登录页按钮） | `https://github.com/xtgm/GTPV1` |
 | `PROXY_CHECK_URL` | ProxyIP 检测站链接 | `https://check.proxyip.cmliussss.net/` |
 
 #### 白名单配置

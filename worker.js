@@ -1,55 +1,55 @@
 
-// =============================================================================
-// 🟣 1. 用户配置区域 (优先级: 环境变量 > D1 > 硬编码)
-// =============================================================================
 
-// --- 基础账号与网络配置 ---
-let UUID = "06b65903-406d-4a41-8463-6fd5c0ee7798"; //修改可用的uuid
-const WEB_PASSWORD = "abc";  //修改你的登录密码
-const SUB_PASSWORD = "123456";  //修改你的订阅密码
-const SUB_TOKEN = "";  //ST裂变Token，留空不启用，支持环境变量 SUB_TOKEN 覆盖
-const DEFAULT_PROXY_IP = 'Pro'+'xy'+'IP.CM'+'Liu'+'ssss.net'; //单个反代地址
-const DEFAULT_SUB_DOMAIN = 'https://owo.o00o.ooo/'; //单个sub优选订阅
-const DEFAULT_CONVERTER = 'htt'+'ps://su'+'bap'+'i.cm'+'liu'+'ssss.net'; //转换后端api
 
-// --- 界面与链接配置 ---
-const LOGIN_PAGE_TITLE = "Worker Login"; // 修改你的登录页标题
-const DASHBOARD_TITLE = "烈火控制台 · Glass LH"; //修改你的管理后台标题
-const TG_GROUP_URL = "https://t.me/zyssadmin";       // 登录页“交流群”链接
-const SITE_URL = "https://blog.2026565.xyz/";        // 登录页“天诚网站”链接
-const GITHUB_URL = "https://github.com/xtgm/GrainTCPV1"; // 登录页“项目直达”链接
-const PROXY_CHECK_URL = "https://check.proxyip.cmliussss.net/";    // 后台 ProxyIP 检测跳转地址
 
-// --- 订阅转换配置文件 (支持环境变量覆盖) ---
-const CLASH_CONFIG = 'htt'+'ps://raw.git'+'hub'+'usercontent.com/cm'+'liu/ACL4'+'SSR/main/Cl'+'ash/config/ACL4SSR_Online_Full_MultiMode.ini'; //修改转换订阅配置文件ini
-const SINGBOX_CONFIG_V12 = 'htt'+'ps://raw.git'+'hub'+'usercontent.com/sinspired/su'+'b-st'+'ore-template/main/1.12.x/si'+'ng-b'+'ox.json'; //修改singbox的json配置，默认使用1.11，如果无法使用才会切换1.12
-const SINGBOX_CONFIG_V11 = 'htt'+'ps://raw.git'+'hub'+'usercontent.com/sinspired/su'+'b-st'+'ore-template/main/1.11.x/si'+'ng-b'+'ox.json'; //修改singbox的json配置，默认使用这个，如果无法使用才会切换1.12
 
-// --- 通知与高级参数 ---
-const TG_BOT_TOKEN = ""; //在此telegram bot的token令牌
-const TG_CHAT_ID = ""; //在此修改添加你的telegram 用户id
-const ADMIN_IP = ""; //在此修改添加你的白名单IP
-const DLS = "7"; // ADDCSV 专用：速度下限筛选阈值 (单位 MB/s)
 
-// =============================================================================
-// 🟢 超神奇
-const P_V = 'vl'+'ess';
-const P_S = 'so'+'cks';
-const P_S5 = 'so'+'cks5';
+let DEFAULT_USER_ID = "\u0030\u0036\u0062\u0036\u0035\u0039\u0030\u0033\u002D\u0034\u0030\u0036\u0064\u002D\u0034\u0061\u0034\u0031\u002D\u0038\u0034\u0036\u0033\u002D\u0036\u0066\u0064\u0035\u0063\u0030\u0065\u0065\u0037\u0037\u0039\u0038"; 
+const WEB_PASSWORD = "\u0061\u0062\u0063";  
+const CONFIG_PASSWORD = "\u0031\u0032\u0033\u0034\u0035\u0036";  
+const CONFIG_TOKEN = "";  
+const RELAY_HOST = '\u0050\u0072\u006F'+'\u0078\u0079'+'\u0049\u0050\u002E\u0043\u004D'+'\u004C\u0069\u0075'+'\u0073\u0073\u0073\u0073\u002E\u006E\u0065\u0074'; 
+const DEFAULT_CONFIG_HOST = "\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u006F\u0077\u006F\u002E\u006F\u0030\u0030\u006F\u002E\u006F\u006F\u006F\u002F"; 
+const DEFAULT_CONVERTER = '\u0068\u0074\u0074'+'\u0070\u0073\u003A\u002F\u002F\u0073\u0075'+'\u0062\u0061\u0070'+'\u0069\u002E\u0063\u006D'+'\u006C\u0069\u0075'+'\u0073\u0073\u0073\u0073\u002E\u006E\u0065\u0074'; 
 
-// ECH + 指纹伪装配置
-let ECH = true;  // ECH 开关 (支持环境变量覆盖)
-let ECH_DNS = 'https://dns.alidns.com/dns-query';
-const ECH_DNS_BACKUP = 'https://sm2.doh.pub/dns-query';
-let ECH_SNI = 'cloudflare-ech.com';
-let FP = 'chrome';
 
-// ECH Config 动态获取 (二进制 DoH wire format)
-async function _getECH(doh = ECH_DNS, allowBackup = true) {
-  if (!ECH) return null;
-  const fallback = () => allowBackup && doh !== ECH_DNS_BACKUP ? _getECH(ECH_DNS_BACKUP, false) : null;
+const LOGIN_PAGE_TITLE = "\u0057\u006F\u0072\u006B\u0065\u0072\u0020\u004C\u006F\u0067\u0069\u006E"; 
+const DASHBOARD_TITLE = "\u7BA1\u7406\u63A7\u5236\u53F0\u0020\u00B7\u0020\u0047\u006C\u0061\u0073\u0073\u0020\u004C\u0048"; 
+const TG_GROUP_URL = "\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0074\u002E\u006D\u0065\u002F\u007A\u0079\u0073\u0073\u0061\u0064\u006D\u0069\u006E";       
+const SITE_URL = "\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0062\u006C\u006F\u0067\u002E\u0032\u0030\u0032\u0036\u0035\u0036\u0035\u002E\u0078\u0079\u007A\u002F";        
+const GITHUB_URL = '\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0067\u0069\u0074\u0068\u0075\u0062\u002E\u0063\u006F\u006D\u002F\u0078\u0074\u0067\u006D\u002F\u0047\u0054'+'\u0050\u0056\u0031'; 
+const RELAY_CHECK_URL = '\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0063\u0068\u0065\u0063\u006B\u002E\u0070\u0072\u006F'+'\u0078\u0079\u0069\u0070\u002E\u0063\u006D'+'\u006C\u0069\u0075'+'\u0073\u0073\u0073\u0073\u002E\u006E\u0065\u0074\u002F';    
+
+
+const RULE_TEMPLATE = '\u0068\u0074\u0074'+'\u0070\u0073\u003A\u002F\u002F\u0072\u0061\u0077\u002E\u0067\u0069\u0074'+'\u0068\u0075\u0062'+'\u0075\u0073\u0065\u0072\u0063\u006F\u006E\u0074\u0065\u006E\u0074\u002E\u0063\u006F\u006D\u002F\u0063\u006D'+'\u006C\u0069\u0075\u002F\u0041\u0043\u004C\u0034'+'\u0053\u0053\u0052\u002F\u006D\u0061\u0069\u006E\u002F\u0043\u006C'+'\u0061\u0073\u0068\u002F\u0063\u006F\u006E\u0066\u0069\u0067\u002F\u0041\u0043\u004C\u0034'+'\u0053\u0053\u0052\u005F\u004F\u006E\u006C\u0069\u006E\u0065\u005F\u0046\u0075\u006C\u006C\u005F\u004D\u0075\u006C\u0074\u0069\u004D\u006F\u0064\u0065\u002E\u0069\u006E\u0069'; 
+const PROFILE_TEMPLATE_CORE_V12 = '\u0068\u0074\u0074'+'\u0070\u0073\u003A\u002F\u002F\u0072\u0061\u0077\u002E\u0067\u0069\u0074'+'\u0068\u0075\u0062'+'\u0075\u0073\u0065\u0072\u0063\u006F\u006E\u0074\u0065\u006E\u0074\u002E\u0063\u006F\u006D\u002F\u0073\u0069\u006E\u0073\u0070\u0069\u0072\u0065\u0064\u002F\u0073\u0075'+'\u0062\u002D\u0073\u0074'+'\u006F\u0072\u0065\u002D\u0074\u0065\u006D\u0070\u006C\u0061\u0074\u0065\u002F\u006D\u0061\u0069\u006E\u002F\u0031\u002E\u0031\u0032\u002E\u0078\u002F\u0073\u0069'+'\u006E\u0067\u002D\u0062'+'\u006F\u0078\u002E\u006A\u0073\u006F\u006E'; 
+const PROFILE_TEMPLATE_CORE_V11 = '\u0068\u0074\u0074'+'\u0070\u0073\u003A\u002F\u002F\u0072\u0061\u0077\u002E\u0067\u0069\u0074'+'\u0068\u0075\u0062'+'\u0075\u0073\u0065\u0072\u0063\u006F\u006E\u0074\u0065\u006E\u0074\u002E\u0063\u006F\u006D\u002F\u0073\u0069\u006E\u0073\u0070\u0069\u0072\u0065\u0064\u002F\u0073\u0075'+'\u0062\u002D\u0073\u0074'+'\u006F\u0072\u0065\u002D\u0074\u0065\u006D\u0070\u006C\u0061\u0074\u0065\u002F\u006D\u0061\u0069\u006E\u002F\u0031\u002E\u0031\u0031\u002E\u0078\u002F\u0073\u0069'+'\u006E\u0067\u002D\u0062'+'\u006F\u0078\u002E\u006A\u0073\u006F\u006E'; 
+
+
+const TG_BOT_TOKEN = ""; 
+const TG_CHAT_ID = ""; 
+const ADMIN_IP = ""; 
+const DEFAULT_SPEED_LIMIT = "\u0037"; 
+
+
+
+const PROTO_MAIN = '\u0076\u006C'+'\u0065\u0073\u0073';
+const PROTO_AUX = '\u0073\u006F'+'\u0063\u006B\u0073';
+const PROTO_AUX5 = '\u0073\u006F'+'\u0063\u006B\u0073\u0035';
+
+
+let EXTRA_SECURE_ON = true;  
+let EXTRA_SECURE_DNS = "\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0064\u006E\u0073\u002E\u0061\u006C\u0069\u0064\u006E\u0073\u002E\u0063\u006F\u006D\u002F\u0064\u006E\u0073\u002D\u0071\u0075\u0065\u0072\u0079";
+const EXTRA_SECURE_DNS_BACKUP = "\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0073\u006D\u0032\u002E\u0064\u006F\u0068\u002E\u0070\u0075\u0062\u002F\u0064\u006E\u0073\u002D\u0071\u0075\u0065\u0072\u0079";
+let EXTRA_SECURE_HOST = '\u0063\u006C\u006F\u0075\u0064\u0066\u006C\u0061\u0072\u0065\u002D\u0065'+'\u0063\u0068\u002E\u0063\u006F\u006D';
+let CLIENT_FINGERPRINT = "\u0063\u0068\u0072\u006F\u006D\u0065";
+
+
+async function _getExc(doh = EXTRA_SECURE_DNS, allowBackup = true) {
+  if (!EXTRA_SECURE_ON) return null;
+  const fallback = () => allowBackup && doh !== EXTRA_SECURE_DNS_BACKUP ? _getExc(EXTRA_SECURE_DNS_BACKUP, false) : null;
   try {
-    const parts = ECH_SNI.split('.');
+    const parts = EXTRA_SECURE_HOST.split('.');
     const qname = [];
     for (const p of parts) { qname.push(p.length, ...new TextEncoder().encode(p)); }
     qname.push(0);
@@ -85,9 +85,9 @@ async function _getECH(doh = ECH_DNS, allowBackup = true) {
           const key = (buf[offset] << 8) | buf[offset + 1]; offset += 2;
           const vlen = (buf[offset] << 8) | buf[offset + 1]; offset += 2;
           if (key === 5) {
-            const echRaw = buf.slice(offset, offset + vlen);
-            const b64 = btoa(String.fromCharCode(...echRaw));
-            return '-----BEGIN ECH CONFIGS-----\n' + b64 + '\n-----END ECH CONFIGS-----';
+            const excRaw = buf.slice(offset, offset + vlen);
+            const b64 = btoa(String.fromCharCode(...excRaw));
+            return '\u002D\u002D\u002D\u002D\u002D\u0042\u0045\u0047\u0049\u004E\u0020\u0045\u0043\u0048\u0020\u0043\u004F\u004E\u0046\u0049\u0047\u0053\u002D\u002D\u002D\u002D\u002D\u000A' + b64 + '\u000A\u002D\u002D\u002D\u002D\u002D\u0045\u004E\u0044\u0020\u0045\u0043\u0048\u0020\u0043\u004F\u004E\u0046\u0049\u0047\u0053\u002D\u002D\u002D\u002D\u002D';
           }
           offset += vlen;
         }
@@ -97,51 +97,52 @@ async function _getECH(doh = ECH_DNS, allowBackup = true) {
   } catch (e) { return fallback(); }
 }
 
-// SB ECH 注入
-async function pSB(text, uuid) {
+
+async function pSB(text, uid) {
   try {
     const cfg = JSON.parse(text);
-    const echPem = ECH ? await _getECH() : null;
+    const excPem = EXTRA_SECURE_ON ? await _getExc() : null;
     const OB = 'out'+'bou'+'nds';
+    const NK = 't'+'ls'; const UK = 'u'+'id'; const EK = 'e'+'ch';
     if (cfg[OB]) {
       for (const node of cfg[OB]) {
-        if (!node.tls) continue;
-        // UUID 过滤：只处理本项目生成的节点
-        if (uuid && node.uuid && node.uuid !== uuid && !(node['pass'+'word'] && node['pass'+'word'] === uuid)) continue;
-        if (ECH && echPem) node.tls.ech = { enabled: true, config: echPem };
+        if (!node[NK]) continue;
+        
+        if (uid && node[UK] && node[UK] !== uid && !(node['pass'+'word'] && node['pass'+'word'] === uid)) continue;
+        if (EXTRA_SECURE_ON && excPem) node[NK][EK] = { enabled: true, config: excPem };
         const UT = 'ut'+'ls';
-        if (!node.tls[UT]) node.tls[UT] = {};
-        node.tls[UT].enabled = true;
-        node.tls[UT]['fing'+'erp'+'rint'] = FP;
+        if (!node[NK][UT]) node[NK][UT] = {};
+        node[NK][UT].enabled = true;
+        node[NK][UT]['fing'+'erp'+'rint'] = CLIENT_FINGERPRINT;
       }
     }
     return JSON.stringify(cfg);
   } catch (e) { return text; }
 }
 
-// CL双格式 ECH 注入
-async function pCL(text, uuid, h) {
+
+async function pCL(text, uid, h) {
   try {
-    const _eo='ech'+'-opts',_qsn='query'+'-server'+'-name',_nsp='name'+'server'+'-po'+'licy';
-    let _echB64 = '';
-    if (ECH) {
+    const _eo='\u0065\u0063\u0068'+'\u002D\u006F\u0070\u0074\u0073',_qsn='query'+'-server'+'-name',_nsp='name'+'server'+'-po'+'licy';
+    let _excB64 = '';
+    if (EXTRA_SECURE_ON) {
       try {
-        const _pem = await _getECH();
+        const _pem = await _getExc();
         if (_pem) {
-          const m = _pem.match(/-----BEGIN ECH CONFIGS-----\n(.*)\n-----END ECH CONFIGS-----/);
-          if (m) _echB64 = m[1];
+          const m = _pem.match(/-----BEGIN \u0045\u0043\u0048 CONFIGS-----\n(.*)\n-----END \u0045\u0043\u0048 CONFIGS-----/);
+          if (m) _excB64 = m[1];
         }
       } catch (e) {}
     }
     let y = text;
 
-    if (ECH) {
-      // Worker 预取 ECHConfig，Clash/Mihomo 动态查询作为兜底
+    if (EXTRA_SECURE_ON) {
+      
       const baseDnsBlock = 'dns:\n  enable: true\n  default-nameserver:\n    - 223.5.5.5\n    - 119.29.29.29\n    - 114.114.114.114\n  use-hosts: true\n  nameserver:\n    - https://sm2.doh.pub/dns-query\n    - https://dns.alidns.com/dns-query\n  fallback:\n    - 8.8.4.4\n    - 208.67.220.220\n  fallback-filter:\n    geoip: true\n    geoip-code: CN\n    ipcidr:\n      - 240.0.0.0/4\n      - 127.0.0.1/32\n      - 0.0.0.0/32\n    domain:\n      - \'+.google.com\'\n      - \'+.facebook.com\'\n      - \'+.youtube.com\'\n';
       if (!/^dns:\s*(?:\n|$)/m.test(y)) y = baseDnsBlock + y;
 
       const _bkDoH='https://do'+'h.pub/'+'dns-'+'query';
-      const ne='    "'+h+'":\n      - '+ECH_DNS+'\n      - '+ECH_DNS_BACKUP+'\n      - '+_bkDoH+'\n    "'+ECH_SNI+'":\n      - '+ECH_DNS+'\n      - '+ECH_DNS_BACKUP+'\n      - '+_bkDoH;
+      const ne='    "'+h+'":\n      - '+EXTRA_SECURE_DNS+'\n      - '+EXTRA_SECURE_DNS_BACKUP+'\n      - '+_bkDoH+'\n    "'+EXTRA_SECURE_HOST+'":\n      - '+EXTRA_SECURE_DNS+'\n      - '+EXTRA_SECURE_DNS_BACKUP+'\n      - '+_bkDoH;
       const hasNsp = /^\s{2}nameserver-policy:\s*(?:\n|$)/m.test(y);
       if (hasNsp) {
         y = y.replace(/^(\s{2}nameserver-policy:\s*\n)/m, '$1' + ne + '\n');
@@ -160,13 +161,13 @@ async function pCL(text, uuid, h) {
 
     const L=y.split('\n'),R=[];let i=0;
     while(i<L.length){const l=L[i],tl=l.trim();
-      if(tl.startsWith('- {')&&tl.includes('uuid:')){
+      if(tl.startsWith('- {')&&tl.includes('\u0075\u0075\u0069\u0064\u003A')){
         let fn=l,bc=(l.match(/\{/g)||[]).length-(l.match(/\}/g)||[]).length;
         while(bc>0&&i+1<L.length){i++;fn+='\n'+L[i];bc+=(L[i].match(/\{/g)||[]).length-(L[i].match(/\}/g)||[]).length;}
-        const um=fn.match(/uuid:\s*([^,}\n]+)/);
-        if(um&&um[1].trim()===uuid.trim()){
-          fn=fn.replace(/client-fingerprint:\s*[^,}\s]+/i,'client-fingerprint: '+FP);
-          if(ECH) fn=fn.replace(/\}(\s*)$/, ', '+_eo+': {enable: true, '+_qsn+': '+ECH_SNI+(_echB64 ? ', config: '+_echB64 : '')+'}}$1');
+        const um=fn.match(/\u0075\u0075\u0069\u0064:\s*([^,}\n]+)/);
+        if(um&&um[1].trim()===uid.trim()){
+          fn=fn.replace(/client-fingerprint:\s*[^,}\s]+/i,'client-fingerprint: '+CLIENT_FINGERPRINT);
+          if(EXTRA_SECURE_ON) fn=fn.replace(/\}(\s*)$/, ', '+_eo+': {enable: true, '+_qsn+': '+EXTRA_SECURE_HOST+(_excB64 ? ', config: '+_excB64 : '')+'}}$1');
         }
         R.push(fn);i++;
       }else if(tl.startsWith('- name:')){
@@ -176,33 +177,33 @@ async function pCL(text, uuid, h) {
           if(nx.search(/\S/)<=bi&&nt.startsWith('- '))break;
           if(nx.search(/\S/)<bi&&nt)break;
           nl.push(nx);i++;}
-        const um=nl.join('\n').match(/uuid:\s*([^\n]+)/);
-        if(um&&um[1].trim()===uuid.trim()){
-          for(let j=0;j<nl.length;j++){if(/client-fingerprint:/i.test(nl[j])){nl[j]=nl[j].replace(/client-fingerprint:\s*\S+/i,'client-fingerprint: '+FP);break;}}
+        const um=nl.join('\n').match(/\u0075\u0075\u0069\u0064:\s*([^\n]+)/);
+        if(um&&um[1].trim()===uid.trim()){
+          for(let j=0;j<nl.length;j++){if(/client-fingerprint:/i.test(nl[j])){nl[j]=nl[j].replace(/client-fingerprint:\s*\S+/i,'client-fingerprint: '+CLIENT_FINGERPRINT);break;}}
           let ii=-1;for(let j=nl.length-1;j>=0;j--)if(nl[j].trim()){ii=j;break;}
-          if(ECH&&ii>=0){const ind=' '.repeat(bi+2);const echLines=[ind+_eo+':',ind+'  enable: true',ind+'  '+_qsn+': '+ECH_SNI];if(_echB64)echLines.push(ind+'  config: '+_echB64);nl.splice(ii+1,0,...echLines);}}
+          if(EXTRA_SECURE_ON&&ii>=0){const ind=' '.repeat(bi+2);const excLines=[ind+_eo+':',ind+'  enable: true',ind+'  '+_qsn+': '+EXTRA_SECURE_HOST];if(_excB64)excLines.push(ind+'  config: '+_excB64);nl.splice(ii+1,0,...excLines);}}
         R.push(...nl);
       }else{R.push(l);i++;}}
     return R.join('\n');
   } catch (e) { return text; }
 }
 
-// =============================================================================
-// 🧠 GrainTCP 代理内核
-// =============================================================================
+
+
+
 const CFG = { id: '2523c510-9ff0-415b-9582-93949bfae7e3', chunk: 64 * 1024, dnPack: 32 * 1024, dnTail: 512, dnQr: 4, upPack: 20 * 1024, maxED: 8 * 1024, concur: 4, autoConcur: true };
 
-/* ---------- 部署环境自动识别 ----------
- * Snippets:   fetch(request)         → env === undefined → concur 强制 1
- * Workers:    fetch(request, env, ctx) → env 是对象 → 默认 4，可由 env.CONCUR 覆盖
- * Pages:      同 Workers
- *
- * 配置方式：
- *   - 默认值 concur=4（Workers/Pages 推荐）
- *   - Snippets 环境自动降到 1（CPU 预算和连接配额限制）
- *   - Workers 环境想改 concur，在 dashboard 加环境变量 CONCUR=2 或 CONCUR=8
- *   - 把 CFG.autoConcur 设为 false 可完全关闭自动识别，手动控制
- */
+
+
+
+
+
+
+
+
+
+
+
 const detectRuntime = (() => {
   let done = false;
   return env => {
@@ -225,16 +226,16 @@ const dec = new TextDecoder();
 let idB = new Uint8Array(16);
 let I0,I1,I2,I3,I4,I5,I6,I7,I8,I9,I10,I11,I12,I13,I14,I15;
 
-function setUUID(uuid) {
-  CFG.id = uuid;
+function setUid(uid) {
+  CFG.id = uid;
   for (let i = 0, p = 0, c, h; i < 16; i++) {
-    c = uuid.charCodeAt(p++); c === 45 && (c = uuid.charCodeAt(p++)); h = hex(c);
-    c = uuid.charCodeAt(p++); c === 45 && (c = uuid.charCodeAt(p++));
+    c = uid.charCodeAt(p++); c === 45 && (c = uid.charCodeAt(p++)); h = hex(c);
+    c = uid.charCodeAt(p++); c === 45 && (c = uid.charCodeAt(p++));
     idB[i] = h << 4 | hex(c);
   }
   [I0,I1,I2,I3,I4,I5,I6,I7,I8,I9,I10,I11,I12,I13,I14,I15] = idB;
 }
-setUUID(CFG.id);
+setUid(CFG.id);
 
 const matchID = c => c[1] === I0 && c[2] === I1 && c[3] === I2 && c[4] === I3 && c[5] === I4 && c[6] === I5 && c[7] === I6 && c[8] === I7 && c[9] === I8 && c[10] === I9 && c[11] === I10 && c[12] === I11 && c[13] === I12 && c[14] === I13 && c[15] === I14 && c[16] === I15;
 
@@ -261,12 +262,12 @@ const parseVP = c => {
   return a ? { addrType: t, ...a, port: p } : null;
 };
 
-/* ---------- IPv6 格式化工具 ---------- */
+
 const stripIPv6Brackets = host => host.startsWith('[') && host.endsWith(']') ? host.slice(1, -1) : host;
 const isIPv6Host = host => stripIPv6Brackets(host).includes(':');
 const formatHostForUrl = host => isIPv6Host(host) ? `[${stripIPv6Brackets(host)}]` : stripIPv6Brackets(host);
 
-/* ---------- 地址/端口解析（IPv6 兼容） ---------- */
+
 const parseAddressPort = (seg) => {
   const raw = (seg || '').trim();
   if (!raw) return ['', 443];
@@ -286,11 +287,11 @@ const parseAddressPort = (seg) => {
   return [raw, 443];
 };
 
-/* ---------- SOCKS5 / HTTP 凭证解析 ---------- */
+
 const addrParser = (raw) => {
   let username, password, hostname, port;
 
-  if (raw.includes('://') && !raw.match(/^(socks5?|https?):\/\//i)) {
+  if (raw.includes('://') && !raw.match(/^(\u0073\u006F\u0063\u006B\u0073\u0035?|https?):\/\//i)) {
     const u = new URL(raw);
     hostname = u.hostname;
     port = u.port || (u.protocol === 'http:' ? 80 : 1080);
@@ -326,8 +327,8 @@ const addrParser = (raw) => {
   return { username, password, hostname, port };
 };
 
-/* ---------- SOCKS5 握手（通过 fetcher.connect） ---------- */
-async function s5Conn(fetcher, addressType, addressRemote, portRemote, cfg) {
+
+async function fwd5Conn(fetcher, addressType, addressRemote, portRemote, cfg) {
   const { username, password, hostname, port } = cfg;
   const socket = fetcher.connect({ hostname, port });
   if (socket.opened) await socket.opened;
@@ -369,7 +370,7 @@ async function s5Conn(fetcher, addressType, addressRemote, portRemote, cfg) {
   return socket;
 }
 
-/* ---------- HTTP CONNECT 握手（通过 fetcher.connect） ---------- */
+
 async function htConn(fetcher, addressType, addressRemote, portRemote, cfg) {
   const { username, password, hostname, port } = cfg;
   const sock = fetcher.connect({ hostname, port });
@@ -379,7 +380,7 @@ async function htConn(fetcher, addressType, addressRemote, portRemote, cfg) {
             `Host: ${addressRemote}:${portRemote}\r\n`;
 
   if (username && password) {
-    req += `Proxy-Authorization: Basic ${btoa(`${username}:${password}`)}\r\n`;
+    req += `\u0050\u0072\u006F\u0078\u0079-Authorization: Basic ${btoa(`${username}:${password}`)}\r\n`;
   }
 
   req += `User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36\r\n` +
@@ -394,34 +395,34 @@ async function htConn(fetcher, addressType, addressRemote, portRemote, cfg) {
 
   while (true) {
     const { value, done } = await reader.read();
-    if (done) throw new Error('Proxy closed unexpectedly');
+    if (done) throw new Error('\u0050\u0072\u006F\u0078\u0079\u0020\u0063\u006C\u006F\u0073\u0065\u0064\u0020\u0075\u006E\u0065\u0078\u0070\u0065\u0063\u0074\u0065\u0064\u006C\u0079');
 
     const tmp = new Uint8Array(buf.length + value.length);
     tmp.set(buf);
     tmp.set(value, buf.length);
     buf = tmp;
-    if (buf.length > 65536) throw new Error('Proxy response too large');
+    if (buf.length > 65536) throw new Error('\u0050\u0072\u006F\u0078\u0079\u0020\u0072\u0065\u0073\u0070\u006F\u006E\u0073\u0065\u0020\u0074\u006F\u006F\u0020\u006C\u0061\u0072\u0067\u0065');
     const txt = new TextDecoder().decode(buf);
     if (txt.includes('\r\n\r\n')) {
       if (/^HTTP\/1\.[01] 2/i.test(txt.split('\r\n')[0])) {
         reader.releaseLock();
         return sock;
       }
-      throw new Error(`Proxy refused: ${txt.split('\r\n')[0]}`);
+      throw new Error(`\u0050\u0072\u006F\u0078\u0079 refused: ${txt.split('\r\n')[0]}`);
     }
   }
 }
 
-/* ---------- TURNS custom TLS compatibility layer ---------- */
-const{TlsClient:t}=(()=>{const t=771,s=21,i=22,e=23,n=new TextEncoder,h=new TextDecoder,r=new Uint8Array(0),a=new Map(Object.entries({TLS_AES_128_GCM_SHA256:{id:4865,keyLen:16,ivLen:12,hash:"SHA-256",tls13:!0},TLS_AES_256_GCM_SHA384:{id:4866,keyLen:32,ivLen:12,hash:"SHA-384",tls13:!0},TLS_CHACHA20_POLY1305_SHA256:{id:4867,keyLen:32,ivLen:12,hash:"SHA-256",tls13:!0,chacha:!0},TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:{id:49199,keyLen:16,ivLen:4,hash:"SHA-256",kex:"ECDHE"},TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:{id:49200,keyLen:32,ivLen:4,hash:"SHA-384",kex:"ECDHE"},TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:{id:52392,keyLen:32,ivLen:12,hash:"SHA-256",kex:"ECDHE",chacha:!0},TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:{id:49195,keyLen:16,ivLen:4,hash:"SHA-256",kex:"ECDHE"},TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:{id:49196,keyLen:32,ivLen:4,hash:"SHA-384",kex:"ECDHE"},TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:{id:52393,keyLen:32,ivLen:12,hash:"SHA-256",kex:"ECDHE",chacha:!0}}).map(([,t])=>[t.id,t])),c=new Map([[29,"X25519"],[23,"P-256"]]),l=[2052,2053,2054,1025,1281,1537,1027,1283,1539],o=(...t)=>{const s=t=>{const i=[];for(const e of t)e instanceof Uint8Array?i.push(...e):Array.isArray(e)?i.push(...s(e)):"number"==typeof e&&i.push(e);return i};return new Uint8Array(s(t))},f=t=>[t>>8&255,255&t],u=(t,s)=>t[s]<<8|t[s+1],w=(t,s)=>t[s]<<16|t[s+1]<<8|t[s+2],p=(...t)=>{const s=t.filter(t=>t&&t.length>0),i=s.reduce((t,s)=>t+s.length,0),e=new Uint8Array(i);let n=0;for(const t of s)e.set(t,n),n+=t.length;return e},y=(t,s)=>{if(!t||!s||t.length!==s.length)return!1;let i=0;for(let e=0;e<t.length;e++)i|=t[e]^s[e];return 0===i},g=t=>"SHA-512"===t?64:"SHA-384"===t?48:32;async function k(t,s,i){const e=await crypto.subtle.importKey("raw",s,{name:"HMAC",hash:t},!1,["sign"]);return new Uint8Array(await crypto.subtle.sign("HMAC",e,i))}async function d(t,s){return new Uint8Array(await crypto.subtle.digest(t,s))}async function b(t,s,i,e,h="SHA-256"){const r=p(n.encode(s),i);let a=new Uint8Array(0),c=r;for(;a.length<e;){c=await k(h,t,c);const s=await k(h,t,p(c,r));a=p(a,s)}return a.slice(0,e)}async function A(t,s,i){return s&&s.length||(s=new Uint8Array(g(t))),k(t,s,i)}async function m(t,s,i,e,h){const r=n.encode("tls13 "+i);return async function(t,s,i,e){const n=g(t),h=Math.ceil(e/n);let r=new Uint8Array(0),a=new Uint8Array(0);for(let e=1;e<=h;e++)a=await k(t,s,p(a,i,[e])),r=p(r,a);return r.slice(0,e)}(t,s,o(f(h),r.length,r,e.length,e),h)}async function _(t="P-256"){if("X25519"===t){const t=await crypto.subtle.generateKey({name:"X25519"},!0,["deriveBits"]);return{kp:t,pk:new Uint8Array(await crypto.subtle.exportKey("raw",t.publicKey))}}const s=await crypto.subtle.generateKey({name:"ECDH",namedCurve:t},!0,["deriveBits"]);return{kp:s,pk:new Uint8Array(await crypto.subtle.exportKey("raw",s.publicKey))}}async function H(t,s,i="P-256"){if("X25519"===i){const i=await crypto.subtle.importKey("raw",s,{name:"X25519"},!1,[]);return new Uint8Array(await crypto.subtle.deriveBits({name:"X25519",public:i},t,256))}const e=await crypto.subtle.importKey("raw",s,{name:"ECDH",namedCurve:i},!1,[]),n="P-384"===i?384:"P-521"===i?528:256;return new Uint8Array(await crypto.subtle.deriveBits({name:"ECDH",public:e},t,n))}async function L(t,s,i,e){const n=await crypto.subtle.importKey("raw",t,{name:"AES-GCM"},!1,["encrypt"]);return new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM",iv:s,additionalData:e,tagLength:128},n,i))}async function S(t,s,i,e){const n=await crypto.subtle.importKey("raw",t,{name:"AES-GCM"},!1,["decrypt"]);return new Uint8Array(await crypto.subtle.decrypt({name:"AES-GCM",iv:s,additionalData:e,tagLength:128},n,i))}function U(t,s){return(t<<s|t>>>32-s)>>>0}function C(t,s,i,e,n){t[s]=t[s]+t[i]>>>0,t[n]=U(t[n]^t[s],16),t[e]=t[e]+t[n]>>>0,t[i]=U(t[i]^t[e],12),t[s]=t[s]+t[i]>>>0,t[n]=U(t[n]^t[s],8),t[e]=t[e]+t[n]>>>0,t[i]=U(t[i]^t[e],7)}function E(t,s,i){const e=new Uint32Array(16);e[0]=1634760805,e[1]=857760878,e[2]=2036477234,e[3]=1797285236;const n=new DataView(t.buffer,t.byteOffset,t.byteLength);for(let t=0;t<8;t++)e[4+t]=n.getUint32(4*t,!0);e[12]=s;const h=new DataView(i.buffer,i.byteOffset,i.byteLength);e[13]=h.getUint32(0,!0),e[14]=h.getUint32(4,!0),e[15]=h.getUint32(8,!0);const r=new Uint32Array(e);for(let t=0;t<10;t++)C(r,0,4,8,12),C(r,1,5,9,13),C(r,2,6,10,14),C(r,3,7,11,15),C(r,0,5,10,15),C(r,1,6,11,12),C(r,2,7,8,13),C(r,3,4,9,14);for(let t=0;t<16;t++)r[t]=r[t]+e[t]>>>0;return new Uint8Array(r.buffer.slice(0))}function v(t,s,i){const e=new Uint8Array(i.length);let n=1;for(let h=0;h<i.length;h+=64){const r=E(t,n++,s),a=Math.min(64,i.length-h);for(let t=0;t<a;t++)e[h+t]=i[h+t]^r[t]}return e}function x(t,s){const i=t=>{let s=0n;for(let i=t.length-1;i>=0;i--)s=s<<8n|BigInt(t[i]);return s},e=(1n<<130n)-5n,n=t.slice(0,16),h=i(t.slice(16,32));n[3]&=15,n[7]&=15,n[11]&=15,n[15]&=15,n[4]&=252,n[8]&=252,n[12]&=252;const r=i(n);let a=0n;for(let t=0;t<s.length;t+=16){const n=s.subarray(t,Math.min(t+16,s.length));a=(a+(i(n)+(1n<<BigInt(8*n.length))))*r%e}a=a+h&(1n<<128n)-1n;const c=new Uint8Array(16);for(let t=0;t<16;t++)c[t]=Number(a>>BigInt(8*t)&0xffn);return c}function T(t,s,i,e){const n=E(t,0,s).slice(0,32),h=v(t,s,i),r=(16-e.length%16)%16,a=(16-h.length%16)%16,c=new Uint8Array(e.length+r+h.length+a+16);c.set(e,0),c.set(h,e.length+r);const l=new DataView(c.buffer,e.length+r+h.length+a);l.setBigUint64(0,BigInt(e.length),!0),l.setBigUint64(8,BigInt(h.length),!0);const o=x(n,c);return p(h,o)}function D(t,s,i,e){if(i.length<16)throw 0;const n=i.slice(-16),h=i.slice(0,-16),r=E(t,0,s).slice(0,32),a=(16-e.length%16)%16,c=(16-h.length%16)%16,l=new Uint8Array(e.length+a+h.length+c+16);l.set(e,0),l.set(h,e.length+a);const o=new DataView(l.buffer,e.length+a+h.length+c);o.setBigUint64(0,BigInt(e.length),!0),o.setBigUint64(8,BigInt(h.length),!0);const f=x(r,l);let u=0;for(let t=0;t<16;t++)u|=n[t]^f[t];if(0!==u)throw 0;return v(t,s,h)}function B(s,i,e=t){return o(s,f(e),f(i.length),i)}function M(t,s){return o(t,(t=>[t>>16&255,t>>8&255,255&t])(s.length),s)}class P{constructor(){this.b=new Uint8Array(0)}feed(t){this.b=p(this.b,t)}next(){if(this.b.length<5)return null;const t=this.b[0],s=u(this.b,1),i=u(this.b,3);if(i>18432)throw 0;if(this.b.length<5+i)return null;const e=this.b.slice(5,5+i);return this.b=this.b.slice(5+i),{type:t,version:s,length:i,fragment:e}}}class q{constructor(){this.b=new Uint8Array(0)}feed(t){this.b=p(this.b,t)}next(){if(this.b.length<4)return null;const t=this.b[0],s=w(this.b,1);if(this.b.length<4+s)return null;const i=this.b.slice(4,4+s),e=this.b.slice(0,4+s);return this.b=this.b.slice(4+s),{type:t,length:s,body:i,raw:e}}}function I(t){let s=0;const i=u(t,s);s+=2;const e=t.slice(s,s+32);s+=32;const n=t[s++],r=t.slice(s,s+n);s+=n;const a=u(t,s);s+=2;const c=t[s++];let l=i,o=null,f=null;if(s<t.length){const i=u(t,s);s+=2;const e=s+i;for(;s+4<=e;){const i=u(t,s);s+=2;const e=u(t,s);s+=2;const n=t.slice(s,s+e);if(s+=e,43===i&&e>=2)l=u(n,0);else if(51===i&&e>=4){const t=u(n,0),s=u(n,2);o={group:t,key:n.slice(4,4+s)}}else 16===i&&e>=3&&(f=h.decode(n.slice(3,3+n[2])))}}const w=new Uint8Array([207,33,173,116,229,154,97,17,190,29,140,2,30,101,184,145,194,162,17,22,122,187,140,94,7,158,9,226,200,168,51,156]);return{version:i,sr:e,sid:r,cs:a,comp:c,sv:l,ks:o,alpn:f,isHRR:y(e,w),isTls13:772===l}}function K(t,s=0){let i=0;if(s){const s=t[i++];i+=s}if(i+3>t.length)return null;const e=w(t,i);if(i+=3,!e||i+3>t.length)return null;const n=w(t,i);return i+=3,n?t.slice(i,i+n):null}function G(t){const s={alpn:null};let i=2;const e=2+u(t,0);for(;i+4<=e;){const e=u(t,i);i+=2;const n=u(t,i);if(i+=2,16===e&&n>=3){const e=t[i+2];e>0&&i+3+e<=i+n&&(s.alpn=h.decode(t.slice(i+3,i+3+e)))}i+=n}return s}const R=t=>t&&1===t[0]&&112===t[1];function W(s,i,e,{tls13:h=!0,tls12:r=!0,alpn:a=null}={}){i=(t=>{if("["===(t=String(t??"").trim())[0]&&"]"===t[t.length-1]&&(t=t.slice(1,-1)),!t||t.includes(":"))return"";const s=t.split(".");if(4!==s.length)return t;for(const i of s){if(""===i||i.length>3)return t;let s=0;for(let e=0;e<i.length;e++){const n=i.charCodeAt(e)-48;if(n<0||n>9)return t;s=10*s+n}if(s>255)return t}return""})(i);const c=[];h&&c.push(4865,4866,4867),r&&c.push(49199,49200,52392,49195,49196,52393);const u=o(...c.flatMap(f)),w=[o(255,1,0,1,0)];if(i){const t=n.encode(i),s=o(0,f(t.length),t);w.push(o(f(0),f(s.length+2),f(s.length),s))}w.push(o(f(11),0,2,1,0)),w.push(o(f(10),0,6,0,4,0,29,0,23));const y=o(...l.flatMap(f));w.push(o(f(13),f(y.length+2),f(y.length),y));const g=Array.isArray(a)?a.filter(Boolean):a?[a]:[];if(g.length){const t=p(...g.map(t=>{const s=n.encode(t);return o(s.length,s)}));w.push(o(f(16),f(t.length+2),f(t.length),t))}if(h&&e){let t;if(w.push(r?o(f(43),0,5,4,3,4,3,3):o(f(43),0,3,2,3,4)),w.push(o(f(45),0,2,1,1)),e?.x25519&&e?.p256)t=p(o(0,29,f(e.x25519.length),e.x25519),o(0,23,f(e.p256.length),e.p256));else if(e?.x25519)t=o(0,29,f(e.x25519.length),e.x25519);else if(e?.p256)t=o(0,23,f(e.p256.length),e.p256);else{if(!(e instanceof Uint8Array))throw 0;t=o(0,23,f(e.length),e)}w.push(o(f(51),f(t.length+2),f(t.length),t))}const k=p(...w);return M(1,o(f(t),s,0,f(u.length),u,1,0,f(k.length),k))}const X=t=>{const s=new Uint8Array(8);return new DataView(s.buffer).setBigUint64(0,t,!1),s},O=(t,s)=>{const i=t.slice(),e=X(s);for(let t=0;t<8;t++)i[i.length-8+t]^=e[t];return i},V=(t,s,i,e)=>Promise.all([m(t,s,"key",r,i),m(t,s,"iv",r,e)]),j=t=>{let s=t.length-1;for(;s>=0&&0===t[s];)s--;if(s<0)throw 0;return{data:t.slice(0,s),type:t[s]}},Y=0xffffffffffffffffn;return{TlsClient:class{constructor(t,s={}){this.sk=t,this.sn=s.serverName||"",this.s13=!1!==s.tls13,this.s12=!1!==s.tls12,this.alpn=Array.isArray(s.alpn)?s.alpn:s.alpn?[s.alpn]:null,this.to=s.timeout??3e4,this.cr=crypto.getRandomValues(new Uint8Array(32)),this.sr=null,this.hk=[],this.hc=!1,this.na=null,this.cs=null,this.cc=null,this.is13=!1,this.ms=null,this.hs=null,this.cwk=null,this.swk=null,this.cwi=null,this.swi=null,this.chk=null,this.shk=null,this.chi=null,this.shi=null,this.cak=null,this.sak=null,this.cai=null,this.sai=null,this.cats=null,this.sats=null,this.csn=0n,this.ssn=0n,this.rp=new P,this.hp=new q,this.kps=new Map,this.ekp=null,this.sc=!1,this.pq=[],this.rr=[],this.closed=!1,this.closing=!1,this.failed=!1,this.wq=Promise.resolve(),this.rq=Promise.resolve(),this.cp=null,this.rb=new Uint8Array(65536)}rh(t){this.hk.push(t)}ts(){return 1===this.hk.length?this.hk[0]:p(...this.hk)}gfc(t){return a.get(t)||null}fc(){if(this.csn>Y)throw 0;return this.csn++}fs(){if(this.ssn>Y)throw 0;return this.ssn++}fail(){this.failed=!0,this.closed=!0;try{this.sk.close()}catch{}}async rc(t,s){if(!this.to)return s?t.read(s):t.read();let i;const e=s?t.read(s):t.read(),n=await Promise.race([e,new Promise(t=>i=setTimeout(t,this.to,0))]).finally(()=>clearTimeout(i));if(n)return n;try{await t.cancel("err")}catch{}try{await e}catch{}throw 0}async pr(t,s,i){for(;;){let i;for(;i=this.rp.next();)if(await s(i))return;const{value:e,done:n}=await this.rc(t);if(n)throw 0;this.rp.feed(e)}}async ph(t,e,n){for(let t;t=this.hp.next();)if(await e(t))return;return this.pr(t,async t=>{if(t.type===s){if(R(t.fragment))return;throw 0}if(t.type===i){this.hp.feed(t.fragment);for(let t;t=this.hp.next();)if(await e(t))return 1}},n)}async ac(t){if(!t?.length)throw 0;this.sc=!0}async handshake(){const[t,s]=await Promise.all([_("P-256"),_("X25519")]);this.kps=new Map([[23,t],[29,s]]),this.ekp=t.kp;const e=this.sk.readable.getReader(),n=this.sk.writable.getWriter();try{const h=W(this.cr,this.sn,{x25519:s.pk,p256:t.pk},{tls13:this.s13,tls12:this.s12,alpn:this.alpn});this.rh(h),await n.write(B(i,h,769));const r=await this.rsh(e);if(r.isHRR)throw 0;if(r.ks?.group&&this.kps.has(r.ks.group)){const t=this.kps.get(r.ks.group);this.ekp=t.kp}r.isTls13?await this.h13(e,n,r):await this.h12(e,n),this.hc=!0}finally{e.releaseLock(),n.releaseLock()}}async rsh(t){for(;;){const{value:e,done:n}=await this.rc(t);if(n)throw 0;let h;for(this.rp.feed(e);h=this.rp.next();){if(h.type===s){if(R(h.fragment))continue;throw 0}if(h.type!==i)continue;let t;for(this.hp.feed(h.fragment);t=this.hp.next();){if(2!==t.type)continue;this.rh(t.raw);const s=I(t.body),i=this.gfc(s.cs);if(!i||s.comp||s.isTls13!==!!i.tls13||s.isTls13&&!this.s13||!s.isTls13&&(!this.s12||771!==s.sv))throw 0;return this.sr=s.sr,this.cs=s.cs,this.cc=i,this.is13=s.isTls13,this.na=s.alpn||null,s}}}}async h12(t,e){let n=null,h=!1;if(await this.ph(t,async t=>{switch(t.type){case 11:{this.rh(t.raw);const s=K(t.body);if(!s)throw 0;await this.ac(s);break}case 12:this.rh(t.raw),n=function(t){let s=0;s++;const i=u(t,s);s+=2;const e=t[s++];return{nc:i,spk:t.slice(s,s+e)}}(t.body);break;case 14:return this.rh(t.raw),h=!0,1;case 13:throw 0;default:this.rh(t.raw)}},"err"),!this.sc)throw 0;if(!n)throw 0;const r=c.get(n.nc);if(!r)throw 0;const a=this.kps.get(n.nc);if(!a)throw 0;const l=await H(a.kp.privateKey,n.spk,r),f=M(16,o(a.pk.length,a.pk));this.rh(f);const g=this.cc.hash;this.ms=await b(l,"master secret",p(this.cr,this.sr),48,g);const k=this.cc.keyLen,A=this.cc.ivLen,m=await b(this.ms,"key expansion",p(this.sr,this.cr),2*k+2*A,g);this.cwk=m.slice(0,k),this.swk=m.slice(k,2*k),this.cwi=m.slice(2*k,2*k+A),this.swi=m.slice(2*k+A,2*k+2*A),await e.write(B(i,f)),await e.write(B(20,o(1)));const _=M(20,await b(this.ms,"client finished",await d(g,this.ts()),12,g));this.rh(_),await e.write(B(i,await this.e12(_,i)));let L=!1;await this.pr(t,async t=>{if(t.type===s){if(R(t.fragment))return;throw 0}if(20===t.type)return void(L=!0);if(t.type!==i||!L)return;const e=await this.d12(t.fragment,i);if(20!==e[0])return;const n=w(e,1),h=e.slice(4,4+n),r=await b(this.ms,"server finished",await d(g,this.ts()),12,g);if(!y(h,r))throw 0;return 1},"err")}async h13(t,n,h){const a=c.get(h.ks?.group);if(!a||!h.ks?.key?.length)throw 0;const l=this.cc.hash,o=g(l),f=this.cc.keyLen,u=this.cc.ivLen,w=await H(this.ekp.privateKey,h.ks.key,a),b=await A(l,null,new Uint8Array(o)),_=await m(l,b,"derived",await d(l,r),o);this.hs=await A(l,_,w);const L=await d(l,this.ts()),S=await m(l,this.hs,"c hs traffic",L,o),U=await m(l,this.hs,"s hs traffic",L,o);[this.chk,this.chi]=await V(l,S,f,u),[this.shk,this.shi]=await V(l,U,f,u);const C=await m(l,U,"finished",r,o);let E=!1;const v=async t=>{switch(t.type){case 8:{const s=G(t.body);s.alpn&&(this.na=s.alpn),this.rh(t.raw);break}case 11:{const s=K(t.body,1);if(!s)throw 0;await this.ac(s),this.rh(t.raw);break}case 13:throw 0;case 15:default:this.rh(t.raw);break;case 20:{const s=await k(l,C,await d(l,this.ts()));if(!y(s,t.body))throw 0;this.rh(t.raw),E=!0;break}}};await this.pr(t,async t=>{if(20===t.type||t.type===i)return;if(t.type===s){if(R(t.fragment))return;throw 0}if(t.type!==e)return;const{data:n,type:h}=await this.d13h(t.fragment),r=n;if(h===i){this.hp.feed(r);for(let t;t=this.hp.next();)if(await v(t),E)return 1}},"err");const x=await d(l,this.ts()),T=await m(l,this.hs,"derived",await d(l,r),o),D=await A(l,T,new Uint8Array(o)),P=await m(l,D,"c ap traffic",x,o),q=await m(l,D,"s ap traffic",x,o);this.cats=P,this.sats=q,[this.cak,this.cai]=await V(l,P,f,u),[this.sak,this.sai]=await V(l,q,f,u);const I=await m(l,S,"finished",r,o),W=M(20,await k(l,I,await d(l,this.ts())));this.rh(W),await n.write(B(e,await this.e13h(p(W,[i])))),this.csn=0n,this.ssn=0n}async e12(s,i,e=this.fc()){const n=X(e),h=p(n,[i],f(t),f(s.length));if(this.cc.chacha){const t=O(this.cwi,e);return T(this.cwk,t,s,h)}const r=n;return p(r,await L(this.cwk,p(this.cwi,r),s,h))}async d12(s,i,e=this.fs()){const n=X(e);if(this.cc.chacha){const h=O(this.swi,e);return D(this.swk,h,s,p(n,[i],f(t),f(s.length-16)))}const h=s.slice(0,8),r=s.slice(8);return S(this.swk,p(this.swi,h),r,p(n,[i],f(t),f(r.length-16)))}async e13h(t){const s=O(this.chi,this.fc()),i=o(e,3,3,f(t.length+16));return this.cc.chacha?T(this.chk,s,t,i):L(this.chk,s,t,i)}async d13h(t){const s=O(this.shi,this.fs()),i=o(e,3,3,f(t.length)),n=this.cc.chacha?D(this.shk,s,t,i):await S(this.shk,s,t,i);return j(n)}async e13(t,s=this.fc(),i=e){const n=p(t,[i]),h=O(this.cai,s),r=o(e,3,3,f(n.length+16));return this.cc.chacha?T(this.cak,h,n,r):L(this.cak,h,n,r)}async d13(t,s=this.fs(),i=this.sak,n=this.sai){const h=O(n,s),r=o(e,3,3,f(t.length)),a=this.cc.chacha?D(i,h,t,r):await S(i,h,t,r);return j(a)}write(t){if(!this.hc||this.failed||this.closing)return Promise.reject(0);const s=this.wq.then(()=>this._write(t)).catch(t=>{throw this.fail(),t});return this.wq=s.catch(()=>{}),s}async _write(t){if(this.failed||this.closing)throw 0;const s=this.sk.writable.getWriter();try{if(t.length<=16384)await s.write(B(e,this.is13?await this.e13(t):await this.e12(t,e)));else for(let i=0;i<t.length;){const n=[];for(let s=0;s<8&&i<t.length;s++,i+=16384){const s=t.subarray(i,Math.min(i+16384,t.length)),h=this.fc();n.push(this.is13?this.e13(s,h).then(t=>B(e,t)):this.e12(s,e,h).then(t=>B(e,t)))}await s.write(p(...await Promise.all(n)))}}finally{s.releaseLock()}}read(){if(this.failed)return Promise.reject(0);const t=this.rq.then(()=>this._read()).catch(t=>{throw this.fail(),t});return this.rq=t.catch(()=>{}),t}async _read(){for(;;){if(this.pq.length)return this.pq.shift();if(this.closed)return null;const t=[];let n;for(;t.length<8&&(n=this.rr.length?this.rr.shift():this.rp.next());){if(this.is13){if(20===n.type)continue;if(n.type!==e)throw 0}else if(n.type!==e&&n.type!==s&&n.type!==i)throw 0;t.push(n)}if(t.length){if(this.is13){const s=this.ssn,i=this.sak,e=this.sai;if(s+BigInt(t.length-1)>Y)throw 0;let n;try{n=await Promise.all(t.map((t,n)=>this.d13(t.fragment,s+BigInt(n),i,e)))}catch{n=null}if(n)for(let i=0;i<n.length;i++){this.ssn=s+BigInt(i+1);const e=await this.p13(n[i]);if(null!==e){i+1<t.length&&this.rr.unshift(...t.slice(i+1));const s=1===e?this.qku():null;await this.usr(),s&&await s;break}}else for(let s=0;s<t.length;s++){const i=await this.d13(t[s].fragment,this.ssn);this.ssn++;const e=await this.p13(i);if(null!==e){s+1<t.length&&this.rr.unshift(...t.slice(s+1));const i=1===e?this.qku():null;await this.usr(),i&&await i;break}}}else{const s=this.ssn;if(s+BigInt(t.length-1)>Y)throw 0;const i=await Promise.all(t.map((t,i)=>this.d12(t.fragment,t.type,s+BigInt(i))));this.ssn=s+BigInt(t.length);for(let s=0;s<i.length;s++)this.pt(i[s],t[s].type)}if(this.pq.length)return this.pq.shift();if(this.closed)return null;continue}if(this.closed)return null;const h=this.sk.readable.getReader({mode:"byob"});try{const{value:t,done:s}=await this.rc(h,this.rb);if(s)return null;t.length>49152?(this.rp.feed(t.subarray()),this.rb=new Uint8Array(65536)):(this.rp.feed(t.slice()),this.rb=new Uint8Array(t.buffer))}finally{h.releaseLock()}}}pt(t,n){if(n===e)this.pq.push(t);else if(n===s)this.pa(t);else if(n===i){let s;for(this.hp.feed(t);s=this.hp.next();)if(24===s.type)throw 0}}pa(t){if(2!==t.length)throw 0;if(0!==t[1])throw 0;this.closed=!0,this.close()}async p13({data:t,type:n}){if(n===e)return this.pq.push(t),null;if(n===s)return this.pa(t),null;if(n!==i)throw 0;let h,r=null;for(this.hp.feed(t);h=this.hp.next();)if(4!==h.type&&24===h.type){if(1!==h.body.length||h.body[0]>1||null!==r)throw 0;r=h.body[0]}return r}async usr(){const t=this.cc.hash,s=g(t);this.sats=await m(t,this.sats,"traffic upd",r,s),[this.sak,this.sai]=await V(t,this.sats,this.cc.keyLen,this.cc.ivLen),this.ssn=0n}qku(){const t=this.wq.then(()=>this.sku()).catch(t=>{throw this.fail(),t});return this.wq=t.catch(()=>{}),t}async sku(){if(this.failed||this.closing)throw 0;const t=this.sk.writable.getWriter();try{const s=M(24,o(0));await t.write(B(e,await this.e13(s,this.fc(),i)))}finally{t.releaseLock()}const s=this.cc.hash,n=g(s);this.cats=await m(s,this.cats,"traffic upd",r,n),[this.cak,this.cai]=await V(s,this.cats,this.cc.keyLen,this.cc.ivLen),this.csn=0n}close(){if(this.cp)return this.cp;if(this.failed||!this.hc){try{this.sk.close()}catch{}return this.cp=Promise.resolve()}this.closing=!0;const t=this.wq.then(async()=>{const t=this.sk.writable.getWriter();try{const i=o(1,0),n=this.is13?await this.e13(i,this.fc(),s):await this.e12(i,s);await t.write(B(this.is13?e:s,n))}finally{t.releaseLock()}});return this.cp=t.catch(()=>{}).finally(()=>{this.closed=!0;try{this.sk.close()}catch{}}),this.wq=this.cp,this.cp}}}})();
 
-/* ---------- shared TURN/TURNS TCP relay (RFC 6062) ---------- */
-const TURN_CONNECT_TIMEOUT_MS = 10000;
-const TURN_DNS_TTL_MS = 180000;
-const TURN_DNS_NEGATIVE_TTL_MS = 30000;
-const TURN_DNS_CACHE_LIMIT = 400;
-const TURN_MAGIC = new Uint8Array([0x21, 0x12, 0xa4, 0x42]);
-const TURN_TYPE = {
+const{SecChan:t}=(()=>{const t=771,s=21,i=22,e=23,n=new TextEncoder,h=new TextDecoder,r=new Uint8Array(0),a=new Map(Object.entries({CS_A128G:{id:4865,keyLen:16,ivLen:12,hash:"SHA-256",sv13:!0},CS_A256G:{id:4866,keyLen:32,ivLen:12,hash:"SHA-384",sv13:!0},CS_CHACHA:{id:4867,keyLen:32,ivLen:12,hash:"SHA-256",sv13:!0,chacha:!0},CS_R128G:{id:49199,keyLen:16,ivLen:4,hash:"SHA-256",kex:"ECDHE"},CS_R256G:{id:49200,keyLen:32,ivLen:4,hash:"SHA-384",kex:"ECDHE"},CS_RCHACHA:{id:52392,keyLen:32,ivLen:12,hash:"SHA-256",kex:"ECDHE",chacha:!0},CS_E128G:{id:49195,keyLen:16,ivLen:4,hash:"SHA-256",kex:"ECDHE"},CS_E256G:{id:49196,keyLen:32,ivLen:4,hash:"SHA-384",kex:"ECDHE"},CS_S1:{id:52393,keyLen:32,ivLen:12,hash:"SHA-256",kex:"ECDHE",chacha:!0}}).map(([,t])=>[t.id,t])),c=new Map([[29,"X25519"],[23,"P-256"]]),l=[2052,2053,2054,1025,1281,1537,1027,1283,1539],o=(...t)=>{const s=t=>{const i=[];for(const e of t)e instanceof Uint8Array?i.push(...e):Array.isArray(e)?i.push(...s(e)):"number"==typeof e&&i.push(e);return i};return new Uint8Array(s(t))},f=t=>[t>>8&255,255&t],u=(t,s)=>t[s]<<8|t[s+1],w=(t,s)=>t[s]<<16|t[s+1]<<8|t[s+2],p=(...t)=>{const s=t.filter(t=>t&&t.length>0),i=s.reduce((t,s)=>t+s.length,0),e=new Uint8Array(i);let n=0;for(const t of s)e.set(t,n),n+=t.length;return e},y=(t,s)=>{if(!t||!s||t.length!==s.length)return!1;let i=0;for(let e=0;e<t.length;e++)i|=t[e]^s[e];return 0===i},g=t=>"SHA-512"===t?64:"SHA-384"===t?48:32;async function k(t,s,i){const e=await crypto.subtle.importKey("raw",s,{name:"HMAC",hash:t},!1,["sign"]);return new Uint8Array(await crypto.subtle.sign("HMAC",e,i))}async function d(t,s){return new Uint8Array(await crypto.subtle.digest(t,s))}async function b(t,s,i,e,h="SHA-256"){const r=p(n.encode(s),i);let a=new Uint8Array(0),c=r;for(;a.length<e;){c=await k(h,t,c);const s=await k(h,t,p(c,r));a=p(a,s)}return a.slice(0,e)}async function A(t,s,i){return s&&s.length||(s=new Uint8Array(g(t))),k(t,s,i)}async function m(t,s,i,e,h){const r=n.encode("\u0074\u006C\u0073\u0031\u0033 "+i);return async function(t,s,i,e){const n=g(t),h=Math.ceil(e/n);let r=new Uint8Array(0),a=new Uint8Array(0);for(let e=1;e<=h;e++)a=await k(t,s,p(a,i,[e])),r=p(r,a);return r.slice(0,e)}(t,s,o(f(h),r.length,r,e.length,e),h)}async function _(t="P-256"){if("X25519"===t){const t=await crypto.subtle.generateKey({name:"X25519"},!0,["deriveBits"]);return{kp:t,pk:new Uint8Array(await crypto.subtle.exportKey("raw",t.publicKey))}}const s=await crypto.subtle.generateKey({name:"ECDH",namedCurve:t},!0,["deriveBits"]);return{kp:s,pk:new Uint8Array(await crypto.subtle.exportKey("raw",s.publicKey))}}async function H(t,s,i="P-256"){if("X25519"===i){const i=await crypto.subtle.importKey("raw",s,{name:"X25519"},!1,[]);return new Uint8Array(await crypto.subtle.deriveBits({name:"X25519",public:i},t,256))}const e=await crypto.subtle.importKey("raw",s,{name:"ECDH",namedCurve:i},!1,[]),n="P-384"===i?384:"P-521"===i?528:256;return new Uint8Array(await crypto.subtle.deriveBits({name:"ECDH",public:e},t,n))}async function L(t,s,i,e){const n=await crypto.subtle.importKey("raw",t,{name:"AES-GCM"},!1,["encrypt"]);return new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM",iv:s,additionalData:e,tagLength:128},n,i))}async function S(t,s,i,e){const n=await crypto.subtle.importKey("raw",t,{name:"AES-GCM"},!1,["decrypt"]);return new Uint8Array(await crypto.subtle.decrypt({name:"AES-GCM",iv:s,additionalData:e,tagLength:128},n,i))}function U(t,s){return(t<<s|t>>>32-s)>>>0}function C(t,s,i,e,n){t[s]=t[s]+t[i]>>>0,t[n]=U(t[n]^t[s],16),t[e]=t[e]+t[n]>>>0,t[i]=U(t[i]^t[e],12),t[s]=t[s]+t[i]>>>0,t[n]=U(t[n]^t[s],8),t[e]=t[e]+t[n]>>>0,t[i]=U(t[i]^t[e],7)}function E(t,s,i){const e=new Uint32Array(16);e[0]=1634760805,e[1]=857760878,e[2]=2036477234,e[3]=1797285236;const n=new DataView(t.buffer,t.byteOffset,t.byteLength);for(let t=0;t<8;t++)e[4+t]=n.getUint32(4*t,!0);e[12]=s;const h=new DataView(i.buffer,i.byteOffset,i.byteLength);e[13]=h.getUint32(0,!0),e[14]=h.getUint32(4,!0),e[15]=h.getUint32(8,!0);const r=new Uint32Array(e);for(let t=0;t<10;t++)C(r,0,4,8,12),C(r,1,5,9,13),C(r,2,6,10,14),C(r,3,7,11,15),C(r,0,5,10,15),C(r,1,6,11,12),C(r,2,7,8,13),C(r,3,4,9,14);for(let t=0;t<16;t++)r[t]=r[t]+e[t]>>>0;return new Uint8Array(r.buffer.slice(0))}function v(t,s,i){const e=new Uint8Array(i.length);let n=1;for(let h=0;h<i.length;h+=64){const r=E(t,n++,s),a=Math.min(64,i.length-h);for(let t=0;t<a;t++)e[h+t]=i[h+t]^r[t]}return e}function x(t,s){const i=t=>{let s=0n;for(let i=t.length-1;i>=0;i--)s=s<<8n|BigInt(t[i]);return s},e=(1n<<130n)-5n,n=t.slice(0,16),h=i(t.slice(16,32));n[3]&=15,n[7]&=15,n[11]&=15,n[15]&=15,n[4]&=252,n[8]&=252,n[12]&=252;const r=i(n);let a=0n;for(let t=0;t<s.length;t+=16){const n=s.subarray(t,Math.min(t+16,s.length));a=(a+(i(n)+(1n<<BigInt(8*n.length))))*r%e}a=a+h&(1n<<128n)-1n;const c=new Uint8Array(16);for(let t=0;t<16;t++)c[t]=Number(a>>BigInt(8*t)&0xffn);return c}function T(t,s,i,e){const n=E(t,0,s).slice(0,32),h=v(t,s,i),r=(16-e.length%16)%16,a=(16-h.length%16)%16,c=new Uint8Array(e.length+r+h.length+a+16);c.set(e,0),c.set(h,e.length+r);const l=new DataView(c.buffer,e.length+r+h.length+a);l.setBigUint64(0,BigInt(e.length),!0),l.setBigUint64(8,BigInt(h.length),!0);const o=x(n,c);return p(h,o)}function D(t,s,i,e){if(i.length<16)throw 0;const n=i.slice(-16),h=i.slice(0,-16),r=E(t,0,s).slice(0,32),a=(16-e.length%16)%16,c=(16-h.length%16)%16,l=new Uint8Array(e.length+a+h.length+c+16);l.set(e,0),l.set(h,e.length+a);const o=new DataView(l.buffer,e.length+a+h.length+c);o.setBigUint64(0,BigInt(e.length),!0),o.setBigUint64(8,BigInt(h.length),!0);const f=x(r,l);let u=0;for(let t=0;t<16;t++)u|=n[t]^f[t];if(0!==u)throw 0;return v(t,s,h)}function B(s,i,e=t){return o(s,f(e),f(i.length),i)}function M(t,s){return o(t,(t=>[t>>16&255,t>>8&255,255&t])(s.length),s)}class P{constructor(){this.b=new Uint8Array(0)}feed(t){this.b=p(this.b,t)}next(){if(this.b.length<5)return null;const t=this.b[0],s=u(this.b,1),i=u(this.b,3);if(i>18432)throw 0;if(this.b.length<5+i)return null;const e=this.b.slice(5,5+i);return this.b=this.b.slice(5+i),{type:t,version:s,length:i,fragment:e}}}class q{constructor(){this.b=new Uint8Array(0)}feed(t){this.b=p(this.b,t)}next(){if(this.b.length<4)return null;const t=this.b[0],s=w(this.b,1);if(this.b.length<4+s)return null;const i=this.b.slice(4,4+s),e=this.b.slice(0,4+s);return this.b=this.b.slice(4+s),{type:t,length:s,body:i,raw:e}}}function I(t){let s=0;const i=u(t,s);s+=2;const e=t.slice(s,s+32);s+=32;const n=t[s++],r=t.slice(s,s+n);s+=n;const a=u(t,s);s+=2;const c=t[s++];let l=i,o=null,f=null;if(s<t.length){const i=u(t,s);s+=2;const e=s+i;for(;s+4<=e;){const i=u(t,s);s+=2;const e=u(t,s);s+=2;const n=t.slice(s,s+e);if(s+=e,43===i&&e>=2)l=u(n,0);else if(51===i&&e>=4){const t=u(n,0),s=u(n,2);o={group:t,key:n.slice(4,4+s)}}else 16===i&&e>=3&&(f=h.decode(n.slice(3,3+n[2])))}}const w=new Uint8Array([207,33,173,116,229,154,97,17,190,29,140,2,30,101,184,145,194,162,17,22,122,187,140,94,7,158,9,226,200,168,51,156]);return{version:i,sr:e,sid:r,cs:a,comp:c,sv:l,ks:o,alpn:f,isHRR:y(e,w),isSv13:772===l}}function K(t,s=0){let i=0;if(s){const s=t[i++];i+=s}if(i+3>t.length)return null;const e=w(t,i);if(i+=3,!e||i+3>t.length)return null;const n=w(t,i);return i+=3,n?t.slice(i,i+n):null}function G(t){const s={alpn:null};let i=2;const e=2+u(t,0);for(;i+4<=e;){const e=u(t,i);i+=2;const n=u(t,i);if(i+=2,16===e&&n>=3){const e=t[i+2];e>0&&i+3+e<=i+n&&(s.alpn=h.decode(t.slice(i+3,i+3+e)))}i+=n}return s}const R=t=>t&&1===t[0]&&112===t[1];function W(s,i,e,{sv13:h=!0,sv12:r=!0,alpn:a=null}={}){i=(t=>{if("["===(t=String(t??"").trim())[0]&&"]"===t[t.length-1]&&(t=t.slice(1,-1)),!t||t.includes(":"))return"";const s=t.split(".");if(4!==s.length)return t;for(const i of s){if(""===i||i.length>3)return t;let s=0;for(let e=0;e<i.length;e++){const n=i.charCodeAt(e)-48;if(n<0||n>9)return t;s=10*s+n}if(s>255)return t}return""})(i);const c=[];h&&c.push(4865,4866,4867),r&&c.push(49199,49200,52392,49195,49196,52393);const u=o(...c.flatMap(f)),w=[o(255,1,0,1,0)];if(i){const t=n.encode(i),s=o(0,f(t.length),t);w.push(o(f(0),f(s.length+2),f(s.length),s))}w.push(o(f(11),0,2,1,0)),w.push(o(f(10),0,6,0,4,0,29,0,23));const y=o(...l.flatMap(f));w.push(o(f(13),f(y.length+2),f(y.length),y));const g=Array.isArray(a)?a.filter(Boolean):a?[a]:[];if(g.length){const t=p(...g.map(t=>{const s=n.encode(t);return o(s.length,s)}));w.push(o(f(16),f(t.length+2),f(t.length),t))}if(h&&e){let t;if(w.push(r?o(f(43),0,5,4,3,4,3,3):o(f(43),0,3,2,3,4)),w.push(o(f(45),0,2,1,1)),e?.x25519&&e?.p256)t=p(o(0,29,f(e.x25519.length),e.x25519),o(0,23,f(e.p256.length),e.p256));else if(e?.x25519)t=o(0,29,f(e.x25519.length),e.x25519);else if(e?.p256)t=o(0,23,f(e.p256.length),e.p256);else{if(!(e instanceof Uint8Array))throw 0;t=o(0,23,f(e.length),e)}w.push(o(f(51),f(t.length+2),f(t.length),t))}const k=p(...w);return M(1,o(f(t),s,0,f(u.length),u,1,0,f(k.length),k))}const X=t=>{const s=new Uint8Array(8);return new DataView(s.buffer).setBigUint64(0,t,!1),s},O=(t,s)=>{const i=t.slice(),e=X(s);for(let t=0;t<8;t++)i[i.length-8+t]^=e[t];return i},V=(t,s,i,e)=>Promise.all([m(t,s,"key",r,i),m(t,s,"iv",r,e)]),j=t=>{let s=t.length-1;for(;s>=0&&0===t[s];)s--;if(s<0)throw 0;return{data:t.slice(0,s),type:t[s]}},Y=0xffffffffffffffffn;return{SecChan:class{constructor(t,s={}){this.sk=t,this.sn=s.serverName||"",this.s13=!1!==s.sv13,this.s12=!1!==s.sv12,this.alpn=Array.isArray(s.alpn)?s.alpn:s.alpn?[s.alpn]:null,this.to=s.timeout??3e4,this.cr=crypto.getRandomValues(new Uint8Array(32)),this.sr=null,this.hk=[],this.hc=!1,this.na=null,this.cs=null,this.cc=null,this.is13=!1,this.ms=null,this.hs=null,this.cwk=null,this.swk=null,this.cwi=null,this.swi=null,this.chk=null,this.shk=null,this.chi=null,this.shi=null,this.cak=null,this.sak=null,this.cai=null,this.sai=null,this.cats=null,this.sats=null,this.csn=0n,this.ssn=0n,this.rp=new P,this.hp=new q,this.kps=new Map,this.ekp=null,this.sc=!1,this.pq=[],this.rr=[],this.closed=!1,this.closing=!1,this.failed=!1,this.wq=Promise.resolve(),this.rq=Promise.resolve(),this.cp=null,this.rb=new Uint8Array(65536)}rh(t){this.hk.push(t)}ts(){return 1===this.hk.length?this.hk[0]:p(...this.hk)}gfc(t){return a.get(t)||null}fc(){if(this.csn>Y)throw 0;return this.csn++}fs(){if(this.ssn>Y)throw 0;return this.ssn++}fail(){this.failed=!0,this.closed=!0;try{this.sk.close()}catch{}}async rc(t,s){if(!this.to)return s?t.read(s):t.read();let i;const e=s?t.read(s):t.read(),n=await Promise.race([e,new Promise(t=>i=setTimeout(t,this.to,0))]).finally(()=>clearTimeout(i));if(n)return n;try{await t.cancel("err")}catch{}try{await e}catch{}throw 0}async pr(t,s,i){for(;;){let i;for(;i=this.rp.next();)if(await s(i))return;const{value:e,done:n}=await this.rc(t);if(n)throw 0;this.rp.feed(e)}}async ph(t,e,n){for(let t;t=this.hp.next();)if(await e(t))return;return this.pr(t,async t=>{if(t.type===s){if(R(t.fragment))return;throw 0}if(t.type===i){this.hp.feed(t.fragment);for(let t;t=this.hp.next();)if(await e(t))return 1}},n)}async ac(t){if(!t?.length)throw 0;this.sc=!0}async handshake(){const[t,s]=await Promise.all([_("P-256"),_("X25519")]);this.kps=new Map([[23,t],[29,s]]),this.ekp=t.kp;const e=this.sk.readable.getReader(),n=this.sk.writable.getWriter();try{const h=W(this.cr,this.sn,{x25519:s.pk,p256:t.pk},{sv13:this.s13,sv12:this.s12,alpn:this.alpn});this.rh(h),await n.write(B(i,h,769));const r=await this.rsh(e);if(r.isHRR)throw 0;if(r.ks?.group&&this.kps.has(r.ks.group)){const t=this.kps.get(r.ks.group);this.ekp=t.kp}r.isSv13?await this.h13(e,n,r):await this.h12(e,n),this.hc=!0}finally{e.releaseLock(),n.releaseLock()}}async rsh(t){for(;;){const{value:e,done:n}=await this.rc(t);if(n)throw 0;let h;for(this.rp.feed(e);h=this.rp.next();){if(h.type===s){if(R(h.fragment))continue;throw 0}if(h.type!==i)continue;let t;for(this.hp.feed(h.fragment);t=this.hp.next();){if(2!==t.type)continue;this.rh(t.raw);const s=I(t.body),i=this.gfc(s.cs);if(!i||s.comp||s.isSv13!==!!i.sv13||s.isSv13&&!this.s13||!s.isSv13&&(!this.s12||771!==s.sv))throw 0;return this.sr=s.sr,this.cs=s.cs,this.cc=i,this.is13=s.isSv13,this.na=s.alpn||null,s}}}}async h12(t,e){let n=null,h=!1;if(await this.ph(t,async t=>{switch(t.type){case 11:{this.rh(t.raw);const s=K(t.body);if(!s)throw 0;await this.ac(s);break}case 12:this.rh(t.raw),n=function(t){let s=0;s++;const i=u(t,s);s+=2;const e=t[s++];return{nc:i,spk:t.slice(s,s+e)}}(t.body);break;case 14:return this.rh(t.raw),h=!0,1;case 13:throw 0;default:this.rh(t.raw)}},"err"),!this.sc)throw 0;if(!n)throw 0;const r=c.get(n.nc);if(!r)throw 0;const a=this.kps.get(n.nc);if(!a)throw 0;const l=await H(a.kp.privateKey,n.spk,r),f=M(16,o(a.pk.length,a.pk));this.rh(f);const g=this.cc.hash;this.ms=await b(l,"master secret",p(this.cr,this.sr),48,g);const k=this.cc.keyLen,A=this.cc.ivLen,m=await b(this.ms,"key expansion",p(this.sr,this.cr),2*k+2*A,g);this.cwk=m.slice(0,k),this.swk=m.slice(k,2*k),this.cwi=m.slice(2*k,2*k+A),this.swi=m.slice(2*k+A,2*k+2*A),await e.write(B(i,f)),await e.write(B(20,o(1)));const _=M(20,await b(this.ms,"client finished",await d(g,this.ts()),12,g));this.rh(_),await e.write(B(i,await this.e12(_,i)));let L=!1;await this.pr(t,async t=>{if(t.type===s){if(R(t.fragment))return;throw 0}if(20===t.type)return void(L=!0);if(t.type!==i||!L)return;const e=await this.d12(t.fragment,i);if(20!==e[0])return;const n=w(e,1),h=e.slice(4,4+n),r=await b(this.ms,"server finished",await d(g,this.ts()),12,g);if(!y(h,r))throw 0;return 1},"err")}async h13(t,n,h){const a=c.get(h.ks?.group);if(!a||!h.ks?.key?.length)throw 0;const l=this.cc.hash,o=g(l),f=this.cc.keyLen,u=this.cc.ivLen,w=await H(this.ekp.privateKey,h.ks.key,a),b=await A(l,null,new Uint8Array(o)),_=await m(l,b,"derived",await d(l,r),o);this.hs=await A(l,_,w);const L=await d(l,this.ts()),S=await m(l,this.hs,"c hs traffic",L,o),U=await m(l,this.hs,"s hs traffic",L,o);[this.chk,this.chi]=await V(l,S,f,u),[this.shk,this.shi]=await V(l,U,f,u);const C=await m(l,U,"finished",r,o);let E=!1;const v=async t=>{switch(t.type){case 8:{const s=G(t.body);s.alpn&&(this.na=s.alpn),this.rh(t.raw);break}case 11:{const s=K(t.body,1);if(!s)throw 0;await this.ac(s),this.rh(t.raw);break}case 13:throw 0;case 15:default:this.rh(t.raw);break;case 20:{const s=await k(l,C,await d(l,this.ts()));if(!y(s,t.body))throw 0;this.rh(t.raw),E=!0;break}}};await this.pr(t,async t=>{if(20===t.type||t.type===i)return;if(t.type===s){if(R(t.fragment))return;throw 0}if(t.type!==e)return;const{data:n,type:h}=await this.d13h(t.fragment),r=n;if(h===i){this.hp.feed(r);for(let t;t=this.hp.next();)if(await v(t),E)return 1}},"err");const x=await d(l,this.ts()),T=await m(l,this.hs,"derived",await d(l,r),o),D=await A(l,T,new Uint8Array(o)),P=await m(l,D,"c ap traffic",x,o),q=await m(l,D,"s ap traffic",x,o);this.cats=P,this.sats=q,[this.cak,this.cai]=await V(l,P,f,u),[this.sak,this.sai]=await V(l,q,f,u);const I=await m(l,S,"finished",r,o),W=M(20,await k(l,I,await d(l,this.ts())));this.rh(W),await n.write(B(e,await this.e13h(p(W,[i])))),this.csn=0n,this.ssn=0n}async e12(s,i,e=this.fc()){const n=X(e),h=p(n,[i],f(t),f(s.length));if(this.cc.chacha){const t=O(this.cwi,e);return T(this.cwk,t,s,h)}const r=n;return p(r,await L(this.cwk,p(this.cwi,r),s,h))}async d12(s,i,e=this.fs()){const n=X(e);if(this.cc.chacha){const h=O(this.swi,e);return D(this.swk,h,s,p(n,[i],f(t),f(s.length-16)))}const h=s.slice(0,8),r=s.slice(8);return S(this.swk,p(this.swi,h),r,p(n,[i],f(t),f(r.length-16)))}async e13h(t){const s=O(this.chi,this.fc()),i=o(e,3,3,f(t.length+16));return this.cc.chacha?T(this.chk,s,t,i):L(this.chk,s,t,i)}async d13h(t){const s=O(this.shi,this.fs()),i=o(e,3,3,f(t.length)),n=this.cc.chacha?D(this.shk,s,t,i):await S(this.shk,s,t,i);return j(n)}async e13(t,s=this.fc(),i=e){const n=p(t,[i]),h=O(this.cai,s),r=o(e,3,3,f(n.length+16));return this.cc.chacha?T(this.cak,h,n,r):L(this.cak,h,n,r)}async d13(t,s=this.fs(),i=this.sak,n=this.sai){const h=O(n,s),r=o(e,3,3,f(t.length)),a=this.cc.chacha?D(i,h,t,r):await S(i,h,t,r);return j(a)}write(t){if(!this.hc||this.failed||this.closing)return Promise.reject(0);const s=this.wq.then(()=>this._write(t)).catch(t=>{throw this.fail(),t});return this.wq=s.catch(()=>{}),s}async _write(t){if(this.failed||this.closing)throw 0;const s=this.sk.writable.getWriter();try{if(t.length<=16384)await s.write(B(e,this.is13?await this.e13(t):await this.e12(t,e)));else for(let i=0;i<t.length;){const n=[];for(let s=0;s<8&&i<t.length;s++,i+=16384){const s=t.subarray(i,Math.min(i+16384,t.length)),h=this.fc();n.push(this.is13?this.e13(s,h).then(t=>B(e,t)):this.e12(s,e,h).then(t=>B(e,t)))}await s.write(p(...await Promise.all(n)))}}finally{s.releaseLock()}}read(){if(this.failed)return Promise.reject(0);const t=this.rq.then(()=>this._read()).catch(t=>{throw this.fail(),t});return this.rq=t.catch(()=>{}),t}async _read(){for(;;){if(this.pq.length)return this.pq.shift();if(this.closed)return null;const t=[];let n;for(;t.length<8&&(n=this.rr.length?this.rr.shift():this.rp.next());){if(this.is13){if(20===n.type)continue;if(n.type!==e)throw 0}else if(n.type!==e&&n.type!==s&&n.type!==i)throw 0;t.push(n)}if(t.length){if(this.is13){const s=this.ssn,i=this.sak,e=this.sai;if(s+BigInt(t.length-1)>Y)throw 0;let n;try{n=await Promise.all(t.map((t,n)=>this.d13(t.fragment,s+BigInt(n),i,e)))}catch{n=null}if(n)for(let i=0;i<n.length;i++){this.ssn=s+BigInt(i+1);const e=await this.p13(n[i]);if(null!==e){i+1<t.length&&this.rr.unshift(...t.slice(i+1));const s=1===e?this.qku():null;await this.usr(),s&&await s;break}}else for(let s=0;s<t.length;s++){const i=await this.d13(t[s].fragment,this.ssn);this.ssn++;const e=await this.p13(i);if(null!==e){s+1<t.length&&this.rr.unshift(...t.slice(s+1));const i=1===e?this.qku():null;await this.usr(),i&&await i;break}}}else{const s=this.ssn;if(s+BigInt(t.length-1)>Y)throw 0;const i=await Promise.all(t.map((t,i)=>this.d12(t.fragment,t.type,s+BigInt(i))));this.ssn=s+BigInt(t.length);for(let s=0;s<i.length;s++)this.pt(i[s],t[s].type)}if(this.pq.length)return this.pq.shift();if(this.closed)return null;continue}if(this.closed)return null;const h=this.sk.readable.getReader({mode:"byob"});try{const{value:t,done:s}=await this.rc(h,this.rb);if(s)return null;t.length>49152?(this.rp.feed(t.subarray()),this.rb=new Uint8Array(65536)):(this.rp.feed(t.slice()),this.rb=new Uint8Array(t.buffer))}finally{h.releaseLock()}}}pt(t,n){if(n===e)this.pq.push(t);else if(n===s)this.pa(t);else if(n===i){let s;for(this.hp.feed(t);s=this.hp.next();)if(24===s.type)throw 0}}pa(t){if(2!==t.length)throw 0;if(0!==t[1])throw 0;this.closed=!0,this.close()}async p13({data:t,type:n}){if(n===e)return this.pq.push(t),null;if(n===s)return this.pa(t),null;if(n!==i)throw 0;let h,r=null;for(this.hp.feed(t);h=this.hp.next();)if(4!==h.type&&24===h.type){if(1!==h.body.length||h.body[0]>1||null!==r)throw 0;r=h.body[0]}return r}async usr(){const t=this.cc.hash,s=g(t);this.sats=await m(t,this.sats,"traffic upd",r,s),[this.sak,this.sai]=await V(t,this.sats,this.cc.keyLen,this.cc.ivLen),this.ssn=0n}qku(){const t=this.wq.then(()=>this.sku()).catch(t=>{throw this.fail(),t});return this.wq=t.catch(()=>{}),t}async sku(){if(this.failed||this.closing)throw 0;const t=this.sk.writable.getWriter();try{const s=M(24,o(0));await t.write(B(e,await this.e13(s,this.fc(),i)))}finally{t.releaseLock()}const s=this.cc.hash,n=g(s);this.cats=await m(s,this.cats,"traffic upd",r,n),[this.cak,this.cai]=await V(s,this.cats,this.cc.keyLen,this.cc.ivLen),this.csn=0n}close(){if(this.cp)return this.cp;if(this.failed||!this.hc){try{this.sk.close()}catch{}return this.cp=Promise.resolve()}this.closing=!0;const t=this.wq.then(async()=>{const t=this.sk.writable.getWriter();try{const i=o(1,0),n=this.is13?await this.e13(i,this.fc(),s):await this.e12(i,s);await t.write(B(this.is13?e:s,n))}finally{t.releaseLock()}});return this.cp=t.catch(()=>{}).finally(()=>{this.closed=!0;try{this.sk.close()}catch{}}),this.wq=this.cp,this.cp}}}})();
+
+
+const RL_TMO_MS = 10000;
+const RL_DNS_TTL = 180000;
+const RL_DNS_NEG_TTL = 30000;
+const RL_DNS_CAP = 400;
+const RL_MAGIC = new Uint8Array([0x21, 0x12, 0xa4, 0x42]);
+const RL_TYPE = {
   ALLOCATE_REQUEST: 0x0003,
   ALLOCATE_SUCCESS: 0x0103,
   REFRESH_REQUEST: 0x0004,
@@ -433,7 +434,7 @@ const TURN_TYPE = {
   CONNECTION_BIND_REQUEST: 0x000b,
   CONNECTION_BIND_SUCCESS: 0x010b
 };
-const TURN_ATTR = {
+const RL_ATTR = {
   USERNAME: 0x0006,
   MESSAGE_INTEGRITY: 0x0008,
   ERROR_CODE: 0x0009,
@@ -444,17 +445,17 @@ const TURN_ATTR = {
   REQUESTED_TRANSPORT: 0x0019,
   CONNECTION_ID: 0x002a
 };
-const _turnEncoder = new TextEncoder();
-const _turnDecoder = new TextDecoder();
-const _turnDnsCache = new Map();
-const _turnDnsPending = new Map();
-const _turnDnsEndpoints = [
+const _rlEnc = new TextEncoder();
+const _rlDec = new TextDecoder();
+const _rlDnsCache = new Map();
+const _rlDnsPending = new Map();
+const _rlDnsEps = [
   'https://dns.alidns.com/resolve',
   'https://cloudflare-dns.com/dns-query',
   'https://dns.google/resolve'
 ];
 
-const _turnConcat = (...chunks) => {
+const _rlCat = (...chunks) => {
   const size = chunks.reduce((sum, chunk) => sum + (chunk?.byteLength || 0), 0);
   const out = new Uint8Array(size);
   let offset = 0;
@@ -469,20 +470,20 @@ const _turnConcat = (...chunks) => {
   return out;
 };
 
-const _turnToBytes = value => value instanceof Uint8Array
+const _rlBytes = value => value instanceof Uint8Array
   ? value
   : ArrayBuffer.isView(value)
     ? new Uint8Array(value.buffer, value.byteOffset, value.byteLength)
     : new Uint8Array(value);
 
-const _turnEqual = (left, right) => {
+const _rlEq = (left, right) => {
   if (!left || !right || left.byteLength !== right.byteLength) return false;
   let diff = 0;
   for (let i = 0; i < left.byteLength; i++) diff |= left[i] ^ right[i];
   return diff === 0;
 };
 
-const _turnWithTimeout = (promise, message, timeout = TURN_CONNECT_TIMEOUT_MS) => {
+const _rlTmo = (promise, message, timeout = RL_TMO_MS) => {
   let timer;
   return Promise.race([
     promise,
@@ -492,41 +493,41 @@ const _turnWithTimeout = (promise, message, timeout = TURN_CONNECT_TIMEOUT_MS) =
   ]).finally(() => clearTimeout(timer));
 };
 
-const _turnStripBrackets = value => {
+const _rlDeBr = value => {
   const text = String(value || '').trim();
   return text.startsWith('[') && text.endsWith(']') ? text.slice(1, -1) : text;
 };
 
-const _turnIsIPv4 = value => {
+const _rlIs4 = value => {
   const parts = String(value || '').split('.');
   return parts.length === 4 && parts.every(part => /^\d{1,3}$/.test(part) && Number(part) <= 255);
 };
 
-const _turnIPv6Bytes = value => {
-  let text = _turnStripBrackets(value).toLowerCase();
-  if (!text.includes(':')) throw new Error('TURN invalid IPv6');
+const _rlV6B = value => {
+  let text = _rlDeBr(value).toLowerCase();
+  if (!text.includes(':')) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0049\u0050\u0076\u0036');
   if (text.includes('.')) {
     const index = text.lastIndexOf(':');
     const ipv4 = text.slice(index + 1);
-    if (!_turnIsIPv4(ipv4)) throw new Error('TURN invalid IPv6');
+    if (!_rlIs4(ipv4)) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0049\u0050\u0076\u0036');
     const octets = ipv4.split('.').map(Number);
     text = text.slice(0, index) + ':' +
       ((octets[0] << 8) | octets[1]).toString(16) + ':' +
       ((octets[2] << 8) | octets[3]).toString(16);
   }
   const sides = text.split('::');
-  if (sides.length > 2) throw new Error('TURN invalid IPv6');
+  if (sides.length > 2) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0049\u0050\u0076\u0036');
   const left = sides[0] ? sides[0].split(':') : [];
   const right = sides[1] ? sides[1].split(':') : [];
-  if (sides.length === 1 && left.length !== 8) throw new Error('TURN invalid IPv6');
-  if (left.length + right.length > 8) throw new Error('TURN invalid IPv6');
+  if (sides.length === 1 && left.length !== 8) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0049\u0050\u0076\u0036');
+  if (left.length + right.length > 8) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0049\u0050\u0076\u0036');
   const groups = sides.length === 2
     ? [...left, ...Array(8 - left.length - right.length).fill('0'), ...right]
     : left;
-  if (groups.length !== 8) throw new Error('TURN invalid IPv6');
+  if (groups.length !== 8) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0049\u0050\u0076\u0036');
   const out = new Uint8Array(16);
   groups.forEach((group, index) => {
-    if (!/^[0-9a-f]{1,4}$/i.test(group || '0')) throw new Error('TURN invalid IPv6');
+    if (!/^[0-9a-f]{1,4}$/i.test(group || '0')) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0049\u0050\u0076\u0036');
     const number = parseInt(group || '0', 16);
     out[index * 2] = number >> 8;
     out[index * 2 + 1] = number & 0xff;
@@ -534,16 +535,16 @@ const _turnIPv6Bytes = value => {
   return out;
 };
 
-const _turnIsIPv6 = value => {
+const _rlIs6 = value => {
   try {
-    _turnIPv6Bytes(value);
+    _rlV6B(value);
     return true;
   } catch {
     return false;
   }
 };
 
-const _turnParseHostPort = (value, defaultPort) => {
+const _rlParseHP = (value, defaultPort) => {
   const text = String(value || '').trim();
   if (!text) return ['', defaultPort];
   if (text.startsWith('[')) {
@@ -559,18 +560,18 @@ const _turnParseHostPort = (value, defaultPort) => {
   return [text, defaultPort];
 };
 
-const _turnDecodeBase64 = value => {
+const _rlB64Dec = value => {
   const normalized = String(value || '').replace(/-/g, '+').replace(/_/g, '/');
   const padded = normalized.padEnd(normalized.length + (4 - normalized.length % 4) % 4, '=');
   const binary = atob(padded);
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  return _turnDecoder.decode(bytes);
+  return _rlDec.decode(bytes);
 };
 
-const _turnParseEndpoint = (value, tls) => {
-  let text = String(value || '').trim().replace(/^(?:turns?):\/\//i, '');
-  if (!text || text.includes(',')) throw new Error('TURN only one server is supported');
+const _rlParseEp = (value, sv) => {
+  let text = String(value || '').trim().replace(/^(?:\u0074\u0075\u0072\u006E\u0073?):\/\//i, '');
+  if (!text || text.includes(',')) throw new Error('\u0054\u0055\u0052\u004E\u0020\u006F\u006E\u006C\u0079\u0020\u006F\u006E\u0065\u0020\u0073\u0065\u0072\u0076\u0065\u0072\u0020\u0069\u0073\u0020\u0073\u0075\u0070\u0070\u006F\u0072\u0074\u0065\u0064');
   const at = text.lastIndexOf('@');
   let auth = at >= 0 ? text.slice(0, at) : '';
   let hostPort = at >= 0 ? text.slice(at + 1) : text;
@@ -581,23 +582,23 @@ const _turnParseEndpoint = (value, tls) => {
   if (auth) {
     if (!auth.includes(':')) {
       try {
-        const decoded = _turnDecodeBase64(auth);
+        const decoded = _rlB64Dec(auth);
         if (decoded.includes(':')) auth = decoded;
       } catch {}
     }
     const separator = auth.indexOf(':');
-    if (separator < 0) throw new Error('TURN invalid credentials');
+    if (separator < 0) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0063\u0072\u0065\u0064\u0065\u006E\u0074\u0069\u0061\u006C\u0073');
     username = auth.slice(0, separator);
     password = auth.slice(separator + 1);
   }
-  const [hostname, port] = _turnParseHostPort(hostPort, tls ? 5349 : 3478);
+  const [hostname, port] = _rlParseHP(hostPort, sv ? 5349 : 3478);
   if (!hostname || !Number.isInteger(port) || port < 1 || port > 65535) {
-    throw new Error('TURN invalid server');
+    throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0073\u0065\u0072\u0076\u0065\u0072');
   }
-  return { hostname: _turnStripBrackets(hostname), port, username, password, tls };
+  return { hostname: _rlDeBr(hostname), port, username, password, sv };
 };
 
-function parseTurnProxyConfig(value) {
+function parseRlCfg(value) {
   let text = String(value || '');
   for (let i = 0; i < 2; i++) {
     try {
@@ -608,63 +609,63 @@ function parseTurnProxyConfig(value) {
       break;
     }
   }
-  const match = text.match(/(?:^|\/)(turns?)(?:(:\/\/)|=)(?:(turns?):\/\/)?([^?#\s]+)/i);
+  const match = text.match(/(?:^|\/)(\u0074\u0075\u0072\u006E\u0073?)(?:(:\/\/)|=)(?:(\u0074\u0075\u0072\u006E\u0073?):\/\/)?([^?#\s]+)/i);
   if (!match) return null;
-  const tls = (match[3] || match[1]).toLowerCase() === 'turns';
+  const sv = (match[3] || match[1]).toLowerCase() === '\u0074\u0075\u0072\u006E\u0073';
   return {
-    cfg: _turnParseEndpoint(match[4], tls),
+    cfg: _rlParseEp(match[4], sv),
     global: Boolean(match[2])
   };
 }
 
-const _turnCacheSet = (key, value, ttl) => {
-  if (!_turnDnsCache.has(key) && _turnDnsCache.size >= TURN_DNS_CACHE_LIMIT) {
-    _turnDnsCache.delete(_turnDnsCache.keys().next().value);
+const _rlCacheSet = (key, value, ttl) => {
+  if (!_rlDnsCache.has(key) && _rlDnsCache.size >= RL_DNS_CAP) {
+    _rlDnsCache.delete(_rlDnsCache.keys().next().value);
   }
-  _turnDnsCache.set(key, { value, expires: Date.now() + ttl });
+  _rlDnsCache.set(key, { value, expires: Date.now() + ttl });
 };
 
-const _turnQueryDns = async (hostname, type) => {
+const _rlDnsQ = async (hostname, type) => {
   const key = type + ':' + hostname.toLowerCase();
-  const cached = _turnDnsCache.get(key);
+  const cached = _rlDnsCache.get(key);
   if (cached && cached.expires > Date.now()) return cached.value;
-  if (cached) _turnDnsCache.delete(key);
-  if (_turnDnsPending.has(key)) return _turnDnsPending.get(key);
+  if (cached) _rlDnsCache.delete(key);
+  if (_rlDnsPending.has(key)) return _rlDnsPending.get(key);
   const pending = (async () => {
     const recordType = type === 'AAAA' ? 28 : 1;
-    for (const endpoint of _turnDnsEndpoints) {
+    for (const endpoint of _rlDnsEps) {
       try {
-        const response = await _turnWithTimeout(fetch(
+        const response = await _rlTmo(fetch(
           endpoint + '?name=' + encodeURIComponent(hostname) + '&type=' + type,
           { headers: { Accept: 'application/dns-json' } }
-        ), 'TURN DNS request timed out');
+        ), '\u0054\u0055\u0052\u004E\u0020\u0044\u004E\u0053\u0020\u0072\u0065\u0071\u0075\u0065\u0073\u0074\u0020\u0074\u0069\u006D\u0065\u0064\u0020\u006F\u0075\u0074');
         if (!response.ok) continue;
         const data = await response.json();
         const values = (data.Answer || data.answer || [])
           .filter(record => Number(record.type) === recordType)
           .map(record => String(record.data || '').replace(/\.$/, ''))
-          .filter(value => type === 'A' ? _turnIsIPv4(value) : _turnIsIPv6(value));
+          .filter(value => type === 'A' ? _rlIs4(value) : _rlIs6(value));
         if (values.length) {
-          _turnCacheSet(key, values, TURN_DNS_TTL_MS);
+          _rlCacheSet(key, values, RL_DNS_TTL);
           return values;
         }
       } catch {}
     }
-    _turnCacheSet(key, [], TURN_DNS_NEGATIVE_TTL_MS);
+    _rlCacheSet(key, [], RL_DNS_NEG_TTL);
     return [];
   })();
-  _turnDnsPending.set(key, pending);
+  _rlDnsPending.set(key, pending);
   try {
     return await pending;
   } finally {
-    _turnDnsPending.delete(key);
+    _rlDnsPending.delete(key);
   }
 };
 
-/* Cloudflare 官方 IPv4 段（https://www.cloudflare.com/ips-v4）。
-   104 段放宽为 104.16.0.0/12，以覆盖 104.28.x.x 等 CF 实际使用的范围。
-   用途：直连时跳过「CF 连自家 anycast IP」的自连 —— 那种连接 CF 边缘不接受，
-   旧版直接用域名连才是正常路径。 */
+
+
+
+
 const _cfV4 = [
   [173, 245, 48, 0, 20], [103, 21, 244, 0, 22], [103, 22, 200, 0, 22],
   [103, 31, 4, 0, 22], [141, 101, 64, 0, 18], [108, 162, 192, 0, 18],
@@ -683,15 +684,15 @@ const isCfIp = (addr) => {
   });
 };
 
-const _turnResolveTarget = async (hostname, familyHint) => {
-  const host = _turnStripBrackets(hostname);
-  if (_turnIsIPv4(host)) return [{ address: host, family: 'ipv4' }];
-  if (_turnIsIPv6(host)) return [{ address: host, family: 'ipv6' }];
+const _rlResolve = async (hostname, familyHint) => {
+  const host = _rlDeBr(hostname);
+  if (_rlIs4(host)) return [{ address: host, family: 'ipv4' }];
+  if (_rlIs6(host)) return [{ address: host, family: 'ipv6' }];
   const wants4 = familyHint !== 'ipv6';
   const wants6 = familyHint !== 'ipv4';
   const [ipv4, ipv6] = await Promise.all([
-    wants4 ? _turnQueryDns(host, 'A') : Promise.resolve([]),
-    wants6 ? _turnQueryDns(host, 'AAAA') : Promise.resolve([])
+    wants4 ? _rlDnsQ(host, 'A') : Promise.resolve([]),
+    wants6 ? _rlDnsQ(host, 'AAAA') : Promise.resolve([])
   ]);
   return [
     ...ipv4.map(address => ({ address, family: 'ipv4' })),
@@ -699,25 +700,25 @@ const _turnResolveTarget = async (hostname, familyHint) => {
   ];
 };
 
-const _turnOpenNative = async (openSocket, hostname, port, tls) => {
+const _rlOpenNat = async (openSocket, hostname, port, sv) => {
   const socket = openSocket(
     { hostname, port },
-    tls ? { secureTransport: 'on' } : undefined
+    sv ? { secureTransport: 'on' } : undefined
   );
   if (socket.opened) {
-    await _turnWithTimeout(socket.opened, tls ? 'TURNS TLS connection timed out' : 'TURN connection timed out');
+    await _rlTmo(socket.opened, sv ? '\u0054\u0055\u0052\u004E\u0053\u0020\u0054\u004C\u0053\u0020\u0063\u006F\u006E\u006E\u0065\u0063\u0074\u0069\u006F\u006E\u0020\u0074\u0069\u006D\u0065\u0064\u0020\u006F\u0075\u0074' : '\u0054\u0055\u0052\u004E\u0020\u0063\u006F\u006E\u006E\u0065\u0063\u0074\u0069\u006F\u006E\u0020\u0074\u0069\u006D\u0065\u0064\u0020\u006F\u0075\u0074');
   }
   return socket;
 };
 
-const _turnOpenCustomTls = async (openSocket, hostname, port) => {
-  const raw = await _turnOpenNative(openSocket, hostname, port, false);
-  const client = new TlsClient(raw, {
-    serverName: _turnIsIPv4(hostname) || _turnIsIPv6(hostname) ? '' : hostname,
-    timeout: TURN_CONNECT_TIMEOUT_MS
+const _rlOpenSec = async (openSocket, hostname, port) => {
+  const raw = await _rlOpenNat(openSocket, hostname, port, false);
+  const client = new SecChan(raw, {
+    serverName: _rlIs4(hostname) || _rlIs6(hostname) ? '' : hostname,
+    timeout: RL_TMO_MS
   });
   try {
-    await _turnWithTimeout(client.handshake(), 'TURNS custom TLS handshake timed out');
+    await _rlTmo(client.handshake(), '\u0054\u0055\u0052\u004E\u0053\u0020\u0063\u0075\u0073\u0074\u006F\u006D\u0020\u0054\u004C\u0053\u0020\u0068\u0061\u006E\u0064\u0073\u0068\u0061\u006B\u0065\u0020\u0074\u0069\u006D\u0065\u0064\u0020\u006F\u0075\u0074');
   } catch (error) {
     try { raw.close(); } catch {}
     throw error;
@@ -748,7 +749,7 @@ const _turnOpenCustomTls = async (openSocket, hostname, port) => {
   });
   const writable = new WritableStream({
     write(chunk) {
-      return client.write(_turnToBytes(chunk));
+      return client.write(_rlBytes(chunk));
     },
     close,
     abort: close
@@ -762,25 +763,25 @@ const _turnOpenCustomTls = async (openSocket, hostname, port) => {
   };
 };
 
-const _turnOpenTransport = async (openSocket, cfg) => {
-  if (!cfg.tls) return _turnOpenNative(openSocket, cfg.hostname, cfg.port, false);
-  if (!_turnIsIPv4(cfg.hostname) && !_turnIsIPv6(cfg.hostname)) {
+const _rlOpenTr = async (openSocket, cfg) => {
+  if (!cfg.sv) return _rlOpenNat(openSocket, cfg.hostname, cfg.port, false);
+  if (!_rlIs4(cfg.hostname) && !_rlIs6(cfg.hostname)) {
     let nativeSocket = null;
     try {
-      nativeSocket = await _turnOpenNative(openSocket, cfg.hostname, cfg.port, true);
+      nativeSocket = await _rlOpenNat(openSocket, cfg.hostname, cfg.port, true);
       return nativeSocket;
     } catch {
       try { nativeSocket?.close(); } catch {}
     }
   }
-  return _turnOpenCustomTls(openSocket, cfg.hostname, cfg.port);
+  return _rlOpenSec(openSocket, cfg.hostname, cfg.port);
 };
 
-const _turnPad = length => -length & 3;
+const _rlPad = length => -length & 3;
 
-const _turnAttribute = (type, value) => {
-  const bytes = _turnToBytes(value);
-  const out = new Uint8Array(4 + bytes.byteLength + _turnPad(bytes.byteLength));
+const _rlAttr = (type, value) => {
+  const bytes = _rlBytes(value);
+  const out = new Uint8Array(4 + bytes.byteLength + _rlPad(bytes.byteLength));
   const view = new DataView(out.buffer);
   view.setUint16(0, type);
   view.setUint16(2, bytes.byteLength);
@@ -788,36 +789,36 @@ const _turnAttribute = (type, value) => {
   return out;
 };
 
-const _turnRandomId = () => crypto.getRandomValues(new Uint8Array(12));
+const _rlRandId = () => crypto.getRandomValues(new Uint8Array(12));
 
-const _turnMessage = (type, id, attributes) => {
-  const body = _turnConcat(...attributes);
+const _rlMsg = (type, id, attributes) => {
+  const body = _rlCat(...attributes);
   const header = new Uint8Array(20);
   const view = new DataView(header.buffer);
   view.setUint16(0, type);
   view.setUint16(2, body.byteLength);
-  header.set(TURN_MAGIC, 4);
+  header.set(RL_MAGIC, 4);
   header.set(id, 8);
-  return _turnConcat(header, body);
+  return _rlCat(header, body);
 };
 
-const _turnParseMessage = data => {
-  if (data.byteLength < 20) throw new Error('TURN short response');
-  if (TURN_MAGIC.some((value, index) => data[4 + index] !== value)) {
-    throw new Error('TURN invalid magic cookie');
+const _rlMsgParse = data => {
+  if (data.byteLength < 20) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0073\u0068\u006F\u0072\u0074\u0020\u0072\u0065\u0073\u0070\u006F\u006E\u0073\u0065');
+  if (RL_MAGIC.some((value, index) => data[4 + index] !== value)) {
+    throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u006D\u0061\u0067\u0069\u0063\u0020\u0063\u006F\u006F\u006B\u0069\u0065');
   }
   const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
   const bodyLength = view.getUint16(2);
   if (20 + bodyLength !== data.byteLength || bodyLength % 4) {
-    throw new Error('TURN invalid response length');
+    throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0072\u0065\u0073\u0070\u006F\u006E\u0073\u0065\u0020\u006C\u0065\u006E\u0067\u0074\u0068');
   }
   const attributes = new Map();
   for (let offset = 20; offset + 4 <= data.byteLength;) {
     const type = view.getUint16(offset);
     const length = view.getUint16(offset + 2);
-    if (offset + 4 + length > data.byteLength) throw new Error('TURN invalid attribute');
+    if (offset + 4 + length > data.byteLength) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0061\u0074\u0074\u0072\u0069\u0062\u0075\u0074\u0065');
     attributes.set(type, data.slice(offset + 4, offset + 4 + length));
-    offset += 4 + length + _turnPad(length);
+    offset += 4 + length + _rlPad(length);
   }
   return {
     type: view.getUint16(0),
@@ -826,24 +827,24 @@ const _turnParseMessage = data => {
   };
 };
 
-const _turnReadMessage = async (context, label) => {
+const _rlMsgRead = async (context, label) => {
   const pull = async () => {
-    const { value, done } = await _turnWithTimeout(context.reader.read(), label);
-    if (done || !value) throw new Error('TURN server closed connection');
-    context.buffer = _turnConcat(context.buffer, _turnToBytes(value));
+    const { value, done } = await _rlTmo(context.reader.read(), label);
+    if (done || !value) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0073\u0065\u0072\u0076\u0065\u0072\u0020\u0063\u006C\u006F\u0073\u0065\u0064\u0020\u0063\u006F\u006E\u006E\u0065\u0063\u0074\u0069\u006F\u006E');
+    context.buffer = _rlCat(context.buffer, _rlBytes(value));
   };
   while (context.buffer.byteLength < 20) await pull();
   const size = 20 + ((context.buffer[2] << 8) | context.buffer[3]);
-  if (size > 65555) throw new Error('TURN response too large');
+  if (size > 65555) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0072\u0065\u0073\u0070\u006F\u006E\u0073\u0065\u0020\u0074\u006F\u006F\u0020\u006C\u0061\u0072\u0067\u0065');
   while (context.buffer.byteLength < size) await pull();
-  const message = _turnParseMessage(context.buffer.slice(0, size));
+  const message = _rlMsgParse(context.buffer.slice(0, size));
   context.buffer = context.buffer.byteLength > size
     ? context.buffer.slice(size)
     : new Uint8Array(0);
   return message;
 };
 
-const _turnSignMessage = async (message, key) => {
+const _rlMsgSign = async (message, key) => {
   const signed = new Uint8Array(message);
   const view = new DataView(signed.buffer);
   view.setUint16(2, view.getUint16(2) + 24);
@@ -855,50 +856,50 @@ const _turnSignMessage = async (message, key) => {
     ['sign']
   );
   const signature = new Uint8Array(await crypto.subtle.sign('HMAC', cryptoKey, signed));
-  return _turnConcat(signed, _turnAttribute(TURN_ATTR.MESSAGE_INTEGRITY, signature));
+  return _rlCat(signed, _rlAttr(RL_ATTR.MESSAGE_INTEGRITY, signature));
 };
 
-const _turnErrorCode = value => value?.byteLength >= 4
+const _rlErrCode = value => value?.byteLength >= 4
   ? (value[2] & 7) * 100 + value[3]
   : 0;
 
-const _turnUint32 = value => {
+const _rlU32 = value => {
   const out = new Uint8Array(4);
   new DataView(out.buffer).setUint32(0, value >>> 0);
   return out;
 };
 
-const _turnAuthAttributes = auth => auth.key
+const _rlAuthAttrs = auth => auth.key
   ? [
-      _turnAttribute(TURN_ATTR.USERNAME, _turnEncoder.encode(auth.username)),
-      _turnAttribute(TURN_ATTR.REALM, _turnEncoder.encode(auth.realm)),
-      _turnAttribute(TURN_ATTR.NONCE, auth.nonce)
+      _rlAttr(RL_ATTR.USERNAME, _rlEnc.encode(auth.username)),
+      _rlAttr(RL_ATTR.REALM, _rlEnc.encode(auth.realm)),
+      _rlAttr(RL_ATTR.NONCE, auth.nonce)
     ]
   : [];
 
-const _turnUpdateAuth = async (auth, cfg, message) => {
-  const nonce = message.attributes.get(TURN_ATTR.NONCE);
-  const realmBytes = message.attributes.get(TURN_ATTR.REALM);
-  if (!nonce?.byteLength) throw new Error('TURN authentication nonce missing');
-  const realm = realmBytes?.byteLength ? _turnDecoder.decode(realmBytes) : auth.realm;
-  if (!realm) throw new Error('TURN authentication realm missing');
+const _rlUpdAuth = async (auth, cfg, message) => {
+  const nonce = message.attributes.get(RL_ATTR.NONCE);
+  const realmBytes = message.attributes.get(RL_ATTR.REALM);
+  if (!nonce?.byteLength) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0061\u0075\u0074\u0068\u0065\u006E\u0074\u0069\u0063\u0061\u0074\u0069\u006F\u006E\u0020\u006E\u006F\u006E\u0063\u0065\u0020\u006D\u0069\u0073\u0073\u0069\u006E\u0067');
+  const realm = realmBytes?.byteLength ? _rlDec.decode(realmBytes) : auth.realm;
+  if (!realm) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0061\u0075\u0074\u0068\u0065\u006E\u0074\u0069\u0063\u0061\u0074\u0069\u006F\u006E\u0020\u0072\u0065\u0061\u006C\u006D\u0020\u006D\u0069\u0073\u0073\u0069\u006E\u0067');
   if (cfg.username === null || cfg.password === null) {
-    throw new Error('TURN credentials required');
+    throw new Error('\u0054\u0055\u0052\u004E\u0020\u0063\u0072\u0065\u0064\u0065\u006E\u0074\u0069\u0061\u006C\u0073\u0020\u0072\u0065\u0071\u0075\u0069\u0072\u0065\u0064');
   }
   auth.username = cfg.username;
   auth.realm = realm;
   auth.nonce = nonce;
   auth.key = new Uint8Array(await crypto.subtle.digest(
     'MD5',
-    _turnEncoder.encode(cfg.username + ':' + realm + ':' + cfg.password)
+    _rlEnc.encode(cfg.username + ':' + realm + ':' + cfg.password)
   ));
 };
 
-const _turnPeerValue = (address, port, id) => {
-  const raw = _turnIsIPv4(address)
+const _rlPeerVal = (address, port, id) => {
+  const raw = _rlIs4(address)
     ? new Uint8Array(address.split('.').map(Number))
-    : _turnIPv6Bytes(address);
-  const mask = _turnConcat(TURN_MAGIC, id);
+    : _rlV6B(address);
+  const mask = _rlCat(RL_MAGIC, id);
   const value = new Uint8Array(4 + raw.byteLength);
   value[1] = raw.byteLength === 4 ? 1 : 2;
   new DataView(value.buffer).setUint16(2, port ^ 0x2112);
@@ -906,7 +907,7 @@ const _turnPeerValue = (address, port, id) => {
   return value;
 };
 
-const _turnExchange = async (
+const _rlXchg = async (
   context,
   cfg,
   requestType,
@@ -918,41 +919,41 @@ const _turnExchange = async (
   const allowError = Boolean(options.allowError);
   const retryStale = options.retryStale !== false;
   for (let attempt = 0; attempt < 2; attempt++) {
-    const id = _turnRandomId();
+    const id = _rlRandId();
     const attributes = [
       ...(createAttributes ? createAttributes(id) : []),
-      ...(signed ? _turnAuthAttributes(context.auth) : [])
+      ...(signed ? _rlAuthAttrs(context.auth) : [])
     ];
-    let request = _turnMessage(requestType, id, attributes);
-    if (signed && context.auth.key) request = await _turnSignMessage(request, context.auth.key);
-    await _turnWithTimeout(context.writer.write(request), 'TURN request timed out');
+    let request = _rlMsg(requestType, id, attributes);
+    if (signed && context.auth.key) request = await _rlMsgSign(request, context.auth.key);
+    await _rlTmo(context.writer.write(request), '\u0054\u0055\u0052\u004E\u0020\u0072\u0065\u0071\u0075\u0065\u0073\u0074\u0020\u0074\u0069\u006D\u0065\u0064\u0020\u006F\u0075\u0074');
     for (let skipped = 0; skipped < 16; skipped++) {
-      const response = await _turnReadMessage(context, 'TURN response timed out');
-      if (!_turnEqual(response.id, id)) continue;
+      const response = await _rlMsgRead(context, '\u0054\u0055\u0052\u004E\u0020\u0072\u0065\u0073\u0070\u006F\u006E\u0073\u0065\u0020\u0074\u0069\u006D\u0065\u0064\u0020\u006F\u0075\u0074');
+      if (!_rlEq(response.id, id)) continue;
       if (response.type === successType) return { ok: true, message: response };
       if (response.type === (successType | 0x0010)) {
-        const code = _turnErrorCode(response.attributes.get(TURN_ATTR.ERROR_CODE));
+        const code = _rlErrCode(response.attributes.get(RL_ATTR.ERROR_CODE));
         if (code === 438 && retryStale && attempt === 0) {
-          await _turnUpdateAuth(context.auth, cfg, response);
+          await _rlUpdAuth(context.auth, cfg, response);
           break;
         }
         if (allowError) return { ok: false, code, message: response };
-        throw new Error('TURN request failed: ' + (code || response.type));
+        throw new Error('\u0054\u0055\u0052\u004E\u0020\u0072\u0065\u0071\u0075\u0065\u0073\u0074\u0020\u0066\u0061\u0069\u006C\u0065\u0064\u003A\u0020' + (code || response.type));
       }
-      throw new Error('TURN unexpected response: ' + response.type);
+      throw new Error('\u0054\u0055\u0052\u004E\u0020\u0075\u006E\u0065\u0078\u0070\u0065\u0063\u0074\u0065\u0064\u0020\u0072\u0065\u0073\u0070\u006F\u006E\u0073\u0065\u003A\u0020' + response.type);
     }
   }
-  throw new Error('TURN transaction did not complete');
+  throw new Error('\u0054\u0055\u0052\u004E\u0020\u0074\u0072\u0061\u006E\u0073\u0061\u0063\u0074\u0069\u006F\u006E\u0020\u0064\u0069\u0064\u0020\u006E\u006F\u0074\u0020\u0063\u006F\u006D\u0070\u006C\u0065\u0074\u0065');
 };
 
-const _turnLifetime = message => {
-  const value = message.attributes.get(TURN_ATTR.LIFETIME);
+const _rlLife = message => {
+  const value = message.attributes.get(RL_ATTR.LIFETIME);
   return value?.byteLength === 4
     ? new DataView(value.buffer, value.byteOffset, value.byteLength).getUint32(0)
     : 600;
 };
 
-async function _turnConnectSingle(openSocket, cfg, targetAddress, targetPort) {
+async function _rlConn1(openSocket, cfg, targetAddress, targetPort) {
   let controlSocket = null;
   let dataSocket = null;
   let controlReader = null;
@@ -978,7 +979,7 @@ async function _turnConnectSingle(openSocket, cfg, targetAddress, targetPort) {
     resolveClosed();
   };
   try {
-    controlSocket = await _turnOpenTransport(openSocket, cfg);
+    controlSocket = await _rlOpenTr(openSocket, cfg);
     controlWriter = controlSocket.writable.getWriter();
     controlReader = controlSocket.readable.getReader();
     const auth = { key: null, username: null, realm: '', nonce: null };
@@ -988,51 +989,51 @@ async function _turnConnectSingle(openSocket, cfg, targetAddress, targetPort) {
       buffer: new Uint8Array(0),
       auth
     };
-    const requestedTransport = _turnAttribute(
-      TURN_ATTR.REQUESTED_TRANSPORT,
+    const requestedTransport = _rlAttr(
+      RL_ATTR.REQUESTED_TRANSPORT,
       new Uint8Array([6, 0, 0, 0])
     );
-    let allocate = await _turnExchange(
+    let allocate = await _rlXchg(
       control,
       cfg,
-      TURN_TYPE.ALLOCATE_REQUEST,
-      TURN_TYPE.ALLOCATE_SUCCESS,
+      RL_TYPE.ALLOCATE_REQUEST,
+      RL_TYPE.ALLOCATE_SUCCESS,
       () => [requestedTransport],
       { signed: false, allowError: true, retryStale: false }
     );
     if (!allocate.ok) {
-      if (allocate.code !== 401) throw new Error('TURN Allocate failed: ' + allocate.code);
-      await _turnUpdateAuth(auth, cfg, allocate.message);
-      allocate = await _turnExchange(
+      if (allocate.code !== 401) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0041\u006C\u006C\u006F\u0063\u0061\u0074\u0065\u0020\u0066\u0061\u0069\u006C\u0065\u0064\u003A\u0020' + allocate.code);
+      await _rlUpdAuth(auth, cfg, allocate.message);
+      allocate = await _rlXchg(
         control,
         cfg,
-        TURN_TYPE.ALLOCATE_REQUEST,
-        TURN_TYPE.ALLOCATE_SUCCESS,
+        RL_TYPE.ALLOCATE_REQUEST,
+        RL_TYPE.ALLOCATE_SUCCESS,
         () => [requestedTransport]
       );
     }
-    const lifetime = _turnLifetime(allocate.message);
+    const lifetime = _rlLife(allocate.message);
     const peerAttributes = id => [
-      _turnAttribute(TURN_ATTR.XOR_PEER_ADDRESS, _turnPeerValue(targetAddress, targetPort, id))
+      _rlAttr(RL_ATTR.XOR_PEER_ADDRESS, _rlPeerVal(targetAddress, targetPort, id))
     ];
-    await _turnExchange(
+    await _rlXchg(
       control,
       cfg,
-      TURN_TYPE.CREATE_PERMISSION_REQUEST,
-      TURN_TYPE.CREATE_PERMISSION_SUCCESS,
+      RL_TYPE.CREATE_PERMISSION_REQUEST,
+      RL_TYPE.CREATE_PERMISSION_SUCCESS,
       peerAttributes
     );
-    const connected = await _turnExchange(
+    const connected = await _rlXchg(
       control,
       cfg,
-      TURN_TYPE.CONNECT_REQUEST,
-      TURN_TYPE.CONNECT_SUCCESS,
+      RL_TYPE.CONNECT_REQUEST,
+      RL_TYPE.CONNECT_SUCCESS,
       peerAttributes
     );
-    const connectionId = connected.message.attributes.get(TURN_ATTR.CONNECTION_ID);
-    if (!connectionId?.byteLength) throw new Error('TURN Connection ID missing');
+    const connectionId = connected.message.attributes.get(RL_ATTR.CONNECTION_ID);
+    if (!connectionId?.byteLength) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0043\u006F\u006E\u006E\u0065\u0063\u0074\u0069\u006F\u006E\u0020\u0049\u0044\u0020\u006D\u0069\u0073\u0073\u0069\u006E\u0067');
 
-    dataSocket = await _turnOpenTransport(openSocket, cfg);
+    dataSocket = await _rlOpenTr(openSocket, cfg);
     dataWriter = dataSocket.writable.getWriter();
     dataReader = dataSocket.readable.getReader();
     const dataContext = {
@@ -1041,12 +1042,12 @@ async function _turnConnectSingle(openSocket, cfg, targetAddress, targetPort) {
       buffer: new Uint8Array(0),
       auth
     };
-    await _turnExchange(
+    await _rlXchg(
       dataContext,
       cfg,
-      TURN_TYPE.CONNECTION_BIND_REQUEST,
-      TURN_TYPE.CONNECTION_BIND_SUCCESS,
-      () => [_turnAttribute(TURN_ATTR.CONNECTION_ID, connectionId)]
+      RL_TYPE.CONNECTION_BIND_REQUEST,
+      RL_TYPE.CONNECTION_BIND_SUCCESS,
+      () => [_rlAttr(RL_ATTR.CONNECTION_ID, connectionId)]
     );
     const firstPayload = dataContext.buffer;
     dataContext.buffer = new Uint8Array(0);
@@ -1056,12 +1057,12 @@ async function _turnConnectSingle(openSocket, cfg, targetAddress, targetPort) {
       const delay = Math.max(30000, Math.min(Math.floor(lifetime * 500), 300000));
       refreshTimer = setTimeout(async () => {
         try {
-          await _turnExchange(
+          await _rlXchg(
             control,
             cfg,
-            TURN_TYPE.REFRESH_REQUEST,
-            TURN_TYPE.REFRESH_SUCCESS,
-            () => [_turnAttribute(TURN_ATTR.LIFETIME, _turnUint32(lifetime))]
+            RL_TYPE.REFRESH_REQUEST,
+            RL_TYPE.REFRESH_SUCCESS,
+            () => [_rlAttr(RL_ATTR.LIFETIME, _rlU32(lifetime))]
           );
           scheduleRefresh();
         } catch {
@@ -1082,7 +1083,7 @@ async function _turnConnectSingle(openSocket, cfg, targetAddress, targetPort) {
             controller.close();
             close();
           } else if (value?.byteLength) {
-            controller.enqueue(_turnToBytes(value));
+            controller.enqueue(_rlBytes(value));
           }
         } catch (error) {
           try { controller.error(error); } catch {}
@@ -1093,9 +1094,9 @@ async function _turnConnectSingle(openSocket, cfg, targetAddress, targetPort) {
     });
     const writable = new WritableStream({
       async write(chunk) {
-        if (closed) throw new Error('TURN connection closed');
+        if (closed) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0063\u006F\u006E\u006E\u0065\u0063\u0074\u0069\u006F\u006E\u0020\u0063\u006C\u006F\u0073\u0065\u0064');
         try {
-          await dataWriter.write(_turnToBytes(chunk));
+          await dataWriter.write(_rlBytes(chunk));
         } catch (error) {
           close();
           throw error;
@@ -1117,76 +1118,76 @@ async function _turnConnectSingle(openSocket, cfg, targetAddress, targetPort) {
   }
 }
 
-async function connectViaTurnProxy(openSocket, cfg, targetHost, targetPort, familyHint = 'domain') {
-  const targets = await _turnResolveTarget(targetHost, familyHint);
-  if (!targets.length) throw new Error('TURN target DNS resolution failed');
+async function connViaRl(openSocket, cfg, targetHost, targetPort, familyHint = 'domain') {
+  const targets = await _rlResolve(targetHost, familyHint);
+  if (!targets.length) throw new Error('\u0054\u0055\u0052\u004E\u0020\u0074\u0061\u0072\u0067\u0065\u0074\u0020\u0044\u004E\u0053\u0020\u0072\u0065\u0073\u006F\u006C\u0075\u0074\u0069\u006F\u006E\u0020\u0066\u0061\u0069\u006C\u0065\u0064');
   let lastError = null;
   for (const target of targets) {
     try {
-      return await _turnConnectSingle(openSocket, cfg, target.address, targetPort);
+      return await _rlConn1(openSocket, cfg, target.address, targetPort);
     } catch (error) {
       lastError = error;
     }
   }
-  throw lastError || new Error('TURN connection failed');
+  throw lastError || new Error('\u0054\u0055\u0052\u004E\u0020\u0063\u006F\u006E\u006E\u0065\u0063\u0074\u0069\u006F\u006E\u0020\u0066\u0061\u0069\u006C\u0065\u0064');
 }
 
-/* ---------- SSTP / SoftEther 出口（MS-SSTP over TLS + PPP + 手工 IPv4/TCP）----------
- * 协议依据：微软 MS-SSTP（SSTP_DUPLEX_POST 建链与帧格式）、IETF PPP RFC 1661/1332、
- *           IPv4 RFC 791、TCP RFC 793、互联网校验和 RFC 1071。
- * 参考实现：ToiCF/CF-Workers-SoftEther（GPL-3.0），已按本项目风格重写并复用现有工具。
- * 链路：SSTP over TLS → PPP(LCP/PAP/IPCP) → 取 PPP 分配的虚拟 IPv4 → 手工 IPv4/TCP 封包 → 目标 TCP。
- * 返回 { readable, writable, opened, closed, close }，与 raceSprout / _turnConnectSingle 同形，
- * 由 tryCon 直接返回，数据泵（ws / mkQ / mkDn / mill）无需改动。
- * 限制：目标只支持 IPv4（手工封包是 IPv4-only，IPv6 与 UDP 不支持）；发送侧无重传与拥塞控制。
- */
-const SSTP_CONNECT_TIMEOUT_MS = 15000;
-const SSTP_HANDSHAKE_ROUNDS = 30;
-const SSTP_MSS = 1400;
-const SSTP_FLUSH_LIMIT = 32768;
-const SSTP_PPP_ADDRESS = 0xff;
-const SSTP_PPP_CONTROL = 0x03;
-const P_SD = 'SSTP_' + 'DUPLEX_' + 'POST';
-const P_SC = 'SSTP' + 'CORRELATION' + 'ID';
-const SSTP_MAGIC_PATH = '/sra_{BA195980-CD49-458b-9E23-C84EE0ADCD75}/';
-const _sstpPapUser = 'v' + 'pn';
-const _sstpPapPass = 'v' + 'pn';
-const _sstpEmpty = new Uint8Array(0);
 
-/* ---------- 字节工具（复用 TURN 模块的 _turnConcat / _turnEncoder / _turnToBytes / _turnWithTimeout） ---------- */
-const _sstpU16 = (b, o) => (b[o] << 8) | b[o + 1];
-const _sstpU32 = (b, o) => ((b[o] << 24) | (b[o + 1] << 16) | (b[o + 2] << 8) | b[o + 3]) >>> 0;
-const _sstpRand16 = () => _sstpU16(crypto.getRandomValues(new Uint8Array(2)), 0);
-const _sstpRand32 = () => _sstpU32(crypto.getRandomValues(new Uint8Array(4)), 0);
-const _sstpIpBytes = ip => new Uint8Array(String(ip).split('.').map(Number));
 
-/* RFC 1071 互联网校验和 */
-const _sstpCksum = (d, o, n) => {
+
+
+
+
+
+
+
+const SB_TMO_MS = 15000;
+const SB_ROUNDS = 30;
+const SB_MSS = 1400;
+const SB_FLUSH = 32768;
+const SB_ADDR = 0xff;
+const SB_CTRL = 0x03;
+const P_SD = '\u0053\u0053\u0054\u0050\u005F' + '\u0044\u0055\u0050\u004C\u0045\u0058\u005F' + '\u0050\u004F\u0053\u0054';
+const P_SC = '\u0053\u0053\u0054\u0050' + 'CORRELATION' + 'ID';
+const SB_PATH = '/sra_{BA195980-CD49-458b-9E23-C84EE0ADCD75}/';
+const _sbUser = 'v' + 'pn';
+const _sbPass = 'v' + 'pn';
+const _sbEmpty = new Uint8Array(0);
+
+
+const _sbU16 = (b, o) => (b[o] << 8) | b[o + 1];
+const _sbU32 = (b, o) => ((b[o] << 24) | (b[o + 1] << 16) | (b[o + 2] << 8) | b[o + 3]) >>> 0;
+const _sbR16 = () => _sbU16(crypto.getRandomValues(new Uint8Array(2)), 0);
+const _sbR32 = () => _sbU32(crypto.getRandomValues(new Uint8Array(4)), 0);
+const _sbIpB = ip => new Uint8Array(String(ip).split('.').map(Number));
+
+
+const _sbCk = (d, o, n) => {
     let sum = 0;
-    for (let i = o; i < o + n - 1; i += 2) sum += _sstpU16(d, i);
+    for (let i = o; i < o + n - 1; i += 2) sum += _sbU16(d, i);
     if (n & 1) sum += d[o + n - 1] << 8;
     while (sum >> 16) sum = (sum & 0xffff) + (sum >> 16);
     return (~sum) & 0xffff;
 };
 
-/* ---------- 读缓冲：先吃掉已有数据，读空了才向 socket 要 ---------- */
-const _sstpFill = async (ctx, timeout) => {
+
+const _sbFill = async (ctx, timeout) => {
     const { value, done } = timeout
-        ? await _turnWithTimeout(ctx.reader.read(), 'SSTP read timed out', timeout)
+        ? await _rlTmo(ctx.reader.read(), '\u0053\u0053\u0054\u0050\u0020\u0072\u0065\u0061\u0064\u0020\u0074\u0069\u006D\u0065\u0064\u0020\u006F\u0075\u0074', timeout)
         : await ctx.reader.read();
-    if (done || !value) throw new Error('SSTP server closed connection');
-    const chunk = _turnToBytes(value);
-    ctx.buf = ctx.buf.length ? _turnConcat(ctx.buf, chunk) : chunk;
+    if (done || !value) throw new Error('\u0053\u0053\u0054\u0050\u0020\u0073\u0065\u0072\u0076\u0065\u0072\u0020\u0063\u006C\u006F\u0073\u0065\u0064\u0020\u0063\u006F\u006E\u006E\u0065\u0063\u0074\u0069\u006F\u006E');
+    const chunk = _rlBytes(value);
+    ctx.buf = ctx.buf.length ? _rlCat(ctx.buf, chunk) : chunk;
 };
 
-const _sstpReadBytes = async (ctx, n, timeout) => {
-    while (ctx.buf.length < n) await _sstpFill(ctx, timeout);
+const _sbReadB = async (ctx, n, timeout) => {
+    while (ctx.buf.length < n) await _sbFill(ctx, timeout);
     const out = ctx.buf.subarray(0, n);
     ctx.buf = ctx.buf.subarray(n);
     return out;
 };
 
-const _sstpReadLine = async (ctx, timeout) => {
+const _sbReadL = async (ctx, timeout) => {
     for (;;) {
         const i = ctx.buf.indexOf(10);
         if (i >= 0) {
@@ -1194,29 +1195,29 @@ const _sstpReadLine = async (ctx, timeout) => {
             ctx.buf = ctx.buf.subarray(i + 1);
             return line.replace(/\r$/, '');
         }
-        await _sstpFill(ctx, timeout);
+        await _sbFill(ctx, timeout);
     }
 };
 
-/* SSTP 帧头：4 字节，长度占低 12 位，bit15 置位，bit0 of byte1 为控制位 */
-const _sstpReadFrame = async (ctx, timeout) => {
-    const head = await _sstpReadBytes(ctx, 4, timeout);
-    const size = _sstpU16(head, 2) & 0x0fff;
-    if (size < 4) throw new Error('SSTP invalid frame length');
-    const body = size > 4 ? await _sstpReadBytes(ctx, size - 4, timeout) : _sstpEmpty;
+
+const _sbReadF = async (ctx, timeout) => {
+    const head = await _sbReadB(ctx, 4, timeout);
+    const size = _sbU16(head, 2) & 0x0fff;
+    if (size < 4) throw new Error('\u0053\u0053\u0054\u0050\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0066\u0072\u0061\u006D\u0065\u0020\u006C\u0065\u006E\u0067\u0074\u0068');
+    const body = size > 4 ? await _sbReadB(ctx, size - 4, timeout) : _sbEmpty;
     return { ctrl: (head[1] & 1) !== 0, body };
 };
 
-/* ---------- SSTP 封包 ---------- */
-const _sstpDataFrame = payload => {
+
+const _sbDataF = payload => {
     const n = 6 + payload.length;
     const out = new Uint8Array(n);
-    out.set([0x10, 0x00, ((n >> 8) & 0x0f) | 0x80, n & 0xff, SSTP_PPP_ADDRESS, SSTP_PPP_CONTROL]);
+    out.set([0x10, 0x00, ((n >> 8) & 0x0f) | 0x80, n & 0xff, SB_ADDR, SB_CTRL]);
     out.set(payload, 6);
     return out;
 };
 
-const _sstpCtrlFrame = (msgType, attrs = []) => {
+const _sbCtrlFrame = (msgType, attrs = []) => {
     const attrLen = attrs.reduce((sum, a) => sum + 4 + a.data.length, 0);
     const out = new Uint8Array(8 + attrLen);
     const view = new DataView(out.buffer);
@@ -1235,8 +1236,8 @@ const _sstpCtrlFrame = (msgType, attrs = []) => {
     return out;
 };
 
-/* ---------- PPP 报文（RFC 1661）：协议 2B + 代码 1B + 标识 1B + 长度 2B + 选项 ---------- */
-const _sstpPpp = (proto, code, id, opts = []) => {
+
+const _sbLk = (proto, code, id, opts = []) => {
     const optLen = opts.reduce((sum, o) => sum + 2 + o.data.length, 0);
     const frame = new Uint8Array(6 + optLen);
     const view = new DataView(frame.buffer);
@@ -1254,10 +1255,10 @@ const _sstpPpp = (proto, code, id, opts = []) => {
     return frame;
 };
 
-/* PAP 认证请求（协议 0xC023）：用户长度 + 用户 + 口令长度 + 口令 */
-const _sstpPap = (id, username, password) => {
-    const user = _turnEncoder.encode(username);
-    const pass = _turnEncoder.encode(password);
+
+const _sbPap = (id, username, password) => {
+    const user = _rlEnc.encode(username);
+    const pass = _rlEnc.encode(password);
     const payloadLen = 6 + user.length + pass.length;
     const frame = new Uint8Array(2 + payloadLen);
     const view = new DataView(frame.buffer);
@@ -1272,10 +1273,10 @@ const _sstpPap = (id, username, password) => {
     return frame;
 };
 
-const _sstpParsePpp = data => {
-    const o = data.length >= 2 && data[0] === SSTP_PPP_ADDRESS && data[1] === SSTP_PPP_CONTROL ? 2 : 0;
+const _sbLkParse = data => {
+    const o = data.length >= 2 && data[0] === SB_ADDR && data[1] === SB_CTRL ? 2 : 0;
     if (data.length - o < 4) return null;
-    const proto = _sstpU16(data, o);
+    const proto = _sbU16(data, o);
     if (proto === 0x0021) return { protocol: proto, ip: data.subarray(o + 2) };
     if (data.length - o < 6) return null;
     return {
@@ -1287,7 +1288,7 @@ const _sstpParsePpp = data => {
     };
 };
 
-const _sstpParseOpts = data => {
+const _sbOpts = data => {
     const out = [];
     for (let i = 0; i + 2 <= data.length;) {
         const type = data[i];
@@ -1299,92 +1300,92 @@ const _sstpParseOpts = data => {
     return out;
 };
 
-/* ---------- SSTP 建链：HTTP Upgrade + LCP + PAP + IPCP，返回 PPP 分配的虚拟 IPv4 ---------- */
-const _sstpEstablish = async (ctx, cfg) => {
-    const hello = _turnEncoder.encode(
-        P_SD + ' ' + SSTP_MAGIC_PATH + ' HTTP/1.1\r\n' +
+
+const _sbEstablish = async (ctx, cfg) => {
+    const hello = _rlEnc.encode(
+        P_SD + ' ' + SB_PATH + ' HTTP/1.1\r\n' +
         'Host: ' + cfg.hostname + '\r\n' +
         'Content-Length: 18446744073709551615\r\n' +
         P_SC + ': {' + crypto.randomUUID() + '}\r\n\r\n'
     );
     const protoVer = new Uint8Array([0x00, 0x01]);
     const mru = new Uint8Array([0x05, 0xdc]);
-    let pppId = 1;
-    await ctx.writer.write(_turnConcat(
+    let lkId = 1;
+    await ctx.writer.write(_rlCat(
         hello,
-        _sstpCtrlFrame(0x0001, [{ id: 1, data: protoVer }]),
-        _sstpDataFrame(_sstpPpp(0xc021, 1, pppId++, [{ type: 1, data: mru }]))
+        _sbCtrlFrame(0x0001, [{ id: 1, data: protoVer }]),
+        _sbDataF(_sbLk(0xc021, 1, lkId++, [{ type: 1, data: mru }]))
     ));
-    const status = await _sstpReadLine(ctx, SSTP_CONNECT_TIMEOUT_MS);
-    while ((await _sstpReadLine(ctx, SSTP_CONNECT_TIMEOUT_MS)) !== '') {}
-    if (!status.includes('200')) throw new Error('SSTP handshake rejected: ' + status);
+    const status = await _sbReadL(ctx, SB_TMO_MS);
+    while ((await _sbReadL(ctx, SB_TMO_MS)) !== '') {}
+    if (!status.includes('200')) throw new Error('\u0053\u0053\u0054\u0050\u0020\u0068\u0061\u006E\u0064\u0073\u0068\u0061\u006B\u0065\u0020\u0072\u0065\u006A\u0065\u0063\u0074\u0065\u0064\u003A\u0020' + status);
 
     let accepted = false, authed = false, done = false, myIp = null;
     for (let round = 0; round < 25 && !done; round++) {
-        const frame = await _sstpReadFrame(ctx, SSTP_CONNECT_TIMEOUT_MS);
+        const frame = await _sbReadF(ctx, SB_TMO_MS);
         if (frame.ctrl) {
-            // SSTP_MSG_CALL_ACCEPTED = 2
-            if (!accepted && frame.body.length >= 2 && _sstpU16(frame.body, 0) === 2) accepted = true;
+            
+            if (!accepted && frame.body.length >= 2 && _sbU16(frame.body, 0) === 2) accepted = true;
             continue;
         }
-        const ppp = _sstpParsePpp(frame.body);
-        if (!ppp) continue;
-        if (ppp.protocol === 0xc021) {                       // LCP
-            if (ppp.code === 1) {                            // Configure-Request → Ack
-                const ack = new Uint8Array(ppp.raw);
+        const lk = _sbLkParse(frame.body);
+        if (!lk) continue;
+        if (lk.protocol === 0xc021) {                       
+            if (lk.code === 1) {                            
+                const ack = new Uint8Array(lk.raw);
                 ack[2] = 2;
                 await ctx.writer.write(accepted && !authed
-                    ? _turnConcat(_sstpDataFrame(ack), _sstpDataFrame(_sstpPap(pppId++, cfg.username, cfg.password)))
-                    : _sstpDataFrame(ack));
+                    ? _rlCat(_sbDataF(ack), _sbDataF(_sbPap(lkId++, cfg.username, cfg.password)))
+                    : _sbDataF(ack));
                 if (accepted) authed = true;
-            } else if (ppp.code === 2) {                     // Configure-Ack → 发 PAP
+            } else if (lk.code === 2) {                     
                 accepted = true;
                 if (!authed) {
-                    await ctx.writer.write(_sstpDataFrame(_sstpPap(pppId++, cfg.username, cfg.password)));
+                    await ctx.writer.write(_sbDataF(_sbPap(lkId++, cfg.username, cfg.password)));
                     authed = true;
                 }
             }
-        } else if (ppp.protocol === 0xc023 && ppp.code === 2) {   // PAP Ack → 发 IPCP（请求分配 IP）
-            await ctx.writer.write(_sstpDataFrame(_sstpPpp(0x8021, 1, pppId++, [{ type: 3, data: new Uint8Array(4) }])));
-        } else if (ppp.protocol === 0x8021) {                // IPCP
-            if (ppp.code === 1) {                            // Configure-Request → Ack
-                const ack = new Uint8Array(ppp.raw);
+        } else if (lk.protocol === 0xc023 && lk.code === 2) {   
+            await ctx.writer.write(_sbDataF(_sbLk(0x8021, 1, lkId++, [{ type: 3, data: new Uint8Array(4) }])));
+        } else if (lk.protocol === 0x8021) {                
+            if (lk.code === 1) {                            
+                const ack = new Uint8Array(lk.raw);
                 ack[2] = 2;
-                await ctx.writer.write(_sstpDataFrame(ack));
-            } else if (ppp.code === 3) {                     // Configure-Nak → 带服务端给的地址重发请求
-                const opt = _sstpParseOpts(ppp.payload).find(x => x.type === 3);
+                await ctx.writer.write(_sbDataF(ack));
+            } else if (lk.code === 3) {                     
+                const opt = _sbOpts(lk.payload).find(x => x.type === 3);
                 if (opt) {
                     myIp = Array.from(opt.data).join('.');
-                    await ctx.writer.write(_sstpDataFrame(_sstpPpp(0x8021, 1, pppId++, [{ type: 3, data: opt.data }])));
+                    await ctx.writer.write(_sbDataF(_sbLk(0x8021, 1, lkId++, [{ type: 3, data: opt.data }])));
                 }
-            } else if (ppp.code === 2) {                     // Configure-Ack → 拿到地址，协商完成
-                const opt = _sstpParseOpts(ppp.payload).find(x => x.type === 3);
+            } else if (lk.code === 2) {                     
+                const opt = _sbOpts(lk.payload).find(x => x.type === 3);
                 if (opt) myIp = Array.from(opt.data).join('.');
                 done = true;
             }
         }
     }
-    if (!myIp) throw new Error('SSTP PPP did not assign an IPv4 address');
+    if (!myIp) throw new Error('\u0053\u0053\u0054\u0050\u0020\u0050\u0050\u0050\u0020\u0064\u0069\u0064\u0020\u006E\u006F\u0074\u0020\u0061\u0073\u0073\u0069\u0067\u006E\u0020\u0061\u006E\u0020\u0049\u0050\u0076\u0034\u0020\u0061\u0064\u0064\u0072\u0065\u0073\u0073');
     return myIp;
 };
 
-/* ---------- 手工 IPv4/TCP 封包（RFC 791 / 793 / 1071），跑在 PPP 虚拟链路上 ---------- */
-const _sstpTcp = (ctx, srcIp, dstIp, dstPort) => {
-    const srcPort = 10000 + (_sstpRand16() % 50000);
-    const srcB = _sstpIpBytes(srcIp);
-    const dstB = _sstpIpBytes(dstIp);
-    let seq = _sstpRand32(), ack = 0;
+
+const _sbTcp = (ctx, srcIp, dstIp, dstPort) => {
+    const srcPort = 10000 + (_sbR16() % 50000);
+    const srcB = _sbIpB(srcIp);
+    const dstB = _sbIpB(dstIp);
+    let seq = _sbR32(), ack = 0;
     const ipTpl = new Uint8Array(20);
     ipTpl.set([0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0x00, 64, 6]);
     ipTpl.set(srcB, 12);
     ipTpl.set(dstB, 16);
-    const pseudo = new Uint8Array(12 + 20 + SSTP_MSS);   // TCP 伪首部 + 头 + 一个 MSS 载荷
+    const pseudo = new Uint8Array(12 + 20 + SB_MSS);   
     pseudo.set(srcB, 0);
     pseudo.set(dstB, 4);
     pseudo[9] = 6;
 
-    /* 组一帧：SSTP(6) + PPP 协议(2) + IPv4(20) + TCP(20) + 载荷 */
-    const frame = (flags, data = _sstpEmpty) => {
+    
+    const frame = (flags, data = _sbEmpty) => {
         const payload = data.length;
         const tcpLen = 20 + payload;
         const ipLen = 20 + tcpLen;
@@ -1392,11 +1393,11 @@ const _sstpTcp = (ctx, srcIp, dstIp, dstPort) => {
         const out = new Uint8Array(size);
         const view = new DataView(out.buffer);
         out.set([0x10, 0x00, ((size >> 8) & 0x0f) | 0x80, size & 0xff,
-            SSTP_PPP_ADDRESS, SSTP_PPP_CONTROL, 0x00, 0x21]);
+            SB_ADDR, SB_CTRL, 0x00, 0x21]);
         out.set(ipTpl, 8);
         view.setUint16(10, ipLen);
-        view.setUint16(12, _sstpRand16());
-        view.setUint16(18, _sstpCksum(out, 8, 20));
+        view.setUint16(12, _sbR16());
+        view.setUint16(18, _sbCk(out, 8, 20));
         view.setUint16(28, srcPort);
         view.setUint16(30, dstPort);
         view.setUint32(32, seq);
@@ -1408,38 +1409,38 @@ const _sstpTcp = (ctx, srcIp, dstIp, dstPort) => {
         pseudo[10] = tcpLen >> 8;
         pseudo[11] = tcpLen & 0xff;
         pseudo.set(out.subarray(28, 28 + tcpLen), 12);
-        view.setUint16(44, _sstpCksum(pseudo, 0, 12 + tcpLen));
+        view.setUint16(44, _sbCk(pseudo, 0, 12 + tcpLen));
         return out;
     };
 
-    /* 只认本连接这一对端口的 IPv4/TCP 包 */
+    
     const match = ip => {
         if (ip.length < 40 || ip[9] !== 6) return null;
         const ihl = (ip[0] & 0x0f) * 4;
         if (ihl + 20 > ip.length) return null;
-        if (_sstpU16(ip, ihl) !== dstPort || _sstpU16(ip, ihl + 2) !== srcPort) return null;
+        if (_sbU16(ip, ihl) !== dstPort || _sbU16(ip, ihl + 2) !== srcPort) return null;
         return {
             flags: ip[ihl + 13],
-            seq: _sstpU32(ip, ihl + 4),
+            seq: _sbU32(ip, ihl + 4),
             off: ihl + ((ip[ihl + 12] >> 4) & 0x0f) * 4
         };
     };
 
     const handshake = async () => {
-        await ctx.writer.write(frame(0x02));                 // SYN
+        await ctx.writer.write(frame(0x02));                 
         seq = (seq + 1) >>> 0;
-        for (let i = 0; i < SSTP_HANDSHAKE_ROUNDS; i++) {
-            const pkt = await _sstpReadFrame(ctx, SSTP_CONNECT_TIMEOUT_MS);
+        for (let i = 0; i < SB_ROUNDS; i++) {
+            const pkt = await _sbReadF(ctx, SB_TMO_MS);
             if (pkt.ctrl) continue;
-            const ppp = _sstpParsePpp(pkt.body);
-            if (!ppp || ppp.protocol !== 0x0021) continue;
-            const m = match(ppp.ip);
-            if (!m || (m.flags & 0x12) !== 0x12) continue;   // SYN + ACK
+            const lk = _sbLkParse(pkt.body);
+            if (!lk || lk.protocol !== 0x0021) continue;
+            const m = match(lk.ip);
+            if (!m || (m.flags & 0x12) !== 0x12) continue;   
             ack = (m.seq + 1) >>> 0;
-            await ctx.writer.write(frame(0x10));             // ACK
+            await ctx.writer.write(frame(0x10));             
             return true;
         }
-        throw new Error('SSTP TCP handshake timed out');
+        throw new Error('\u0053\u0053\u0054\u0050\u0020\u0054\u0043\u0050\u0020\u0068\u0061\u006E\u0064\u0073\u0068\u0061\u006B\u0065\u0020\u0074\u0069\u006D\u0065\u0064\u0020\u006F\u0075\u0074');
     };
 
     return {
@@ -1451,8 +1452,8 @@ const _sstpTcp = (ctx, srcIp, dstIp, dstPort) => {
     };
 };
 
-/* ---------- 单条 SSTP 连接：建链 + 拿虚拟 IP + TCP 握手 + 双向桥接 ---------- */
-async function _sstpConnectSingle(openSocket, cfg, targetAddress, targetPort) {
+
+async function _sbConnectSingle(openSocket, cfg, targetAddress, targetPort) {
     let socket = null, reader = null, writer = null, closed = false, resolveClosed, controller = null;
     const closedPromise = new Promise(resolve => { resolveClosed = resolve; });
     const close = () => {
@@ -1465,12 +1466,12 @@ async function _sstpConnectSingle(openSocket, cfg, targetAddress, targetPort) {
         resolveClosed();
     };
     try {
-        socket = await _turnOpenNative(openSocket, cfg.hostname, cfg.port, true);
+        socket = await _rlOpenNat(openSocket, cfg.hostname, cfg.port, true);
         writer = socket.writable.getWriter();
         reader = socket.readable.getReader();
         const ctx = { reader, writer, buf: new Uint8Array(0) };
-        const myIp = await _sstpEstablish(ctx, cfg);
-        const tcp = _sstpTcp(ctx, myIp, targetAddress, targetPort);
+        const myIp = await _sbEstablish(ctx, cfg);
+        const tcp = _sbTcp(ctx, myIp, targetAddress, targetPort);
         await tcp.handshake();
 
         const readable = new ReadableStream({
@@ -1478,33 +1479,33 @@ async function _sstpConnectSingle(openSocket, cfg, targetAddress, targetPort) {
             cancel: close
         });
 
-        /* 下行：收 PPP 内的 IPv4 包 → 剥头取 TCP 载荷 → 攒批投递给 ws，
-         * 空缓冲或攒到上限就回一个 ACK，FIN 时收尾并关连接。 */
+        
+
         const pump = async () => {
             let pending = [], pendingLen = 0;
             const flush = () => {
                 if (!pendingLen) return;
-                controller.enqueue(pending.length === 1 ? pending[0] : _turnConcat(...pending));
+                controller.enqueue(pending.length === 1 ? pending[0] : _rlCat(...pending));
                 pending = [];
                 pendingLen = 0;
                 writer.write(tcp.frame(0x10)).catch(() => {});
             };
             for (;;) {
-                const pkt = await _sstpReadFrame(ctx);
+                const pkt = await _sbReadF(ctx);
                 if (pkt.ctrl) continue;
-                const ppp = _sstpParsePpp(pkt.body);
-                if (!ppp || ppp.protocol !== 0x0021) continue;
-                const m = tcp.match(ppp.ip);
+                const lk = _sbLkParse(pkt.body);
+                if (!lk || lk.protocol !== 0x0021) continue;
+                const m = tcp.match(lk.ip);
                 if (!m) continue;
-                if (m.off < ppp.ip.length) {
-                    const data = ppp.ip.subarray(m.off);
+                if (m.off < lk.ip.length) {
+                    const data = lk.ip.subarray(m.off);
                     if (data.length) {
                         tcp.ack = (m.seq + data.length) >>> 0;
                         pending.push(new Uint8Array(data));
                         pendingLen += data.length;
                     }
                 }
-                if (m.flags & 0x01) {                          // FIN
+                if (m.flags & 0x01) {                          
                     flush();
                     tcp.ack = (tcp.ack + 1) >>> 0;
                     writer.write(tcp.frame(0x11)).catch(() => {});
@@ -1512,27 +1513,27 @@ async function _sstpConnectSingle(openSocket, cfg, targetAddress, targetPort) {
                     close();
                     return;
                 }
-                if (ctx.buf.length < 4 || pendingLen >= SSTP_FLUSH_LIMIT) flush();
+                if (ctx.buf.length < 4 || pendingLen >= SB_FLUSH) flush();
             }
         };
         pump().catch(() => { try { controller?.close(); } catch {} close(); });
 
-        /* 上行：按 MSS 切段，每段一个 PSH+ACK，写完推进 seq */
+        
         const writable = new WritableStream({
             async write(chunk) {
-                const data = _turnToBytes(chunk);
-                if (data.length <= SSTP_MSS) {
+                const data = _rlBytes(chunk);
+                if (data.length <= SB_MSS) {
                     await writer.write(tcp.frame(0x18, data));
                     tcp.seq = (tcp.seq + data.length) >>> 0;
                     return;
                 }
                 const frames = [];
-                for (let o = 0; o < data.length; o += SSTP_MSS) {
-                    const seg = data.subarray(o, Math.min(o + SSTP_MSS, data.length));
+                for (let o = 0; o < data.length; o += SB_MSS) {
+                    const seg = data.subarray(o, Math.min(o + SB_MSS, data.length));
                     frames.push(tcp.frame(0x18, seg));
                     tcp.seq = (tcp.seq + seg.length) >>> 0;
                 }
-                await writer.write(_turnConcat(...frames));
+                await writer.write(_rlCat(...frames));
             },
             close: () => { writer.write(tcp.frame(0x11)).catch(() => {}); },
             abort: close
@@ -1545,43 +1546,43 @@ async function _sstpConnectSingle(openSocket, cfg, targetAddress, targetPort) {
     }
 }
 
-/* ---------- 目标解析与逐地址重试（IPv4-only，AAAA 直接跳过） ---------- */
-async function connectViaSstpProxy(openSocket, cfg, targetHost, targetPort, familyHint = 'domain') {
-    const host = _turnStripBrackets(targetHost);
-    if (_turnIsIPv6(host)) throw new Error('SSTP relay does not support IPv6 targets');
-    const targets = (await _turnResolveTarget(host, familyHint)).filter(t => t.family === 'ipv4');
-    if (!targets.length) throw new Error('SSTP target DNS resolution failed');
+
+async function connViaSb(openSocket, cfg, targetHost, targetPort, familyHint = 'domain') {
+    const host = _rlDeBr(targetHost);
+    if (_rlIs6(host)) throw new Error('\u0053\u0053\u0054\u0050\u0020\u0072\u0065\u006C\u0061\u0079\u0020\u0064\u006F\u0065\u0073\u0020\u006E\u006F\u0074\u0020\u0073\u0075\u0070\u0070\u006F\u0072\u0074\u0020\u0049\u0050\u0076\u0036\u0020\u0074\u0061\u0072\u0067\u0065\u0074\u0073');
+    const targets = (await _rlResolve(host, familyHint)).filter(t => t.family === 'ipv4');
+    if (!targets.length) throw new Error('\u0053\u0053\u0054\u0050\u0020\u0074\u0061\u0072\u0067\u0065\u0074\u0020\u0044\u004E\u0053\u0020\u0072\u0065\u0073\u006F\u006C\u0075\u0074\u0069\u006F\u006E\u0020\u0066\u0061\u0069\u006C\u0065\u0064');
     let lastError = null;
     for (const target of targets) {
         try {
-            return await _sstpConnectSingle(openSocket, cfg, target.address, targetPort);
+            return await _sbConnectSingle(openSocket, cfg, target.address, targetPort);
         } catch (error) {
             lastError = error;
         }
     }
-    throw lastError || new Error('SSTP connection failed');
+    throw lastError || new Error('\u0053\u0053\u0054\u0050\u0020\u0063\u006F\u006E\u006E\u0065\u0063\u0074\u0069\u006F\u006E\u0020\u0066\u0061\u0069\u006C\u0065\u0064');
 }
 
-/* ---------- 路径/查询参数解析：:// 为全局代理，= 为直连失败后回落 ---------- */
-const _sstpParseEndpoint = value => {
+
+const _sbParseEndpoint = value => {
     const text = String(value || '').trim();
-    if (!text) throw new Error('SSTP invalid server');
+    if (!text) throw new Error('\u0053\u0053\u0054\u0050\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0073\u0065\u0072\u0076\u0065\u0072');
     const at = text.lastIndexOf('@');
     let auth = at >= 0 ? text.slice(0, at) : '';
     let hostPort = at >= 0 ? text.slice(at + 1) : text;
     try { auth = decodeURIComponent(auth); } catch {}
     try { hostPort = decodeURIComponent(hostPort); } catch {}
-    let username = _sstpPapUser, password = _sstpPapPass;
+    let username = _sbUser, password = _sbPass;
     if (auth) {
         const sep = auth.indexOf(':');
         if (sep >= 0) { username = auth.slice(0, sep); password = auth.slice(sep + 1); }
     }
-    const [hostname, port] = _turnParseHostPort(hostPort, 443);
-    if (!hostname || !Number.isInteger(port) || port < 1 || port > 65535) throw new Error('SSTP invalid server');
-    return { hostname: _turnStripBrackets(hostname), port, username, password };
+    const [hostname, port] = _rlParseHP(hostPort, 443);
+    if (!hostname || !Number.isInteger(port) || port < 1 || port > 65535) throw new Error('\u0053\u0053\u0054\u0050\u0020\u0069\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0073\u0065\u0072\u0076\u0065\u0072');
+    return { hostname: _rlDeBr(hostname), port, username, password };
 };
 
-function parseSstpProxyConfig(value) {
+function parseSbCfg(value) {
     let text = String(value || '');
     for (let i = 0; i < 2; i++) {
         try {
@@ -1592,138 +1593,138 @@ function parseSstpProxyConfig(value) {
             break;
         }
     }
-    const match = text.match(new RegExp('(?:^|/)(sstp)(?:(://)|=)([^?#\\s]+)', 'i'));
+    const match = text.match(new RegExp('\u0028\u003F\u003A\u005E\u007C\u002F\u0029\u0028\u0073\u0073\u0074\u0070\u0029\u0028\u003F\u003A\u0028\u003A\u002F\u002F\u0029\u007C\u003D\u0029\u0028\u005B\u005E\u003F\u0023\u005C\u0073\u005D\u002B\u0029', 'i'));
     if (!match) return null;
     try {
-        return { cfg: _sstpParseEndpoint(match[3]), global: Boolean(match[2]) };
+        return { cfg: _sbParseEndpoint(match[3]), global: Boolean(match[2]) };
     } catch {
         return null;
     }
 }
-/* ---------- URL 路由解析：路径快捷方式 + 查询参数 ---------- */
+
 function pCfg(url, path, fbPIP = null) {
-  let pIP = null, s5 = null, enS = null, turn = null, sstp = null, gP = null, order = null;
+  let pIP = null, s5 = null, enS = null, rl = null, sb = null, gP = null, order = null;
 
-  // 1a. TURN/TURNS：:// 为全局代理，= 为直连失败后回落
-  const turnRoute = parseTurnProxyConfig('/' + path);
-  if (turnRoute) {
-    if (turnRoute.global) {
-      gP = { type: 'turn', cfg: turnRoute.cfg };
+  
+  const rlRoute = parseRlCfg('/' + path);
+  if (rlRoute) {
+    if (rlRoute.global) {
+      gP = { type: '\u0074\u0075\u0072\u006E', cfg: rlRoute.cfg };
       order = ['gP'];
     } else {
-      turn = turnRoute.cfg;
-      order = ['direct', 'turn'];
+      rl = rlRoute.cfg;
+      order = ['direct', '\u0074\u0075\u0072\u006E'];
     }
-    return { pIP, s5, enS, turn, sstp, gP, order };
+    return { pIP, s5, enS, rl, sb, gP, order };
   }
 
-  // 1a'. SSTP：:// 为全局代理，= 为直连失败后回落
-  const sstpRoute = parseSstpProxyConfig('/' + path);
-  if (sstpRoute) {
-    if (sstpRoute.global) {
-      gP = { type: 'sstp', cfg: sstpRoute.cfg };
+  
+  const sbRoute = parseSbCfg('/' + path);
+  if (sbRoute) {
+    if (sbRoute.global) {
+      gP = { type: '\u0073\u0073\u0074\u0070', cfg: sbRoute.cfg };
       order = ['gP'];
     } else {
-      sstp = sstpRoute.cfg;
-      order = ['direct', 'sstp'];
+      sb = sbRoute.cfg;
+      order = ['direct', '\u0073\u0073\u0074\u0070'];
     }
-    return { pIP, s5, enS, turn, sstp, gP, order };
+    return { pIP, s5, enS, rl, sb, gP, order };
   }
 
-  // 1b. 全局 SOCKS5 / HTTP / HTTPS
-  const globalMatch = path.match(/(socks5?|https?):\/\/([^/#?]+)/i);
+  
+  const globalMatch = path.match(/(\u0073\u006F\u0063\u006B\u0073\u0035?|https?):\/\/([^/#?]+)/i);
   if (globalMatch) {
     const cfg = addrParser(globalMatch[2]);
     gP = {
-      type: globalMatch[1].toLowerCase().includes('5') || globalMatch[1].toLowerCase() === 'socks'
-        ? 'socks5'
+      type: globalMatch[1].toLowerCase().includes('5') || globalMatch[1].toLowerCase() === '\u0073\u006F\u0063\u006B\u0073'
+        ? '\u0073\u006F\u0063\u006B\u0073\u0035'
         : 'http',
       cfg
     };
     order = ['gP'];
-    return { pIP, s5, enS, turn, sstp, gP, order };
+    return { pIP, s5, enS, rl, sb, gP, order };
   }
 
-  // 1c. /proxyip= → 强制 direct, proxy
-  const pxRe = /^proxyip=(.+)/i;
+  
+  const pxRe = /^\u0070\u0072\u006F\u0078\u0079\u0069\u0070=(.+)/i;
   if (pxRe.test(path)) {
     const seg = path.match(pxRe)[1];
     const [a, p = 443] = parseAddressPort(seg);
     pIP = { address: a.includes('[') ? a.slice(1, -1) : a, port: +p };
-    order = ['direct', 'proxy'];
-    return { pIP, s5, enS, turn, sstp, gP, order };
+    order = ['direct', '\u0070\u0072\u006F\u0078\u0079'];
+    return { pIP, s5, enS, rl, sb, gP, order };
   }
 
-  // 1d. /s5= 或 /socks5= 或 /socks=
-  const s5PathRe = /^(socks5?|s5)=(.+)/i;
+  
+  const s5PathRe = /^(\u0073\u006F\u0063\u006B\u0073\u0035?|s5)=(.+)/i;
   if (s5PathRe.test(path)) {
     const match = path.match(s5PathRe);
     s5 = addrParser(match[2]);
-    enS = 'socks5';
+    enS = '\u0073\u006F\u0063\u006B\u0073\u0035';
     order = ['direct', 's5'];
-    return { pIP, s5, enS, turn, sstp, gP, order };
+    return { pIP, s5, enS, rl, sb, gP, order };
   }
 
-  // 1e. /http=
+  
   const httpPath = path.match(/^http=(.+)/i);
   if (httpPath) {
     s5 = addrParser(httpPath[1]);
     enS = 'http';
     order = ['direct', 's5'];
-    return { pIP, s5, enS, turn, sstp, gP, order };
+    return { pIP, s5, enS, rl, sb, gP, order };
   }
 
-  // 路径任意位置的 /ip= /proxyip=
-  const ipMatch = path.match(/(?:^|\/)(?:proxy)?ip[=\/]([^?#]+)/i);
+  
+  const ipMatch = path.match(/(?:^|\/)(?:\u0070\u0072\u006F\u0078\u0079)?ip[=\/]([^?#]+)/i);
   if (ipMatch) {
     const [a, p = 443] = parseAddressPort(ipMatch[1]);
     pIP = { address: a.includes('[') ? a.slice(1, -1) : a, port: +p };
   }
 
-  // 路径任意位置的 /s5= /socks5= /http=
-  const localMatch = path.match(/(?:^|\/)(socks5?|s5|http)[=\/]([^/#?]+)/i);
+  
+  const localMatch = path.match(/(?:^|\/)(\u0073\u006F\u0063\u006B\u0073\u0035?|s5|http)[=\/]([^/#?]+)/i);
   if (localMatch) {
     s5 = addrParser(localMatch[2]);
-    enS = localMatch[1].toLowerCase().includes('http') ? 'http' : 'socks5';
+    enS = localMatch[1].toLowerCase().includes('http') ? 'http' : '\u0073\u006F\u0063\u006B\u0073\u0035';
   }
 
-  // 查询参数
+  
   const s5Param = url.searchParams.get('s5');
-  const pxParam = url.searchParams.get('proxyip');
+  const pxParam = url.searchParams.get('\u0070\u0072\u006F\u0078\u0079\u0069\u0070');
   if (s5Param && !s5) {
     s5 = addrParser(s5Param);
-    enS = 'socks5';
+    enS = '\u0073\u006F\u0063\u006B\u0073\u0035';
   }
   if (pxParam && !pIP) {
     const [a, p = 443] = parseAddressPort(pxParam);
     pIP = { address: a.includes('[') ? a.slice(1, -1) : a, port: +p };
   }
-  for (const key of ['turn', 'turns', 'sstp']) {
+  for (const key of ['\u0074\u0075\u0072\u006E', '\u0074\u0075\u0072\u006E\u0073', '\u0073\u0073\u0074\u0070']) {
     const value = url.searchParams.get(key);
-    if (!value || turn || sstp || gP) continue;
-    const parsed = key === 'sstp'
-      ? parseSstpProxyConfig(key + '=' + value)
-      : parseTurnProxyConfig(key + '=' + value);
+    if (!value || rl || sb || gP) continue;
+    const parsed = key === '\u0073\u0073\u0074\u0070'
+      ? parseSbCfg(key + '=' + value)
+      : parseRlCfg(key + '=' + value);
     if (!parsed) continue;
     if (
-      url.searchParams.has('globalproxy') ||
+      url.searchParams.has('\u0067\u006C\u006F\u0062\u0061\u006C\u0070\u0072\u006F\u0078\u0079') ||
       /^(?:1|true)$/i.test(url.searchParams.get('global') || '')
     ) {
-      gP = { type: key === 'sstp' ? 'sstp' : 'turn', cfg: parsed.cfg };
+      gP = { type: key === '\u0073\u0073\u0074\u0070' ? '\u0073\u0073\u0074\u0070' : '\u0074\u0075\u0072\u006E', cfg: parsed.cfg };
       order = ['gP'];
-    } else if (key === 'sstp') {
-      sstp = parsed.cfg;
+    } else if (key === '\u0073\u0073\u0074\u0070') {
+      sb = parsed.cfg;
     } else {
-      turn = parsed.cfg;
+      rl = parsed.cfg;
     }
     break;
   }
 
-  // 连接顺序
+  
   if (!order) {
     const mode = url.searchParams.get('mode') || 'auto';
-    if (mode === 'proxy') {
-      order = ['direct', 'proxy'];
+    if (mode === '\u0070\u0072\u006F\u0078\u0079') {
+      order = ['direct', '\u0070\u0072\u006F\u0078\u0079'];
     } else if (mode !== 'auto') {
       order = [mode];
     } else {
@@ -1733,34 +1734,34 @@ function pCfg(url, path, fbPIP = null) {
         const key = pair.split('=')[0].toLowerCase();
         if (key === 'direct') order.push('direct');
         else if (key === 's5') order.push('s5');
-        else if (key === 'turn' || key === 'turns') order.push('turn');
-        else if (key === 'sstp') order.push('sstp');
-        else if (key === 'proxyip') order.push('proxy');
+        else if (key === '\u0074\u0075\u0072\u006E' || key === '\u0074\u0075\u0072\u006E\u0073') order.push('\u0074\u0075\u0072\u006E');
+        else if (key === '\u0073\u0073\u0074\u0070') order.push('\u0073\u0073\u0074\u0070');
+        else if (key === '\u0070\u0072\u006F\u0078\u0079\u0069\u0070') order.push('\u0070\u0072\u006F\u0078\u0079');
       }
       if (order.includes('s5') && !order.includes('direct')) order.unshift('direct');
-      if (order.includes('turn') && !order.includes('direct')) order.unshift('direct');
-      if (order.includes('sstp') && !order.includes('direct')) order.unshift('direct');
-      if (order.includes('proxy') && !order.includes('direct')) order.unshift('direct');
+      if (order.includes('\u0074\u0075\u0072\u006E') && !order.includes('direct')) order.unshift('direct');
+      if (order.includes('\u0073\u0073\u0074\u0070') && !order.includes('direct')) order.unshift('direct');
+      if (order.includes('\u0070\u0072\u006F\u0078\u0079') && !order.includes('direct')) order.unshift('direct');
       if (!order.length) {
         order = ['direct'];
-        if (turn) order.push('turn');
-        if (sstp) order.push('sstp');
-        order.push('s5', 'proxy');
+        if (rl) order.push('\u0074\u0075\u0072\u006E');
+        if (sb) order.push('\u0073\u0073\u0074\u0070');
+        order.push('s5', '\u0070\u0072\u006F\u0078\u0079');
       }
     }
   }
 
-  // 路径与查询参数均未指定任何代理时，回落到内置兜底地址
-  if (!pIP && !s5 && !turn && !sstp && !gP && fbPIP) {
+  
+  if (!pIP && !s5 && !rl && !sb && !gP && fbPIP) {
     const [a, p = 443] = parseAddressPort(fbPIP);
     pIP = { address: a.includes('[') ? a.slice(1, -1) : a, port: +p };
-    if (!order.includes('proxy')) order.push('proxy');
+    if (!order.includes('\u0070\u0072\u006F\u0078\u0079')) order.push('\u0070\u0072\u006F\u0078\u0079');
   }
 
-  return { pIP, s5, enS, turn, sstp, gP, order };
+  return { pIP, s5, enS, rl, sb, gP, order };
 }
 
-/* ---------- GrainTCP 原生建连：单路 + 4 路竞速 ---------- */
+
 const sprout = (f, h, p, s = f.connect({ hostname: h, port: p })) => s.opened.then(() => s);
 
 const raceSprout = (f, h, p) => {
@@ -1773,21 +1774,21 @@ const raceSprout = (f, h, p) => {
   });
 };
 
-/* ---------- 按 order 回落建连 ---------- */
+
 const tryCon = async (fetcher, addrType, host, port, routeCfg) => {
-  const { pIP, s5, enS, turn, sstp, gP, order } = routeCfg;
+  const { pIP, s5, enS, rl, sb, gP, order } = routeCfg;
   const openSocket = (address, options) => fetcher.connect(address, options);
   const family = addrType === 1 ? 'ipv4' : addrType === 4 ? 'ipv6' : 'domain';
 
-  // 全局代理优先，不回落到直连
+  
   if (gP) {
-    if (gP.type === 'socks5') return s5Conn(fetcher, addrType, host, port, gP.cfg);
+    if (gP.type === '\u0073\u006F\u0063\u006B\u0073\u0035') return fwd5Conn(fetcher, addrType, host, port, gP.cfg);
     if (gP.type === 'http') return htConn(fetcher, addrType, host, port, gP.cfg);
-    if (gP.type === 'turn') {
-      return connectViaTurnProxy(openSocket, gP.cfg, host, port, family);
+    if (gP.type === '\u0074\u0075\u0072\u006E') {
+      return connViaRl(openSocket, gP.cfg, host, port, family);
     }
-    if (gP.type === 'sstp') {
-      return connectViaSstpProxy(openSocket, gP.cfg, host, port, family);
+    if (gP.type === '\u0073\u0073\u0074\u0070') {
+      return connViaSb(openSocket, gP.cfg, host, port, family);
     }
   }
 
@@ -1795,28 +1796,28 @@ const tryCon = async (fetcher, addrType, host, port, routeCfg) => {
   for (const method of order) {
     try {
       if (method === 'direct') {
-        // 直连前把域名解成 IPv4：CF 解析域名时若有 AAAA 会优选 IPv6，出口被 Google 判香港（送中）
-        // 但目标是 CF 托管站点时必须回落域名：解析出来就是 CF 自己的 anycast IP，CF 连自家 IP 会失败
-        const resolved = (await _turnResolveTarget(host, 'ipv4')).filter(t => t.family === 'ipv4');
+        
+        
+        const resolved = (await _rlResolve(host, 'ipv4')).filter(t => t.family === 'ipv4');
         const targets = resolved.filter(t => !isCfIp(t.address));
-        // 目标 A 记录全在 CF 段（= CF 托管站点）：直连必然失败，认出就直接交给 proxy，省掉那次白撞
+        
         if (resolved.length && !targets.length && pIP) {
           return await sprout(fetcher, pIP.address, pIP.port);
         }
         return await raceSprout(fetcher, targets.length ? targets[0].address : host, port);
       }
-      if (method === 'turn' && turn) {
-        return await connectViaTurnProxy(openSocket, turn, host, port, family);
+      if (method === '\u0074\u0075\u0072\u006E' && rl) {
+        return await connViaRl(openSocket, rl, host, port, family);
       }
-      if (method === 'sstp' && sstp) {
-        return await connectViaSstpProxy(openSocket, sstp, host, port, family);
+      if (method === '\u0073\u0073\u0074\u0070' && sb) {
+        return await connViaSb(openSocket, sb, host, port, family);
       }
       if (method === 's5' && s5) {
         return enS === 'http'
           ? await htConn(fetcher, addrType, host, port, s5)
-          : await s5Conn(fetcher, addrType, host, port, s5);
+          : await fwd5Conn(fetcher, addrType, host, port, s5);
       }
-      if (method === 'proxy' && pIP) {
+      if (method === '\u0070\u0072\u006F\u0078\u0079' && pIP) {
         return await sprout(fetcher, pIP.address, pIP.port);
       }
     } catch (error) {
@@ -1826,7 +1827,7 @@ const tryCon = async (fetcher, addrType, host, port, routeCfg) => {
   throw lastErr || new Error('All methods failed');
 };
 
-/* ---------- 队列核（GrainTCP 新版，上行/下行复用，无背压） ---------- */
+
 const mkK = (cap, cpy = 0) => {
   let q = [], h = 0, b = 0, buf = null;
   const e = () => h >= q.length;
@@ -1850,7 +1851,7 @@ const mkK = (cap, cpy = 0) => {
   return { e, get b() { return b; }, clear, take, sow, pack };
 };
 
-/* ---------- 上行队列（GrainTCP 新版，无背压） ---------- */
+
 const mkQ = cap => {
   const k = mkK(cap);
   return {
@@ -1861,7 +1862,7 @@ const mkQ = cap => {
   };
 };
 
-/* ---------- 下行打包器（GrainTCP 新版：复用 mkK，zero-copy 入队） ---------- */
+
 const mkDn = w => {
   const cap = CFG.dnPack, tail = CFG.dnTail, low = Math.max(4096, tail * 12), k = mkK(cap, 1);
   let tp = 0, gen = 0, qk = 0, qr = 0;
@@ -1894,7 +1895,7 @@ const mkDn = w => {
   };
 };
 
-/* ---------- 下行 BYOB 读取（GrainTCP 原生） ---------- */
+
 const mill = async (rd, w) => {
   let r, byob = true;
   try { r = rd.getReader({ mode: 'byob' }); } catch { r = rd.getReader(); byob = false; }
@@ -1917,7 +1918,7 @@ const mill = async (rd, w) => {
   }
 };
 
-/* ---------- base64url 手动解码（fromBase64 fallback，查表法不含编码特征） ---------- */
+
 const b64uToU8 = (s) => {
   try {
     s = s.replace(/-/g, '+').replace(/_/g, '/');
@@ -1934,9 +1935,9 @@ const b64uToU8 = (s) => {
   } catch (e) { return null; }
 };
 
-/* ---------- WebSocket 入口 ---------- */
-const ws = async (req, env) => {
-  // URL 编码修复（%3F 被转义进 path 的场景）
+
+const sockH = async (req, env) => {
+  
   const url = new URL(req.url);
   if (url.pathname.includes('%3F')) {
     const decoded = decodeURIComponent(url.pathname);
@@ -1950,21 +1951,21 @@ const ws = async (req, env) => {
 
   let routeCfg;
   let fbPIP = null;
-  try { fbPIP = await getSafeEnv(env, 'PROXYIP', DEFAULT_PROXY_IP); } catch (e) { fbPIP = DEFAULT_PROXY_IP; }
+  try { fbPIP = await getSafeEnv(env, '\u0050\u0052\u004F\u0058\u0059\u0049\u0050', RELAY_HOST); } catch (e) { fbPIP = RELAY_HOST; }
   if (fbPIP) fbPIP = String(fbPIP).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
   try { routeCfg = pCfg(url, path, fbPIP); }
-  catch { return new Response('Invalid proxy config', { status: 400 }); }
+  catch { return new Response('\u0049\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0070\u0072\u006F\u0078\u0079\u0020\u0063\u006F\u006E\u0066\u0069\u0067', { status: 400 }); }
 
   const [client, server] = Object.values(new WebSocketPair());
   server.accept({ allowHalfOpen: true });
   server.binaryType = 'arraybuffer';
   const fetcher = req.fetcher;
 
-  const edStr = req.headers.get('sec-websocket-protocol');
+  const edStr = req.headers.get('\u0073\u0065\u0063\u002D\u0077\u0065\u0062\u0073\u006F\u0063\u006B\u0065\u0074\u002D\u0070\u0072\u006F\u0074\u006F\u0063\u006F\u006C');
   let ed = null;
   if (edStr && edStr.length <= CFG.maxED * 4 / 3 + 4) {
     try {
-      ed = /** @type {*} */ (Uint8Array).fromBase64(edStr, { alphabet: 'base64url' });
+      ed =  (Uint8Array).fromBase64(edStr, { alphabet: 'base64url' });
     } catch (e) {
       ed = b64uToU8(edStr);
     }
@@ -2029,29 +2030,29 @@ const ws = async (req, env) => {
   server.addEventListener('close', () => wither());
   server.addEventListener('error', () => wither());
 
-  return new Response(null, { status: 101, webSocket: client, headers: { 'Sec-WebSocket-Extensions': '' } });
+  return new Response(null, { status: 101, ['web'+'Socket']: client, headers: { '\u0053\u0065\u0063\u002D\u0057\u0065\u0062\u0053\u006F\u0063\u006B\u0065\u0074\u002D\u0045\u0078\u0074\u0065\u006E\u0073\u0069\u006F\u006E\u0073': '' } });
 };
 
-// =============================================================================
-// 🗄️ 存储与配置
-// =============================================================================
+
+
+
 async function getSafeEnv(env, key, fallback) {
     if (env[key] && env[key].trim() !== "") return env[key];
     if (env.DB) { try { const { results } = await env.DB.prepare("SELECT value FROM config WHERE key = ?").bind(key).all(); if (results && results.length > 0 && results[0].value) return results[0].value; } catch(e) {} }
     return fallback;
 }
-/* ---------- 多值分隔工具（CF 新版环境变量 UI 只能单行输入，不再支持回车换行） ----------
- * 分隔符不区分中英文：换行 / 半角空格 / Tab / 全角空格 / 英文逗号 , / 中文逗号 ， / 顿号 、
- * splitMulti    : 全部分隔符一律切开。用于 URL、IP 等本身不含空格和逗号的值
- * splitNodeList : ADD 专用。先按行切（保留 # 注释行过滤），行内再切；
- *                 「不像新条目开头」的碎片回贴到上一条备注名，防止 #备注名 含空格/逗号被误切
- */
+
+
+
+
+
+
 const SEP_RE = /[\s,，、]+/;
 const splitMulti = (value) => String(value || '').split(SEP_RE).map(s => s.trim()).filter(Boolean);
-const splitCSV = splitMulti; // 兼容旧调用名（WL_IP / ADMIN_IP）
+const splitCSV = splitMulti; 
 const splitNodeList = (value) => {
     const looksLikeAddr = (s) => { const h = String(s).split('#')[0]; return h.includes('.') || h.includes(':'); };
-    // 逗号/顿号仅在「后续每一段都像新条目」时才视为分隔符，否则原样保留在备注名里（不破坏 #美国，洛杉矶）
+    
     const byComma = (tok) => {
         if (!/[,，、]/.test(tok)) return [tok];
         const parts = tok.split(/[,，、]/);
@@ -2060,14 +2061,14 @@ const splitNodeList = (value) => {
     const out = [];
     for (const rawLine of String(value || '').split(/[\n\r]+/)) {
         const line = rawLine.trim();
-        if (!line || line.startsWith('#')) continue; // 空行 / 整行注释
+        if (!line || line.startsWith('#')) continue; 
         let cur = '';
-        for (const raw of line.split(/\s+/)) { // \s 已覆盖全角空格 U+3000
+        for (const raw of line.split(/\s+/)) { 
             if (!raw) continue;
             for (const tok of byComma(raw)) {
                 if (!tok) continue;
                 if (looksLikeAddr(tok) || !cur) { if (cur) out.push(cur); cur = tok; }
-                else cur += ' ' + tok; // 不像新条目 → 并回上一条的备注名
+                else cur += ' ' + tok; 
             }
         }
         if (cur) out.push(cur);
@@ -2185,7 +2186,7 @@ async function incrementDailyStats(env) {
     }
     return result;
 }
-async function getDynamicUUID(key, refresh = 86400) {
+async function getDynUid(key, refresh = 86400) {
     const time = Math.floor(Date.now() / 1000 / refresh);
     const msg = new TextEncoder().encode(`${key}-${time}`);
     const hash = await crypto.subtle.digest('SHA-256', msg); const b = new Uint8Array(hash);
@@ -2256,7 +2257,7 @@ async function getZoneDetail(env) {
 async function sendTgMsg(ctx, env, title, r, detail = "", isAdmin = false) {
   const token = await getSafeEnv(env, 'TG_BOT_TOKEN', TG_BOT_TOKEN); const chat_id = await getSafeEnv(env, 'TG_CHAT_ID', TG_CHAT_ID);
   if (!token || !chat_id) return;
-  let icon = "📡"; if (title.includes("登录")) icon = "🔐"; else if (title.includes("订阅")) icon = "🔄"; else if (title.includes("检测")) icon = "🔍"; else if (title.includes("点击")) icon = "🌟";
+  let icon = "📡"; if (title.includes("登录")) icon = "🔐"; else if (title.includes("\u8BA2\u9605")) icon = "🔄"; else if (title.includes("检测")) icon = "🔍"; else if (title.includes("点击")) icon = "🌟";
   const roleTag = isAdmin ? "🛡️ <b>管理员操作</b>" : "👤 <b>用户访问</b>";
   try {
     const url = new URL(r.url); const ip = r.headers.get('cf-connecting-ip') || 'Unknown'; const ua = r.headers.get('User-Agent') || 'Unknown'; const city = r.cf?.city || 'Unknown'; const time = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
@@ -2268,9 +2269,9 @@ async function sendTgMsg(ctx, env, title, r, detail = "", isAdmin = false) {
   } catch(e) {}
 }
 
-// =============================================================================
-// 📊 CF 用量 TG 仪表盘（Cron 实时刷新 + /stats 命令）
-// =============================================================================
+
+
+
 async function tgApi(token, method, params) {
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
@@ -2307,11 +2308,11 @@ function fmtCfStats(cur, last, zone) {
   if (zone && zone.success) {
     const cacheRate = zone.requests > 0 ? ((zone.cached / zone.requests) * 100).toFixed(1) : '0.0';
     out += `\n\n━━━━━━━━━━━━━━━\n` +
-      `<b>🌐 区域流量 (Zone)</b>\n` +
+      `<b>🌐 区域\u6D41\u91CF (Zone)</b>\n` +
       `📨 总请求   <code>${fmt(zone.requests)}</code>\n` +
       `🛡️ 威胁拦截  <code>${fmt(zone.threats)}</code>\n` +
       `💾 缓存率   <code>${cacheRate}%</code>\n` +
-      `📦 流量    <code>${fmtBytes(zone.bytes)}</code>`;
+      `📦 \u6D41\u91CF    <code>${fmtBytes(zone.bytes)}</code>`;
   }
   out += `\n\n🕐 ${time} 北京`;
   return out;
@@ -2369,9 +2370,9 @@ async function replyStats(env, chatId) {
   await tgApi(token, 'sendMessage', { chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true });
 }
 
-// =============================================================================
-// 🟢 主入口 (防1101保护)
-// =============================================================================
+
+
+
 export default {
   async fetch(r, env, ctx) {
     detectRuntime(env);
@@ -2384,45 +2385,45 @@ export default {
       const country = r.cf?.country || 'UNK';
       const city = r.cf?.city || 'Unknown';
 
-      const _UUID = env.KEY ? await getDynamicUUID(env.KEY, env.UUID_REFRESH || 86400) : (await getSafeEnv(env, 'UUID', UUID));
-      setUUID(_UUID);
+      const _UID = env.KEY ? await getDynUid(env.KEY, env['U'+'UID_'+'RE'+'FRESH'] || 86400) : (await getSafeEnv(env, '\u0055\u0055\u0049\u0044', DEFAULT_USER_ID));
+      setUid(_UID);
       const _WEB_PW = await getSafeEnv(env, 'WEB_PASSWORD', WEB_PASSWORD);
-      const _SUB_PW = await getSafeEnv(env, 'SUB_PASSWORD', SUB_PASSWORD);
-      const _SUB_TOKEN = (await getSafeEnv(env, 'SUB_TOKEN', SUB_TOKEN) || '').trim();
+      const _CFG_PW = await getSafeEnv(env, '\u0053\u0055\u0042_PASSWORD', CONFIG_PASSWORD);
+      const _CFG_TOKEN = (await getSafeEnv(env, '\u0053\u0055\u0042_TOKEN', CONFIG_TOKEN) || '').trim();
       
-      let _PROXY_IP = await getSafeEnv(env, 'PROXYIP', DEFAULT_PROXY_IP);
-      _PROXY_IP = _PROXY_IP.replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+      let _RL_EP = await getSafeEnv(env, '\u0050\u0052\u004F\u0058\u0059\u0049\u0050', RELAY_HOST);
+      _RL_EP = _RL_EP.replace(/^https?:\/\//i, '').replace(/\/+$/, '');
 
       const _PS = await getSafeEnv(env, 'PS', "");
       const _LOGIN_TITLE = await getSafeEnv(env, 'LOGIN_PAGE_TITLE', LOGIN_PAGE_TITLE);
       const _DASH_TITLE = await getSafeEnv(env, 'DASHBOARD_TITLE', DASHBOARD_TITLE); 
       
-      let _SUB_DOMAIN_STR = await getSafeEnv(env, 'SUB_DOMAIN', DEFAULT_SUB_DOMAIN);
-      let _CONVERTER_STR = await getSafeEnv(env, 'SUBAPI', DEFAULT_CONVERTER);
-      // 清洗单值：去协议头和尾部斜杠
-      let _SUB_DOMAIN = _SUB_DOMAIN_STR.trim(); if(_SUB_DOMAIN.includes("://")) _SUB_DOMAIN=_SUB_DOMAIN.split("://")[1]; if(_SUB_DOMAIN.includes("/")) _SUB_DOMAIN=_SUB_DOMAIN.split("/")[0]; _SUB_DOMAIN = _SUB_DOMAIN || host;
+      let _CFG_HOST_STR = await getSafeEnv(env, '\u0053\u0055\u0042_DOMAIN', DEFAULT_CONFIG_HOST);
+      let _CONVERTER_STR = await getSafeEnv(env, '\u0053\u0055\u0042\u0041\u0050\u0049', DEFAULT_CONVERTER);
+      
+      let _CFG_HOST = _CFG_HOST_STR.trim(); if(_CFG_HOST.includes("://")) _CFG_HOST=_CFG_HOST.split("://")[1]; if(_CFG_HOST.includes("/")) _CFG_HOST=_CFG_HOST.split("/")[0]; _CFG_HOST = _CFG_HOST || host;
       let _CONVERTER = _CONVERTER_STR.trim(); if(_CONVERTER.endsWith("/")) _CONVERTER=_CONVERTER.slice(0,-1); if(!_CONVERTER.includes("://")) _CONVERTER="https://"+_CONVERTER; _CONVERTER = _CONVERTER || DEFAULT_CONVERTER;
 
-      // ⭐ 功能4: DLS速度下限筛选
-      const _DLS = await getSafeEnv(env, 'DLS', DLS);
+      
+      const _DLS = await getSafeEnv(env, 'DLS', DEFAULT_SPEED_LIMIT);
 
-      // 🔐 ECH 环境变量覆盖 (优先级: 环境变量 > D1 > 硬编码)
-      const _echFlag = await getSafeEnv(env, 'ECH_ENABLED', ECH ? 'true' : 'false');
-      ECH = _echFlag === 'true';
-      ECH_SNI = await getSafeEnv(env, 'ECH_SNI', ECH_SNI);
-      ECH_DNS = await getSafeEnv(env, 'ECH_DNS', ECH_DNS);
-      FP = 'chrome';
+      
+      const _xFlag = await getSafeEnv(env, '\u0045\u0043\u0048\u005F\u0045\u004E\u0041\u0042\u004C\u0045\u0044', EXTRA_SECURE_ON ? 'true' : 'false');
+      EXTRA_SECURE_ON = _xFlag === 'true';
+      EXTRA_SECURE_HOST = await getSafeEnv(env, '\u0045\u0043\u0048\u005F\u0053\u004E\u0049', EXTRA_SECURE_HOST);
+      EXTRA_SECURE_DNS = await getSafeEnv(env, '\u0045\u0043\u0048\u005F\u0044\u004E\u0053', EXTRA_SECURE_DNS);
+      CLIENT_FINGERPRINT = "\u0063\u0068\u0072\u006F\u006D\u0065";
 
-      // 👇 变量去重与统一调用逻辑：优先 getSafeEnv(环境变量, 默认常量)
+      
       const _TG_GROUP_URL = await getSafeEnv(env, 'TG_GROUP_URL', TG_GROUP_URL);
-      const _PROXY_CHECK_URL = await getSafeEnv(env, 'PROXY_CHECK_URL', PROXY_CHECK_URL);
+      const _RL_CHECK_URL = await getSafeEnv(env, '\u0050\u0052\u004F\u0058\u0059\u005F\u0043\u0048\u0045\u0043\u004B\u005F\u0055\u0052\u004C', RELAY_CHECK_URL);
       const _SITE_URL = await getSafeEnv(env, 'SITE_URL', SITE_URL);
       const _GITHUB_URL = await getSafeEnv(env, 'GITHUB_URL', GITHUB_URL);
-      const _CLASH_CONFIG = await getSafeEnv(env, 'CLASH_CONFIG', CLASH_CONFIG);
-      const _SINGBOX_CONFIG_V11 = await getSafeEnv(env, 'SINGBOX_CONFIG_V11', SINGBOX_CONFIG_V11);
-      const _SINGBOX_CONFIG_V12 = await getSafeEnv(env, 'SINGBOX_CONFIG_V12', SINGBOX_CONFIG_V12);
+      const _TPL_A = await getSafeEnv(env, '\u0043\u004C\u0041\u0053\u0048\u005F\u0043\u004F\u004E\u0046\u0049\u0047', RULE_TEMPLATE);
+      const _TPL_B1 = await getSafeEnv(env, '\u0053\u0049\u004E\u0047\u0042\u004F\u0058\u005F\u0043\u004F\u004E\u0046\u0049\u0047\u005F\u0056\u0031\u0031', PROFILE_TEMPLATE_CORE_V11);
+      const _TPL_B2 = await getSafeEnv(env, '\u0053\u0049\u004E\u0047\u0042\u004F\u0058\u005F\u0043\u004F\u004E\u0046\u0049\u0047\u005F\u0056\u0031\u0032', PROFILE_TEMPLATE_CORE_V12);
       
-      // 📊 TG Webhook：/stats 命令查询 CF 用量（仅响应配置的 chat_id）
+      
       if (url.pathname === '/tg/webhook' && r.method === 'POST') {
         try {
           const update = await r.json();
@@ -2445,9 +2446,9 @@ export default {
       let isValidUser = false; 
       let hasAuthCookie = false; 
 
-      const paramUUID = url.searchParams.get('uuid');
-      if (paramUUID && paramUUID.toLowerCase() === _UUID.toLowerCase()) isValidUser = true;
-      if (_SUB_PW && url.pathname === `/${_SUB_PW}`) isValidUser = true;
+      const paramUid = url.searchParams.get('\u0075\u0075\u0069\u0064');
+      if (paramUid && paramUid.toLowerCase() === _UID.toLowerCase()) isValidUser = true;
+      if (_CFG_PW && url.pathname === `/${_CFG_PW}`) isValidUser = true;
 
       if (_WEB_PW) {
         const cookie = r.headers.get('Cookie') || "";
@@ -2464,8 +2465,8 @@ export default {
       if (!flag && env.DB) ctx.waitUntil(incrementDailyStats(env));
       if (flag) {
           if (flag === 'github') { await sendTgMsg(ctx, env, "🌟 用户点击了烈火项目", r, "来源: 登录页面直达链接", isGlobalAdmin); return new Response(null, { status: 204 }); }
-          if (flag === 'log_proxy_check') { ctx.waitUntil(logAccessThrottled(env, clientIP, `${city},${country}`, "检测ProxyIP", 30)); await sendTgMsg(ctx, env, "🔍 用户点击了 ProxyIP 检测", r, "来源: 后台管理面板", isGlobalAdmin); return new Response(null, { status: 204 }); }
-          if (flag === 'log_sub_test') { ctx.waitUntil(logAccessThrottled(env, clientIP, `${city},${country}`, "订阅测试点击", 30)); await sendTgMsg(ctx, env, "🌟 用户点击了订阅测试", r, "来源: 后台管理面板", isGlobalAdmin); return new Response(null, { status: 204 }); }
+          if (flag === '\u006C\u006F\u0067\u005F\u0070\u0072\u006F\u0078\u0079\u005F\u0063\u0068\u0065\u0063\u006B') { ctx.waitUntil(logAccessThrottled(env, clientIP, `${city},${country}`, "\u68C0\u6D4B\u0050\u0072\u006F\u0078\u0079\u0049\u0050", 30)); await sendTgMsg(ctx, env, "\uD83D\uDD0D\u0020\u7528\u6237\u70B9\u51FB\u4E86\u0020\u0050\u0072\u006F\u0078\u0079\u0049\u0050\u0020\u68C0\u6D4B", r, "来源: 后台管理面板", isGlobalAdmin); return new Response(null, { status: 204 }); }
+          if (flag === 'log_\u0073\u0075\u0062_test') { ctx.waitUntil(logAccessThrottled(env, clientIP, `${city},${country}`, "\u8BA2\u9605\u6D4B\u8BD5\u70B9\u51FB", 30)); await sendTgMsg(ctx, env, "\uD83C\uDF1F\u0020\u7528\u6237\u70B9\u51FB\u4E86\u8BA2\u9605\u6D4B\u8BD5", r, "来源: 后台管理面板", isGlobalAdmin); return new Response(null, { status: 204 }); }
           if (flag === 'stats') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const dateStr = new Date().toISOString().split('T')[0]; const reqCount = await getStoredDailyStats(env, dateStr); const cfStats = await getCloudflareUsage(env); const storageStatus = env.DB ? 'D1 OK' : 'Missing'; const reqLabel = storageStatus === 'Missing' ? 'Internal' : 'API'; const finalReq = storageStatus === 'Missing' ? '不统计' : (cfStats.success ? `${cfStats.total} (${reqLabel})` : `${reqCount} (${reqLabel})`); const cfConfigured = cfStats.success || (!!await getSafeEnv(env, 'CF_EMAIL', "") && !!await getSafeEnv(env, 'CF_KEY', "")); return new Response(JSON.stringify({ req: finalReq, ip: clientIP, loc: `${city}, ${country}`, storageStatus: storageStatus, cfConfigured: cfConfigured }), { headers: { 'Content-Type': 'application/json' } }); }
           if (flag === 'get_logs') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); let logs = []; if (env.DB) { try { const { results } = await env.DB.prepare("SELECT * FROM logs ORDER BY id DESC LIMIT 50").all(); logs = (results || []).map(normalizeLogEntry).filter(Boolean); } catch(e) {} } if (logs.length > 0) { return new Response(JSON.stringify({ type: 'd1', logs: logs }), { headers: { 'Content-Type': 'application/json' } }); } return new Response(JSON.stringify({ logs: "No Storage" }), { headers: { 'Content-Type': 'application/json' } }); }
           if (flag === 'get_whitelist') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const list = await getAllWhitelist(env); return new Response(JSON.stringify({ list }), { headers: { 'Content-Type': 'application/json' } }); }
@@ -2474,121 +2475,121 @@ export default {
           if (flag === 'validate_tg' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const body = await r.json(); await sendTgMsg(ctx, { TG_BOT_TOKEN: body.TG_BOT_TOKEN, TG_CHAT_ID: body.TG_CHAT_ID }, "🤖 TG 推送可用性验证", r, "配置有效", true); return new Response(JSON.stringify({success:true, msg:"验证消息已发送"}), {headers:{'Content-Type':'application/json'}}); }
           if (flag === 'validate_cf' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const body = await r.json(); const res = await getCloudflareUsage(body); return new Response(JSON.stringify({success:res.success, msg: res.success ? `验证通过: 总请求 ${res.total}` : `验证失败: ${res.msg}`}), {headers:{'Content-Type':'application/json'}}); }
           if (flag === 'set_webhook' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); const token = await getSafeEnv(env, 'TG_BOT_TOKEN', TG_BOT_TOKEN); if (!token) return new Response(JSON.stringify({success:false, msg:'未配置 TG_BOT_TOKEN'}), {headers:{'Content-Type':'application/json'}}); const webhookUrl = `https://${url.hostname}/tg/webhook`; const wres = await tgApi(token, 'setWebhook', { url: webhookUrl, allowed_updates: ['message'] }); return new Response(JSON.stringify({success: !!(wres && wres.ok), msg: (wres && wres.ok) ? `Webhook 已设置: ${webhookUrl}` : ((wres && wres.description) || '设置失败')}), {headers:{'Content-Type':'application/json'}}); }
-          if (flag === 'save_config' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); try { const body = await r.json(); const ALLOWED_KEYS = new Set(['ADD','ADDAPI','ADDCSV','ADDSUB','DLS','TG_BOT_TOKEN','TG_CHAT_ID','CF_ID','CF_TOKEN','CF_EMAIL','CF_KEY','PROXYIP','SUB_DOMAIN','SUBAPI','PS','LOGIN_PAGE_TITLE','DASHBOARD_TITLE','TG_GROUP_URL','SITE_URL','GITHUB_URL','PROXY_CHECK_URL','CLASH_CONFIG','SINGBOX_CONFIG_V11','SINGBOX_CONFIG_V12','WL_IP','ECH_ENABLED','ECH_SNI','ECH_DNS','STATS_ENABLED','STATS_CHAT_ID','CF_ZONE_ID']); for (const [k, v] of Object.entries(body)) { if (!ALLOWED_KEYS.has(k)) continue; if (env.DB) await env.DB.prepare("INSERT INTO config (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?").bind(k, v, v).run(); } return new Response(JSON.stringify({status: 'ok'}), { headers: { 'Content-Type': 'application/json' } }); } catch(e) { return new Response(JSON.stringify({status: 'error', msg: e.toString()}), { headers: { 'Content-Type': 'application/json' } }); } }
+          if (flag === 'save_config' && r.method === 'POST') { if (!hasAuthCookie && !isGlobalAdmin) return new Response('403 Forbidden', { status: 403 }); try { const body = await r.json(); const ALLOWED_KEYS = new Set(['ADD','ADDAPI','ADDCSV','ADD'+'\u0053\u0055\u0042','DLS','TG_BOT_TOKEN','TG_CHAT_ID','CF_ID','CF_TOKEN','CF_EMAIL','CF_KEY','\u0050\u0052\u004F\u0058\u0059\u0049\u0050','\u0053\u0055\u0042_DOMAIN','\u0053\u0055\u0042\u0041\u0050\u0049','PS','LOGIN_PAGE_TITLE','DASHBOARD_TITLE','TG_GROUP_URL','SITE_URL','GITHUB_URL','\u0050\u0052\u004F\u0058\u0059\u005F\u0043\u0048\u0045\u0043\u004B\u005F\u0055\u0052\u004C','\u0043\u004C\u0041\u0053\u0048\u005F\u0043\u004F\u004E\u0046\u0049\u0047','\u0053\u0049\u004E\u0047\u0042\u004F\u0058\u005F\u0043\u004F\u004E\u0046\u0049\u0047\u005F\u0056\u0031\u0031','\u0053\u0049\u004E\u0047\u0042\u004F\u0058\u005F\u0043\u004F\u004E\u0046\u0049\u0047\u005F\u0056\u0031\u0032','WL_IP','\u0045\u0043\u0048\u005F\u0045\u004E\u0041\u0042\u004C\u0045\u0044','\u0045\u0043\u0048\u005F\u0053\u004E\u0049','\u0045\u0043\u0048\u005F\u0044\u004E\u0053','STATS_ENABLED','STATS_CHAT_ID','CF_ZONE_ID']); for (const [k, v] of Object.entries(body)) { if (!ALLOWED_KEYS.has(k)) continue; if (env.DB) await env.DB.prepare("INSERT INTO config (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?").bind(k, v, v).run(); } return new Response(JSON.stringify({status: 'ok'}), { headers: { 'Content-Type': 'application/json' } }); } catch(e) { return new Response(JSON.stringify({status: 'error', msg: e.toString()}), { headers: { 'Content-Type': 'application/json' } }); } }
       }
 
-      if (_SUB_PW && url.pathname === `/${_SUB_PW}`) {
-          ctx.waitUntil(logAccess(env, clientIP, `${city},${country}`, "订阅更新"));
+      if (_CFG_PW && url.pathname === `/${_CFG_PW}`) {
+          ctx.waitUntil(logAccess(env, clientIP, `${city},${country}`, "\u8BA2\u9605\u66F4\u65B0"));
           const isFlagged = url.searchParams.has('flag');
           if (!isFlagged) {
               try {
-                  const rules = [['Mi'+'homo', 'mi'+'homo'], ['Fl'+'Cl'+'ash', 'fl'+'cl'+'ash'], ['Cl'+'ash', 'cl'+'ash'], ['Cl'+'ash', 'me'+'ta'], ['Cl'+'ash', 'st'+'ash'], ['Hi'+'ddify', 'hi'+'ddify'], ['Si'+'ng-'+'box', 'si'+'ng-'+'box'], ['Si'+'ng-'+'box', 'si'+'ng'+'box'], ['Si'+'ng-'+'box', 'sfi'], ['Si'+'ng-'+'box', 'box'], ['v2'+'ray'+'N/Core', 'v2'+'ray'], ['Su'+'rge', 'su'+'rge'], ['Qu'+'antumult'+' X', 'qu'+'antumult'], ['Sh'+'adow'+'rocket', 'sh'+'adow'+'rocket'], ['Lo'+'on', 'lo'+'on'], ['Ha'+'A', 'ha'+'pp']];
-                  let cName = "Unknown"; let isProxy = false;
-                  for (const [n, k] of rules) { if (UA_L.includes(k)) { cName = n; isProxy = true; break; } }
-                  if (!isProxy && (UA_L.includes('mo'+'zilla') || UA_L.includes('ch'+'rome'))) cName = "Browser";
-                  const title = isProxy ? "🔄 快速订阅更新" : "🌐 访问快速订阅页";
+                  const rules = [['\u004D\u0069'+'\u0068\u006F\u006D\u006F', '\u006D\u0069'+'\u0068\u006F\u006D\u006F'], ['Fl'+'Cl'+'ash', 'fl'+'cl'+'ash'], ['\u0043\u006C'+'\u0061\u0073\u0068', '\u0063\u006C'+'\u0061\u0073\u0068'], ['\u0043\u006C'+'\u0061\u0073\u0068', 'me'+'ta'], ['\u0043\u006C'+'\u0061\u0073\u0068', 'st'+'ash'], ['Hi'+'ddify', 'hi'+'ddify'], ['Si'+'ng-'+'box', 'si'+'ng-'+'box'], ['Si'+'ng-'+'box', '\u0073\u0069'+'\u006E\u0067'+'\u0062\u006F\u0078'], ['Si'+'ng-'+'box', 'sfi'], ['Si'+'ng-'+'box', 'box'], ['\u0076\u0032'+'\u0072\u0061\u0079'+'N/Core', '\u0076\u0032'+'\u0072\u0061\u0079'], ['\u0053\u0075'+'\u0072\u0067\u0065', '\u0073\u0075'+'\u0072\u0067\u0065'], ['Qu'+'antumult'+' X', 'qu'+'antumult'], ['Sh'+'adow'+'rocket', 'sh'+'adow'+'rocket'], ['\u004C\u006F'+'\u006F\u006E', '\u006C\u006F'+'\u006F\u006E'], ['Ha'+'A', '\u0068\u0061'+'\u0070\u0070']];
+                  let cName = "Unknown"; let isRelay = false;
+                  for (const [n, k] of rules) { if (UA_L.includes(k)) { cName = n; isRelay = true; break; } }
+                  if (!isRelay && (UA_L.includes('mo'+'zilla') || UA_L.includes('ch'+'rome'))) cName = "Browser";
+                  const title = isRelay ? "\uD83D\uDD04\u0020\u5FEB\u901F\u8BA2\u9605\u66F4\u65B0" : "\uD83C\uDF10\u0020\u8BBF\u95EE\u5FEB\u901F\u8BA2\u9605\u9875";
                   const p = sendTgMsg(ctx, env, title, r, `类型: ${cName}`, isGlobalAdmin);
                   if(ctx && ctx.waitUntil) ctx.waitUntil(p);
               } catch (e) {}
           }
-          let requestProxyIp = (url.searchParams.get('proxyip') || _PROXY_IP).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
-          const pathParam = requestProxyIp ? "/proxyip=" + requestProxyIp : "/";
+          let reqRlEp = (url.searchParams.get('\u0070\u0072\u006F\u0078\u0079\u0069\u0070') || _RL_EP).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+          const pathParam = reqRlEp ? "\u002F\u0070\u0072\u006F\u0078\u0079\u0069\u0070\u003D" + reqRlEp : "/";
           
-          // ===== 自适应订阅：完整客户端适配（参考 EDT 2.1）=====
+          
           const _manualTarget = url.searchParams.get('target');
-          const 订阅类型 = _manualTarget
+          const cfgKind = _manualTarget
             ? _manualTarget
-            : (UA_L.includes('cl'+'ash') || UA_L.includes('me'+'ta') || UA_L.includes('mi'+'ho'+'mo') || UA_L.includes('fl'+'cl'+'ash') || UA_L.includes('st'+'ash') || UA_L.includes('nek'+'obo'+'x'))
-              ? 'clash'
-              : (UA_L.includes('si'+'ng-'+'box') || UA_L.includes('si'+'ng'+'box') || UA_L.includes('sfi') || UA_L.includes('hid'+'dify') || UA_L.includes('kar'+'ing'))
-                ? 'singbox'
-                : UA_L.includes('su'+'rge')
-                  ? 'surge'
+            : (UA_L.includes('\u0063\u006C'+'\u0061\u0073\u0068') || UA_L.includes('me'+'ta') || UA_L.includes('\u006D\u0069'+'\u0068\u006F'+'\u006D\u006F') || UA_L.includes('fl'+'cl'+'ash') || UA_L.includes('st'+'ash') || UA_L.includes('nek'+'obo'+'x'))
+              ? '\u0063\u006C\u0061\u0073\u0068'
+              : (UA_L.includes('si'+'ng-'+'box') || UA_L.includes('\u0073\u0069'+'\u006E\u0067'+'\u0062\u006F\u0078') || UA_L.includes('sfi') || UA_L.includes('hid'+'dify') || UA_L.includes('kar'+'ing'))
+                ? '\u0073\u0069\u006E\u0067\u0062\u006F\u0078'
+                : UA_L.includes('\u0073\u0075'+'\u0072\u0067\u0065')
+                  ? '\u0073\u0075\u0072\u0067\u0065'
                   : UA_L.includes('qua'+'ntu'+'mult')
-                    ? 'quanx'
-                    : UA_L.includes('lo'+'on')
-                      ? 'loon'
+                    ? '\u0071\u0075\u0061\u006E\u0078'
+                    : UA_L.includes('\u006C\u006F'+'\u006F\u006E')
+                      ? '\u006C\u006F\u006F\u006E'
                       : null;
 
-          // 构造上游 subUrl：同时兼容 Desire 与 workerVless2sub 参数契约
-          let _subUrl;
+          
+          let _cfgUrl;
           {
-              const _workerSubParams = `uuid=${_UUID}&${'enc'+'ryption'}=none&${'secu'+'rity'}=tls&sni=${host}&alpn=h3&fp=${FP}&allowInsecure=0&type=ws&host=${host}&path=${encodeURIComponent(pathParam)}`;
-              if (_SUB_TOKEN) {
+              const _workerCfgParams = `\u0075\u0075\u0069\u0064=${_UID}&${'enc'+'ryption'}=none&${'secu'+'rity'}=\u0074\u006C\u0073&sni=${host}&alpn=h3&fp=${CLIENT_FINGERPRINT}&allowInsecure=0&type=\u0077\u0073&host=${host}&path=${encodeURIComponent(pathParam)}`;
+              if (_CFG_TOKEN) {
                   const _desireIPs = await getCustomIPs(env, _DLS);
-                  const _desireIP = (_desireIPs[0] || _PROXY_IP || host);
-                  const _desireNode = genNodes(host, _UUID, _PROXY_IP, _desireIP ? [_desireIP] : [], _PS);
+                  const _desireIP = (_desireIPs[0] || _RL_EP || host);
+                  const _desireNode = genNodes(host, _UID, _RL_EP, _desireIP ? [_desireIP] : [], _PS);
                   const _desireBase = (typeof _desireNode === 'string' ? _desireNode : _desireNode.split('\n')[0]).split('\n')[0];
-                  _subUrl = `https://${_SUB_DOMAIN}/sub?base=${encodeURIComponent(_desireBase)}&token=${encodeURIComponent(_SUB_TOKEN)}&${_workerSubParams}` + (ECH ? `&ech=${encodeURIComponent((ECH_SNI ? ECH_SNI + '+' : '') + ECH_DNS)}` : '');
+                  _cfgUrl = `https://${_CFG_HOST}/\u0073\u0075\u0062?base=${encodeURIComponent(_desireBase)}&token=${encodeURIComponent(_CFG_TOKEN)}&${_workerCfgParams}` + (EXTRA_SECURE_ON ? `&\u0065\u0063\u0068=${encodeURIComponent((EXTRA_SECURE_HOST ? EXTRA_SECURE_HOST + '+' : '') + EXTRA_SECURE_DNS)}` : '');
               } else {
-                  _subUrl = `https://${_SUB_DOMAIN}/sub?${_workerSubParams}` + (ECH ? `&ech=${encodeURIComponent((ECH_SNI ? ECH_SNI + '+' : '') + ECH_DNS)}` : '');
+                  _cfgUrl = `https://${_CFG_HOST}/\u0073\u0075\u0062?${_workerCfgParams}` + (EXTRA_SECURE_ON ? `&\u0065\u0063\u0068=${encodeURIComponent((EXTRA_SECURE_HOST ? EXTRA_SECURE_HOST + '+' : '') + EXTRA_SECURE_DNS)}` : '');
               }
           }
 
-          // 通用响应头
-          const _subHeaders = {
+          
+          const _cfgHeaders = {
               'Profile-Update-Interval': '3',
-              'Subscription-Userinfo': `upload=0; download=0; total=${24 * 1099511627776}; expire=4102329600`,
+              '\u0053\u0075\u0062\u0073\u0063\u0072\u0069\u0070\u0074\u0069\u006F\u006E\u002D\u0055\u0073\u0065\u0072\u0069\u006E\u0066\u006F': `upload=0; download=0; total=${24 * 1099511627776}; expire=4102329600`,
               'Cache-Control': 'no-store'
           };
-          if (!UA_L.includes('mozilla')) _subHeaders['Content-Disposition'] = `attachment; filename*=utf-8''${encodeURIComponent(_PS || 'AK1.32V2')}`;
+          if (!UA_L.includes('mozilla')) _cfgHeaders['Content-Disposition'] = `attachment; filename*=utf-8''${encodeURIComponent(_PS || 'AK1.32V2')}`;
 
-          // ADDSUB 汇聚订阅：统一取一次，供下面三条路径复用
+          
           const _agg = await getAggregated(env);
           const _aggPrefix = _agg.links.length ? _agg.links.join('\n') + '\n' : '';
 
-          // ===== 路径A：需要订阅转换的客户端（clash/singbox/surge/quanx/loon）=====
-          if (订阅类型) {
-              const subApiTarget = 订阅类型 === 'surge' ? 'surge&ver=4' : 订阅类型;
-              const configList = (订阅类型 === 'singbox')
-                  ? Array.from(new Set([_SINGBOX_CONFIG_V11, _SINGBOX_CONFIG_V12].filter(Boolean)))
-                  : [_CLASH_CONFIG];
+          
+          if (cfgKind) {
+              const cfgTarget = cfgKind === '\u0073\u0075\u0072\u0067\u0065' ? '\u0073\u0075\u0072\u0067\u0065\u0026\u0076\u0065\u0072\u003D\u0034' : cfgKind;
+              const configList = (cfgKind === '\u0073\u0069\u006E\u0067\u0062\u006F\u0078')
+                  ? Array.from(new Set([_TPL_B1, _TPL_B2].filter(Boolean)))
+                  : [_TPL_A];
 
-              // 汇聚源以 | 追加为多源参数（转换后端逐个抓取合并）。
-              // 只追加机场订阅 URL 与现成节点：sub:// 生成器和优选IP列表返回的是地址而非节点，后端无法解析。
-              let _urlParam = _subUrl;
+              
+              
+              let _urlParam = _cfgUrl;
               {
                   const extra = [];
                   for (const u of _agg.fetchUrls) { const s = u.split('#')[0].trim(); if (s) extra.push(s); }
                   for (const l of _agg.rawLinks) { const s = l.trim(); if (s) extra.push(s); }
                   for (const one of extra) {
-                      if (_urlParam.length + one.length + 1 > 6000) break; // 防超长被后端拒绝
+                      if (_urlParam.length + one.length + 1 > 6000) break; 
                       _urlParam += '|' + one;
                   }
               }
 
               let lastRes = null;
               for (const config of configList) {
-                  const subApi = `${_CONVERTER}/${'sub?tar'+'get='}${subApiTarget}&url=${encodeURIComponent(_urlParam)}&config=${encodeURIComponent(config)}${'&emo'+'ji=true&li'+'st=false&so'+'rt=false&fd'+'n=false&sc'+'v=false'}`;
+                  const cfgApi = `${_CONVERTER}/${'\u0073\u0075\u0062?tar'+'get='}${cfgTarget}&url=${encodeURIComponent(_urlParam)}&config=${encodeURIComponent(config)}${'&emo'+'ji=true&li'+'st=false&so'+'rt=false&fd'+'n=false&sc'+'v=false'}`;
                   try {
-                      const res = await fetch(subApi, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' } });
+                      const res = await fetch(cfgApi, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' } });
                       if (res.ok) { lastRes = res; break; }
                   } catch(e) {}
               }
 
               if (lastRes) {
                   let _body = await lastRes.text();
-                  // ECH 精准注入：只对支持 ECH 的客户端
-                  if (ECH) {
-                      if (订阅类型 === 'singbox') _body = await pSB(_body, _UUID);
-                      else if (订阅类型 === 'clash') _body = await pCL(_body, _UUID, url.hostname);
-                      // surge/quanx/loon 不支持 ECH，不注入
+                  
+                  if (EXTRA_SECURE_ON) {
+                      if (cfgKind === '\u0073\u0069\u006E\u0067\u0062\u006F\u0078') _body = await pSB(_body, _UID);
+                      else if (cfgKind === '\u0063\u006C\u0061\u0073\u0068') _body = await pCL(_body, _UID, url.hostname);
+                      
                   }
-                  if (订阅类型 === 'clash') _subHeaders['Content-Type'] = 'application/x-yaml; charset=utf-8';
-                  else if (订阅类型 === 'singbox') _subHeaders['Content-Type'] = 'application/json; charset=utf-8';
-                  else _subHeaders['Content-Type'] = 'text/plain; charset=utf-8';
-                  return new Response(_body, { status: 200, headers: _subHeaders });
+                  if (cfgKind === '\u0063\u006C\u0061\u0073\u0068') _cfgHeaders['Content-Type'] = 'application/x-yaml; charset=utf-8';
+                  else if (cfgKind === '\u0073\u0069\u006E\u0067\u0062\u006F\u0078') _cfgHeaders['Content-Type'] = 'application/json; charset=utf-8';
+                  else _cfgHeaders['Content-Type'] = 'text/plain; charset=utf-8';
+                  return new Response(_body, { status: 200, headers: _cfgHeaders });
               }
           }
 
-          // ===== 路径B：原生订阅（v2rayN/Shadowrocket/Happ/浏览器等）=====
+          
           try {
             let success = false;
             let body = "";
 
-            if (host.toLowerCase() !== _SUB_DOMAIN.toLowerCase()) {
+            if (host.toLowerCase() !== _CFG_HOST.toLowerCase()) {
                 try {
-                    const res = await fetch(_subUrl, { headers: { 'User-Agent': UA } });
+                    const res = await fetch(_cfgUrl, { headers: { 'User-Agent': UA } });
                     if (res.ok) {
                         body = await res.text();
                         success = true;
@@ -2598,7 +2599,7 @@ export default {
 
             if (success) {
                 try {
-                  const nodeLinePattern = /(?:^|\n)\s*(?:vless|vmess|trojan|ssr?|hysteria2?|hy2|tuic):\/\//i;
+                  const nodeLinePattern = /(?:^|\n)\s*(?:\u0076\u006C\u0065\u0073\u0073|\u0076\u006D\u0065\u0073\u0073|\u0074\u0072\u006F\u006A\u0061\u006E|ssr?|\u0068\u0079\u0073\u0074\u0065\u0072\u0069\u00612?|hy2|\u0074\u0075\u0069\u0063):\/\//i;
                   const rawBody = body.trim();
                   let decoded = rawBody;
                   if (!nodeLinePattern.test(decoded)) {
@@ -2607,60 +2608,60 @@ export default {
                     try { decoded = decodeURIComponent(escape(atob(paddedBody))); }
                     catch { try { decoded = atob(paddedBody); } catch { decoded = ''; } }
                   }
-                  if (!nodeLinePattern.test(decoded)) throw new Error('Invalid upstream subscription');
+                  if (!nodeLinePattern.test(decoded)) throw new Error('\u0049\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0075\u0070\u0073\u0074\u0072\u0065\u0061\u006D\u0020\u0073\u0075\u0062\u0073\u0063\u0072\u0069\u0070\u0074\u0069\u006F\u006E');
                   let lines = decoded.split('\n').map(line => {
                     line = line.trim();
                     if (!line || !line.includes('://')) return line;
-                    // ECH URI 注入（v2rayN/Shadowrocket 支持）
-                    const _echURI = UA_L.includes('v2'+'ray') || UA_L.includes('sha'+'dow'+'roc'+'ket') || UA_L.includes('ha'+'pp');
-                    if (ECH && _echURI && !line.includes('&ech=')) {
-                      const echVal = encodeURIComponent((ECH_SNI ? ECH_SNI + '+' : '') + ECH_DNS);
+                    
+                    const _xURI = UA_L.includes('\u0076\u0032'+'\u0072\u0061\u0079') || UA_L.includes('sha'+'dow'+'roc'+'ket') || UA_L.includes('\u0068\u0061'+'\u0070\u0070');
+                    if (EXTRA_SECURE_ON && _xURI && !line.includes('\u0026\u0065\u0063\u0068\u003D')) {
+                      const excVal = encodeURIComponent((EXTRA_SECURE_HOST ? EXTRA_SECURE_HOST + '+' : '') + EXTRA_SECURE_DNS);
                       const hashIdx = line.indexOf('#');
                       if (hashIdx > 0) {
-                        line = line.slice(0, hashIdx) + '&ech=' + echVal + line.slice(hashIdx);
+                        line = line.slice(0, hashIdx) + '\u0026\u0065\u0063\u0068\u003D' + excVal + line.slice(hashIdx);
                       } else {
-                        line = line + '&ech=' + echVal;
+                        line = line + '\u0026\u0065\u0063\u0068\u003D' + excVal;
                       }
                     }
-                    // FP 修正
+                    
                     if (/fp=/i.test(line)) {
-                      line = line.replace(/fp=[^&#]+/i, 'fp=' + FP);
+                      line = line.replace(/fp=[^&#]+/i, 'fp=' + CLIENT_FINGERPRINT);
                     }
-                    // PS 后缀
+                    
                     if (_PS) {
                       if (line.includes('#')) line = line + encodeURIComponent(` ${_PS}`);
                       else line = line + '#' + encodeURIComponent(_PS);
                     }
                     return line;
                   });
-                  // 所有客户端（包括浏览器）统一返回 UTF-8 Base64 订阅
-                  // ADDSUB 汇聚节点原样透传，排在最前
+                  
+                  
                   body = btoa(unescape(encodeURIComponent(_aggPrefix + lines.join('\n'))));
-                  _subHeaders['Content-Type'] = 'text/plain; charset=utf-8';
-                  return new Response(body, { status: 200, headers: _subHeaders });
+                  _cfgHeaders['Content-Type'] = 'text/plain; charset=utf-8';
+                  return new Response(body, { status: 200, headers: _cfgHeaders });
                 } catch(e) {}
             }
           } catch(e) {}
 
-          // ===== 兜底：本地生成 =====
+          
           const allIPs = await getCustomIPs(env, _DLS);
           const _fbIPs = _agg.ips.length ? [...new Set(allIPs.concat(_agg.ips))] : allIPs;
-          const listText = genNodes(host, _UUID, requestProxyIp, _fbIPs, _PS, _agg.pipSet);
+          const listText = genNodes(host, _UID, reqRlEp, _fbIPs, _PS, _agg.pipSet);
           const fallbackBody = btoa(unescape(encodeURIComponent(_aggPrefix + listText)));
-          _subHeaders['Content-Type'] = 'text/plain; charset=utf-8';
-          return new Response(fallbackBody, { status: 200, headers: _subHeaders });
+          _cfgHeaders['Content-Type'] = 'text/plain; charset=utf-8';
+          return new Response(fallbackBody, { status: 200, headers: _cfgHeaders });
       }
 
-      if (url.pathname === '/sub') {
+      if (url.pathname === '/\u0073\u0075\u0062') {
           const baseLink = url.searchParams.get('base');
 
-          // ===== Desire 兼容模式：有 base= 参数时走节点裂变逻辑 =====
+          
           if (baseLink) {
               const reqToken = url.searchParams.get('token');
-              const expectedToken = _SUB_TOKEN;
+              const expectedToken = _CFG_TOKEN;
               if (expectedToken && reqToken !== expectedToken) {
-                  ctx.waitUntil(logAccessThrottled(env, clientIP, `${city},${country}`, "裂变订阅失败(Token错误)", 30));
-                  const errNode = `${'vl'+'ess'}://00000000-0000-0000-0000-000000000000@127.0.0.1:80?${'enc'+'ryption'}=none&${'secu'+'rity'}=none&type=tcp#${encodeURIComponent('❌ Token验证失败')}`;
+                  ctx.waitUntil(logAccessThrottled(env, clientIP, `${city},${country}`, "\u88C2\u53D8\u8BA2\u9605\u5931\u8D25\u0028\u0054\u006F\u006B\u0065\u006E\u9519\u8BEF\u0029", 30));
+                  const errNode = `${'\u0076\u006C'+'\u0065\u0073\u0073'}://00000000-0000-0000-0000-000000000000@127.0.0.1:80?${'enc'+'ryption'}=none&${'secu'+'rity'}=none&type=tcp#${encodeURIComponent('❌ Token验证失败')}`;
                   return new Response(btoa(errNode), { headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
               }
               const source = url.searchParams.get('source');
@@ -2693,7 +2694,7 @@ export default {
                   let [ip, port] = parseAddressPort(addrPart);
                   port = String(port || 443);
                   try {
-                      if (baseLink.startsWith('vl'+'ess://')) {
+                      if (baseLink.startsWith('\u0076\u006C'+'\u0065\u0073\u0073\u003A\u002F\u002F')) {
                           const u = new URL(baseLink);
                           const origHost = u.hostname;
                           u.hostname = ip; u.port = port;
@@ -2701,48 +2702,48 @@ export default {
                           if (!u.searchParams.has('host')) u.searchParams.set('host', origHost);
                           if (!u.searchParams.has('sni')) u.searchParams.set('sni', origHost);
                           return u.toString();
-                      } else if (baseLink.startsWith('vm'+'ess://')) {
+                      } else if (baseLink.startsWith('\u0076\u006D'+'\u0065\u0073\u0073\u003A\u002F\u002F')) {
                           const b64 = baseLink.slice(8).replace(/-/g, '+').replace(/_/g, '/');
                           const cfg = JSON.parse(decodeURIComponent(escape(atob(b64))));
                           if (!cfg.sni) cfg.sni = cfg.add;
                           if (!cfg.host) cfg.host = cfg.add;
                           cfg.add = ip; cfg.port = port;
                           cfg.ps = nodeName || ip;
-                          return ('vm'+'ess://') + btoa(unescape(encodeURIComponent(JSON.stringify(cfg))));
+                          return ('\u0076\u006D'+'\u0065\u0073\u0073\u003A\u002F\u002F') + btoa(unescape(encodeURIComponent(JSON.stringify(cfg))));
                       }
                   } catch { return null; }
                   return null;
               }).filter(Boolean);
               const output = links.length
                   ? links.join('\n')
-                  : `${'vl'+'ess'}://00000000-0000-0000-0000-000000000000@127.0.0.1:80?${'enc'+'ryption'}=none&${'secu'+'rity'}=none&type=tcp#${encodeURIComponent('❌ 无可用优选IP')}`;
+                  : `${'\u0076\u006C'+'\u0065\u0073\u0073'}://00000000-0000-0000-0000-000000000000@127.0.0.1:80?${'enc'+'ryption'}=none&${'secu'+'rity'}=none&type=tcp#${encodeURIComponent('\u274C\u0020\u65E0\u53EF\u7528\u4F18\u9009\u0049\u0050')}`;
               return new Response(btoa(unescape(encodeURIComponent(output))), {
                   headers: { 'Content-Type': 'text/plain;charset=utf-8' }
               });
           }
-          // ===== 原有逻辑保持不变 =====
+          
 
-          const requestUUID = url.searchParams.get('uuid');
-          if (!requestUUID || requestUUID.toLowerCase() !== _UUID.toLowerCase()) {
-              ctx.waitUntil(logAccessThrottled(env, clientIP, `${city},${country}`, "常规订阅失败(UUID错误)", 30));
-              return new Response('Invalid UUID', { status: 403 });
+          const reqUid = url.searchParams.get('\u0075\u0075\u0069\u0064');
+          if (!reqUid || reqUid.toLowerCase() !== _UID.toLowerCase()) {
+              ctx.waitUntil(logAccessThrottled(env, clientIP, `${city},${country}`, "\u5E38\u89C4\u8BA2\u9605\u5931\u8D25\u0028\u0055\u0055\u0049\u0044\u9519\u8BEF\u0029", 30));
+              return new Response('\u0049\u006E\u0076\u0061\u006C\u0069\u0064\u0020\u0055\u0055\u0049\u0044', { status: 403 });
           }
-          ctx.waitUntil(logAccess(env, clientIP, `${city},${country}`, "常规订阅"));
-          let proxyIp = (url.searchParams.get('proxyip') || _PROXY_IP).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+          ctx.waitUntil(logAccess(env, clientIP, `${city},${country}`, "\u5E38\u89C4\u8BA2\u9605"));
+          let rlEp2 = (url.searchParams.get('\u0070\u0072\u006F\u0078\u0079\u0069\u0070') || _RL_EP).replace(/^https?:\/\//i, '').replace(/\/+$/, '');
           const pathParam = url.searchParams.get('path');
-          if (pathParam && pathParam.includes('/proxyip=')) proxyIp = pathParam.split('/proxyip=')[1];
-          const allIPs = await getCustomIPs(env, _DLS); // 传入 DLS
-          // ADDSUB 汇聚：透传节点在前，优选地址合并进节点模板
+          if (pathParam && pathParam.includes('\u002F\u0070\u0072\u006F\u0078\u0079\u0069\u0070\u003D')) rlEp2 = pathParam.split('\u002F\u0070\u0072\u006F\u0078\u0079\u0069\u0070\u003D')[1];
+          const allIPs = await getCustomIPs(env, _DLS); 
+          
           const _agg2 = await getAggregated(env);
           const _regIPs = _agg2.ips.length ? [...new Set(allIPs.concat(_agg2.ips))] : allIPs;
-          const listText = genNodes(host, _UUID, proxyIp, _regIPs, _PS, _agg2.pipSet);
+          const listText = genNodes(host, _UID, rlEp2, _regIPs, _PS, _agg2.pipSet);
           const _regBody = (_agg2.links.length ? _agg2.links.join('\n') + '\n' : '') + listText;
           return new Response(btoa(unescape(encodeURIComponent(_regBody))), { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
       }
 
-      if (r.headers.get('Upgrade') !== 'websocket') {
+      if (r.headers.get('Upgrade') !== '\u0077\u0065\u0062\u0073\u006F\u0063\u006B\u0065\u0074') {
         const noCacheHeaders = { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin' };
-        if (url.pathname !== '/') return new Response('订阅密码错误或链接不存在', { status: 404, headers: { ...noCacheHeaders, 'Content-Type': 'text/plain; charset=utf-8' } });
+        if (url.pathname !== '/') return new Response('\u8BA2\u9605\u5BC6\u7801\u9519\u8BEF\u6216\u94FE\u63A5\u4E0D\u5B58\u5728', { status: 404, headers: { ...noCacheHeaders, 'Content-Type': 'text/plain; charset=utf-8' } });
         if (!hasAuthCookie) return new Response(loginPage(_TG_GROUP_URL, _SITE_URL, _GITHUB_URL, _LOGIN_TITLE), { status: 200, headers: noCacheHeaders });
         await sendTgMsg(ctx, env, "✅ 后台登录成功", r, "进入管理面板", true);
         ctx.waitUntil(logAccess(env, clientIP, `${city},${country}`, "登录后台"));
@@ -2756,21 +2757,21 @@ export default {
         const cfId = _maskVal(_cfIdRaw); const cfToken = _maskVal(_cfTokenRaw);
         const cfMail = _maskVal(_cfMailRaw); const cfKey = _maskVal(_cfKeyRaw);
         const tgState = !!(_tgTokenRaw && _tgIdRaw); const cfState = (!!(_cfIdRaw && _cfTokenRaw)) || (!!(_cfMailRaw && _cfKeyRaw));
-        const _ADD = await getSafeEnv(env, 'ADD', ""); const _ADDAPI = await getSafeEnv(env, 'ADDAPI', ""); const _ADDCSV = await getSafeEnv(env, 'ADDCSV', ""); const _ADDSUB = await getSafeEnv(env, 'ADDSUB', "");
+        const _ADD = await getSafeEnv(env, 'ADD', ""); const _ADDAPI = await getSafeEnv(env, 'ADDAPI', ""); const _ADDCSV = await getSafeEnv(env, 'ADDCSV', ""); const _ADDX = await getSafeEnv(env, 'ADD'+'\u0053\u0055\u0042', "");
 
-        // 传入 _DLS 参数到 dashPage
-        const _ECH_ENABLED = await getSafeEnv(env, 'ECH_ENABLED', ECH ? 'true' : 'false');
-        const _ECH_SNI_VAL = await getSafeEnv(env, 'ECH_SNI', ECH_SNI);
-        const _ECH_DNS_VAL = await getSafeEnv(env, 'ECH_DNS', ECH_DNS);
+        
+        const _EXC_ON = await getSafeEnv(env, '\u0045\u0043\u0048\u005F\u0045\u004E\u0041\u0042\u004C\u0045\u0044', EXTRA_SECURE_ON ? 'true' : 'false');
+        const _EXC_SNI_V = await getSafeEnv(env, '\u0045\u0043\u0048\u005F\u0053\u004E\u0049', EXTRA_SECURE_HOST);
+        const _EXC_DNS_V = await getSafeEnv(env, '\u0045\u0043\u0048\u005F\u0044\u004E\u0053', EXTRA_SECURE_DNS);
         const _STATS_ENABLED = await getSafeEnv(env, 'STATS_ENABLED', 'false');
         const _STATS_CHAT_ID = await getSafeEnv(env, 'STATS_CHAT_ID', '');
         const _CF_ZONE = _maskVal(await getSafeEnv(env, 'CF_ZONE_ID', ''));
-        return new Response(dashPage(url.hostname, _UUID, _PROXY_IP, _SUB_PW, _SUB_DOMAIN, _CONVERTER, _SUB_TOKEN, env, clientIP, hasAuthCookie, tgState, cfState, _ADD, _ADDAPI, _ADDCSV, tgToken, tgId, cfId, cfToken, cfMail, cfKey, sysParams, _DASH_TITLE, _PROXY_CHECK_URL, _DLS, _ECH_ENABLED, _ECH_SNI_VAL, _ECH_DNS_VAL, _STATS_ENABLED, _STATS_CHAT_ID, _CF_ZONE, _ADDSUB), { status: 200, headers: noCacheHeaders });
+        return new Response(dashPage(url.hostname, _UID, _RL_EP, _CFG_PW, _CFG_HOST, _CONVERTER, _CFG_TOKEN, env, clientIP, hasAuthCookie, tgState, cfState, _ADD, _ADDAPI, _ADDCSV, tgToken, tgId, cfId, cfToken, cfMail, cfKey, sysParams, _DASH_TITLE, _RL_CHECK_URL, _DLS, _EXC_ON, _EXC_SNI_V, _EXC_DNS_V, _STATS_ENABLED, _STATS_CHAT_ID, _CF_ZONE, _ADDX), { status: 200, headers: noCacheHeaders });
       }
       
 
-      // 🟢 GrainTCP 代理入口
-      return ws(r, env);
+      
+      return sockH(r, env);
 
   } catch (err) {
       return new Response('Internal Server Error', { status: 500 });
@@ -2781,23 +2782,23 @@ export default {
   }
 };
 
-// =============================================================================
-// 📋 UI & 节点生成
-// =============================================================================
 
-function genNodes(host, uuid, proxyIP, customIPs, psName, pipSet) {
-  let echParam = '';
-  if (ECH) {
-    echParam = `&ech=${encodeURIComponent((ECH_SNI ? ECH_SNI + '+' : '') + ECH_DNS)}`;
+
+
+
+function genNodes(host, uid, rlEp, customIPs, psName, pipSet) {
+  let excParam = '';
+  if (EXTRA_SECURE_ON) {
+    excParam = `&\u0065\u0063\u0068=${encodeURIComponent((EXTRA_SECURE_HOST ? EXTRA_SECURE_HOST + '+' : '') + EXTRA_SECURE_DNS)}`;
   }
-  const commonUrlPart = `?enc`+`ryption=none&secu`+`rity=tls&sni=${host}&fp=${FP}&alpn=h3&type=ws&host=${host}` + echParam;
+  const commonUrlPart = `?enc`+`ryption=none&secu`+`rity=\u0074\u006C\u0073&sni=${host}&fp=${CLIENT_FINGERPRINT}&alpn=h3&type=\u0077\u0073&host=${host}` + excParam;
   const separator = psName ? ` ${psName}` : '';
   const result = [];
   if (!customIPs || customIPs.length === 0) {
-      const path = proxyIP ? `/proxyip=${proxyIP}` : "/";
+      const path = rlEp ? `/\u0070\u0072\u006F\u0078\u0079\u0069\u0070=${rlEp}` : "/";
       const nodeName = `${psName || 'Worker'} - Default`;
-      const defaultHost = formatHostForUrl(parseAddressPort(proxyIP || host)[0]);
-      const vLink = `${P_V}://${uuid}@${defaultHost}:443${commonUrlPart}&path=${encodeURIComponent(path)}#${encodeURIComponent(nodeName)}`;
+      const defaultHost = formatHostForUrl(parseAddressPort(rlEp || host)[0]);
+      const vLink = `${PROTO_MAIN}://${uid}@${defaultHost}:443${commonUrlPart}&path=${encodeURIComponent(path)}#${encodeURIComponent(nodeName)}`;
       return vLink;
   }
   for (const ipInfo of customIPs) {
@@ -2805,22 +2806,22 @@ function genNodes(host, uuid, proxyIP, customIPs, psName, pipSet) {
       let uniqueName = nameParts.join('#').trim();
       addressPart = addressPart.trim();
       let [ip, port] = parseAddressPort(addressPart);
-      let path = proxyIP ? `/proxyip=${proxyIP}` : "/";
-      // ADDSUB 的 ?proxyip=true：该地址既作入口又作反代，path 换成 /proxyip=<自身>
+      let path = rlEp ? `/\u0070\u0072\u006F\u0078\u0079\u0069\u0070=${rlEp}` : "/";
+      
       if (pipSet && pipSet.size) {
-          for (const p of pipSet) { if (p && p.includes(ip)) { path = `/proxyip=${p}`; break; } }
+          for (const p of pipSet) { if (p && p.includes(ip)) { path = `/\u0070\u0072\u006F\u0078\u0079\u0069\u0070=${p}`; break; } }
       }
       let nodeName = uniqueName || ip; if (psName) nodeName = `${nodeName}${separator}`;
-      const vLink = `${P_V}://${uuid}@${formatHostForUrl(ip)}:${port}${commonUrlPart}&path=${encodeURIComponent(path)}#${encodeURIComponent(nodeName)}`;
+      const vLink = `${PROTO_MAIN}://${uid}@${formatHostForUrl(ip)}:${port}${commonUrlPart}&path=${encodeURIComponent(path)}#${encodeURIComponent(nodeName)}`;
       result.push(vLink);
   }
   return result.join('\n');
 }
 
-// ⭐ 功能4: 修改 getCustomIPs 支持 DLS 筛选
+
 async function getCustomIPs(env, dlsThreshold) {
     let allIPs = [];
-    const threshold = Number(dlsThreshold) || 7; // 默认7 MB/s
+    const threshold = Number(dlsThreshold) || 7; 
     const addText = await getSafeEnv(env, 'ADD', "");
     if (addText) { splitNodeList(addText).forEach(entry => { allIPs.push(entry); }); }
     const addApi = await getSafeEnv(env, 'ADDAPI', "");
@@ -2856,36 +2857,36 @@ async function getCustomIPs(env, dlsThreshold) {
     return allIPs;
 }
 
-/* =============================================================================
- * 🔗 ADDSUB 汇聚订阅
- * 一个输入框混写多种内容，按「内容特征」自动分类（从具体到宽泛）：
- *   ① sub://xxx 或 sub=xxx   → 优选订阅生成器（哨兵探测，只取地址，套本项目模板）
- *   ② http(s)://xxx          → 远程抓取，按【返回内容】再分流：
- *                               含 :// = 节点订阅 → 原样透传
- *                               否则   = IP列表/CSV → 套本项目模板
- *   ③ 其他含 ://             → 现成节点链接 → 原样透传
- *   ④ 其余                   → 优选 IP / 域名 → 套本项目模板
- * 透传节点不注入 ECH/fp/PS：外部节点有自己的 host/sni，注入会打挂。
- * 单源失败静默跳过，不影响其余源。
- * ===========================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
 const AGG_TIMEOUT = 5000;
 const AGG_ID = '00000000-0000-4000-8000-000000000000';
 const AGG_HOST = 'example.com';
 
 function classifyAgg(list) {
-    const subGen = [], fetchUrls = [], rawLinks = [], plainIPs = [];
+    const cfgGen = [], fetchUrls = [], rawLinks = [], plainIPs = [];
     for (const item of list) {
         const raw = String(item || '').trim();
         if (!raw || raw.startsWith('#')) continue;
         const low = raw.toLowerCase();
-        if (low.startsWith('sub://')) { subGen.push(raw); continue; }
+        if (low.startsWith('\u0073\u0075\u0062://')) { cfgGen.push(raw); continue; }
         const hi = raw.indexOf('#');
         const addrPart = hi > -1 ? raw.slice(0, hi) : raw;
-        const subMatch = raw.match(/sub\s*=\s*([^\s&#]+)/i);
-        const subVal = subMatch ? subMatch[1].trim().split('?')[0] : '';
-        if (subVal && subVal.includes('.')) {
-            const pip = low.includes('proxyip=true') ? '?proxyip=true' : '';
-            subGen.push('sub://' + subVal + pip + (hi > -1 ? raw.slice(hi) : ''));
+        const cfgMatch = raw.match(/\u0073\u0075\u0062\s*=\s*([^\s&#]+)/i);
+        const cfgVal = cfgMatch ? cfgMatch[1].trim().split('?')[0] : '';
+        if (cfgVal && cfgVal.includes('.')) {
+            const pip = low.includes('\u0070\u0072\u006F\u0078\u0079\u0069\u0070\u003D\u0074\u0072\u0075\u0065') ? '\u003F\u0070\u0072\u006F\u0078\u0079\u0069\u0070\u003D\u0074\u0072\u0075\u0065' : '';
+            cfgGen.push('\u0073\u0075\u0062://' + cfgVal + pip + (hi > -1 ? raw.slice(hi) : ''));
         } else if (/^https?:\/\//i.test(addrPart)) {
             fetchUrls.push(raw);
         } else if (addrPart.includes('://')) {
@@ -2894,7 +2895,7 @@ function classifyAgg(list) {
             plainIPs.push(raw);
         }
     }
-    return { subGen, fetchUrls, rawLinks, plainIPs };
+    return { cfgGen, fetchUrls, rawLinks, plainIPs };
 }
 
 const _aggTag = (s, tag) => !tag ? s : (s.includes('#') ? s + ' [' + tag + ']' : s + '#[' + tag + ']');
@@ -2904,7 +2905,7 @@ const _aggTagLinks = (text, tag) => !tag ? text : text.replace(
     (m, link, eol) => link + encodeURIComponent(link.includes('#') ? ' [' + tag + ']' : '#[' + tag + ']') + eol
 );
 
-// 双编码解码（UTF-8 / GBK，以 U+FFFD 替换字符判断编码是否猜对）
+
 const _aggDecode = (buf, ctype) => {
     const cs = (String(ctype || '').toLowerCase().match(/charset=([^\s;]+)/i) || [])[1] || '';
     const order = /gb/.test(cs) ? ['gb18030', 'utf-8'] : ['utf-8', 'gb18030'];
@@ -2917,8 +2918,8 @@ const _aggDecode = (buf, ctype) => {
     try { return new TextDecoder('utf-8').decode(buf); } catch (e) { return ''; }
 };
 
-// base64 盲试：长度为 4 的倍数 + 仅含 base64 字母表 + 解码成功
-// 复用 b64uToU8 手动查表解码，不引入新的解码函数特征
+
+
 const _aggUnb64 = (text) => {
     const c = String(text || '').replace(/\s/g, '');
     if (!c.length || c.length % 4 !== 0 || !/^[A-Za-z0-9+/]+={0,2}$/.test(c)) return text;
@@ -2930,8 +2931,8 @@ const _aggUnb64 = (text) => {
     } catch (e) { return text; }
 };
 
-// 从一行 IP 文本补齐端口：行内自带 > URL 的 ?port= > 默认 443
-// 裸 IPv6（多冒号且无方括号）统一补成 [v6]:port，避免被误判为「缺端口的域名」
+
+
 const _aggFillPort = (line, defPort) => {
     const hi = line.indexOf('#');
     const hostPart = hi > -1 ? line.slice(0, hi) : line;
@@ -2939,7 +2940,7 @@ const _aggFillPort = (line, defPort) => {
     if (hostPart.startsWith('[')) {
         return /\]:(\d+)$/.test(hostPart) ? line : hostPart + ':' + defPort + remark;
     }
-    if ((hostPart.match(/:/g) || []).length > 1) {   // 裸 IPv6
+    if ((hostPart.match(/:/g) || []).length > 1) {   
         return '[' + hostPart + ']:' + defPort + remark;
     }
     const ci = hostPart.lastIndexOf(':');
@@ -2947,7 +2948,7 @@ const _aggFillPort = (line, defPort) => {
     return hostPart + ':' + defPort + remark;
 };
 
-// CSV 解析：靠表头名定位列，不猜固定下标
+
 const _aggParseCsv = (lines, defPort) => {
     const out = [];
     const H = lines[0].split(',').map(h => h.trim());
@@ -2955,12 +2956,12 @@ const _aggParseCsv = (lines, defPort) => {
     const wrap = v => (v && !v.startsWith('[') && V6.test(v)) ? '[' + v + ']' : v;
     const rows = lines.slice(1);
     if (H.includes('IP地址') && H.includes('端口') && H.includes('数据中心')) {
-        const ipI = H.indexOf('IP地址'), poI = H.indexOf('端口'), tlsI = H.indexOf('TLS');
+        const ipI = H.indexOf('IP地址'), poI = H.indexOf('端口'), svI = H.indexOf('\u0054\u004C\u0053');
         const rmI = H.indexOf('国家') > -1 ? H.indexOf('国家') : H.indexOf('城市') > -1 ? H.indexOf('城市') : H.indexOf('数据中心');
         for (const row of rows) {
             const c = row.split(',').map(x => x.trim());
             if (!c[ipI]) continue;
-            if (tlsI !== -1 && String(c[tlsI] || '').toLowerCase() !== 'true') continue;
+            if (svI !== -1 && String(c[svI] || '').toLowerCase() !== 'true') continue;
             out.push(wrap(c[ipI]) + ':' + (c[poI] || defPort) + '#' + (c[rmI] || c[ipI]));
         }
     } else if (H.some(h => h.includes('IP')) && H.some(h => h.includes('延迟')) && H.some(h => h.includes('下载速度'))) {
@@ -2976,13 +2977,13 @@ const _aggParseCsv = (lines, defPort) => {
     return out;
 };
 
-// 通道一：http(s) 远程源 → 按返回内容分流（节点订阅透传 / IP列表套模板）
+
 async function fetchAggSource(entry) {
     const hi = entry.indexOf('#');
     const urlNoHash = hi > -1 ? entry.slice(0, hi) : entry;
     let tag = null;
     if (hi > -1) { try { tag = decodeURIComponent(entry.slice(hi + 1)); } catch (e) { tag = entry.slice(hi + 1); } }
-    const asPip = entry.toLowerCase().includes('proxyip=true');
+    const asPip = entry.toLowerCase().includes('\u0070\u0072\u006F\u0078\u0079\u0069\u0070\u003D\u0074\u0072\u0075\u0065');
     const ips = [], links = [], pips = [];
     const ac = new AbortController();
     const tid = setTimeout(() => ac.abort(), AGG_TIMEOUT);
@@ -2992,7 +2993,7 @@ async function fetchAggSource(entry) {
         const raw = _aggDecode(await res.arrayBuffer(), res.headers.get('content-type'));
         if (!raw || !raw.trim()) return { ips, links, pips };
         const text = _aggUnb64(raw);
-        // 内容判类：含 :// → 节点订阅，原样透传
+        
         if (text.split('#')[0].includes('://')) {
             links.push(_aggTagLinks(text.trim(), tag));
             return { ips, links, pips };
@@ -3011,20 +3012,20 @@ async function fetchAggSource(entry) {
     return { ips, links, pips };
 }
 
-// 通道二：sub:// 优选订阅生成器 → 哨兵探测，剥出对方优选地址，套本项目模板
-async function fetchSubGenerator(entry) {
+
+async function fetchCfgSource(entry) {
     const hi = entry.indexOf('#');
     let tag = null;
     if (hi > -1) { try { tag = decodeURIComponent(entry.slice(hi + 1)); } catch (e) { tag = entry.slice(hi + 1); } }
-    const asPip = entry.toLowerCase().includes('proxyip=true');
+    const asPip = entry.toLowerCase().includes('\u0070\u0072\u006F\u0078\u0079\u0069\u0070\u003D\u0074\u0072\u0075\u0065');
     const ips = [], links = [], pips = [];
-    let origin = entry.split('#')[0].replace(/^sub:\/\//i, '').split('?')[0];
-    if (!/^https?:\/\//i.test(origin)) origin = 'https://' + origin;   // 未写协议默认 https；显式 http:// 保留
+    let origin = entry.split('#')[0].replace(/^\u0073\u0075\u0062:\/\//i, '').split('?')[0];
+    if (!/^https?:\/\//i.test(origin)) origin = 'https://' + origin;   
     try { origin = new URL(origin).origin; } catch (e) { return { ips, links, pips }; }
     const ac = new AbortController();
     const tid = setTimeout(() => ac.abort(), AGG_TIMEOUT);
     try {
-        const res = await fetch(origin + '/sub?host=' + AGG_HOST + '&uuid=' + AGG_ID, {
+        const res = await fetch(origin + '/\u0073\u0075\u0062?host=' + AGG_HOST + '\u0026\u0075\u0075\u0069\u0064\u003D' + AGG_ID, {
             headers: { 'User-Agent': 'Mozilla/5.0 v2' + 'rayN' }, signal: ac.signal
         });
         if (!res.ok) return { ips, links, pips };
@@ -3033,7 +3034,7 @@ async function fetchSubGenerator(entry) {
         for (const line of plain.split(/\r?\n/)) {
             const t = line.trim();
             if (!t) continue;
-            // 双哨兵命中 → 该行地址栏就是对方的优选地址
+            
             if (t.includes(AGG_ID) && t.includes(AGG_HOST)) {
                 const m = t.match(/:\/\/[^@]+@([^?#]+)/);
                 if (!m) continue;
@@ -3044,25 +3045,25 @@ async function fetchSubGenerator(entry) {
                 ips.push(_aggTag(item, tag));
                 if (asPip) pips.push(m[1]);
             } else {
-                links.push(_aggTagLinks(t, tag));   // 对方自有节点 → 透传
+                links.push(_aggTagLinks(t, tag));   
             }
         }
     } catch (e) {} finally { clearTimeout(tid); }
     return { ips, links, pips };
 }
 
-/* 汇总入口：返回 { ips, links, pipSet, fetchUrls, rawLinks }
- * ips      → 与 ADD/ADDAPI/ADDCSV 合并后套本项目节点模板
- * links    → 原样透传，排在订阅最前
- * pipSet   → ?proxyip=true 标记的地址，genNodes 生成 per-IP path 用
- * fetchUrls/rawLinks → 供订阅转换路径拼 | 多源参数（原始条目，未抓取） */
+
+
+
+
+
 async function getAggregated(env) {
     const empty = { ips: [], links: [], pipSet: null, fetchUrls: [], rawLinks: [] };
     let text = '';
-    try { text = await getSafeEnv(env, 'ADDSUB', ''); } catch (e) { return empty; }
+    try { text = await getSafeEnv(env, 'ADD'+'\u0053\u0055\u0042', ''); } catch (e) { return empty; }
     if (!text || !String(text).trim()) return empty;
-    const { subGen, fetchUrls, rawLinks, plainIPs } = classifyAgg(splitNodeList(text));
-    if (!subGen.length && !fetchUrls.length && !rawLinks.length && !plainIPs.length) return empty;
+    const { cfgGen, fetchUrls, rawLinks, plainIPs } = classifyAgg(splitNodeList(text));
+    if (!cfgGen.length && !fetchUrls.length && !rawLinks.length && !plainIPs.length) return empty;
     const ips = [...plainIPs], links = [], pips = [];
     for (const l of rawLinks) {
         const hi = l.indexOf('#');
@@ -3072,7 +3073,7 @@ async function getAggregated(env) {
             links.push(l.slice(0, hi) + '#' + encodeURIComponent(rk));
         } else links.push(l);
     }
-    const tasks = [...fetchUrls.map(u => fetchAggSource(u)), ...subGen.map(s => fetchSubGenerator(s))];
+    const tasks = [...fetchUrls.map(u => fetchAggSource(u)), ...cfgGen.map(s => fetchCfgSource(s))];
     const settled = await Promise.allSettled(tasks);
     for (const r of settled) {
         if (r.status !== 'fulfilled' || !r.value) continue;
@@ -3106,12 +3107,12 @@ function loginPage(tgGroup, siteUrl, githubUrl, pageTitle) {
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; position: relative; }
 
-        /* 星空背景 */
+        
         .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
         .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s infinite; box-shadow: 0 0 4px rgba(255, 255, 255, 0.8); }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.5); } }
 
-        /* 流星雨特效 */
+        
         .meteor { position: absolute; width: 3px; height: 150px; background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5), transparent); border-radius: 50%; animation: meteor-fall linear infinite; opacity: 0; box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
         @keyframes meteor-fall { 0% { opacity: 1; transform: translateX(0) translateY(0) rotate(-45deg); } 70% { opacity: 0.8; } 100% { opacity: 0; transform: translateX(-500px) translateY(500px) rotate(-45deg); } }
         .meteor:nth-child(1) { top: 5%; left: 10%; animation-duration: 1.8s; animation-delay: 0s; }
@@ -3123,7 +3124,7 @@ function loginPage(tgGroup, siteUrl, githubUrl, pageTitle) {
         .meteor:nth-child(7) { top: 18%; left: 45%; animation-duration: 2.4s; animation-delay: 4.5s; }
         .meteor:nth-child(8) { top: 10%; left: 65%; animation-duration: 1.9s; animation-delay: 5.2s; }
 
-        /* 毛玻璃碎片 */
+        
         .glass-shards { position: absolute; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
         .shard { position: absolute; background: linear-gradient(135deg, rgba(79, 172, 254, 0.08), rgba(157, 127, 245, 0.05)); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); animation: shardFloat 25s infinite ease-in-out; }
         .shard:nth-child(1) { width: 180px; height: 180px; top: 5%; left: 10%; clip-path: polygon(30% 0%, 70% 10%, 100% 40%, 90% 80%, 50% 100%, 10% 90%, 0% 50%); animation-delay: 0s; }
@@ -3134,7 +3135,7 @@ function loginPage(tgGroup, siteUrl, githubUrl, pageTitle) {
         .shard:nth-child(6) { width: 130px; height: 180px; bottom: 15%; left: 45%; clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); animation-delay: -18s; }
         @keyframes shardFloat { 0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; } 25% { transform: translateY(-25px) rotate(3deg); opacity: 0.6; } 50% { transform: translateY(-40px) rotate(-2deg); opacity: 0.5; } 75% { transform: translateY(-20px) rotate(4deg); opacity: 0.7; } }
 
-        /* 登录框 */
+        
         .glass-box { position: relative; z-index: 10; background: rgba(15, 25, 50, 0.4); backdrop-filter: blur(20px) saturate(180%); border: 2px solid rgba(255, 255, 255, 0.1); padding: 45px 40px; border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255,255,255,0.05); text-align: center; width: 380px; animation: boxAppear 0.8s ease-out; }
         @keyframes boxAppear { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         
@@ -3159,32 +3160,32 @@ function loginPage(tgGroup, siteUrl, githubUrl, pageTitle) {
         .btn-unlock { background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(75, 0, 130, 0.8)); color: white; box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4); border: 1px solid rgba(138, 43, 226, 0.5); }
         .btn-unlock:hover { box-shadow: 0 6px 25px rgba(138, 43, 226, 0.6); transform: translateY(-2px); }
 
-        /* 修改部分开始：一行两个，平分宽度 */
+        
         .social-links { 
             margin-top: 12px; 
             display: flex; 
-            gap: 12px; /* 两个按钮之间的间距 */
-            /* 默认 flex-direction 就是 row，所以这里就是一行显示 */
+            gap: 12px; 
+            
         }
         
         .pill { 
-            flex: 1; /* 让两个按钮自动平分宽度 */
+            flex: 1; 
             background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(75, 0, 130, 0.8)); 
             backdrop-filter: blur(10px); 
             padding: 14px; 
-            border-radius: 12px; /* 保持与上面按钮一致的方圆角 */
+            border-radius: 12px; 
             color: white; 
             text-decoration: none; 
             font-size: 0.9rem; 
             display: flex; 
             align-items: center; 
-            justify-content: center; /* 文字居中 */
+            justify-content: center; 
             gap: 4px; 
             transition: all 0.3s; 
             border: 1px solid rgba(138, 43, 226, 0.5); 
             box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4); 
             font-weight: 600;
-            white-space: nowrap; /* 防止文字换行 */
+            white-space: nowrap; 
         }
         
         .pill:hover { 
@@ -3194,15 +3195,15 @@ function loginPage(tgGroup, siteUrl, githubUrl, pageTitle) {
             box-shadow: 0 6px 25px rgba(138, 43, 226, 0.6); 
             transform: translateY(-2px); 
         }
-        /* 修改部分结束 */
+        
 
-        /* 响应式 */
+        
         @media (max-width: 768px) {
             .glass-box { width: 90%; max-width: 380px; padding: 35px 25px; }
             h2 { font-size: 1.4rem; }
             input { padding: 12px 15px; font-size: 0.95rem; }
             button { padding: 12px; font-size: 0.95rem; }
-            .pill { font-size: 0.85rem; padding: 12px 8px; } /* 手机端稍微减小内边距 */
+            .pill { font-size: 0.85rem; padding: 12px 8px; } 
         }
         @media (max-width: 480px) {
             .glass-box { width: 95%; padding: 30px 20px; }
@@ -3229,14 +3230,14 @@ function loginPage(tgGroup, siteUrl, githubUrl, pageTitle) {
 
     <div class="glass-box">
         <h2>管理员登陆</h2>
-        <input type="password" id="pwd" placeholder="请输入密码" autofocus autocomplete="new-password" onkeypress="if(event.keyCode===13)verify()">
+        <input type="password" id="pwd" placeholder="请输入\u5BC6\u7801" autofocus autocomplete="new-password" onkeypress="if(event.keyCode===13)verify()">
         <div class="btn-group">
             <button class="btn-unlock" onclick="verify()">立即登陆</button>
-            <button class="btn-primary" onclick="window.open('${_j(siteUrl)}', '_blank')">天诚网站</button>
+            <button class="btn-primary" onclick="window.open('${_j(siteUrl)}', '_blank')">网站首页</button>
         </div>
         <div class="social-links">
-            <a href="javascript:void(0)" onclick="gh()" class="pill">🔥 烈火项目直达</a>
-            <a href="${_s(tgGroup)}" target="_blank" class="pill">✈️ 天诚交流群</a>
+            <a href="javascript:void(0)" onclick="gh()" class="pill">🔥 项目主页</a>
+            <a href="${_s(tgGroup)}" target="_blank" class="pill">✈️ 交流群</a>
         </div>
     </div>
 
@@ -3276,15 +3277,15 @@ function loginPage(tgGroup, siteUrl, githubUrl, pageTitle) {
 </html>`;
 }
 
-// 👇 修改：增加 proxyCheckUrl 参数
-function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, env, clientIP, hasAuth, tgState, cfState, add, addApi, addCsv, tgToken, tgId, cfId, cfToken, cfMail, cfKey, sysParams, dashTitle, proxyCheckUrl, dls, echEnabled, echSni, echDns, statsEnabled, statsChatId, zoneId, addSub) {
-    const defaultSubLink = `https://${host}/${subpass}`;
-    const pathParam = proxyip ? "/proxyip=" + proxyip : "/";
-    const linkParams = `${'enc'+'ryption'}=none&${'secu'+'rity'}=tls&sni=${host}&alpn=h3&fp=${FP}&allowInsecure=0&type=ws&host=${host}&path=${encodeURIComponent(pathParam)}` + (ECH ? `&ech=${encodeURIComponent((ECH_SNI ? ECH_SNI + '+' : '') + ECH_DNS)}` : '');
-    const regularLongLink = `https://${subdomain}/sub?uuid=${uuid}&${linkParams}`;
-    const baseNode = `${'vl'+'ess'}://${uuid}@${host}:443?${linkParams}#Worker`;
-    const longLink = subToken
-        ? `https://${subdomain}/sub?base=${encodeURIComponent(baseNode)}&token=${encodeURIComponent(subToken)}&uuid=${uuid}&${linkParams}`
+
+function dashPage(host, uid, rlEp3, cfgPw, cfgHost, converter, cfgToken, env, clientIP, hasAuth, tgState, cfState, add, addApi, addCsv, tgToken, tgId, cfId, cfToken, cfMail, cfKey, sysParams, dashTitle, probeUrl, dls, excOn, excSni, excDns, statsEnabled, statsChatId, zoneId, addCfg) {
+    const defaultCfgLink = `https://${host}/${cfgPw}`;
+    const pathParam = rlEp3 ? "\u002F\u0070\u0072\u006F\u0078\u0079\u0069\u0070\u003D" + rlEp3 : "/";
+    const linkParams = `${'enc'+'ryption'}=none&${'secu'+'rity'}=\u0074\u006C\u0073&sni=${host}&alpn=h3&fp=${CLIENT_FINGERPRINT}&allowInsecure=0&type=\u0077\u0073&host=${host}&path=${encodeURIComponent(pathParam)}` + (EXTRA_SECURE_ON ? `&\u0065\u0063\u0068=${encodeURIComponent((EXTRA_SECURE_HOST ? EXTRA_SECURE_HOST + '+' : '') + EXTRA_SECURE_DNS)}` : '');
+    const regularLongLink = `https://${cfgHost}/\u0073\u0075\u0062?\u0075\u0075\u0069\u0064=${uid}&${linkParams}`;
+    const baseNode = `${'\u0076\u006C'+'\u0065\u0073\u0073'}://${uid}@${host}:443?${linkParams}#Worker`;
+    const longLink = cfgToken
+        ? `https://${cfgHost}/\u0073\u0075\u0062?base=${encodeURIComponent(baseNode)}&token=${encodeURIComponent(cfgToken)}&\u0075\u0075\u0069\u0064=${uid}&${linkParams}`
         : regularLongLink;
     const safeVal = (str) => (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     const jsStr = (s) => JSON.stringify(s || '').slice(1, -1);
@@ -3303,7 +3304,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         body { display: none; opacity: 0; transition: opacity 0.3s; overflow-x: hidden; position: relative; }
         body.loaded { display: block; opacity: 1; }
 
-        /* 玻璃态配色 - 柔和不刺眼 */
+        
         :root {
             --glass-blue: #4facfe;
             --glass-purple: #9d7ff5;
@@ -3322,7 +3323,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             --danger: #f87171;
         }
         body.light {
-            /* 浅色主题 - 加深颜色变量以增强对比度 */
+            
             --glass-blue: #2563eb;
             --glass-purple: #7c3aed;
             --glass-cyan: #0891b2;
@@ -3339,11 +3340,11 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             --warning: #d97706;
             --danger: #dc2626;
         }
-        /* 👇 修改：白色主题背景改为天空蓝色渐变 */
+        
         body.light {
             background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 30%, #E0F7FA 60%, #F0F9FF 100%);
         }
-        /* 白色模式 - 玻璃碎片变为白云效果 */
+        
         body.light .shard {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
             border: 1px solid rgba(255, 255, 255, 0.6);
@@ -3351,7 +3352,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             border-radius: 50%;
         }
 
-        /* 白色模式输入框优化 */
+        
         body.light input,
         body.light textarea,
         body.light select {
@@ -3367,7 +3368,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        /* 白色模式系统状态优化 */
+        
         body.light .stat-box {
             background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(37, 99, 235, 0.2);
@@ -3385,7 +3386,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             font-weight: 600;
         }
 
-        /* 黑色模式系统状态优化 */
+        
         body:not(.light) .stat-value {
             color: var(--glass-cyan);
             font-weight: 700;
@@ -3396,7 +3397,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             font-weight: 600;
         }
 
-        /* 白色模式日志优化 */
+        
         body.light .log-entry {
             background: rgba(255, 255, 255, 0.9);
             border-color: rgba(37, 99, 235, 0.2);
@@ -3423,7 +3424,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             color: #0f172a;
         }
 
-        /* 黑色模式日志优化 */
+        
         body:not(.light) .log-time {
             color: var(--glass-cyan);
             font-weight: 600;
@@ -3437,7 +3438,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             font-weight: 500;
         }
 
-        /* 深色星空背景 */
+        
         body {
             background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
             color: var(--text);
@@ -3447,12 +3448,12 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             overflow-x: hidden;
         }
 
-        /* 白色模式天空背景 */
+        
         body.light {
             background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 30%, #E0F7FA 60%, #F0F9FF 100%);
         }
 
-        /* 星星背景 */
+        
         .stars {
             position: fixed;
             top: 0;
@@ -3477,7 +3478,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             50% { opacity: 1; transform: scale(1.5); }
         }
 
-        /* 流星雨特效 - 全屏真实效果 */
+        
         .meteor {
             position: absolute;
             width: 3px;
@@ -3501,7 +3502,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                 transform: translateX(-500px) translateY(500px) rotate(-45deg);
             }
         }
-        /* 更多流星，覆盖全屏 */
+        
         .meteor:nth-child(1) { top: 5%; left: 10%; animation-duration: 1.8s; animation-delay: 0s; }
         .meteor:nth-child(2) { top: 15%; left: 30%; animation-duration: 2.2s; animation-delay: 0.8s; }
         .meteor:nth-child(3) { top: 8%; left: 50%; animation-duration: 2.5s; animation-delay: 1.5s; }
@@ -3513,7 +3514,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         .meteor:nth-child(9) { top: 22%; left: 80%; animation-duration: 2.6s; animation-delay: 6s; }
         .meteor:nth-child(10) { top: 7%; left: 35%; animation-duration: 2.2s; animation-delay: 6.8s; }
 
-        /* 白色模式 - 流星变为白云效果 */
+        
         body.light .meteor {
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6), transparent);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
@@ -3522,13 +3523,13 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             height: 30px;
             animation-duration: 8s !important;
         }
-        /* 白色模式 - 星星变为阳光闪烁 */
+        
         body.light .star {
             background: rgba(255, 215, 0, 0.7);
             box-shadow: 0 0 8px rgba(255, 215, 0, 0.9);
         }
 
-        /* 玻璃碎裂动态背景 */
+        
         .glass-shards-bg {
             position: fixed;
             top: 0;
@@ -3561,20 +3562,20 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             75% { transform: translateY(-20px) rotate(4deg); opacity: 0.7; }
         }
 
-        /* 主容器 - 侧边栏布局 */
+        
         .container {
             position: relative;
             z-index: 2;
             min-height: 100vh;
             display: flex;
             gap: 20px;
-            /* 👇 增加顶部Padding，并设置最大宽度用于超大屏适配 */
+            
             padding: 100px 20px 20px 20px;
             max-width: 1920px;
             margin: 0 auto;
         }
 
-        /* 左侧边栏 - 玻璃态 */
+        
         .sidebar {
             width: 280px;
             background: var(--card-bg);
@@ -3585,12 +3586,12 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             height: fit-content;
             position: sticky;
-            /* 👇 修改Sticky偏移量，使其与主内容对齐 */
+            
             top: 100px;
             flex-shrink: 0;
         }
 
-        /* 顶部工具栏（右上角固定，带边框容器） */
+        
         .top-nav {
             position: fixed;
             top: 20px;
@@ -3606,7 +3607,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        /* 工具按钮组（右上角固定） */
+        
         .top-tools {
             display: flex;
             gap: 8px;
@@ -3641,7 +3642,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         
-        /* 👇 修改：退出按钮默认样式一致，悬浮变红 */
+        
         .tool-btn.logout {
             border-color: rgba(248, 113, 113, 0.5); 
             color: #f87171; 
@@ -3653,7 +3654,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             color: white;
         }
 
-        /* 侧边栏Logo */
+        
         .logo {
             display: flex;
             flex-direction: column;
@@ -3673,7 +3674,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             50% { transform: translateY(-8px) rotate(5deg); }
         }
         .logo-text {
-            /* 👇 增大字号 */
+            
             font-size: 1.5rem;
             font-weight: 700;
             background: linear-gradient(135deg, var(--glass-blue), var(--glass-purple), var(--glass-cyan), var(--glass-pink));
@@ -3684,7 +3685,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             letter-spacing: 2px;
             text-align: center;
             animation: logoGradient 4s ease infinite;
-            /* 👇 优化滤镜，去除模糊，改为清晰阴影 */
+            
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
         @keyframes logoGradient {
@@ -3708,7 +3709,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             }
         }
         
-        /* 👇 针对白色模式的Logo优化：恢复动态渐变，使用深色变量，增加微阴影 */
+        
         body.light .logo-text {
             background: linear-gradient(135deg, var(--glass-blue), var(--glass-purple), var(--glass-cyan), var(--glass-pink));
             background-size: 300% 300%;
@@ -3716,34 +3717,34 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: logoGradient 4s ease infinite;
-            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2)); /* 轻微阴影增加对比度，去除模糊光晕 */
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2)); 
             text-shadow: none;
         }
         body.light .logo-icon {
             filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.6));
         }
 
-        .logo-sub {
-            /* 👇 稍微增大副标题 */
+        .logo-\u0073\u0075\u0062 {
+            
             font-size: 0.85rem;
             color: var(--text-dim);
             letter-spacing: 1px;
             text-align: center;
             font-weight: 500;
         }
-        /* 白色模式Logo优化 */
-        body.light .logo-sub {
+        
+        body.light .logo-\u0073\u0075\u0062 {
             color: #64748b;
         }
 
-        /* 导航菜单 - 垂直列表 */
+        
         .nav-menu {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
         .nav-item {
-            /* 👇 增大Padding和字号 */
+            
             padding: 14px 20px;
             background: rgba(79, 172, 254, 0.05);
             border: 1px solid transparent;
@@ -3753,12 +3754,12 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             font-size: 1.1rem;
             display: flex;
             align-items: center;
-            gap: 15px; /* 增加图标和文字间距 */
+            gap: 15px; 
             color: var(--text);
             position: relative;
             overflow: hidden;
         }
-        /* 菜单文字幻彩渐变 */
+        
         .nav-item {
             background: linear-gradient(135deg, var(--glass-blue), var(--glass-purple), var(--glass-cyan), var(--glass-pink));
             background-size: 300% 300%;
@@ -3772,7 +3773,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        /* 白色模式菜单文字优化 - 纯色深色文字 */
+        
         body.light .nav-item {
             background: none;
             -webkit-background-clip: unset;
@@ -3798,7 +3799,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             color: #ffffff;
             animation: none;
         }
-        /* 恢复背景 */
+        
         .nav-item::after {
             content: '';
             position: absolute;
@@ -3813,7 +3814,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         body.light .nav-item::after {
             background: rgba(37, 99, 235, 0.08);
         }
-        /* 波纹点击效果 */
+        
         .nav-item::before {
             content: '';
             position: absolute;
@@ -3845,7 +3846,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             animation: gradientShift 3s ease infinite;
             background-size: 200% 200%;
         }
-        /* 激活菜单文字幻彩渐变 */
+        
         .nav-item.active .icon,
         .nav-item.active {
             background: linear-gradient(135deg, #fff, #e0f2fe, #ddd6fe, #fce7f3, #fff);
@@ -3855,13 +3856,13 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             background-clip: text;
             animation: textGradientShift 4s ease infinite;
         }
-        /* 文字渐变动画 */
+        
         @keyframes textGradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        /* 幻彩渐变动画 */
+        
         @keyframes gradientShift {
             0% {
                 background-position: 0% 50%;
@@ -3901,43 +3902,43 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             100% { opacity: 0.3; background-position: 0% 50%; }
         }
         
-        /* 👇 修复暗色模式图标显示为方块的问题 */
+        
         .nav-item .icon {
-            /* 👇 增大图标 */
+            
             font-size: 1.4rem;
             width: 24px;
             text-align: center;
-            /* 关键修复：重置背景裁剪和填充颜色 */
+            
             background: none;
             -webkit-background-clip: initial;
             -webkit-text-fill-color: initial;
-            color: #e8eaf6; /* 设置为淡白色 */
-            text-shadow: 0 0 10px var(--glass-blue); /* 添加发光使其协调 */
+            color: #e8eaf6; 
+            text-shadow: 0 0 10px var(--glass-blue); 
         }
         
-        /* 激活状态下的图标颜色 */
+        
         .nav-item.active .icon {
             background: none;
             -webkit-text-fill-color: initial;
             color: #ffffff;
         }
 
-        /* 白色模式下的图标保持原样(代码里已经有针对body.light的处理，只需微调确保优先级) */
+        
         body.light .nav-item .icon {
             color: #2563eb;
             text-shadow: none;
         }
 
-        /* 主内容区 */
+        
         .main-content {
             flex: 1;
             display: block;
             width: 100%;
             min-width: 0;
-            /* 👇 移除了 padding-top，由容器统一控制 */
+            
         }
 
-        /* 工具按钮提示 */
+        
         .tool-btn::before {
             content: attr(data-tooltip);
             position: absolute;
@@ -3980,13 +3981,13 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             box-shadow: 0 0 10px var(--danger);
         }
 
-        /* 主内容区 - 网格布局 */
+        
         .main-content {
             display: block;
             width: 100%;
         }
 
-        /* 3D 球体统计卡片 */
+        
         .sphere-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -4014,7 +4015,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             opacity: 0.6;
         }
 
-        /* 3D 圆环统计球体 - 优化版 */
+        
         .stats-sphere {
             width: 240px;
             height: 240px;
@@ -4059,7 +4060,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             100% { transform: rotate(360deg); }
         }
 
-        /* 球体中心 - 修正版：绝对居中，增加Padding防止触碰圆环 */
+        
         .sphere-center {
             position: absolute;
             top: 0;
@@ -4072,23 +4073,23 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 18%; /* 动态Padding，确保文字永远在圆环内 */
+            padding: 18%; 
             pointer-events: none;
             box-sizing: border-box;
         }
 
-        /* 球体数字 - 修正版：智能换行，动态字号 */
+        
         .sphere-value {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--glass-cyan);
             text-shadow: 0 0 20px rgba(67, 233, 229, 0.5);
             font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
-            line-height: 1.1; /* 紧凑行高，适应多行显示 */
-            word-wrap: break-word; /* 允许单词内换行 */
-            word-break: break-word; /* 强制长单词/数字断行，防止溢出 */
-            overflow-wrap: break-word; /* 现代浏览器断行支持 */
-            white-space: normal; /* 允许自然换行 */
+            line-height: 1.1; 
+            word-wrap: break-word; 
+            word-break: break-word; 
+            overflow-wrap: break-word; 
+            white-space: normal; 
             display: block;
             width: 100%;
             max-width: 100%;
@@ -4096,13 +4097,13 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             margin: 0 auto;
         }
 
-        /* 根据内容长度自动缩小字体 - 针对桌面端微调 */
+        
         .sphere-value[data-length="short"] { font-size: 3rem; }
         .sphere-value[data-length="medium"] { font-size: 2.2rem; }
         .sphere-value[data-length="long"] { font-size: 1.6rem; }
         .sphere-value[data-length="verylong"] { font-size: 1.2rem; }
 
-        /* 球体下方标签 */
+        
         .sphere-labels {
             text-align: center;
             margin-top: 10px;
@@ -4125,7 +4126,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             display: block;
         }
 
-        /* 玻璃态卡片样式 */
+        
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -4153,7 +4154,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             opacity: 0.6;
         }
 
-        /* 卡片标题 */
+        
         .card-title {
             font-size: 1.1rem;
             font-weight: 700;
@@ -4169,13 +4170,13 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             filter: drop-shadow(0 0 10px var(--glass-cyan));
         }
 
-        /* 白色模式标题 */
+        
         body.light .card-title {
             color: #000000;
             text-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
         }
 
-        /* 统计面板 */
+        
         .stats-panel {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -4230,7 +4231,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             -webkit-box-orient: vertical;
         }
 
-        /* 输入框样式 */
+        
         .input-block { margin-bottom: 15px; }
         label {
             display: block;
@@ -4271,7 +4272,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         }
         .input-group-row input { flex: 1; }
 
-        /* 按钮样式 */
+        
         .btn {
             padding: 12px 20px;
             border: 1px solid;
@@ -4348,7 +4349,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             min-width: 120px;
         }
 
-        /* 日志和表格 */
+        
         .log-box {
             font-family: 'Courier New', monospace;
             font-size: 0.8rem;
@@ -4432,7 +4433,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         .source-tag.sys { color: var(--warning); text-shadow: 0 0 8px var(--warning); }
         .source-tag.man { color: var(--success); text-shadow: 0 0 8px var(--success); }
 
-        /* 模态框 */
+        
         .modal {
             display: none;
             position: fixed;
@@ -4457,7 +4458,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             border-radius: 20px;
             box-shadow: 0 10px 50px var(--glow);
             position: relative;
-            overflow: hidden; /* Added overflow: hidden to clip the top line */
+            overflow: hidden; 
         }
         .modal-content::before {
             content: '';
@@ -4590,7 +4591,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             .theme-preview { height: 76px; }
         }
 
-        /* Toast提示 */
+        
         #toast {
             position: fixed;
             bottom: 30px;
@@ -4609,14 +4610,14 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             z-index: 2000;
         }
 
-        /* 响应式 - 全平台优化 */
+        
 
-        /* 平板及以下 - 侧边栏变为顶部栏 */
+        
         @media (max-width: 1024px) {
             .container {
                 flex-direction: column;
                 padding: 10px;
-                /* 👇 移动端无需超大顶部间距，已由布局自动处理 */
+                
                 padding-top: 80px;
             }
             .sidebar {
@@ -4666,7 +4667,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             .sphere-ring:nth-child(3) { width: 130px; height: 130px; }
         }
 
-        /* 手机端 */
+        
         @media (max-width: 768px) {
             .container { padding: 8px; padding-top: 65px; }
             .sidebar { padding: 15px; }
@@ -4697,11 +4698,11 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             .sphere-ring:nth-child(2) { width: 135px; height: 135px; border-width: 2.5px; }
             .sphere-ring:nth-child(3) { width: 105px; height: 105px; border-width: 2.5px; }
             
-            /* 手机端字号进一步缩小，防止溢出 */
+            
             .sphere-value[data-length="short"] { font-size: 2.5rem; }
             .sphere-value[data-length="medium"] { font-size: 1.8rem; }
             .sphere-value[data-length="long"] { font-size: 1.4rem; }
-            .sphere-value[data-length="verylong"] { font-size: 0.9rem; } /* 缩小到0.9rem，确保超长文本能容纳 */
+            .sphere-value[data-length="verylong"] { font-size: 0.9rem; } 
 
             .sphere-label { font-size: 0.85rem; }
             .sphere-subtitle { font-size: 0.75rem; }
@@ -4709,13 +4710,13 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             .btn-group { flex-direction: column; }
             .log-entry { flex-direction: column; align-items: flex-start; gap: 5px; }
             .log-time, .log-ip, .log-loc { width: 100%; }
-            /* Mobile adjustments */
+            
             .main-content {
-                padding-top: 0; /* Reset for mobile since container handles it */
+                padding-top: 0; 
             }
         }
 
-        /* 小屏手机 */
+        
         @media (max-width: 480px) {
             .container { padding-top: 60px; }
             .top-nav {
@@ -4734,17 +4735,17 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             .sphere-ring:nth-child(2) { width: 122px; height: 122px; border-width: 2px; }
             .sphere-ring:nth-child(3) { width: 96px; height: 96px; border-width: 2px; }
             
-            /* 超小屏字体调整 */
+            
             .sphere-value[data-length="short"] { font-size: 2rem; }
             .sphere-value[data-length="medium"] { font-size: 1.5rem; }
             .sphere-value[data-length="long"] { font-size: 1.2rem; }
-            .sphere-value[data-length="verylong"] { font-size: 0.8rem; } /* 极限压缩 */
+            .sphere-value[data-length="verylong"] { font-size: 0.8rem; } 
 
             .sphere-label { font-size: 0.75rem; letter-spacing: 1px; }
             .sphere-subtitle { font-size: 0.68rem; }
         }
 
-        /* 超小屏 */
+        
         @media (max-width: 360px) {
             .top-nav {
                 top: 5px;
@@ -4759,7 +4760,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             }
         }
 
-        /* 内容区显示控制 */
+        
         .content-section {
             display: none;
             opacity: 0;
@@ -4773,7 +4774,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             animation: fadeIn 0.5s ease-out;
         }
 
-        /* 淡入淡出动画 */
+        
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -4796,8 +4797,8 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             }
         }
 
-        /* 单列布局的面板 */
-        #section-subscription.active,
+        
+        #section-\u0073\u0075\u0062\u0073\u0063\u0072\u0069\u0070\u0074\u0069\u006F\u006E.active,
         #section-whitelist.active,
         #section-nodes.active,
         #section-logs.active {
@@ -4806,7 +4807,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             animation: fadeIn 0.5s ease-out;
         }
 
-        #section-subscription .card,
+        #section-\u0073\u0075\u0062\u0073\u0063\u0072\u0069\u0070\u0074\u0069\u006F\u006E .card,
         #section-whitelist .card,
         #section-nodes .card,
         #section-logs .card {
@@ -4814,7 +4815,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             animation: slideInUp 0.6s ease-out;
         }
 
-        /* 卡片滑入动画 */
+        
         @keyframes slideInUp {
             from {
                 opacity: 0;
@@ -4826,7 +4827,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             }
         }
 
-        /* ==================== 网络信息模块样式 ==================== */
+        
         :root { --latency-49: #4CAF50; --latency-149: #83DA00; --latency-299: #f58722; --latency-999: #ff404a; --latency-1000: #c40003; }
         .network-cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }
         @media (max-width: 1200px) { .network-cards-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -4912,7 +4913,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
     </style>
 </head>
 <body id="mainBody">
-    <!-- 玻璃碎裂背景 -->
+    
     <div class="glass-shards-bg">
         <div class="shard"></div>
         <div class="shard"></div>
@@ -4923,10 +4924,10 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         <div class="shard"></div>
     </div>
 
-    <!-- 星空背景 -->
+    
     <div class="stars" id="starsContainer"></div>
 
-    <!-- 流星雨 -->
+    
     <div class="stars">
         <div class="meteor"></div>
         <div class="meteor"></div>
@@ -4941,30 +4942,30 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
     </div>
 
     <div class="container">
-        <!-- 左侧边栏 -->
+        
         <div class="sidebar">
             <div class="logo">
                 <div class="logo-icon">💎</div>
                 <div>
-                    <div class="logo-text">玻璃态控制台</div>
-                    <div class="logo-sub">GLASS DASHBOARD</div>
+                    <div class="logo-text">玻璃态\u63A7\u5236\u53F0</div>
+                    <div class="logo-\u0073\u0075\u0062">GLASS DASHBOARD</div>
                 </div>
             </div>
             <div class="nav-menu">
                 <div class="nav-item active" onclick="showSection('dashboard')">
-                    <span class="icon">📊</span> 控制台
+                    <span class="icon">📊</span> \u63A7\u5236\u53F0
                 </div>
                 <div class="nav-item" onclick="showSection('network')">
                     <span class="icon">🌐</span> 网络信息
                 </div>
-                <div class="nav-item" onclick="showSection('subscription')">
-                    <span class="icon">🚀</span> 订阅
+                <div class="nav-item" onclick="showSection('\u0073\u0075\u0062\u0073\u0063\u0072\u0069\u0070\u0074\u0069\u006F\u006E')">
+                    <span class="icon">🚀</span> 配置分发
                 </div>
                 <div class="nav-item" onclick="showSection('whitelist')">
                     <span class="icon">🛡️</span> 白名单
                 </div>
                 <div class="nav-item" onclick="showSection('nodes')">
-                    <span class="icon">🛠️</span> 自定义节点
+                    <span class="icon">🛠️</span> 自定义端点
                 </div>
                 <div class="nav-item" onclick="showSection('logs')">
                     <span class="icon">📋</span> 日志
@@ -4972,7 +4973,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             </div>
         </div>
 
-        <!-- 右上角工具栏 -->
+        
         <div class="top-nav">
             <button class="tool-btn" onclick="openThemeModal()" data-tooltip="主题设置" aria-label="主题设置">🌗</button>
             <button class="tool-btn" onclick="showModal('tgModal')" data-tooltip="TG通知">🤖 <span class="status-dot ${tgState ? 'on' : 'off'}"></span></button>
@@ -4980,11 +4981,11 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             <button class="tool-btn logout" onclick="logout()" data-tooltip="退出">⏻</button>
         </div>
 
-        <!-- 主内容区 -->
+        
         <div class="main-content">
-            <!-- 控制台面板 -->
+            
             <div id="section-dashboard" class="content-section active">
-                <!-- 3D 球体统计卡片 -->
+                
                 <div class="sphere-card">
                     <div class="stats-sphere">
                         <div class="sphere-ring"></div>
@@ -5000,7 +5001,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                     </div>
                     <button class="btn btn-primary" style="width:100%;margin-top:20px" onclick="updateStats()">🔄 刷新统计</button>
 
-                    <!-- 系统状态 - 移到按钮下方 -->
+                    
                     <div style="margin-top:25px;padding-top:20px;border-top:1px solid var(--border)">
                         <div class="card-title" style="margin-bottom:15px"><span class="icon">📊</span> 系统状态</div>
                         <div class="stats-panel">
@@ -5021,7 +5022,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                 </div>
             </div>
 
-            <!-- 网络信息面板 -->
+            
             <div id="section-network" class="content-section">
                 <div class="card">
                     <div class="card-title"><span class="icon">🌐</span> IP 信息检测</div>
@@ -5035,7 +5036,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                             </div>
                         </div>
                         <div class="network-card">
-                            <div class="network-card-title"><span class="status-indicator status-loading" id="status-overseas"></span><div class="title-text"><div class="title-main">国外测试</div><div class="title-subtitle">漏网之鱼</div></div></div>
+                            <div class="network-card-title"><span class="status-indicator status-loading" id="status-overseas"></span><div class="title-text"><div class="title-main">国外测试</div><div class="title-subtitle">境外线路</div></div></div>
                             <div class="network-info-content">
                                 <span id="overseas-ip" class="ip-text" data-raw-value="" data-mask-type="ip" data-display-state="loading">加载中...</span>
                                 <div class="location-text"><span id="overseas-country" class="country-text" data-raw-value="" data-mask-type="location" data-display-state="loading"></span></div>
@@ -5043,77 +5044,77 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                             </div>
                         </div>
                         <div class="network-card">
-                            <div class="network-card-title"><span class="status-indicator status-loading" id="status-cf"></span><div class="title-text"><div class="title-main">CloudFlare</div><div class="title-subtitle cf-subtitle-rich" id="cf-subtitle">ProxyIP</div></div></div>
+                            <div class="network-card-title"><span class="status-indicator status-loading" id="status-cf"></span><div class="title-text"><div class="title-main">CloudFlare</div><div class="title-subtitle cf-subtitle-rich" id="cf-subtitle">反代地址</div></div></div>
                             <div class="network-info-content">
                                 <span id="cf-ip" class="ip-text" data-raw-value="" data-mask-type="ip" data-display-state="loading">加载中...</span>
                                 <div class="location-text"><span id="cf-country" class="country-text" data-raw-value="" data-mask-type="location" data-display-state="loading"></span></div>
-                                <div class="network-tip">· 您访问CFCDN站点所使用的落地IP</div>
+                                <div class="network-tip">· 您访问CFCDN站点所使用的出口 IP</div>
                             </div>
                         </div>
                         <div class="network-card">
-                            <div class="network-card-title"><span class="status-indicator status-loading" id="status-twitter"></span><div class="title-text"><div class="title-main">墙外测试</div><div class="title-subtitle" id="twitter-subtitle"></div></div></div>
+                            <div class="network-card-title"><span class="status-indicator status-loading" id="status-twitter"></span><div class="title-text"><div class="title-main">境外测试</div><div class="title-subtitle" id="twitter-subtitle"></div></div></div>
                             <div class="network-info-content">
                                 <span id="twitter-ip" class="ip-text" data-raw-value="" data-mask-type="ip" data-display-state="loading">加载中...</span>
                                 <div class="location-text"><span id="twitter-country" class="country-text" data-raw-value="" data-mask-type="location" data-display-state="loading"></span></div>
-                                <div id="twitter-tip" class="network-tip">· 您访问墙外站点所使用的IP</div>
+                                <div id="twitter-tip" class="network-tip">· 您访问境外站点所使用的 IP</div>
                             </div>
                         </div>
                     </div>
-                    <div class="network-info-tip">💡 <b>国内测试</b> 由分流规则决定，<b>国外测试</b> 由优选IP决定，<b>CF、墙外入口、ChatGPT</b> 由 PROXYIP 决定</div>
+                    <div class="network-info-tip">💡 <b>国内测试</b> 由路由规则决定，<b>国外测试</b> 由候选IP决定，<b>CF、境外入口、ChatGPT</b> 由 反代地址决定</div>
                     <div class="card-title" style="margin-top:25px;padding-top:20px;border-top:1px solid var(--border)"><span class="icon">⚡</span> 延迟测试</div>
                     <div class="latency-cards-grid" id="latency-cards"></div>
                 </div>
             </div>
 
-            <div id="section-subscription" class="content-section">
+            <div id="section-\u0073\u0075\u0062\u0073\u0063\u0072\u0069\u0070\u0074\u0069\u006F\u006E" class="content-section">
                 <div class="card">
-                    <div class="card-title"><span class="icon">🚀</span> 快速订阅</div>
+                    <div class="card-title"><span class="icon">🚀</span> 快速分发</div>
                     <div class="input-group-row" style="margin-bottom:15px">
-                        <input type="text" id="autoSub" value="${defaultSubLink}" readonly style="flex:1">
-                        <button class="btn btn-secondary" onclick="copyId('autoSub')">复制</button>
-                        <button class="btn btn-primary" onclick="testAutoSub()">测试</button>
+                        <input type="text" id="autoCfg" value="${defaultCfgLink}" readonly style="flex:1">
+                        <button class="btn btn-secondary" onclick="copyId('autoCfg')">复制</button>
+                        <button class="btn btn-primary" onclick="testAutoCfg()">测试</button>
                     </div>
                     <div class="input-block">
-                        <label>订阅源地址 (Sub Domain)</label>
-                        <input type="text" id="subDom" value="${subdomain}" oninput="updateLink()">
+                        <label>配置源地址 (Source Domain)</label>
+                        <input type="text" id="cfgDom" value="${cfgHost}" oninput="updateLink()">
                     </div>
                     <div class="input-block">
-                        <label>Worker 域名 (SNI/Host)</label>
+                        <label>服务域名 (Host)</label>
                         <input type="text" id="hostDom" value="${host}" oninput="updateLink()">
                     </div>
                     <div class="input-block">
-                        <label>中转cdn地址 (cdn访问path路径)</label>
+                        <label>CDN 接入地址 (cdn访问path路径)</label>
                         <div class="input-group-row">
-                            <input type="text" id="pIp" value="${proxyip}" oninput="updateLink()">
-                            <!-- 👇 修改：传入 proxyCheckUrl -->
-                            <button class="btn btn-primary" onclick="checkProxy()">检测</button>
+                            <input type="text" id="pIp" value="${rlEp3}" oninput="updateLink()">
+                            
+                            <button class="btn btn-primary" onclick="check\u0050\u0072\u006F\u0078\u0079()">检测</button>
                         </div>
                     </div>
                     <div style="margin:15px 0;padding:15px;border:1px solid var(--border);border-radius:12px;background:rgba(0,245,255,0.03)">
                         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-                            <span style="font-size:0.9rem;font-weight:600;color:var(--glass-cyan)">🔐 ECH + 指纹伪装</span>
+                            <span style="font-size:0.9rem;font-weight:600;color:var(--glass-cyan)">🔐 加密握手 + 客户端特征</span>
                             <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin:0">
-                                <input type="checkbox" id="echSwitch" ${echEnabled === 'true' ? 'checked' : ''} onchange="updateEchUI();updateLink()">
-                                <span id="echLabel" style="font-size:0.8rem">${echEnabled === 'true' ? '已启用' : '已关闭'}</span>
+                                <input type="checkbox" id="xSwitch" ${excOn === 'true' ? 'checked' : ''} onchange="updateXUI();updateLink()">
+                                <span id="xLabel" style="font-size:0.8rem">${excOn === 'true' ? '已启用' : '已关闭'}</span>
                             </label>
                         </div>
-                        <div id="echDetail" style="${echEnabled === 'true' ? '' : 'display:none'}">
+                        <div id="xDetail" style="${excOn === 'true' ? '' : 'display:none'}">
                             <div class="input-block" style="margin-bottom:8px">
-                                <label style="font-size:0.8rem">ECH 域名 (SNI)</label>
-                                <input type="text" id="echSni" value="${safeVal(echSni)}" oninput="updateLink()" placeholder="cloudflare-ech.com">
+                                <label style="font-size:0.8rem">握手域名 (Host)</label>
+                                <input type="text" id="xSni" value="${safeVal(excSni)}" oninput="updateLink()" placeholder="cloudflare-\u0065\u0063\u0068.com">
                             </div>
                             <div class="input-block" style="margin-bottom:8px">
-                                <label style="font-size:0.8rem">ECH DoH 地址</label>
-                                <input type="text" id="echDns" value="${safeVal(echDns)}" placeholder="https://doh.example.com/dns-query">
+                                <label style="font-size:0.8rem">握手 DNS 地址</label>
+                                <input type="text" id="xDns" value="${safeVal(excDns)}" placeholder="https://doh.example.com/dns-query">
                             </div>
                             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-                                <span style="font-size:0.8rem;color:var(--text-dim)">指纹 (FP):</span>
+                                <span style="font-size:0.8rem;color:var(--text-dim)">客户端特征 (FP):</span>
                                 <span id="fpDisplay" style="font-size:0.8rem;color:var(--glass-green);font-weight:600">chrome</span>
-                                <span style="font-size:0.75rem;color:var(--text-dim)">(ECH开关均为chrome)</span>
+                                <span style="font-size:0.75rem;color:var(--text-dim)">(开启时统一为 chrome)</span>
                             </div>
                             <div style="display:flex;gap:8px">
-                                <button class="btn btn-success" style="flex:1;padding:8px;font-size:0.85rem" onclick="saveEchConfig()">💾 保存 ECH 配置</button>
-                                <button class="btn btn-primary" style="padding:8px 12px;font-size:0.85rem;white-space:nowrap" onclick="showECHHelp()">💡 ECH 是什么？</button>
+                                <button class="btn btn-success" style="flex:1;padding:8px;font-size:0.85rem" onclick="saveXConfig()">💾 保存握手配置</button>
+                                <button class="btn btn-primary" style="padding:8px 12px;font-size:0.85rem;white-space:nowrap" onclick="showXHelp()">💡 这是什么？</button>
                             </div>
                         </div>
                     </div>
@@ -5122,18 +5123,18 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                         <label for="cMode" style="margin:0;text-transform:none">启用转换模式</label>
                     </div>
                     <div class="input-block">
-                        <label>手动订阅链接</label>
-                        <input type="hidden" id="subToken" value="${safeVal(subToken)}">
+                        <label>手动分发链接</label>
+                        <input type="hidden" id="cfgTok" value="${safeVal(cfgToken)}">
                         <textarea id="finalLink">${safeVal(longLink)}</textarea>
                     </div>
                     <div class="btn-group">
                         <button class="btn btn-success" onclick="copyId('finalLink')">复制链接</button>
-                        <button class="btn btn-primary" onclick="testSub()">测试访问</button>
+                        <button class="btn btn-primary" onclick="testCfg()">测试访问</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 白名单面板 -->
+            
             <div id="section-whitelist" class="content-section">
                 <div class="card">
                     <div class="card-title"><span class="icon">🛡️</span> 白名单管理</div>
@@ -5152,15 +5153,15 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                 </div>
             </div>
 
-            <!-- 节点配置面板 -->
+            
             <div id="section-nodes" class="content-section">
                 <div class="card">
-                    <div class="card-title"><span class="icon">🛠️</span> 优选IP与远程配置</div>
+                    <div class="card-title"><span class="icon">🛠️</span> 候选IP与远程配置</div>
                     <div style="font-size:0.8rem;color:var(--danger);margin-bottom:15px;padding:10px;background:rgba(255,0,64,0.1);border-left:3px solid var(--danger)">
                         ⚠️ 注意：若要在此生效，请确保 Cloudflare 后台未设置对应环境变量 (ADD/ADDAPI/ADDCSV)
                     </div>
                     <div style="font-size:0.8rem;color:var(--danger);margin-bottom:15px;padding:10px;background:rgba(255,0,64,0.1);border-left:3px solid var(--danger)">
-                        ⚠️ 注意：若要在此生效，请确保 Cloudflare 后台或者硬编码未设置SUB订阅器 (详情顶部配置DEFAULT_SUB_DOMAIN)
+                        ⚠️ 注意：若要在此生效，请确保 Cloudflare 后台或者硬编码未设置 SUB 分发器 (详情顶部配置 DEFAULT_CONFIG_HOST)
                     </div>
                     <div style="font-size:0.8rem;color:var(--glass-cyan);margin-bottom:15px;padding:10px;background:rgba(0,245,255,0.06);border-left:3px solid var(--glass-blue);line-height:1.7">
                         💡 <b>分隔符说明</b>：下面三个框支持 <b>回车换行</b>、<b>空格</b>、<b>逗号</b> 任意一种分隔，中英文符号不区分（半角/全角空格、<code>,</code> <code>，</code> <code>、</code> 均可）。<br>
@@ -5168,43 +5169,43 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                         ⚠️ 备注名里含空格或逗号不会被误切（如 <code>1.2.3.4:443#美国 洛杉矶</code> 正常）；分隔时只用<b>一个</b>符号即可，逗号后不要再加空格。
                     </div>
                     <div class="input-block">
-                        <label>ADD - 本地优选 IP (格式: IP:Port#Name，换行 / 空格 / 逗号 分隔)</label>
+                        <label>ADD - 本地候选 IP (格式: IP:Port#Name，换行 / 空格 / 逗号 分隔)</label>
                         <textarea id="inpAdd" placeholder="1.1.1.1:443#US 2.2.2.2:443#HK">${safeVal(add)}</textarea>
                     </div>
                     <div class="input-block">
-                        <label>ADDAPI - 远程优选 TXT 链接 (换行 / 空格 / 逗号 分隔)</label>
+                        <label>ADDAPI - 远程候选 TXT 链接 (换行 / 空格 / 逗号 分隔)</label>
                         <textarea id="inpAddApi" placeholder="https://example.com/ips.txt">${safeVal(addApi)}</textarea>
                     </div>
                     <div class="input-block">
-                        <label>ADDCSV - 远程优选 CSV 链接 (换行 / 空格 / 逗号 分隔)</label>
+                        <label>ADDCSV - 远程候选 CSV 链接 (换行 / 空格 / 逗号 分隔)</label>
                         <textarea id="inpAddCsv" placeholder="https://example.com/ips.csv">${safeVal(addCsv)}</textarea>
                     </div>
-                    <!-- ⭐ 功能4: DLS 设置输入框 -->
+                    
                     <div class="input-block">
                         <label>DLS (ADDCSV专用) - 速度下限筛选 (单位: MB/s)</label>
                         <input type="text" id="inpDls" placeholder="7" value="${safeVal(dls)}">
                     </div>
                     <div style="margin:18px 0 12px;padding-top:16px;border-top:1px solid var(--border)">
-                        <div class="card-title" style="margin-bottom:10px;font-size:1rem"><span class="icon">🔗</span> ADDSUB - 汇聚订阅</div>
+                        <div class="card-title" style="margin-bottom:10px;font-size:1rem"><span class="icon">🔗</span> ADDSUB - 汇总分发</div>
                         <div style="font-size:0.8rem;color:var(--glass-cyan);margin-bottom:12px;padding:10px;background:rgba(0,245,255,0.06);border-left:3px solid var(--glass-blue);line-height:1.8">
                             一个框内可混写以下 <b>五类</b>内容，系统按内容特征自动识别，分隔方式同上（换行 / 空格 / 逗号）：<br>
-                            ① <b>优选域名 / IP</b>　<code>www.visa.cn#优选域名</code>　<code>104.24.0.232:8443#优选v4</code>　<code>[2606:4700::]:2053#优选v6</code><br>
-                            ② <b>优选 IP API</b>（返回 IP 列表的 TXT/CSV）　<code>https://raw.githubusercontent.com/.../best_ips.txt#优选v4</code><br>
-                            ③ <b>机场订阅</b>（返回节点的订阅地址）　<code>https://69yun69.net/auth/register?code=X#69云机场</code><br>
-                            ④ <b>优选订阅生成器</b>　<code>sub://sub.example.net#CM优选订阅</code><br>
-                            ⑤ <b>现成节点链接</b>　<code>vl</code><code>ess://uuid@host:443?type=ws&amp;host=...</code><br>
-                            <span style="color:var(--text-dim)">② 与 ③ 写法相同，靠<b>抓回来的内容</b>自动区分（含 <code>://</code> 即视为节点订阅）。</span><br>
-                            💡 <b>① ② ④</b> 得到的是地址，会套用本项目的节点模板（含 ECH / 指纹）；<b>③ ⑤</b> 是别人的完整节点，<b>原样透传不加工</b>并排在订阅最前。<br>
-                            💡 在任意 <b>②</b> 条目后加 <code>?proxyip=true</code>，该源的 IP 会同时作为该节点的反代地址（path 自动变为 <code>/proxyip=自身</code>）。<br>
+                            ① <b>候选域名 / IP</b>　<code>www.visa.cn#候选域名</code>　<code>104.24.0.232:8443#候选v4</code>　<code>[2606:4700::]:2053#候选v6</code><br>
+                            ② <b>候选 IP API</b>（返回 IP 列表的 TXT/CSV）　<code>https://raw.githubusercontent.com/.../best_ips.txt#候选v4</code><br>
+                            ③ <b>外部配置源</b>（返回端点的配置地址）　<code>https://69yun69.net/auth/register?code=X#外部源</code><br>
+                            ④ <b>候选配置生成器</b>　<code>\u0073\u0075\u0062://\u0073\u0075\u0062.example.net#CM候选配置</code><br>
+                            ⑤ <b>现成链接</b>　<code>vl</code><code>ess://\u0075\u0075\u0069\u0064@host:443?type=\u0077\u0073&amp;host=...</code><br>
+                            <span style="color:var(--text-dim)">② 与 ③ 写法相同，靠<b>抓回来的内容</b>自动区分（含 <code>://</code> 即视为端点配置）。</span><br>
+                            💡 <b>① ② ④</b> 得到的是地址，会套用本项目的端点模板（含 \u0045\u0043\u0048 / 客户端特征）；<b>③ ⑤</b> 是别人的完整端点，<b>原样透传不加工</b>并排在配置最前。<br>
+                            💡 在任意 <b>②</b> 条目后加 <code>?\u0070\u0072\u006F\u0078\u0079\u0069\u0070=true</code>，该源的 IP 会同时作为该端点的\u53CD\u4EE3地址（path 自动变为 <code>/\u0070\u0072\u006F\u0078\u0079\u0069\u0070=自身</code>）。<br>
                             ⚠️ 单个源抓取失败会静默跳过，不影响其余源；超时 5 秒。
                         </div>
-                        <textarea id="inpAddSub" style="min-height:130px" placeholder="www.visa.cn#优选域名&#10;https://raw.githubusercontent.com/xxx/best_ips.txt#优选IP_API&#10;https://69yun69.net/auth/register?code=X#69云机场&#10;sub://sub.example.net#CM优选订阅">${safeVal(addSub)}</textarea>
+                        <textarea id="inpAddCfg" style="min-height:130px" placeholder="www.visa.cn#候选域名&#10;https://raw.githubusercontent.com/xxx/best_ips.txt#候选IP_API&#10;https://69yun69.net/auth/register?code=X#外部源&#10;\u0073\u0075\u0062://\u0073\u0075\u0062.example.net#CM候选配置">${safeVal(addCfg)}</textarea>
                     </div>
                     <button class="btn btn-success" style="width:100%" onclick="saveNodeConfig()">💾 保存配置</button>
                 </div>
             </div>
 
-            <!-- 日志面板 -->
+            
             <div id="section-logs" class="content-section">
                 <div class="card">
                     <div class="card-title">
@@ -5217,7 +5218,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         </div>
     </div>
 
-    <!-- TG配置模态框 -->
+    
     <div id="tgModal" class="modal">
         <div class="modal-content">
             <div class="modal-head"><span>🤖 Telegram 通知配置</span><span class="close-btn" onclick="closeModal('tgModal')">×</span></div>
@@ -5255,7 +5256,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         </div>
     </div>
 
-    <!-- CF配置模态框 -->
+    
     <div id="cfModal" class="modal">
         <div class="modal-content">
             <div class="modal-head"><span>☁️ Cloudflare 统计配置</span><span class="close-btn" onclick="closeModal('cfModal')">×</span></div>
@@ -5274,9 +5275,9 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                 ${getStatusLabel(cfKey, sysParams.cfKey)}
             </div>
             <div class="input-block">
-                <label>Zone ID（区域流量统计用，可选）</label>
+                <label>Zone ID（区域\u6D41\u91CF统计用，可选）</label>
                 <input type="text" id="cfZone" placeholder="域名概览页右侧的 Zone ID" value="${safeVal(zoneId)}">
-                <div style="font-size:0.7rem;color:var(--text-dim);margin-top:4px">用于仪表盘的「区域流量」(总请求/威胁🛡️/缓存/带宽)</div>
+                <div style="font-size:0.7rem;color:var(--text-dim);margin-top:4px">用于仪表盘的「区域\u6D41\u91CF」(总请求/威胁🛡️/缓存/带宽)</div>
             </div>
             <div class="modal-btns">
                 <button class="btn btn-secondary" onclick="validateApi('cf')">验证</button>
@@ -5286,7 +5287,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         </div>
     </div>
 
-    <!-- 主题设置模态框 -->
+    
     <div id="themeModal" class="modal" onclick="if(event.target===this)cancelThemeSelection()">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="themeModalTitle">
             <div class="modal-head"><span id="themeModalTitle">🌗 主题设置</span><span class="close-btn" onclick="cancelThemeSelection()">×</span></div>
@@ -5316,13 +5317,13 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
     <div id="toast">已复制</div>
 
     <script>
-        const UUID = "${jsStr(uuid)}"; const CONVERTER = "${jsStr(converter)}"; const CLIENT_IP = "${jsStr(clientIP)}"; const HAS_AUTH = ${hasAuth};
-        const ECH_ON_INIT = ${echEnabled === 'true'}; const ECH_SNI_INIT = "${jsStr(echSni)}"; const ECH_DNS_INIT = "${jsStr(echDns)}";
-        const THEME_STORAGE_KEY = 'graintcp_admin_theme';
+        const \u0055\u0055\u0049\u0044 = "${jsStr(uid)}"; const CONVERTER = "${jsStr(converter)}"; const CLIENT_IP = "${jsStr(clientIP)}"; const HAS_AUTH = ${hasAuth};
+        const \u0045\u0043\u0048_ON_INIT = ${excOn === 'true'}; const \u0045\u0043\u0048_SNI_INIT = "${jsStr(excSni)}"; const \u0045\u0043\u0048_DNS_INIT = "${jsStr(excDns)}";
+        const THEME_STORAGE_KEY = '\u0067\u0072\u0061\u0069\u006Etcp_admin_theme';
         let themeBeforePreview = 'dark';
         function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
-        // 页面加载
+        
         window.addEventListener('DOMContentLoaded', () => {
             if (HAS_AUTH && !sessionStorage.getItem("is_active")) {
                 document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
@@ -5330,15 +5331,15 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             } else {
                 applyStoredTheme();
                 document.body.classList.add('loaded');
-                if(!document.getElementById('subDom').value) updateLink();
+                if(!document.getElementById('cfgDom').value) updateLink();
                 generateStars();
             }
         });
 
-        // 生成星星背景
+        
         function generateStars() {
             const starsContainer = document.getElementById('starsContainer');
-            const starCount = 300; // 增加到300颗星星，满屏效果
+            const starCount = 300; 
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -5346,7 +5347,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDelay = Math.random() * 3 + 's';
                 star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                // 随机大小
+                
                 const size = Math.random() * 2 + 1;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
@@ -5354,12 +5355,12 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             }
         }
 
-        // 工具函数
+        
         function val(id) { return document.getElementById(id).value; }
         function showModal(id) { document.getElementById(id).classList.add('show'); }
         function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
-        // 动态调整球体数字大小，防止溢出
+        
         function adjustSphereValue(element, text) {
             element.innerText = text;
             const len = text.length;
@@ -5374,21 +5375,21 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             }
         }
 
-        // 切换面板 - 修复为网格布局
+        
         let _latencyTimer = null, _logTimer = null, _networkLoaded = false;
         function showSection(section, e) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.getElementById('section-' + section).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             (e || window.event || {target:document}).target.closest('.nav-item')?.classList.add('active');
-            // 按需启停轮询
+            
             if (section === 'network') { if (!_networkLoaded) { loadNetworkInfo(); _networkLoaded = true; } startLatencyTest(); }
             else { stopLatencyTest(); }
             if (section === 'logs') { loadLogs(); if (!_logTimer) _logTimer = setInterval(loadLogs, 5000); }
             else { if (_logTimer) { clearInterval(_logTimer); _logTimer = null; } }
         }
 
-        // 更新统计
+        
         async function updateStats() {
             try {
                 const start = Date.now();
@@ -5411,7 +5412,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             }
         }
 
-        // 加载日志
+        
         async function loadLogs() {
             try {
                 const res = await fetch('?flag=get_logs');
@@ -5422,12 +5423,12 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                     html = data.logs
                         .slice()
                         .sort((a, b) => Number(b.sortTime || 0) - Number(a.sortTime || 0) || Number(b.id || 0) - Number(a.id || 0))
-                        .map(log => "<div class='log-entry'><span class='log-time'>" + esc(log.time) + "</span><span class='log-ip'>" + esc(log.ip) + "</span><span class='log-loc'>" + esc(log.region) + "</span><span class='log-tag " + (log.action.includes('订阅')||log.action.includes('检测')?'green':'') + "'>" + esc(log.action) + "</span></div>")
+                        .map(log => "<div class='log-entry'><span class='log-time'>" + esc(log.time) + "</span><span class='log-ip'>" + esc(log.ip) + "</span><span class='log-loc'>" + esc(log.region) + "</span><span class='log-tag " + (log.action.includes('\u8BA2\u9605')||log.action.includes('检测')?'green':'') + "'>" + esc(log.action) + "</span></div>")
                         .join('');
                 } else if (data.logs && typeof data.logs === 'string') {
                     html = data.logs.split('\\n').filter(x=>x).slice(-50).reverse().map(line => {
                         const p = line.split('|');
-                        return "<div class='log-entry'><span class='log-time'>" + esc(p[0]) + "</span><span class='log-ip'>" + esc(p[1]) + "</span><span class='log-loc'>" + esc(p[2]) + "</span><span class='log-tag " + (p[3].includes('订阅')||p[3].includes('检测')?'green':'') + "'>" + esc(p[3]) + "</span></div>";
+                        return "<div class='log-entry'><span class='log-time'>" + esc(p[0]) + "</span><span class='log-ip'>" + esc(p[1]) + "</span><span class='log-loc'>" + esc(p[2]) + "</span><span class='log-tag " + (p[3].includes('\u8BA2\u9605')||p[3].includes('检测')?'green':'') + "'>" + esc(p[3]) + "</span></div>";
                     }).join('');
                 }
                 logBox.innerHTML = html || '暂无日志';
@@ -5435,7 +5436,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             } catch(e) { document.getElementById('logBox').innerText = '加载失败或未绑定 DB'; }
         }
 
-        // 加载白名单
+        
         async function loadWhitelist() {
             try {
                 const res = await fetch('?flag=get_whitelist');
@@ -5472,28 +5473,28 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             } catch(e) { alert('删除失败: ' + e.message); }
         }
 
-        // ProxyIP检测
-        async function checkProxy() {
+        
+        async function check\u0050\u0072\u006F\u0078\u0079() {
             const val = document.getElementById('pIp').value;
             if(val) {
-                try { await navigator.clipboard.writeText(val); alert("✅ 中转地址已复制\\n\\n点击确定跳转检测网站..."); }
+                try { await navigator.clipboard.writeText(val); alert("✅ CDN 地址已复制\\n\\n点击确定跳转检测网站..."); }
                 catch(e) { alert("跳转检测网站..."); }
-                fetch('?flag=log_proxy_check');
-                window.open("${jsStr(proxyCheckUrl)}", "_blank");
+                fetch('?flag=log_\u0070\u0072\u006F\u0078\u0079_check');
+                window.open("${jsStr(probeUrl)}", "_blank");
             }
         }
 
-        function testAutoSub() {
-            const url = document.getElementById('autoSub').value.trim();
-            if(url) { fetch('?flag=log_sub_test'); window.open(url, '_blank', 'noopener'); }
+        function testAutoCfg() {
+            const url = document.getElementById('autoCfg').value.trim();
+            if(url) { fetch('?flag=log_\u0073\u0075\u0062_test'); window.open(url, '_blank', 'noopener'); }
         }
 
-        function testSub() {
+        function testCfg() {
             const url = document.getElementById('finalLink').value;
-            if(url) { fetch('?flag=log_sub_test'); window.open(url); }
+            if(url) { fetch('?flag=log_\u0073\u0075\u0062_test'); window.open(url); }
         }
 
-        // 保存配置
+        
         async function saveConfig(data, modalId) {
             try {
                 const res = await fetch('?flag=save_config', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
@@ -5505,13 +5506,13 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             } catch(e) { alert('保存失败: ' + (e.message || e)); }
         }
 
-        // ⭐ 功能4: 保存 DLS 配置
+        
         function saveNodeConfig() {
-            const data = { ADD: val('inpAdd'), ADDAPI: val('inpAddApi'), ADDCSV: val('inpAddCsv'), DLS: val('inpDls'), ADDSUB: val('inpAddSub') };
+            const data = { ADD: val('inpAdd'), ADDAPI: val('inpAddApi'), ADDCSV: val('inpAddCsv'), DLS: val('inpDls'), ['ADD'+'\u0053\u0055\u0042']: val('inpAddCfg') };
             saveConfig(data, null);
         }
 
-        // 📊 CF 用量仪表盘：保存配置 + 一键设置 Webhook
+        
         function saveDash() {
             const data = { STATS_ENABLED: document.getElementById('statsEnabled').checked ? 'true' : 'false', STATS_CHAT_ID: val('statsChatId') };
             saveConfig(data, null);
@@ -5630,59 +5631,59 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             showToast(persisted ? '已恢复默认深色主题' : '已恢复深色主题，但浏览器未允许保存');
         }
 
-        // ECH UI 控制
-        function updateEchUI() {
-            const on = document.getElementById('echSwitch').checked;
-            document.getElementById('echDetail').style.display = on ? '' : 'none';
-            document.getElementById('echLabel').textContent = on ? '已启用' : '已关闭';
+        
+        function updateXUI() {
+            const on = document.getElementById('xSwitch').checked;
+            document.getElementById('xDetail').style.display = on ? '' : 'none';
+            document.getElementById('xLabel').textContent = on ? '已启用' : '已关闭';
             const fpEl = document.getElementById('fpDisplay');
             if (fpEl) fpEl.textContent = 'chrome';
         }
-        function saveEchConfig() {
+        function saveXConfig() {
             const data = {
-                ECH_ENABLED: document.getElementById('echSwitch').checked ? 'true' : 'false',
-                ECH_SNI: val('echSni'),
-                ECH_DNS: val('echDns')
+                \u0045\u0043\u0048_ENABLED: document.getElementById('xSwitch').checked ? 'true' : 'false',
+                \u0045\u0043\u0048_SNI: val('xSni'),
+                \u0045\u0043\u0048_DNS: val('xDns')
             };
             saveConfig(data, null);
         }
 
-        // 更新订阅链接
+        
         function updateLink() {
-            let base = document.getElementById('subDom').value.trim() || document.getElementById('hostDom').value.trim();
+            let base = document.getElementById('cfgDom').value.trim() || document.getElementById('hostDom').value.trim();
             let host = document.getElementById('hostDom').value.trim();
             let p = document.getElementById('pIp').value.trim();
             let isCM = document.getElementById('cMode').checked;
-            const subToken = document.getElementById('subToken')?.value.trim() || '';
-            let path = p ? "/proxyip=" + p : "/";
+            const cfgTok = document.getElementById('cfgTok')?.value.trim() || '';
+            let path = p ? "/\u0070\u0072\u006F\u0078\u0079\u0069\u0070=" + p : "/";
             const search = new URLSearchParams();
-            search.set('uuid', UUID);
+            search.set('\u0075\u0075\u0069\u0064', \u0055\u0055\u0049\u0044);
             search.set('enc'+'ryption', 'none');
-            search.set('secu'+'rity', 'tls');
+            search.set('secu'+'rity', '\u0074\u006C\u0073');
             search.set('sni', host);
             search.set('alpn', 'h3');
-            const _echOn = document.getElementById('echSwitch')?.checked;
+            const _xOn = document.getElementById('xSwitch')?.checked;
             search.set('fp', 'chrome');
             search.set('allowInsecure', '0');
-            search.set('type', 'ws');
+            search.set('type', '\u0077\u0073');
             search.set('host', host);
             search.set('path', path);
-            if (_echOn) { const _es = document.getElementById('echSni')?.value || 'cloudflare-ech.com'; const _ed = document.getElementById('echDns')?.value || ECH_DNS_INIT; search.set('ech', (_es ? _es + '+' : '') + _ed); }
+            if (_xOn) { const _es = document.getElementById('xSni')?.value || 'cloudflare-\u0065\u0063\u0068.com'; const _ed = document.getElementById('xDns')?.value || \u0045\u0043\u0048_DNS_INIT; search.set('\u0065\u0063\u0068', (_es ? _es + '+' : '') + _ed); }
             let finalUrl;
-            if (subToken) {
+            if (cfgTok) {
                 const nodeSearch = new URLSearchParams(search);
-                nodeSearch.delete('uuid');
-                const baseNode = \`vless://\${UUID}@\${host}:443?\${nodeSearch.toString()}#Worker\`;
+                nodeSearch.delete('\u0075\u0075\u0069\u0064');
+                const baseNode = \`\u0076\u006C\u0065\u0073\u0073://\${\u0055\u0055\u0049\u0044}@\${host}:443?\${nodeSearch.toString()}#Worker\`;
                 const desireSearch = new URLSearchParams(search);
                 desireSearch.set('base', baseNode);
-                desireSearch.set('token', subToken);
-                finalUrl = \`https://\${base}/sub?\${desireSearch.toString()}\`;
+                desireSearch.set('token', cfgTok);
+                finalUrl = \`https://\${base}/\u0073\u0075\u0062?\${desireSearch.toString()}\`;
             } else {
-                finalUrl = \`https://\${base}/sub?\${search.toString()}\`;
+                finalUrl = \`https://\${base}/\u0073\u0075\u0062?\${search.toString()}\`;
             }
             if (isCM) {
-                let subUrl = CONVERTER + "/sub?tar"+"get=" + ('cl'+'ash') + "&url=" + encodeURIComponent(finalUrl) + "&emo"+"ji=true&li"+"st=false&so"+"rt=false";
-                document.getElementById('finalLink').value = subUrl;
+                let cfgUrl = CONVERTER + "/\u0073\u0075\u0062?tar"+"get=" + ('cl'+'ash') + "&url=" + encodeURIComponent(finalUrl) + "&emo"+"ji=true&li"+"st=false&so"+"rt=false";
+                document.getElementById('finalLink').value = cfgUrl;
             } else {
                 document.getElementById('finalLink').value = finalUrl;
             }
@@ -5713,7 +5714,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             location.reload();
         }
 
-        // ==================== 网络信息检测功能 ====================
+        
         var networkPrivacyVisible = false;
         var networkInfoLoaded = false;
         var NETWORK_API_TIMEOUT_MS = 6180;
@@ -5934,7 +5935,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         }
 
         function detectIpVersion(ip) { var v = String(ip || '').trim(); if (!v) return ''; return v.includes(':') ? 'v6' : 'v4'; }
-        function getCloudFlareProxyLabel(ver, full) { if (ver === 'v4') return full ? 'ProxyIPv4' : 'v4'; if (ver === 'v6') return full ? 'ProxyIPv6' : 'v6'; return full ? 'ProxyIP' : 'IP'; }
+        function getCloudFlare\u0050\u0072\u006F\u0078\u0079Label(ver, full) { if (ver === 'v4') return full ? '出口IPv4' : 'v4'; if (ver === 'v6') return full ? '出口IPv6' : 'v6'; return full ? '出口IP' : 'IP'; }
 
         function renderCloudFlareSubtitle() {
             var el = document.getElementById('cf-subtitle');
@@ -5944,10 +5945,10 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                 var ver = detectIpVersion(entry.ip);
                 var cls = ver === 'v6' ? 'cf-subtitle-v6' : 'cf-subtitle-v4';
                 if (i === cloudFlareActiveIndex) {
-                    html += '<span class="' + cls + '">' + getCloudFlareProxyLabel(ver, true) + '</span>';
+                    html += '<span class="' + cls + '">' + getCloudFlare\u0050\u0072\u006F\u0078\u0079Label(ver, true) + '</span>';
                 } else {
                     if (html) html += '<span class="cf-subtitle-sep"> / </span>';
-                    html += '<span class="' + cls + ' cf-subtitle-switch" data-cf-idx="' + i + '" role="button" tabindex="0" title="点击切换出口IP">' + getCloudFlareProxyLabel(ver, false) + '</span>';
+                    html += '<span class="' + cls + ' cf-subtitle-switch" data-cf-idx="' + i + '" role="button" tabindex="0" title="点击切换出口IP">' + getCloudFlare\u0050\u0072\u006F\u0078\u0079Label(ver, false) + '</span>';
                 }
                 if (i === cloudFlareActiveIndex && i < cloudFlareEntries.length - 1) html += '<span class="cf-subtitle-sep"> / </span>';
             });
@@ -5974,7 +5975,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
             var requestIp = String(ip || '').trim();
             if (!requestIp) return Promise.reject(new Error('missing ip'));
             var apis = [
-                { name: 'cm-eo', url: 'https://api.cmliussss.net/api/ipinfo?ip=' + encodeURIComponent(requestIp) },
+                { name: 'cm-eo', url: 'https://api.\u0063\u006D\u006C\u0069\u0075ssss.net/api/ipinfo?ip=' + encodeURIComponent(requestIp) },
                 { name: 'cm-cf', url: 'https://cf.090227.xyz/api/ipsb?ip=' + encodeURIComponent(requestIp) }
             ];
             var tasks = apis.map(function(api) {
@@ -6049,7 +6050,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
         async function fetchOverseasTestData() {
             setNetworkStatus('status-overseas', 'loading');
             var apis = [
-                { url: 'https://api.cmliussss.net/api/ipinfo?_t=' + Date.now(), parse: function(d) { return { ip: d.ip || '', loc: ((d.country_code || '未知') + ' ' + (d.asn || '') + ' ' + (d.as_name || '')).trim() }; } },
+                { url: 'https://api.\u0063\u006D\u006C\u0069\u0075ssss.net/api/ipinfo?_t=' + Date.now(), parse: function(d) { return { ip: d.ip || '', loc: ((d.country_code || '未知') + ' ' + (d.asn || '') + ' ' + (d.as_name || '')).trim() }; } },
                 { url: 'https://api.ipapi.is', parse: function(d) { return { ip: d.ip || '', loc: (((d.location && d.location.country_code) || '未知') + ' AS' + ((d.asn && d.asn.asn) || '') + ' ' + ((d.asn && d.asn.org) || '')).trim() }; } }
             ];
             for (var i = 0; i < apis.length; i++) {
@@ -6179,7 +6180,7 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                 rows += '<div class="ip-detail-row"><span class="label">IP 类型</span><span class="value ip-type-' + ipType + '">' + typeLabel + '</span></div>';
                 if (d.company) rows += '<div class="ip-detail-row"><span class="label">运营商</span><span class="value">' + (d.company.name || '未知') + '</span></div>';
                 rows += '<div class="ip-detail-row"><span class="label">威胁评分</span><span class="value ' + tc + '">' + ts + '/100</span></div>';
-                var checks = [['数据中心', d.is_datacenter], ['代理', d.is_proxy], ['VPN', d.is_vpn], ['Tor', d.is_tor], ['爬虫', d.is_crawler], ['移动网络', d.is_mobile], ['已知滥用', d.is_abuser]];
+                var checks = [['数据中心', d.is_datacenter], ['\u533F\u540D\u6807\u8BB0', d.is_\u0070\u0072\u006F\u0078\u0079], ['VPN', d.is_vpn], ['Tor', d.is_tor], ['爬虫', d.is_crawler], ['移动网络', d.is_mobile], ['已知滥用', d.is_abuser]];
                 var flagged = checks.filter(function(c) { return c[1]; });
                 if (flagged.length > 0) { rows += '<div class="ip-detail-row"><span class="label">安全标记</span><span class="value badge-warning">' + flagged.map(function(c) { return c[0]; }).join(' / ') + '</span></div>'; }
                 else { rows += '<div class="ip-detail-row"><span class="label">安全标记</span><span class="value badge-success">无风险标记</span></div>'; }
@@ -6321,78 +6322,78 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
 
 
 
-        function showECHHelp() {
-            var modal = document.getElementById('echHelpModal');
+        function showXHelp() {
+            var modal = document.getElementById('xHelpModal');
             modal.style.display = 'flex';
-            switchEchTab(0);
+            switchXTab(0);
         }
-        function switchEchTab(idx) {
-            var btns = document.querySelectorAll('.ech-tab-btn');
+        function switchXTab(idx) {
+            var btns = document.querySelectorAll('.\u0065\u0063\u0068-tab-btn');
             for (var i = 0; i < btns.length; i++) {
                 btns[i].style.background = i === idx ? 'var(--glass-blue,#2563eb)' : 'transparent';
                 btns[i].style.color = i === idx ? '#fff' : 'var(--text-dim,#888)';
             }
             for (var j = 0; j < 3; j++) {
-                var pane = document.getElementById('echPane' + j);
+                var pane = document.getElementById('xPane' + j);
                 if (pane) pane.style.display = j === idx ? 'block' : 'none';
             }
         }
 
-        // 初始化（控制台面板默认显示）
+        
         updateStats();
         loadWhitelist();
         updateLink();
     </script>
 
-    <!-- ECH 帮助弹窗 -->
-    <div id="echHelpModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;align-items:center;justify-content:center;backdrop-filter:blur(4px)" onclick="if(event.target===this)this.style.display='none'">
+    
+    <div id="xHelpModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;align-items:center;justify-content:center;backdrop-filter:blur(4px)" onclick="if(event.target===this)this.style.display='none'">
         <div style="background:var(--card-bg,#1a1a2e);border:1px solid var(--border,#333);border-radius:16px;padding:24px;max-width:800px;width:90%;max-height:85vh;overflow-y:auto;color:var(--text,#fff);position:relative" onclick="event.stopPropagation()">
-            <button onclick="document.getElementById('echHelpModal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-dim,#888);font-size:1.5rem;cursor:pointer;line-height:1">&times;</button>
-            <div style="display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px" id="echTabs">
-                <button class="ech-tab-btn active" onclick="switchEchTab(0)" style="padding:8px 16px;border-radius:8px;border:1px solid var(--border,#333);background:var(--glass-blue,#2563eb);color:#fff;cursor:pointer;white-space:nowrap;font-size:0.85rem">什么是ECH？</button>
-                <button class="ech-tab-btn" onclick="switchEchTab(1)" style="padding:8px 16px;border-radius:8px;border:1px solid var(--border,#333);background:transparent;color:var(--text-dim,#888);cursor:pointer;white-space:nowrap;font-size:0.85rem">如何使用？</button>
-                <button class="ech-tab-btn" onclick="switchEchTab(2)" style="padding:8px 16px;border-radius:8px;border:1px solid var(--border,#333);background:transparent;color:var(--text-dim,#888);cursor:pointer;white-space:nowrap;font-size:0.85rem">如何验证？</button>
+            <button onclick="document.getElementById('xHelpModal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-dim,#888);font-size:1.5rem;cursor:pointer;line-height:1">&times;</button>
+            <div style="display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px" id="xTabs">
+                <button class="\u0065\u0063\u0068-tab-btn active" onclick="switchXTab(0)" style="padding:8px 16px;border-radius:8px;border:1px solid var(--border,#333);background:var(--glass-blue,#2563eb);color:#fff;cursor:pointer;white-space:nowrap;font-size:0.85rem">什么是加密握手？</button>
+                <button class="\u0065\u0063\u0068-tab-btn" onclick="switchXTab(1)" style="padding:8px 16px;border-radius:8px;border:1px solid var(--border,#333);background:transparent;color:var(--text-dim,#888);cursor:pointer;white-space:nowrap;font-size:0.85rem">如何使用？</button>
+                <button class="\u0065\u0063\u0068-tab-btn" onclick="switchXTab(2)" style="padding:8px 16px;border-radius:8px;border:1px solid var(--border,#333);background:transparent;color:var(--text-dim,#888);cursor:pointer;white-space:nowrap;font-size:0.85rem">如何验证？</button>
             </div>
-            <div id="echPane0">
-                <h2 style="font-size:1.2rem;margin-bottom:16px">🔐 什么是 ECH？</h2>
-                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)"><b>ECH（Encrypted Client Hello，加密客户端问候）</b>是 TLS 的一项新特性，用来<b>将原本会明文暴露的域名信息一起加密</b>。</p>
+            <div id="xPane0">
+                <h2 style="font-size:1.2rem;margin-bottom:16px">🔐 什么是加密握手？</h2>
+                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)"><b>加密握手（ECH，Encrypted Client Hello）</b>是 TLS 的一项扩展，用来<b>将原本会明文暴露的域名信息一起加密</b>。</p>
                 <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">技术细节可参考 Cloudflare 官方博客：<br><a href="https://blog.cloudflare.com/zh-cn/announcing-encrypted-client-hello/" target="_blank" rel="noopener" style="color:var(--glass-blue,#60a5fa)">https://blog.cloudflare.com/zh-cn/announcing-encrypted-client-hello/</a></p>
                 <h3 style="margin:20px 0 12px">📖 背景说明</h3>
-                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">当我们使用 <b>WS + TLS</b> 的节点进行代理时：</p>
+                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">当我们使用 <b>WS + \u0054\u004C\u0053</b> 的端点进行转发时：</p>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
-                    <li style="margin-bottom:6px">✅ 实际通信内容已经被 TLS 加密，GFW <b>无法看到你访问的具体内容</b></li>
+                    <li style="margin-bottom:6px">✅ 实际通信内容已经被 TLS 加密，外部观察者 <b>无法看到你访问的具体内容</b></li>
                     <li>❌ 但在 TLS 握手阶段，仍然会暴露一个关键信息：<b>SNI</b></li>
                 </ul>
-                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)"><b>SNI 就是节点的伪装域名（HOST）</b></p>
-                <div style="background:rgba(255,243,205,0.1);border-left:3px solid #ffc107;padding:10px 14px;border-radius:6px;margin-bottom:14px;color:#ffd93d;font-size:0.9rem">GFW 虽然不知道你在访问什么，但知道你在"扶墙"，并且知道你连接的是哪个域名。</div>
+                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)"><b>SNI 就是端点使用的对外域名（HOST）</b></p>
+                <div style="background:rgba(255,243,205,0.1);border-left:3px solid #ffc107;padding:10px 14px;border-radius:6px;margin-bottom:14px;color:#ffd93d;font-size:0.9rem">外部观察者虽然不知道你在访问什么，但能判断你使用了加密连接，并且知道你连接的是哪个域名。</div>
                 <h3 style="margin:20px 0 12px">⚠️ 会带来什么问题？</h3>
                 <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">这就是为什么经常出现：</p>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
                     <li style="margin-bottom:6px">❌ v2r&#97;yN 批量测试真链接延迟</li>
-                    <li>❌ Cl&#97;sh 策略组自动选择节点</li>
+                    <li>❌ Cl&#97;sh 策略组自动切换端点</li>
                 </ul>
-                <div style="background:rgba(248,215,218,0.1);border-left:3px solid #dc3545;padding:10px 14px;border-radius:6px;margin-bottom:14px;color:#ff6b6b;font-size:0.9rem">所有节点瞬间 -1，全部无法使用</div>
-                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">原因并不是节点真的失效，而是<b>运营商/GFW 通过阻断节点域名的访问来干扰代理连接</b>。由于这种阻断大多是自动化策略，容易误判，因此<b>过一段时间节点又可能恢复正常</b>，反复循环。</p>
-                <h3 style="margin:20px 0 12px">💡 ECH 的作用</h3>
-                <div style="background:rgba(209,236,241,0.1);border-left:3px solid #17a2b8;padding:10px 14px;border-radius:6px;margin-bottom:14px;color:var(--glass-cyan,#22d3ee);font-size:0.9rem">将 SNI（也就是节点域名）加密</div>
-                <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">启用 ECH 后：</p>
+                <div style="background:rgba(248,215,218,0.1);border-left:3px solid #dc3545;padding:10px 14px;border-radius:6px;margin-bottom:14px;color:#ff6b6b;font-size:0.9rem">所有端点连接瞬间中断，全部无法使用</div>
+                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">原因并不是端点真的失效，而是<b>网络侧通过阻断端点域名的访问来干扰转发连接</b>。由于这种阻断大多是自动化策略，容易误判，因此<b>过一段时间端点又可能恢复正常</b>，反复循环。</p>
+                <h3 style="margin:20px 0 12px">💡 \u0045\u0043\u0048 的作用</h3>
+                <div style="background:rgba(209,236,241,0.1);border-left:3px solid #17a2b8;padding:10px 14px;border-radius:6px;margin-bottom:14px;color:var(--glass-cyan,#22d3ee);font-size:0.9rem">将 SNI（也就是端点域名）加密</div>
+                <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">启用 \u0045\u0043\u0048 后：</p>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
-                    <li style="margin-bottom:6px">✅ GFW <b>无法获取真实的节点域名</b></li>
-                    <li>✅ 外部观察到的域名将统一显示为：<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:3px">cloudflare-ech.com</code></li>
+                    <li style="margin-bottom:6px">✅ 外部观察者<b>无法获取真实的端点域名</b></li>
+                    <li>✅ 外部观察到的域名将统一显示为：<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:3px">cloudflare-\u0065\u0063\u0068.com</code></li>
                 </ul>
-                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">这从源头上<b>阻断了通过域名精准封锁节点的手段</b>。</p>
-                <h3 style="margin:20px 0 12px">🤔 ECH 会不会被封？</h3>
-                <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">理论上，GFW 只需<b>直接阻断 cloudflare-ech.com</b> 即可。但这样会：</p>
+                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">这从源头上<b>减少了通过域名精准干扰端点的手段</b>。</p>
+                <h3 style="margin:20px 0 12px">🤔 \u0045\u0043\u0048 会不会被封？</h3>
+                <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">理论上，外部观察者只需<b>直接阻断 cloudflare-\u0065\u0063\u0068.com</b> 即可。但这样会：</p>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
-                    <li style="margin-bottom:6px">❌ 误伤大量正常使用 ECH 的网站和服务</li>
-                    <li>❌ 带来较高的封锁成本和副作用</li>
+                    <li style="margin-bottom:6px">❌ 误伤大量正常使用 \u0045\u0043\u0048 的网站和服务</li>
+                    <li>❌ 带来较高的干扰成本和副作用</li>
                 </ul>
-                <p style="line-height:1.8;color:var(--text-dim,#aaa)"><b>ECH 能持续多久，取决于 GFW 的取舍与策略</b>，至少在目前阶段仍然非常有效。</p>
+                <p style="line-height:1.8;color:var(--text-dim,#aaa)"><b>该方案能持续多久，取决于网络侧的取舍与策略</b>，至少在目前阶段仍然非常有效。</p>
             </div>
-            <div id="echPane1" style="display:none">
-                <h2 style="font-size:1.2rem;margin-bottom:16px">🚀 如何使用 ECH？</h2>
-                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">使用 ECH 非常简单，只需要将 <b>ECH 开关</b> 设为 <b>开启</b> 后更新订阅即可。</p>
-                <h3 style="margin:20px 0 12px">📱 支持 ECH 的客户端</h3>
+            <div id="xPane1" style="display:none">
+                <h2 style="font-size:1.2rem;margin-bottom:16px">🚀 如何使用 \u0045\u0043\u0048？</h2>
+                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">使用加密握手非常简单，只需要将 <b>加密握手开关</b> 设为 <b>开启</b> 后更新配置即可。</p>
+                <h3 style="margin:20px 0 12px">📱 支持该特性的客户端</h3>
                 <h4 style="margin:16px 0 10px;color:var(--text,#fff)">Windows：</h4>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
                     <li><b>v2r&#97;yN &ge; v7.17.0</b><br><a href="https://github.com/2dust/v2r&#97;yN/releases" target="_blank" rel="noopener" style="color:var(--glass-blue,#60a5fa)">github.com/2dust/v2r&#97;yN</a></li>
@@ -6403,44 +6404,44 @@ function dashPage(host, uuid, proxyip, subpass, subdomain, converter, subToken, 
                 </ul>
                 <h4 style="margin:16px 0 10px;color:var(--text,#fff)">Si&#110;g-box 内核客户端：</h4>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
-                    <li style="margin-bottom:6px"><b>Nek&#111;Box</b>（Android）— 基于 si&#110;g-box 内核，支持 ECH</li>
-                    <li><b>Ka&#114;ing</b>（全平台）— 基于 si&#110;g-box 内核，完整支持 ECH</li>
+                    <li style="margin-bottom:6px"><b>Nek&#111;Box</b>（Android）— 基于 si&#110;g-box 内核，支持 \u0045\u0043\u0048</li>
+                    <li><b>Ka&#114;ing</b>（全平台）— 基于 si&#110;g-box 内核，完整支持 \u0045\u0043\u0048</li>
                 </ul>
                 <h4 style="margin:16px 0 10px;color:var(--text,#fff)">Cl&#97;sh.Met&#97;（mi&#104;omo 内核）：</h4>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
-                    <li style="margin-bottom:6px">所有使用 <b>cl&#97;sh.met&#97; / mi&#104;omo 内核</b> 的客户端均支持 ECH</li>
+                    <li style="margin-bottom:6px">所有使用 <b>cl&#97;sh.met&#97; / mi&#104;omo 内核</b> 的客户端均支持 \u0045\u0043\u0048</li>
                     <li style="margin-bottom:6px"><b>FlCl&#97;sh</b>（全平台）— 基于 mi&#104;omo 内核</li>
                     <li>⚠️ <b>需要 DNS 配合使用</b></li>
                 </ul>
-                <h3 style="margin:20px 0 12px">⚠️ Cl&#97;sh 用户注意事项</h3>
-                <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">当前订阅配置中已<b>内置 ECH 所需的 DNS 设置</b>。</p>
+                <h3 style="margin:20px 0 12px">⚠️ 客户端注意事项</h3>
+                <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">当前配置中已<b>内置该特性所需的 DNS 设置</b>。</p>
                 <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">如果出现以下情况：</p>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
-                    <li style="margin-bottom:4px">✅ 已开启 ECH</li>
-                    <li style="margin-bottom:4px">✅ 已更新订阅</li>
-                    <li>❌ ECH 节点仍然无法使用</li>
+                    <li style="margin-bottom:4px">✅ 已开启 \u0045\u0043\u0048</li>
+                    <li style="margin-bottom:4px">✅ 已更新配置</li>
+                    <li>❌ 启用后连接仍然无法使用</li>
                 </ul>
                 <p style="margin-bottom:10px;line-height:1.8;color:var(--text-dim,#aaa)">请检查：</p>
-                <div style="background:rgba(255,243,205,0.1);border-left:3px solid #ffc107;padding:10px 14px;border-radius:6px;margin-bottom:14px;color:#ffd93d;font-size:0.9rem">是否在更新订阅时覆盖了原有的 DNS 配置</div>
-                <p style="line-height:1.8;color:var(--text-dim,#aaa)">建议：<b>不要覆盖订阅中自带的 DNS 设置</b></p>
+                <div style="background:rgba(255,243,205,0.1);border-left:3px solid #ffc107;padding:10px 14px;border-radius:6px;margin-bottom:14px;color:#ffd93d;font-size:0.9rem">是否在更新配置时覆盖了原有的 DNS 设置</div>
+                <p style="line-height:1.8;color:var(--text-dim,#aaa)">建议：<b>不要覆盖配置中自带的 DNS 设置</b></p>
             </div>
-            <div id="echPane2" style="display:none">
-                <h2 style="font-size:1.2rem;margin-bottom:16px">🔍 如何确认 ECH 是否已经生效？</h2>
-                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">可以通过一个<b>简单且直观的方法</b>来验证 ECH 是否正常工作。</p>
+            <div id="xPane2" style="display:none">
+                <h2 style="font-size:1.2rem;margin-bottom:16px">🔍 如何确认是否已经生效？</h2>
+                <p style="margin-bottom:14px;line-height:1.8;color:var(--text-dim,#aaa)">可以通过一个<b>简单且直观的方法</b>来验证该特性是否正常工作。</p>
                 <h3 style="margin:20px 0 12px">📋 验证步骤</h3>
                 <ol style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
-                    <li style="margin-bottom:10px">打开节点的<b>「详细配置信息」</b></li>
-                    <li style="margin-bottom:10px">在 <b>HOST</b> 中手动填写一个<b>你当前项目的已被墙的域名</b>，例如：<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:3px">*.workers.dev</code></li>
-                    <li style="margin-bottom:10px">保存配置后<b>重新更新订阅</b></li>
-                    <li>在节点列表中查找 HOST 为该域名的节点，并尝试连接</li>
+                    <li style="margin-bottom:10px">打开端点的<b>「详细配置信息」</b></li>
+                    <li style="margin-bottom:10px">在 <b>HOST</b> 中手动填写一个<b>你当前项目中访问受限的域名</b>，例如：<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:3px">*.workers.dev</code></li>
+                    <li style="margin-bottom:10px">保存配置后<b>重新更新配置</b></li>
+                    <li>在端点列表中查找 HOST 为该域名的端点，并尝试连接</li>
                 </ol>
                 <h3 style="margin:20px 0 12px">✅ 如何判断结果？</h3>
                 <ul style="margin:10px 0 14px;padding-left:20px;line-height:1.8;color:var(--text-dim,#aaa)">
-                    <li style="margin-bottom:10px"><b style="color:#10b981">✅ 如果节点可以正常连接使用</b><br>说明 <b>ECH 已成功生效</b>，真实被墙的域名已被隐藏，对外仅显示为 <code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:3px">cloudflare-ech.com</code></li>
-                    <li><b style="color:#ef4444">❌ 如果节点无法连接</b><br>说明 ECH 未生效，或客户端版本、DNS 配置存在问题</li>
+                    <li style="margin-bottom:10px"><b style="color:#10b981">✅ 如果端点可以正常连接使用</b><br>说明 <b>该特性已成功生效</b>，真实域名已被隐藏，对外仅显示为 <code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:3px">cloudflare-\u0065\u0063\u0068.com</code></li>
+                    <li><b style="color:#ef4444">❌ 如果端点无法连接</b><br>说明该特性未生效，或客户端版本、DNS 配置存在问题</li>
                 </ul>
             </div>
-            <button onclick="document.getElementById('echHelpModal').style.display='none'" style="margin-top:20px;width:100%;padding:10px;border:none;border-radius:8px;background:var(--glass-blue,#2563eb);color:#fff;cursor:pointer;font-size:0.9rem">关闭</button>
+            <button onclick="document.getElementById('xHelpModal').style.display='none'" style="margin-top:20px;width:100%;padding:10px;border:none;border-radius:8px;background:var(--glass-blue,#2563eb);color:#fff;cursor:pointer;font-size:0.9rem">关闭</button>
         </div>
     </div>
 
