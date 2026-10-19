@@ -4,6 +4,30 @@
 
 ---
 
+## 目录
+
+- [视频教程](#视频教程)
+- [开源代码引用](#-开源代码引用)
+- [配置说明](#配置说明)
+  - [Workers 版环境变量](#workers-版环境变量)
+  - [D1 数据库](#d1-数据库workers-版必须)
+  - [Snippets 版顶部配置](#snippets-版代码顶部配置)
+- [部署教程](#部署教程)
+- [项目简介](#项目简介)
+- [功能一览](#功能一览)
+- [文件说明](#文件说明)
+- [界面预览](#界面预览)
+- [代理使用教程](#代理使用教程)
+- [订阅使用教程](#订阅使用教程)
+- [ECH 加密使用教程](#ech-加密使用教程)
+- [后台管理面板](#后台管理面板)
+- [CF 用量实时监控](#cf-用量实时监控)
+- [GrainTCP 内核参数](#graintcp-内核参数)
+- [常见问题](#常见问题)
+- [免责声明](#免责声明)
+
+---
+
 ## 视频教程
 
 [RrainTCP视频教程](https://www.youtube.com/watch?v=jJMZOrQOwM8)
@@ -40,270 +64,6 @@
 
 ---
 
-## 目录
-
-- [视频教程](#视频教程)
-- [开源代码引用](#-开源代码引用)
-- [项目简介](#项目简介)
-- [功能一览](#功能一览)
-- [界面预览](#界面预览)
-- [文件说明](#文件说明)
-- [部署教程](#部署教程)
-- [配置说明](#配置说明)
-- [代理使用教程](#代理使用教程)
-- [订阅使用教程](#订阅使用教程)
-- [ECH 加密使用教程](#ech-加密使用教程)
-- [后台管理面板](#后台管理面板)
-- [CF 用量实时监控](#cf-用量实时监控)
-- [GrainTCP 内核参数](#graintcp-内核参数)
-- [常见问题](#常见问题)
-- [免责声明](#免责声明)
-
----
-
-## 项目简介
-
-GrainTCPV1 是一个部署在 Cloudflare 上的代理节点管理系统，提供：
-
-- 代理隧道（WebSocket → TCP）
-- 自适应订阅分发（自动识别客户端返回对应格式）
-- ECH 加密注入（提升连接隐蔽性）
-- 可视化后台管理面板
-- 多种代理出口方式（Direct / SOCKS5 / HTTP/HTTPS / ProxyIP / TURN/TURNS）
-- CF 用量实时监控（Telegram 仪表盘 + `/stats` 命令，含 Zone 流量与威胁统计）
-
-支持两种部署方式：**Workers**（完整版）和 **Snippets**（精简版）。
-
----
-
-## 功能一览
-
-| 功能 | Workers | Snippets | 说明 |
-|------|:---:|:---:|------|
-| GrainTCP 代理内核 | ✅ | ✅ | 4 路并发竞速建连 + BYOB 零拷贝 + Early Data |
-| TURN/TCP 中继 | ✅ | ✅ | 两版均支持匿名或长期凭证认证、A/AAAA 目标解析、IPv4/IPv6 XOR 地址和事务 ID 校验 |
-| SSTP / SoftEther 中继 | ✅ | ❌ | Worker 版脚本内完成 SSTP 建链、PPP 协商与手工 IPv4/TCP 封包；目标仅 IPv4 |
-| TURN TXT/多服务器池 | ❌ | ❌ | 两版均只支持单个服务器，不支持逗号多地址、竞速池或 `!txt` 地址池 |
-| TURNS/TLS 中继 | ✅ | ✅ | 两版控制连接和数据连接均使用 TLS；Worker 还支持域名原生 TLS 与兼容 TLS 回退 |
-| SOCKS5 代理 | ✅ | ✅ | 全局/局部模式，支持用户名密码认证 |
-| HTTP CONNECT 代理 | ✅ | ✅ | 全局/局部模式，支持 Basic Auth |
-| HTTPS CONNECT 代理 | ❌ | ✅ | Snippets 通过真实 TLS 连接 HTTPS 代理服务器 |
-| ProxyIP 中转 | ✅ | ✅ | 指定优选 IP 作为出口中转 |
-| 自适应订阅 | ✅ | ✅ | 根据客户端 UA 自动返回对应格式 |
-| ECH 加密 | ✅ | ✅ | DoH 查询自动注入 ECH Config |
-| 后台管理面板 | ✅ | ✅ | 可视化管理界面 |
-| 主题选择与保存 | ✅ | ❌ | 深色/浅色实时预览，支持浏览器保存、取消预览和恢复默认 |
-| D1 数据库 | ✅ | ❌ | 持久化存储配置和日志 |
-| Telegram 通知 | ✅ | ❌ | 登录/订阅操作实时推送 |
-| Desire 裂变 | ✅ | ❌ | SUB_TOKEN 优选 IP 批量裂变 |
-| 白名单/访问日志 | ✅ | ❌ | IP 白名单免登录 + 日志记录 |
-| 环境变量配置 | ✅ | ❌ | Dashboard 在线修改配置 |
-| CF 用量 TG 仪表盘 | ✅ | ❌ | Cron 每 30 分钟刷新 Telegram 仪表盘（仅 Worker 版，依赖 D1/Cron） |
-| /stats 命令查询 | ✅ | ❌ | Telegram 发送 `/stats` 实时查询用量（仅 Worker 版） |
-| Zone HTTP 统计 | ✅ | ❌ | 区域级请求/威胁/缓存/带宽 + 国家/状态码/设备分布（仅 Worker 版） |
-
----
-
-## 文件说明
-
-| 文件 | 大小 | 用途 |
-|------|------|------|
-| `worker.js` | ~345 KB | Workers/Pages 完整版（可读源码，支持环境变量 + D1） |
-| `snippets.js` | ~32 KB | Snippets 精简版（压缩代码，配置写在顶部） |
-
-两份文件共同支持 TURN/TCP、TURNS/TLS、SOCKS5、HTTP、ProxyIP、ECH、订阅和后台；SSTP/SoftEther 中继仅 Worker 版支持，Snippets 版因 32KB 上限未实现。Worker 的 TURN/TURNS 支持全局代理、直连失败回落、查询参数、Base64/UTF-8 凭证、DNS 缓存、438 Nonce 更新与 Allocation Refresh；Snippets 的 TURN/TURNS 仅支持全局 `://` 路径，但额外实现了真实 HTTPS CONNECT。两版均不支持 TURN 多服务器池或 `!txt` 地址池。
-
----
-
-## 界面预览
-
-**Snippets 版：**
-
-<img width="1920" height="919" alt="image" src="https://github.com/user-attachments/assets/288f586d-8f37-4785-a4dc-58153bb5dfa2" />
-<img width="1920" alt="Snippets管理页面" src="./issue/snippets展示/snippets管理页面.png" />
-
-**Worker 版：**
-
-<img width="1920" alt="Worker登录页" src="./issue/worker展示/登录页.png" />
-<img width="1920" alt="Worker控制台" src="./issue/worker展示/控制台展示.png" />
-<img width="1920" alt="Worker订阅页面" src="./issue/worker展示/订阅页面.png" />
-<img width="1920" alt="Worker白名单" src="./issue/worker展示/白名单页面.png" />
-<img width="1920" alt="Worker日志" src="./issue/worker展示/日志详情页面.png" />
-<img width="1920" alt="Worker网络信息" src="./issue/worker展示/网络信息.png" />
-
----
-
-## 部署教程
-
-### 方式一：Cloudflare Workers 部署（推荐）
-
-**适合**：需要完整功能（D1 数据库、TG 通知、白名单、优选 IP 列表等）。
-
-**步骤**：
-
-1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
-2. 左侧菜单进入 **Workers & Pages** → 点击右上角 **创建**
-3. 选择 **Hello World** 模板 → 点击 **部署**
-
-<img width="800" alt="创建Worker" src="./issue/worker部署教程/创建worker.png" />
-
-4. 部署完成后，在 Workers 列表找到刚部署的项目，点击 **编辑代码**
-
-<img width="800" alt="部署Worker" src="./issue/worker部署教程/部署worker.png" />
-
-5. 按 `Ctrl+A` 全选 → 删除 → 粘贴 `worker.js` 全部代码
-
-<img width="800" alt="修改Worker代码" src="./issue/worker部署教程/修改worker代码.png" />
-
-6. 点击右上角 **保存并部署**
-7. 回到 Worker 概览页 → 进入 **设置 → 变量和机密**
-8. 添加环境变量（建议至少填 `UUID`、`WEB_PASSWORD`、`SUB_PASSWORD`；不填会使用代码内置默认值，详见下文「配置说明」）
-9. 可选：绑定自定义域名（设置 → 触发器 → 自定义域）
-
-**D1 数据库配置（必须，完整步骤）**：
-
-D1 是 Cloudflare 提供的免费 SQLite 数据库，用于存储配置、白名单、日志和统计数据。Worker 版必须绑定 D1 才能使用后台管理功能。
-
-**第一步：创建 D1 数据库**
-
-1. 登录 Cloudflare Dashboard
-2. 左侧菜单找到 **Workers & Pages** → 点击 **D1 SQL 数据库**
-3. 点击右上角 **创建** 按钮
-4. 数据库名称随意填写（如 `graintcp_db`）→ 点击 **创建**
-
-**第二步：初始化表结构**
-
-进入刚创建的数据库 → 点击 **控制台** 标签 → 粘贴以下 SQL 并点击 **执行**：
-
-```sql
-CREATE TABLE IF NOT EXISTS config (key TEXT PRIMARY KEY, value TEXT);
-CREATE TABLE IF NOT EXISTS whitelist (ip TEXT PRIMARY KEY, created_at INTEGER);
-CREATE TABLE IF NOT EXISTS logs (id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, ip TEXT, region TEXT, action TEXT);
-CREATE TABLE IF NOT EXISTS stats (date TEXT PRIMARY KEY, count INTEGER DEFAULT 0);
-```
-
-执行成功后会看到 4 张表被创建。
-
-**第三步：绑定到 Worker**
-
-1. 回到你的 Worker 项目 → **设置** → **变量和机密**
-2. 向下滚动找到 **D1 数据库绑定** 区域
-3. 点击 **添加绑定**
-4. **变量名称**填：`DB`（必须大写，不可改名）
-5. **D1 数据库**下拉选择刚创建的数据库
-6. 点击 **保存** → 重新部署 Worker
-
-**验证是否成功**：
-
-部署后访问你的 Worker 域名，登录后台 → 如果白名单、日志、统计等功能正常显示，说明 D1 绑定成功。
-
-**D1 数据表说明**：
-
-| 表名 | 用途 | 说明 |
-|------|------|------|
-| `config` | 配置存储 | 后台保存的所有配置（ProxyIP、TG Token 等） |
-| `whitelist` | IP 白名单 | 免登录 IP 地址列表 |
-| `logs` | 访问日志 | 最近 2000 条操作记录（自动清理） |
-| `stats` | 每日统计 | 按日期累计访问次数 |
-
-**D1 免费额度**：
-
-- 每日读取：5,000,000 行
-- 每日写入：100,000 行
-- 存储空间：5 GB
-
-正常使用远低于这些限制，无需担心。
-
-### 方式二：Cloudflare Snippets 部署
-
-**适合**：已有域名接入 Cloudflare、想要极简部署、无需 D1/TG 通知等扩展功能。
-
-**步骤**：
-
-1. 登录 Cloudflare Dashboard
-2. 选择你已接入的域名
-
-<img width="800" alt="找到有Snippets的域名" src="./issue/snippets教程/找到有snippets的域名.png" />
-
-3. 左侧菜单进入 **规则 → Snippets** → 点击 **创建片段**
-
-<img width="800" alt="在Snippets页面创建片段" src="./issue/snippets教程/在snippets页面创建片段.png" />
-
-4. 输入片段名称（随意，如 `graintcp`）
-
-<img width="800" alt="输入创建片段的名字" src="./issue/snippets教程/输入创建片段的名字.png" />
-
-5. 粘贴 `snippets.js` 全部代码
-6. **修改顶部配置区**（UUID、密码、ProxyIP 等改成你自己的值）
-
-<img width="800" alt="编辑Snippets代码" src="./issue/snippets教程/编辑snippets代码.png" />
-
-7. 在下方 **触发规则** 中设置匹配条件：
-   - 字段：`主机名 (Hostname)`
-   - 运算符：`等于 (equals)`
-   - 值：你的子域名（如 `sub.yourdomain.com`）
-
-<img width="800" alt="设置自定义筛选表达式" src="./issue/snippets教程/设置自定义筛选表达式.png" />
-
-8. 点击 **启用片段规则** 保存
-
-<img width="800" alt="启用片段规则" src="./issue/snippets教程/启用片段规则.png" />
-
-9. **配置 DNS（重要）**：前往 DNS 设置页 → 添加 A 记录 → 名称填子域名 → IPv4 填 `192.0.2.1` → 代理状态开启橙色云朵
-
-<img width="800" alt="创建新代理DNS记录指向" src="./issue/snippets教程/创建新代理DNS记录指向.png" />
-
-**注意事项**：
-- Snippets 没有环境变量功能，所有配置直接改代码顶部
-- Snippets 有 32KB 大小限制
-- Snippets 的 CPU 执行时间有限，并发竞速数自动降为 1
-
-### 方式三：Cloudflare Pages 部署
-
-**步骤**：
-
-1. 将 `worker.js` 重命名为 `_worker.js`
-2. 将该文件放入一个空文件夹（如 `graintcp/`）
-3. 进入 **Workers & Pages** → **创建** → 选择 **Pages**
-
-<img width="800" alt="Cloudflare主页" src="./issue/pages部署教程/cloudflare主页-计算workers和pages.png" />
-<img width="800" alt="Pages创建应用程序" src="./issue/pages部署教程/pages创建应用程序.png" />
-
-**方法 A：GitHub 自动同步（推荐）**
-
-4. 选择 **导入现有 Git 存储库**
-
-<img width="800" alt="选择导入现有git存储库" src="./issue/pages部署教程/选择导入现有git存储库.png" />
-<img width="800" alt="创建Pages导入现有git存储库" src="./issue/pages部署教程/创建pages，导入现有git存储库.png" />
-
-5. 选择 GitHub 账户 → 选择你 Fork 的项目
-
-<img width="800" alt="选择存储库" src="./issue/pages部署教程/选择存储库，选择github账户，选择fork的项目。.png" />
-
-6. 写入项目名称并部署
-
-<img width="800" alt="创建Pages项目名字并部署" src="./issue/pages部署教程/创建pages项目名字。部署.png" />
-<img width="800" alt="部署Pages页面" src="./issue/pages部署教程/部署pages页面.png" />
-
-**方法 B：直接上传**
-
-4. 选择 **上传部署**
-
-<img width="800" alt="选择上传部署" src="./issue/pages部署教程/github上传部署/选择上传部署.png" />
-
-5. 写入项目名称并创建项目
-
-<img width="800" alt="写入项目名称并创建项目" src="./issue/pages部署教程/github上传部署/写入项目名称并创建项目.png" />
-
-6. 上传包含 `_worker.js` 的 ZIP 压缩包或文件夹 → 点击 **部署站点**
-
-<img width="800" alt="选择项目zip包并部署" src="./issue/pages部署教程/github上传部署/选择下载好的项目zip包或者是文件夹，并部署站点。.png" />
-
-7. 部署后进入 Pages 项目 **设置** → 添加环境变量和 D1 绑定
-8. 重新部署使配置生效
-
----
-
 ## 配置说明
 
 ### Workers 版（环境变量）
@@ -313,6 +73,8 @@ CREATE TABLE IF NOT EXISTS stats (date TEXT PRIMARY KEY, count INTEGER DEFAULT 0
 **环境变量 > D1 数据库（后台面板保存）> 代码硬编码**
 
 同名变量只要设置了环境变量，后台面板里保存的值就不再生效；想改回用面板配置，把对应环境变量删掉即可。
+
+> 后台面板只能修改部分配置。`UUID`、`WEB_PASSWORD`、`SUB_PASSWORD`、`SUB_TOKEN`、`CONCUR`、`KEY`、`UUID_REFRESH` 这 7 项**只能通过环境变量修改**，后台面板没有对应输入框。
 
 #### 怎么添加
 
@@ -506,11 +268,59 @@ sub://sub.example.net#CM优选订阅
 |--------|------|------|
 | `WL_IP` | 管理员 IP 白名单，命中后可免登录访问后台 | 多个 IP 用 空格 / 逗号 / 换行 分隔（中英文符号不区分） |
 
-#### D1 数据库绑定
+### D1 数据库（Workers 版必须）
 
-| 变量名 | 类型 | 说明 |
-|--------|------|------|
-| `DB` | D1 数据库绑定 | 必须绑定，变量名必须是 `DB`，不是普通文本环境变量 |
+D1 是 Cloudflare 提供的免费 SQLite 数据库，用于存储后台配置、白名单、日志和统计数据。Worker 版必须绑定 D1 才能使用后台管理功能。
+
+#### 第一步：创建 D1 数据库
+
+1. 登录 Cloudflare Dashboard
+2. 左侧菜单找到 **Workers & Pages** → 点击 **D1 SQL 数据库**
+3. 点击右上角 **创建** 按钮
+4. 数据库名称随意填写（如 `graintcp_db`）→ 点击 **创建**
+
+#### 第二步：初始化表结构
+
+进入刚创建的数据库 → 点击 **控制台** 标签 → 粘贴以下 SQL 并点击 **执行**：
+
+```sql
+CREATE TABLE IF NOT EXISTS config (key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE IF NOT EXISTS whitelist (ip TEXT PRIMARY KEY, created_at INTEGER);
+CREATE TABLE IF NOT EXISTS logs (id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, ip TEXT, region TEXT, action TEXT);
+CREATE TABLE IF NOT EXISTS stats (date TEXT PRIMARY KEY, count INTEGER DEFAULT 0);
+```
+
+执行成功后会看到 4 张表被创建。
+
+#### 第三步：绑定到 Worker
+
+1. 回到你的 Worker 项目 → **设置** → **变量和机密**
+2. 向下滚动找到 **D1 数据库绑定** 区域
+3. 点击 **添加绑定**
+4. **变量名称**填：`DB`（必须大写，不可改名，这不是普通文本环境变量）
+5. **D1 数据库**下拉选择刚创建的数据库
+6. 点击 **保存** → 重新部署 Worker
+
+#### 验证是否成功
+
+部署后访问你的 Worker 域名，登录后台 → 如果白名单、日志、统计等功能正常显示，说明 D1 绑定成功。
+
+#### 数据表说明
+
+| 表名 | 用途 | 说明 |
+|------|------|------|
+| `config` | 配置存储 | 后台保存的所有配置（ProxyIP、TG Token 等） |
+| `whitelist` | IP 白名单 | 免登录 IP 地址列表 |
+| `logs` | 访问日志 | 最近 2000 条操作记录（自动清理） |
+| `stats` | 每日统计 | 按日期累计访问次数 |
+
+#### 免费额度
+
+- 每日读取：5,000,000 行
+- 每日写入：100,000 行
+- 存储空间：5 GB
+
+正常使用远低于这些限制，无需担心。
 
 ---
 
@@ -546,6 +356,199 @@ let SUBAPI="https://订阅转换API",SUBINI="订阅转换配置URL";
 | `https://dns.alidns.com/dns-query` | 你的 DoH 地址 | 更换主 DoH 查询服务器（`ECH_DNS`） |
 | `https://sm2.doh.pub/dns-query` | 你的备用 DoH 地址 | 更换备用 DoH 查询服务器（`ECH_B`） |
 | `cloudflare-ech.com` | 你的 ECH SNI | 更换 ECH 解析域名 |
+
+---
+
+## 部署教程
+
+### 方式一：Cloudflare Workers 部署（推荐）
+
+**适合**：需要完整功能（D1 数据库、TG 通知、白名单、优选 IP 列表等）。
+
+**步骤**：
+
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. 左侧菜单进入 **Workers & Pages** → 点击右上角 **创建**
+3. 选择 **Hello World** 模板 → 点击 **部署**
+
+<img width="800" alt="创建Worker" src="./issue/worker部署教程/创建worker.png" />
+
+4. 部署完成后，在 Workers 列表找到刚部署的项目，点击 **编辑代码**
+
+<img width="800" alt="部署Worker" src="./issue/worker部署教程/部署worker.png" />
+
+5. 按 `Ctrl+A` 全选 → 删除 → 粘贴 `worker.js` 全部代码
+
+<img width="800" alt="修改Worker代码" src="./issue/worker部署教程/修改worker代码.png" />
+
+6. 点击右上角 **保存并部署**
+7. 回到 Worker 概览页 → 进入 **设置 → 变量和机密**
+8. 添加环境变量（建议至少填 `UUID`、`WEB_PASSWORD`、`SUB_PASSWORD`；不填会使用代码内置默认值，详见下文「配置说明」）
+9. 可选：绑定自定义域名（设置 → 触发器 → 自定义域）
+
+**D1 数据库（必须）**：
+
+完整步骤见上文「配置说明 → D1 数据库（Workers 版必须）」，包含创建数据库、初始化 4 张表、绑定 `DB` 变量名和验证方法。
+
+### 方式二：Cloudflare Snippets 部署
+
+**适合**：已有域名接入 Cloudflare、想要极简部署、无需 D1/TG 通知等扩展功能。
+
+**步骤**：
+
+1. 登录 Cloudflare Dashboard
+2. 选择你已接入的域名
+
+<img width="800" alt="找到有Snippets的域名" src="./issue/snippets教程/找到有snippets的域名.png" />
+
+3. 左侧菜单进入 **规则 → Snippets** → 点击 **创建片段**
+
+<img width="800" alt="在Snippets页面创建片段" src="./issue/snippets教程/在snippets页面创建片段.png" />
+
+4. 输入片段名称（随意，如 `graintcp`）
+
+<img width="800" alt="输入创建片段的名字" src="./issue/snippets教程/输入创建片段的名字.png" />
+
+5. 粘贴 `snippets.js` 全部代码
+6. **修改顶部配置区**（UUID、密码、ProxyIP 等改成你自己的值）
+
+<img width="800" alt="编辑Snippets代码" src="./issue/snippets教程/编辑snippets代码.png" />
+
+7. 在下方 **触发规则** 中设置匹配条件：
+   - 字段：`主机名 (Hostname)`
+   - 运算符：`等于 (equals)`
+   - 值：你的子域名（如 `sub.yourdomain.com`）
+
+<img width="800" alt="设置自定义筛选表达式" src="./issue/snippets教程/设置自定义筛选表达式.png" />
+
+8. 点击 **启用片段规则** 保存
+
+<img width="800" alt="启用片段规则" src="./issue/snippets教程/启用片段规则.png" />
+
+9. **配置 DNS（重要）**：前往 DNS 设置页 → 添加 A 记录 → 名称填子域名 → IPv4 填 `192.0.2.1` → 代理状态开启橙色云朵
+
+<img width="800" alt="创建新代理DNS记录指向" src="./issue/snippets教程/创建新代理DNS记录指向.png" />
+
+**注意事项**：
+- Snippets 没有环境变量功能，所有配置直接改代码顶部
+- Snippets 有 32KB 大小限制
+- Snippets 的 CPU 执行时间有限，并发竞速数自动降为 1
+
+### 方式三：Cloudflare Pages 部署
+
+**步骤**：
+
+1. 将 `worker.js` 重命名为 `_worker.js`
+2. 将该文件放入一个空文件夹（如 `graintcp/`）
+3. 进入 **Workers & Pages** → **创建** → 选择 **Pages**
+
+<img width="800" alt="Cloudflare主页" src="./issue/pages部署教程/cloudflare主页-计算workers和pages.png" />
+<img width="800" alt="Pages创建应用程序" src="./issue/pages部署教程/pages创建应用程序.png" />
+
+**方法 A：GitHub 自动同步（推荐）**
+
+4. 选择 **导入现有 Git 存储库**
+
+<img width="800" alt="选择导入现有git存储库" src="./issue/pages部署教程/选择导入现有git存储库.png" />
+<img width="800" alt="创建Pages导入现有git存储库" src="./issue/pages部署教程/创建pages，导入现有git存储库.png" />
+
+5. 选择 GitHub 账户 → 选择你 Fork 的项目
+
+<img width="800" alt="选择存储库" src="./issue/pages部署教程/选择存储库，选择github账户，选择fork的项目。.png" />
+
+6. 写入项目名称并部署
+
+<img width="800" alt="创建Pages项目名字并部署" src="./issue/pages部署教程/创建pages项目名字。部署.png" />
+<img width="800" alt="部署Pages页面" src="./issue/pages部署教程/部署pages页面.png" />
+
+**方法 B：直接上传**
+
+4. 选择 **上传部署**
+
+<img width="800" alt="选择上传部署" src="./issue/pages部署教程/github上传部署/选择上传部署.png" />
+
+5. 写入项目名称并创建项目
+
+<img width="800" alt="写入项目名称并创建项目" src="./issue/pages部署教程/github上传部署/写入项目名称并创建项目.png" />
+
+6. 上传包含 `_worker.js` 的 ZIP 压缩包或文件夹 → 点击 **部署站点**
+
+<img width="800" alt="选择项目zip包并部署" src="./issue/pages部署教程/github上传部署/选择下载好的项目zip包或者是文件夹，并部署站点。.png" />
+
+7. 部署后进入 Pages 项目 **设置** → 添加环境变量和 D1 绑定
+8. 重新部署使配置生效
+
+---
+
+## 项目简介
+
+GrainTCPV1 是一个部署在 Cloudflare 上的代理节点管理系统，提供：
+
+- 代理隧道（WebSocket → TCP）
+- 自适应订阅分发（自动识别客户端返回对应格式）
+- ECH 加密注入（提升连接隐蔽性）
+- 可视化后台管理面板
+- 多种代理出口方式（Direct / SOCKS5 / HTTP/HTTPS / ProxyIP / TURN/TURNS）
+- CF 用量实时监控（Telegram 仪表盘 + `/stats` 命令，含 Zone 流量与威胁统计）
+
+支持两种部署方式：**Workers**（完整版）和 **Snippets**（精简版）。
+
+---
+
+## 功能一览
+
+| 功能 | Workers | Snippets | 说明 |
+|------|:---:|:---:|------|
+| GrainTCP 代理内核 | ✅ | ✅ | 4 路并发竞速建连 + BYOB 零拷贝 + Early Data |
+| TURN/TCP 中继 | ✅ | ✅ | 两版均支持匿名或长期凭证认证、A/AAAA 目标解析、IPv4/IPv6 XOR 地址和事务 ID 校验 |
+| SSTP / SoftEther 中继 | ✅ | ❌ | Worker 版脚本内完成 SSTP 建链、PPP 协商与手工 IPv4/TCP 封包；目标仅 IPv4 |
+| TURN TXT/多服务器池 | ❌ | ❌ | 两版均只支持单个服务器，不支持逗号多地址、竞速池或 `!txt` 地址池 |
+| TURNS/TLS 中继 | ✅ | ✅ | 两版控制连接和数据连接均使用 TLS；Worker 还支持域名原生 TLS 与兼容 TLS 回退 |
+| SOCKS5 代理 | ✅ | ✅ | 全局/局部模式，支持用户名密码认证 |
+| HTTP CONNECT 代理 | ✅ | ✅ | 全局/局部模式，支持 Basic Auth |
+| HTTPS CONNECT 代理 | ❌ | ✅ | Snippets 通过真实 TLS 连接 HTTPS 代理服务器 |
+| ProxyIP 中转 | ✅ | ✅ | 指定优选 IP 作为出口中转 |
+| 自适应订阅 | ✅ | ✅ | 根据客户端 UA 自动返回对应格式 |
+| ECH 加密 | ✅ | ✅ | DoH 查询自动注入 ECH Config |
+| 后台管理面板 | ✅ | ✅ | 可视化管理界面 |
+| 主题选择与保存 | ✅ | ❌ | 深色/浅色实时预览，支持浏览器保存、取消预览和恢复默认 |
+| D1 数据库 | ✅ | ❌ | 持久化存储配置和日志 |
+| Telegram 通知 | ✅ | ❌ | 登录/订阅操作实时推送 |
+| Desire 裂变 | ✅ | ❌ | SUB_TOKEN 优选 IP 批量裂变 |
+| 白名单/访问日志 | ✅ | ❌ | IP 白名单免登录 + 日志记录 |
+| 环境变量配置 | ✅ | ❌ | Dashboard 在线修改配置 |
+| CF 用量 TG 仪表盘 | ✅ | ❌ | Cron 每 30 分钟刷新 Telegram 仪表盘（仅 Worker 版，依赖 D1/Cron） |
+| /stats 命令查询 | ✅ | ❌ | Telegram 发送 `/stats` 实时查询用量（仅 Worker 版） |
+| Zone HTTP 统计 | ✅ | ❌ | 区域级请求/威胁/缓存/带宽 + 国家/状态码/设备分布（仅 Worker 版） |
+
+---
+
+## 文件说明
+
+| 文件 | 大小 | 用途 |
+|------|------|------|
+| `worker.js` | ~345 KB | Workers/Pages 完整版（可读源码，支持环境变量 + D1） |
+| `snippets.js` | ~32 KB | Snippets 精简版（压缩代码，配置写在顶部） |
+
+两份文件共同支持 TURN/TCP、TURNS/TLS、SOCKS5、HTTP、ProxyIP、ECH、订阅和后台；SSTP/SoftEther 中继仅 Worker 版支持，Snippets 版因 32KB 上限未实现。Worker 的 TURN/TURNS 支持全局代理、直连失败回落、查询参数、Base64/UTF-8 凭证、DNS 缓存、438 Nonce 更新与 Allocation Refresh；Snippets 的 TURN/TURNS 仅支持全局 `://` 路径，但额外实现了真实 HTTPS CONNECT。两版均不支持 TURN 多服务器池或 `!txt` 地址池。
+
+---
+
+## 界面预览
+
+**Snippets 版：**
+
+<img width="1920" height="919" alt="image" src="https://github.com/user-attachments/assets/288f586d-8f37-4785-a4dc-58153bb5dfa2" />
+<img width="1920" alt="Snippets管理页面" src="./issue/snippets展示/snippets管理页面.png" />
+
+**Worker 版：**
+
+<img width="1920" alt="Worker登录页" src="./issue/worker展示/登录页.png" />
+<img width="1920" alt="Worker控制台" src="./issue/worker展示/控制台展示.png" />
+<img width="1920" alt="Worker订阅页面" src="./issue/worker展示/订阅页面.png" />
+<img width="1920" alt="Worker白名单" src="./issue/worker展示/白名单页面.png" />
+<img width="1920" alt="Worker日志" src="./issue/worker展示/日志详情页面.png" />
+<img width="1920" alt="Worker网络信息" src="./issue/worker展示/网络信息.png" />
 
 ---
 
@@ -1112,61 +1115,100 @@ ECH 开启后，系统自动对订阅内容做以下处理：
 2. 输入登录密码（Workers 版为 `WEB_PASSWORD`，Snippets 版为 `WP`）
 3. 点击登录按钮进入管理面板
 
-### 功能模块详解
+### 左侧菜单一览
 
-#### 📊 系统状态
+| 菜单 | 页面 | 能做什么 |
+|------|------|----------|
+| 📊 控制台 | 概览 | 当前 IP、Google 延迟、存储状态，刷新统计 |
+| 🌐 网络信息 | 网络检测 | 国内 / 国外 / CloudFlare / 境外四个出口 IP，候选 IP 延迟 |
+| 🚀 配置分发 | 生成链接 | 生成、复制、测试分发链接；修改 ECH、配置源、CDN 地址 |
+| 🛡️ 白名单 | IP 白名单 | 添加 / 删除免登录 IP（仅 Workers） |
+| 🛠️ 自定义端点 | 候选 IP 与远程配置 | ADD / ADDAPI / ADDCSV / DLS / ADDSUB（仅 Workers） |
+| 📋 日志 | 操作日志 | 最近 50 条访问记录（仅 Workers） |
 
-- 显示当前 IP、Google 延迟、存储状态
-- 点击 **🔄 刷新统计** 重新获取
+### 各页面怎么用
 
-#### 🌐 IP 信息检测 / ⚡ 延迟测试
+#### 📊 控制台
 
-- 四个网络出口检测：国内测试、国外测试、CloudFlare、境外测试
-- 延迟测试显示各候选 IP 的连通延迟
+- **当前 IP**：Cloudflare 看到的访问者 IP
+- **Google 延迟**：出口连通性
+- **存储状态**：D1 是否正常
+- 点 **🔄 刷新统计** 重新获取
 
-#### 🚀 快速分发
+#### 🌐 网络信息
 
-- 顶部显示自适应分发链接（`https://域名/订阅密码`），点 **复制** 复制、点 **测试** 验证是否正常返回
-- **配置源地址**：上游配置源地址（对应环境变量 `SUB_DOMAIN`）
-- **服务域名**：当前 Worker 使用的域名
-- **CDN 接入地址**：默认反代 / 候选地址，点 **检测** 打开检测站
-- **🔐 加密握手 + 客户端特征**：ECH 开关、握手域名（`ECH_SNI`）、握手 DNS（`ECH_DNS`）；开启后客户端特征统一为 `chrome`
-- **启用转换模式**：生成经过订阅转换的链接
-- **手动分发链接**：带完整参数的链接（含 UUID、SNI、path 等），点 **复制链接** / **测试访问**
+- **国内测试 / 国外测试 / CloudFlare / 境外测试**：四个出口 IP 与地区
+- **延迟测试**：逐个候选 IP 的连通延迟
+- 纯展示，不需要保存
 
-#### 🛡️ 白名单管理（Workers 版）
+#### 🚀 配置分发（最常用）
 
-- 添加 IP 到白名单 → 该 IP 访问无需登录密码
-- 支持 IPv4 和 IPv6 地址
-- 点击删除可移除白名单条目
-- 系统内置 IP 需要改代码或环境变量才能删除
+从上到下依次是：
 
-#### 🛠️ 候选IP与远程配置（Workers 版）
+1. **分发链接（只读）**
+   - 点 **复制** 复制到剪贴板
+   - 点 **测试** 验证链接能否正常返回配置
+2. **配置源地址**（对应环境变量 `SUB_DOMAIN`）
+   - 上游配置源，决定从哪里拉取节点
+3. **服务域名**
+   - 当前 Worker 使用的域名，会写进链接的 `host` / `sni`
+4. **CDN 接入地址**
+   - 默认反代 / 候选地址，会写进 `path=/proxyip=...`
+   - 点 **检测** 打开 ProxyIP 检测站
+5. **🔐 加密握手 + 客户端特征**
+   - 开关：开启 / 关闭 ECH
+   - **握手域名**：对应 `ECH_SNI`，默认 `cloudflare-ech.com`
+   - **握手 DNS 地址**：对应 `ECH_DNS`，默认 `https://dns.alidns.com/dns-query`
+   - **客户端特征**：开启 ECH 时统一为 `chrome`
+   - 改完必须点 **💾 保存握手配置** 才会写入 D1
+   - 点 **💡 这是什么？** 查看功能说明
+6. **启用转换模式**
+   - 勾选后，手动分发链接会变成经过订阅转换的地址（适合 Clash 等客户端）
+7. **手动分发链接**
+   - 自动生成，带完整参数（UUID、SNI、path、ECH 等）
+   - 点 **复制链接** / **测试访问**
 
-- `ADD`：本地候选 IP（格式 `IP:端口#备注`，多个用 换行 / 空格 / 逗号 分隔）
-- `ADDAPI`：远程候选 TXT 文件 URL（多个用 换行 / 空格 / 逗号 分隔）
-- `ADDCSV`：远程候选 CSV 文件 URL（多个用 换行 / 空格 / 逗号 分隔）
-- `DLS`：速度下限筛选（用于 ADDCSV，单位 MB/s）
+> ⚠️ **注意**：配置源地址、服务域名、CDN 接入地址、启用转换模式这几个输入**只影响当前生成的链接，不会写入 D1**，刷新页面后会恢复默认值。要长期生效，请把对应值写进环境变量（`SUB_DOMAIN`、`PROXYIP`）或代码常量。只有「加密握手」有独立的保存按钮。
+
+#### 🛡️ 白名单（Workers 版）
+
+- 输入 IP（IPv4 / IPv6）→ 点 **添加**
+- 列表里的 IP 访问后台时免登录
+- 点对应 **删除** 移除
+- 点 **刷新** 重新加载列表
+- 系统内置 IP 需要改代码或环境变量 `WL_IP` 才能删除
+
+#### 🛠️ 自定义端点（Workers 版）
+
+- **ADD**：本地候选 IP，格式 `IP:端口#备注`，多个用 换行 / 空格 / 逗号 分隔
+- **ADDAPI**：远程 TXT 链接（返回 IP 列表）
+- **ADDCSV**：远程 CSV 链接，配合 `DLS` 过滤低速项
+- **DLS**：ADDCSV 的速度下限，单位 MB/s，默认 `7`
 - **ADDSUB - 汇总分发**：一个框混写五类内容（候选域名/IP、候选 IP API、外部配置源、候选配置生成器、现成链接）
+- 改完点 **💾 保存配置** 写入 D1
 
-> ⚠️ 页面顶部有红色提示：这里保存的值**只有在 Cloudflare 后台没有设置同名环境变量时才生效**（环境变量优先级更高）。详见上文「配置说明」。
+> ⚠️ 页面顶部红字：这里保存的值**只有在 Cloudflare 后台没有设置同名环境变量时才生效**。例如 Dashboard 里已经设了 `ADD`，面板里再改也不会用。
 
-> 面板输入框用回车换行最直观；若改在 Cloudflare 环境变量界面填写（新版只能单行），请用空格或逗号分隔。详见上文「多值分隔符说明」。
+> 💡 分隔方式：回车换行、空格、逗号都行，中英文符号不区分。Dashboard 环境变量界面只能单行，请用空格或逗号。
 
-#### 📋 操作日志（Workers 版）
+#### 📋 日志（Workers 版）
 
-- 显示最近 50 条访问记录
-- 包含时间、IP、路径、User-Agent 信息
-- 点 **🔄 刷新日志** 重新加载
+- 最近 50 条访问记录：时间、IP、路径、User-Agent
+- 页面打开时每 5 秒自动刷新
+- 点 **🔄 刷新日志** 立即刷新
 
-#### 右上角工具栏
+### 右上角工具栏
 
-- **主题设置**：打开深色/浅色主题选择框
-- **TG 通知**：配置 Bot Token / Chat ID；含「CF 用量仪表盘」开关、推送 Chat ID、一键设置 Webhook 按钮（Workers 版）
-- **CF 统计**：配置 Account ID / API Token（或 Email + Global Key）+ Zone ID（区域统计用）
-- **退出登录**：清除 Cookie 退出会话
+| 按钮 | 功能 | 设置方法 |
+|------|------|----------|
+| 🌗 | 主题设置 | 选深色 / 浅色，点 **保存主题** |
+| 🤖 | TG 通知 | 填 `TG_BOT_TOKEN`、`TG_CHAT_ID` → **验证** → **保存**；「CF 用量仪表盘」开关和推送 Chat ID 另点 **💾 保存仪表盘**；点 **🔗 设置 Webhook** 注册 `/tg/webhook` |
+| ☁️ | CF 统计 | 填 Account ID + API Token（或 Email + Global API Key）+ Zone ID → **验证** → **保存** |
+| ⏻ | 退出 | 清除登录 Cookie |
 
-#### 主题设置说明
+> 弹窗里的值保存到 D1；如果 Dashboard 设置了同名环境变量，环境变量优先。
+
+### 主题设置说明
 
 > 本功能适用于 Workers 版后台，默认使用深色主题。
 
