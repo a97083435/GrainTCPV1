@@ -108,7 +108,7 @@ GrainTCPV1 是一个部署在 Cloudflare 上的代理节点管理系统，提供
 
 | 文件 | 大小 | 用途 |
 |------|------|------|
-| `worker.js` | ~307 KB | Workers/Pages 完整版（可读源码，支持环境变量 + D1） |
+| `worker.js` | ~345 KB | Workers/Pages 完整版（可读源码，支持环境变量 + D1） |
 | `snippets.js` | ~32 KB | Snippets 精简版（压缩代码，配置写在顶部） |
 
 两份文件共同支持 TURN/TCP、TURNS/TLS、SOCKS5、HTTP、ProxyIP、ECH、订阅和后台；SSTP/SoftEther 中继仅 Worker 版支持，Snippets 版因 32KB 上限未实现。Worker 的 TURN/TURNS 支持全局代理、直连失败回落、查询参数、Base64/UTF-8 凭证、DNS 缓存、438 Nonce 更新与 Allocation Refresh；Snippets 的 TURN/TURNS 仅支持全局 `://` 路径，但额外实现了真实 HTTPS CONNECT。两版均不支持 TURN 多服务器池或 `!txt` 地址池。
@@ -157,7 +157,7 @@ GrainTCPV1 是一个部署在 Cloudflare 上的代理节点管理系统，提供
 
 6. 点击右上角 **保存并部署**
 7. 回到 Worker 概览页 → 进入 **设置 → 变量和机密**
-8. 添加环境变量（最少填：`UUID`、`WEB_PASSWORD`、`SUB_PASSWORD`）
+8. 添加环境变量（建议至少填 `UUID`、`WEB_PASSWORD`、`SUB_PASSWORD`；不填会使用代码内置默认值，详见下文「配置说明」）
 9. 可选：绑定自定义域名（设置 → 触发器 → 自定义域）
 
 **D1 数据库配置（必须，完整步骤）**：
@@ -308,19 +308,39 @@ CREATE TABLE IF NOT EXISTS stats (date TEXT PRIMARY KEY, count INTEGER DEFAULT 0
 
 ### Workers 版（环境变量）
 
-Workers 版通过 Cloudflare Dashboard 在线配置环境变量。
+环境变量在 Cloudflare Dashboard 里配置，优先级最高：
 
-**配置优先级：环境变量 > D1 数据库 > 代码硬编码**
+**环境变量 > D1 数据库（后台面板保存）> 代码硬编码**
 
-#### 必填配置
+同名变量只要设置了环境变量，后台面板里保存的值就不再生效；想改回用面板配置，把对应环境变量删掉即可。
 
-| 变量名 | 说明 | 示例值 |
-|--------|------|--------|
-| `UUID` | 节点连接凭证（标准 UUID 格式） | `a1b2c3d4-1234-5678-abcd-123456789abc` |
-| `WEB_PASSWORD` | 后台登录密码 | `mypassword123` |
-| `SUB_PASSWORD` | 订阅路径密码 | `mysub` |
-| `PROXYIP` | 默认 ProxyIP 中转地址 | `cdn.example.com` 或 `1.2.3.4:443` |
-| `SUB_DOMAIN` | 上游订阅源地址 | `https://owo.o00o.ooo/` |
+#### 怎么添加
+
+1. 打开 Cloudflare Dashboard → **Workers & Pages** → 点进你的 Worker
+2. 顶部切到 **设置（Settings）** → 左侧 **变量和机密（Variables and Secrets）**
+3. 点 **添加（Add）**，按值的性质选类型：
+   - **文本（Text）**：UUID、ProxyIP、上游订阅源等非敏感值
+   - **机密（Secret）**：登录密码、Bot Token、CF Token 等敏感值，保存后页面不再显示明文
+4. 变量名必须与下表**完全一致**（区分大小写，不能带空格或中文）
+5. 全部添加完点 **保存并部署（Save and deploy）**——只保存不部署不生效
+6. 刷新后台页面验证：标题、登录密码等应立即变成新值
+
+#### 最小可用配置（只填这 3 个就能跑）
+
+| 变量名 | 用途 | 示例值 | 不填时使用 |
+|--------|------|--------|-----------|
+| `UUID` | 节点连接凭证，标准 UUID 格式 | `a1b2c3d4-1234-5678-abcd-123456789abc` | 代码内置 UUID（公开可见，务必更换） |
+| `WEB_PASSWORD` | 后台登录密码 | 自定义强密码 | 代码内置弱默认值（务必更换） |
+| `SUB_PASSWORD` | 订阅路径密码 | `mysub` | 代码内置弱默认值（务必更换） |
+
+> 三个都不填也能启动，但默认值写在公开源码顶部，任何人都能看到。正式对外使用前必须改掉 `WEB_PASSWORD` 和 `SUB_PASSWORD`。
+
+#### 其余常用配置
+
+| 变量名 | 说明 | 示例值 | 不填时使用 |
+|--------|------|--------|-----------|
+| `PROXYIP` | 默认 ProxyIP 中转地址 | `cdn.example.com` 或 `1.2.3.4:443` | `ProxyIP.CMLiussss.net` |
+| `SUB_DOMAIN` | 上游订阅源地址 | `https://owo.o00o.ooo/` | `https://owo.o00o.ooo/` |
 
 #### 可选配置
 
@@ -348,7 +368,7 @@ Workers 版通过 Cloudflare Dashboard 在线配置环境变量。
 |--------|------|--------|
 | `ECH_ENABLED` | ECH 开关（`true` 或 `false`） | `true` |
 | `ECH_SNI` | ECH 解析域名 | `cloudflare-ech.com` |
-| `ECH_DNS` | DoH 查询地址 | `https://odvr.nic.cz/doh` |
+| `ECH_DNS` | DoH 查询地址 | `https://dns.alidns.com/dns-query` |
 
 #### Telegram 通知
 
@@ -407,7 +427,7 @@ Workers 版通过 Cloudflare Dashboard 在线配置环境变量。
 > 1. 分隔时只用**一个**符号即可。若写成 `#A， 5.6.7.8...`（逗号后又加空格），逗号会残留在上一个节点名尾部（变成 `A，`），不影响连接，仅名字略难看。
 > 2. 后台管理面板的输入框仍然是多行文本框，用回车换行是最直观的写法，行为与旧版完全一致；`#` 开头的整行仍作为注释被忽略。
 
-#### ADDSUB 汇聚订阅
+#### ADDSUB 汇聚订阅（面板中显示为「ADDSUB - 汇总分发」）
 
 一个输入框内可混写以下 **五类**内容，系统按**内容特征**自动识别并分别处理。分隔方式同其他多值变量（换行 / 空格 / 逗号，中英文符号不区分）。
 
@@ -474,10 +494,10 @@ sub://sub.example.net#CM优选订阅
 | 变量名 | 说明 | 默认值 |
 |--------|------|--------|
 | `LOGIN_PAGE_TITLE` | 登录页浏览器标题 | `Worker Login` |
-| `DASHBOARD_TITLE` | 后台管理页标题 | `烈火控制台 · Glass LH` |
+| `DASHBOARD_TITLE` | 后台管理页标题 | `管理控制台 · Glass LH` |
 | `TG_GROUP_URL` | 交流群链接（登录页按钮） | `https://t.me/zyssadmin` |
 | `SITE_URL` | 网站链接（登录页按钮） | `https://blog.2026565.xyz/` |
-| `GITHUB_URL` | 项目地址（登录页按钮） | `https://github.com/xtgm/stallTCP1.32V2` |
+| `GITHUB_URL` | 项目地址（登录页按钮） | `https://github.com/xtgm/GrainTCPV1` |
 | `PROXY_CHECK_URL` | ProxyIP 检测站链接 | `https://check.proxyip.cmliussss.net/` |
 
 #### 白名单配置
@@ -522,8 +542,9 @@ let SUBAPI="https://订阅转换API",SUBINI="订阅转换配置URL";
 
 | 搜索 | 替换为 | 说明 |
 |------|--------|------|
-| `ECH=!0` | `ECH=!1` | 关闭 ECH（`!0`=开，`!1`=关） |
-| `odvr.nic.cz/doh` | 你的 DoH 地址 | 更换 DoH 查询服务器 |
+| `ECH=true` | `ECH=false` | 关闭 ECH |
+| `https://dns.alidns.com/dns-query` | 你的 DoH 地址 | 更换主 DoH 查询服务器（`ECH_DNS`） |
+| `https://sm2.doh.pub/dns-query` | 你的备用 DoH 地址 | 更换备用 DoH 查询服务器（`ECH_B`） |
 | `cloudflare-ech.com` | 你的 ECH SNI | 更换 ECH 解析域名 |
 
 ---
@@ -945,7 +966,7 @@ https://你的域名/sub?uuid=你的UUID
 
 **方式三：通过后台管理面板**
 
-登录后台 → 找到"快速订阅"卡片 → 点击复制按钮。
+登录后台 → 找到「🚀 快速分发」卡片 → 点击复制按钮。
 
 ### 自适应订阅（自动识别客户端）
 
@@ -1034,8 +1055,8 @@ ECH（Encrypted Client Hello）是一种 TLS 扩展，对 TLS 握手中的 SNI�
 - 环境变量 `ECH_ENABLED` 设为 `true`（开启）或 `false`（关闭）
 
 **Snippets 版**：
-- 搜索 `ECH=!0` 替换为 `ECH=!1` 即可关闭
-- 搜索 `ECH=!1` 替换为 `ECH=!0` 即可开启
+- 搜索 `ECH=true` 替换为 `ECH=false` 即可关闭
+- 搜索 `ECH=false` 替换为 `ECH=true` 即可开启
 
 ### ECH 对各客户端的影响
 
@@ -1059,13 +1080,14 @@ ECH 开启后，系统自动对订阅内容做以下处理：
 
 ### 更换 ECH 的 DoH 服务器
 
-默认使用 `https://odvr.nic.cz/doh`。如需更换：
+默认使用 `https://dns.alidns.com/dns-query`。如需更换：
 
 **Workers 版**：环境变量 `ECH_DNS` 填入新地址
 
-**Snippets 版**：在代码中搜索 `odvr.nic.cz/doh` 替换为你的 DoH 地址
+**Snippets 版**：在代码中搜索 `https://dns.alidns.com/dns-query` 替换为你的 DoH 地址
 
 可选的公共 DoH 服务器：
+- `https://dns.alidns.com/dns-query`（默认）
 - `https://odvr.nic.cz/doh`
 - `https://223.5.5.5/dns-query`
 - `https://dns.google/dns-query`
@@ -1092,53 +1114,50 @@ ECH 开启后，系统自动对订阅内容做以下处理：
 
 ### 功能模块详解
 
-#### 快速自适应订阅
+#### 📊 系统状态
 
-- 显示你的自适应订阅链接（`https://域名/订阅密码`）
-- 点击 **复制** → 链接复制到剪贴板
-- 点击 **测试** → 验证订阅链接是否正常返回数据
+- 显示当前 IP、Google 延迟、存储状态
+- 点击 **🔄 刷新统计** 重新获取
 
-#### 手动订阅链接
+#### 🌐 IP 信息检测 / ⚡ 延迟测试
 
-- 显示带完整参数的订阅链接（含 UUID、SNI、path 等）
-- 可直接复制给客户端使用
-- 点击 **更新链接** → 根据当前配置重新生成
+- 四个网络出口检测：国内测试、国外测试、CloudFlare、境外测试
+- 延迟测试显示各候选 IP 的连通延迟
 
-#### ProxyIP 检测
+#### 🚀 快速分发
 
-- 点击 **检测** 按钮 → 打开 ProxyIP 检测站
-- 验证当前 ProxyIP 地址是否可用、延迟如何
+- 顶部显示自适应分发链接（`https://域名/订阅密码`），点 **复制** 复制、点 **测试** 验证是否正常返回
+- **配置源地址**：上游配置源地址（对应环境变量 `SUB_DOMAIN`）
+- **服务域名**：当前 Worker 使用的域名
+- **CDN 接入地址**：默认反代 / 候选地址，点 **检测** 打开检测站
+- **🔐 加密握手 + 客户端特征**：ECH 开关、握手域名（`ECH_SNI`）、握手 DNS（`ECH_DNS`）；开启后客户端特征统一为 `chrome`
+- **启用转换模式**：生成经过订阅转换的链接
+- **手动分发链接**：带完整参数的链接（含 UUID、SNI、path 等），点 **复制链接** / **测试访问**
 
-#### 订阅源测试
-
-- 输入上游订阅源 URL
-- 点击 **测试** → 系统 fetch 验证是否可连通
-
-#### ECH 加密配置
-
-- 显示当前 ECH 状态（开启/关闭）
-- 显示 ECH DNS 地址和 ECH SNI 域名
-- Workers 版可在此修改配置
-
-#### 白名单管理（Workers 版）
+#### 🛡️ 白名单管理（Workers 版）
 
 - 添加 IP 到白名单 → 该 IP 访问无需登录密码
 - 支持 IPv4 和 IPv6 地址
 - 点击删除可移除白名单条目
+- 系统内置 IP 需要改代码或环境变量才能删除
 
-#### 自定义节点（Workers 版）
+#### 🛠️ 候选IP与远程配置（Workers 版）
 
-- `ADD`：手动添加优选 IP（格式 `IP:端口#备注`，多个用 换行 / 空格 / 逗号 分隔）
-- `ADDAPI`：填入远程 TXT 文件 URL（多个用 换行 / 空格 / 逗号 分隔）
-- `ADDCSV`：填入远程 CSV 文件 URL（多个用 换行 / 空格 / 逗号 分隔）
+- `ADD`：本地候选 IP（格式 `IP:端口#备注`，多个用 换行 / 空格 / 逗号 分隔）
+- `ADDAPI`：远程候选 TXT 文件 URL（多个用 换行 / 空格 / 逗号 分隔）
+- `ADDCSV`：远程候选 CSV 文件 URL（多个用 换行 / 空格 / 逗号 分隔）
 - `DLS`：速度下限筛选（用于 ADDCSV，单位 MB/s）
+- **ADDSUB - 汇总分发**：一个框混写五类内容（候选域名/IP、候选 IP API、外部配置源、候选配置生成器、现成链接）
+
+> ⚠️ 页面顶部有红色提示：这里保存的值**只有在 Cloudflare 后台没有设置同名环境变量时才生效**（环境变量优先级更高）。详见上文「配置说明」。
 
 > 面板输入框用回车换行最直观；若改在 Cloudflare 环境变量界面填写（新版只能单行），请用空格或逗号分隔。详见上文「多值分隔符说明」。
 
-#### 访问日志（Workers 版）
+#### 📋 操作日志（Workers 版）
 
 - 显示最近 50 条访问记录
 - 包含时间、IP、路径、User-Agent 信息
+- 点 **🔄 刷新日志** 重新加载
 
 #### 右上角工具栏
 
@@ -1214,8 +1233,7 @@ ECH 开启后，系统自动对订阅内容做以下处理：
 | `concur` | 4 | 1（自动降级） | 并发竞速建连数 |
 | `chunk` | 64 KB | 64 KB | BYOB 读取块大小 |
 | `dnPack` | 32 KB | 32 KB | 下行打包阈值 |
-| `upPack` | 16 KB | 16 KB | 上行合并阈值 |
-| `upQMax` | 256 KB | 256 KB | 上行队列上限 |
+| `upPack` | 20 KB | 20 KB | 上行合并阈值 |
 | `maxED` | 8 KB | 8 KB | Early Data 最大长度 |
 
 ### 修改 concur（并发竞速数）
@@ -1267,7 +1285,7 @@ ECH 开启后，系统自动对订阅内容做以下处理：
 **Q: 出现 Cloudflare 1101 错误？**
 
 1101 是 Cloudflare 检测到代码中的敏感特征。本项目已做反检测处理：
-- 敏感词使用字符串拆分（如 `'so'+'cks5'`）
+- 敏感词使用字符串拆分（如 `'so'+'cks'+'s5'`）
 - Snippets 版无 `import` 语句
 - 无高密度 `atob` 调用
 
